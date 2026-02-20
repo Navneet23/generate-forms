@@ -1,7 +1,7 @@
 # Task 06 — Chat Panel
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

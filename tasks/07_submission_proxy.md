@@ -1,7 +1,7 @@
 # Task 07 — Submission Proxy
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

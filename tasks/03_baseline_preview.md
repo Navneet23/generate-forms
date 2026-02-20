@@ -1,7 +1,7 @@
 # Task 03 — Baseline Preview
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

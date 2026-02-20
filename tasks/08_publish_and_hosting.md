@@ -1,7 +1,7 @@
 # Task 08 — Publish and Hosting
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

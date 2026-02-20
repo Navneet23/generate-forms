@@ -1,7 +1,7 @@
 # Task 02 — Form Structure Normaliser
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

@@ -1,7 +1,7 @@
 # Task 05 — Preview Pane
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 
