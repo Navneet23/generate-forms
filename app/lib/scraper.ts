@@ -49,18 +49,36 @@ export async function scrapeForm(url: string): Promise<FormStructure> {
 
   const html = await res.text();
 
-  // Extract FB_PUBLIC_LOAD_DATA_ from the page
-  const match = html.match(/FB_PUBLIC_LOAD_DATA_\s*=\s*(\[[\s\S]*?\]);\s*<\/script>/);
-  if (!match) {
+  // Locate FB_PUBLIC_LOAD_DATA_ in the page
+  const marker = "FB_PUBLIC_LOAD_DATA_ = ";
+  const markerIndex = html.indexOf(marker);
+  if (markerIndex === -1) {
     throw new Error(
       "Could not find form data. Make sure the form is public and the URL is a valid Google Form."
     );
   }
 
+  // Walk the string tracking bracket depth to find the full JSON array,
+  // avoiding the non-greedy regex bug that stops at the first closing bracket.
+  const jsonStart = markerIndex + marker.length;
+  let depth = 0;
+  let jsonEnd = -1;
+  for (let i = jsonStart; i < html.length; i++) {
+    if (html[i] === "[") depth++;
+    else if (html[i] === "]") {
+      depth--;
+      if (depth === 0) {
+        jsonEnd = i + 1;
+        break;
+      }
+    }
+  }
+  if (jsonEnd === -1) throw new Error("Failed to extract form data.");
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let raw: any;
   try {
-    raw = JSON.parse(match[1]);
+    raw = JSON.parse(html.slice(jsonStart, jsonEnd));
   } catch {
     throw new Error("Failed to parse form data.");
   }
@@ -74,8 +92,8 @@ function normalise(url: string, raw: any): FormStructure {
   const formId = formIdMatch?.[1] ?? "";
 
   const meta = raw?.[1];
-  const title: string = meta?.[8]?.[0] ?? "Untitled Form";
-  const description: string = meta?.[8]?.[1] ?? "";
+  const title: string = meta?.[8] ?? "Untitled Form";
+  const description: string = meta?.[0] ?? "";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rawQuestions: any[] = meta?.[1] ?? [];
 

@@ -3,6 +3,11 @@
 ## Status
 `Done`
 
+## Post-build fixes
+- Added rule 9: explicit linear scale rendering instructions (horizontal row, labels under min/max)
+- Added rule 10: multi-step review pages must show actual entered values
+- Updated rule 5: multi-step forms must collect all values across all steps before submitting
+
 ## Description
 
 Build the server-side layer that takes the normalised form structure, the creator's text prompt, and the conversation history, constructs a prompt, calls the LLM, and returns a complete self-contained HTML page that renders the styled form.

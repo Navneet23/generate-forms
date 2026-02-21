@@ -3,6 +3,12 @@
 ## Status
 `Done`
 
+## Post-build fixes
+- Replaced non-greedy regex with bracket-depth walker to correctly extract full nested JSON
+- Corrected title index from `meta[8][0]` → `meta[8]` (plain string, not array)
+- Corrected description index from `meta[8][1]` → `meta[0]`
+- Confirmed index mapping against live form data
+
 ## Description
 
 Build a server-side endpoint that accepts a public Google Form URL, fetches the page HTML, and extracts the form structure from the embedded `FB_PUBLIC_LOAD_DATA_` JavaScript variable.

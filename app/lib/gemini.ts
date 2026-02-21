@@ -21,9 +21,12 @@ RULES — you must follow all of these:
 5. The form must submit via JavaScript fetch POST to: ${submitUrl}
    Send JSON body: an object mapping each entry.XXXXXXXXX name to its value.
    On success show a thank-you message. On error show a friendly error message.
+   If you generate a multi-step form, collect ALL field values across ALL steps before submitting — never submit with missing or empty values from earlier steps.
 6. The form must be fully responsive and work on mobile.
-7. Render ALL questions from the structure in order. Do not skip any.
+7. Render ALL questions from the structure in order. Do not skip any. Always render the form title and description at the top.
 8. For required fields, add visible indication and client-side validation before submit.
+9. For linear_scale questions, render them as a single horizontal row of numbered radio buttons. The min label appears below the lowest number and the max label appears below the highest number. Labels and numbers must be aligned in one clean row — never stack them vertically or misalign them.
+10. If generating a multi-step form with a review page, the review page must display the actual values the user entered, not placeholder text like "No answer provided".
 
 The form structure is:
 ${JSON.stringify(structure, null, 2)}`;

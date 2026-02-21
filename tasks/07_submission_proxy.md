@@ -3,6 +3,11 @@
 ## Status
 `Done`
 
+## Post-build fixes
+- Added CORS headers (`Access-Control-Allow-Origin: *`) to all responses
+- Added OPTIONS handler for CORS preflight requests
+- Required because srcdoc iframes have a null origin, which triggers CORS preflight even for same-host requests
+
 ## Description
 
 Build a server-side endpoint that receives form submissions from the AI-generated form and proxies them to the original Google Form's submission endpoint. This is necessary because the browser cannot POST directly to Google Forms from a different origin (CORS).

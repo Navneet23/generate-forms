@@ -44,8 +44,7 @@ export default function Home() {
   }
 
   function handleCopy() {
-    const fullUrl = `${window.location.origin}${publishedUrl}`;
-    navigator.clipboard.writeText(fullUrl);
+    navigator.clipboard.writeText(publishedUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -87,7 +86,7 @@ export default function Home() {
         {publishedUrl ? (
           <>
             <span className="text-sm text-gray-600 truncate">
-              localhost:3000{publishedUrl}
+              {publishedUrl}
             </span>
             <button
               onClick={handleCopy}

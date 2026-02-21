@@ -3,6 +3,10 @@
 ## Status
 `Done`
 
+## Post-build fixes
+- Fixed double-origin bug in frontend: publish API returns full URL, frontend was incorrectly prepending window.location.origin again
+- Published URL now displayed and copied correctly
+
 ## Description
 
 When the creator is happy with the generated form, they click "Publish". This freezes the current AI-generated HTML, stores it on the server, and returns a unique shareable URL that serves the same form to every respondent.
