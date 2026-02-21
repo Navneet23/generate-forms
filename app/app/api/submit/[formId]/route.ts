@@ -17,11 +17,18 @@ export async function POST(
 ) {
   try {
     const { formId } = await params;
-    const body: Record<string, string> = await req.json();
+    const body: Record<string, string | string[]> = await req.json();
 
     const formData = new URLSearchParams();
     for (const [key, value] of Object.entries(body)) {
-      formData.append(key, value);
+      if (Array.isArray(value)) {
+        // Checkboxes send multiple values for the same key
+        for (const v of value) {
+          formData.append(key, v);
+        }
+      } else if (value !== null && value !== undefined && value !== "") {
+        formData.append(key, value);
+      }
     }
     formData.append("submit", "Submit");
 
@@ -34,11 +41,14 @@ export async function POST(
       redirect: "manual",
     });
 
-    if (googleRes.status === 200 || googleRes.status === 302) {
+    // Google Forms returns 200 on success, 302 on redirect-to-thanks page
+    // Status 0 can happen with opaque redirects (redirect:"manual")
+    if (googleRes.status === 200 || googleRes.status === 302 || googleRes.status === 0) {
       return NextResponse.json({ status: "ok" }, { headers: CORS_HEADERS });
     }
 
-    console.error("Google Forms submission unexpected status:", googleRes.status);
+    const responseText = await googleRes.text().catch(() => "(unreadable)");
+    console.error("Google Forms submission unexpected status:", googleRes.status, responseText.slice(0, 500));
     return NextResponse.json(
       { error: "Submission failed. Please try again." },
       { status: 500, headers: CORS_HEADERS }

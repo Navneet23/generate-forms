@@ -71,3 +71,23 @@ Access-Control-Allow-Headers: Content-Type
 **Fix:** Set `devIndicators: false` in `next.config.ts`.
 
 **File:** `next.config.ts`
+
+---
+
+## Bug 6 — Form submission returning 500 after multi-step form submit (in progress)
+
+**Symptom:** Clicking Submit on the final review page of an AI-generated multi-step form returns HTTP 500 from `/api/submit/[formId]`.
+
+**Root cause (suspected):** The AI-generated form may send checkbox field values as a JSON array (e.g. `["Option A", "Option B"]`) or as `null`/empty string for unanswered checkboxes. The original proxy typed the body as `Record<string, string>` and passed all values directly to `URLSearchParams`, which stringifies arrays as `"Option A,Option B"` instead of appending each value separately — Google Forms requires a separate entry per selected option.
+
+A secondary suspect is that Google Forms returns an unexpected HTTP status code for certain submissions (e.g. an opaque redirect with status `0`), which the proxy was treating as failure.
+
+**Partial fix applied:**
+- Changed body type to `Record<string, string | string[]>`; array values are now appended individually to `URLSearchParams` (correct format for checkboxes)
+- Empty/null/undefined values are skipped rather than sent as empty strings
+- Status `0` (opaque redirect from `redirect: "manual"`) is now treated as success alongside 200 and 302
+- Improved server-side error logging: Google's response body (first 500 chars) is now logged when an unexpected status is received
+
+**Status:** Issue persists — root cause not yet fully confirmed. Server-side logs should now surface the exact Google response on next reproduction.
+
+**File:** `app/app/api/submit/[formId]/route.ts`
