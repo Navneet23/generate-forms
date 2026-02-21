@@ -1,7 +1,7 @@
 # Task V2-02 — Iframe Screenshot Capture (html2canvas bridge)
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

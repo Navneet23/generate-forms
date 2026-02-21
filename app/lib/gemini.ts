@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, Part } from "@google/generative-ai";
 import { FormStructure } from "./scraper";
 
 const MODEL_ID = "gemini-2.0-flash";
@@ -6,6 +6,11 @@ const MODEL_ID = "gemini-2.0-flash";
 export interface HistoryTurn {
   role: "user" | "model";
   text: string;
+}
+
+export interface StyleGuide {
+  imageBase64: string; // data:image/png;base64,... or raw base64
+  focusNote: string;
 }
 
 function buildSystemPrompt(structure: FormStructure, submitUrl: string): string {
@@ -32,12 +37,21 @@ The form structure is:
 ${JSON.stringify(structure, null, 2)}`;
 }
 
+function toInlineData(base64WithPrefix: string): { mimeType: string; data: string } {
+  // Handle both "data:image/png;base64,XXX" and raw base64
+  const match = base64WithPrefix.match(/^data:(image\/[^;]+);base64,(.+)$/);
+  if (match) return { mimeType: match[1], data: match[2] };
+  return { mimeType: "image/png", data: base64WithPrefix };
+}
+
 export async function generateForm(
   structure: FormStructure,
   userPrompt: string,
   history: HistoryTurn[],
   previousHtml: string,
-  submitUrl: string
+  submitUrl: string,
+  screenshotBase64?: string,
+  styleGuide?: StyleGuide
 ): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
@@ -48,7 +62,6 @@ export async function generateForm(
     systemInstruction: buildSystemPrompt(structure, submitUrl),
   });
 
-  // Build history for the chat (max last 10 turns)
   const recentHistory = history.slice(-10);
 
   const chat = model.startChat({
@@ -58,14 +71,42 @@ export async function generateForm(
     })),
   });
 
-  const fullPrompt = previousHtml
+  // Build the user message parts
+  const parts: Part[] = [];
+
+  // Style guide image — reference only, never embedded
+  if (styleGuide?.imageBase64) {
+    const { mimeType, data } = toInlineData(styleGuide.imageBase64);
+    parts.push({
+      inlineData: { mimeType, data },
+    });
+    const focusText = styleGuide.focusNote
+      ? ` Focus specifically on: ${styleGuide.focusNote}.`
+      : "";
+    parts.push({
+      text: `Use the visual style of the image above as a reference.${focusText} Do not embed the image in the form.`,
+    });
+  }
+
+  // Screenshot of a selected region — shows the creator what to change
+  if (screenshotBase64) {
+    const { mimeType, data } = toInlineData(screenshotBase64);
+    parts.push({ inlineData: { mimeType, data } });
+    parts.push({
+      text: "The image above is a screenshot of the region the creator wants to change.",
+    });
+  }
+
+  // Main prompt text
+  const promptText = previousHtml
     ? `Current form HTML:\n${previousHtml}\n\nCreator request: ${userPrompt}\n\nUpdate the form to fulfil this request. Return the complete updated HTML page.`
     : `Creator request: ${userPrompt}\n\nGenerate the complete HTML page for this form.`;
 
-  const result = await chat.sendMessage(fullPrompt);
+  parts.push({ text: promptText });
+
+  const result = await chat.sendMessage(parts);
   const text = result.response.text();
 
-  // Strip accidental markdown code fences
   return text
     .replace(/^```html\s*/i, "")
     .replace(/^```\s*/i, "")

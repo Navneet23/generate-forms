@@ -1,7 +1,7 @@
 # Task V2-09 — Style Guide Session Persistence
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

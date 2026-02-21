@@ -1,7 +1,7 @@
 # Task V2-06 — Image Upload API Endpoint
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

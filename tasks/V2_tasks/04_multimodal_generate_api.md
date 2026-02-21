@@ -1,7 +1,7 @@
 # Task V2-04 — Multimodal Generate API (Images + Text)
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

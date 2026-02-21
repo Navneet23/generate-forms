@@ -1,7 +1,7 @@
 # Task V2-07 — Style Guide Dialog
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

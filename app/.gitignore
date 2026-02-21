@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# uploaded images (permanent on server, not committed to git)
+/public/uploads/*
+!/public/uploads/.gitkeep

@@ -1,7 +1,7 @@
 # Task V2-08 — Website Screenshot API
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

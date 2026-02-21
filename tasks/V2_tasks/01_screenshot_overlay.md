@@ -1,7 +1,7 @@
 # Task V2-01 — Screenshot Selection Overlay
 
 ## Status
-`To Do`
+`Done`
 
 ## Description
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generateForm, HistoryTurn } from "@/lib/gemini";
+import { generateForm, HistoryTurn, StyleGuide } from "@/lib/gemini";
 import { FormStructure } from "@/lib/scraper";
 
 export async function POST(req: NextRequest) {
@@ -9,11 +9,15 @@ export async function POST(req: NextRequest) {
       prompt,
       history,
       previousHtml,
+      screenshotBase64,
+      styleGuide,
     }: {
       structure: FormStructure;
       prompt: string;
       history: HistoryTurn[];
       previousHtml: string;
+      screenshotBase64?: string;
+      styleGuide?: StyleGuide;
     } = await req.json();
 
     if (!structure || !prompt) {
@@ -30,7 +34,9 @@ export async function POST(req: NextRequest) {
       prompt,
       history ?? [],
       previousHtml ?? "",
-      submitUrl
+      submitUrl,
+      screenshotBase64,
+      styleGuide
     );
 
     return NextResponse.json({ html });

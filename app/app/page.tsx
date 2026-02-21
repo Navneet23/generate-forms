@@ -5,7 +5,7 @@ import UrlBar from "@/components/UrlBar";
 import PreviewPane from "@/components/PreviewPane";
 import ChatPanel from "@/components/ChatPanel";
 import { FormStructure } from "@/lib/scraper";
-import { HistoryTurn } from "@/lib/gemini";
+import { HistoryTurn, StyleGuide } from "@/lib/gemini";
 
 export default function Home() {
   const [formUrl, setFormUrl] = useState("");
@@ -15,6 +15,8 @@ export default function Home() {
   const [publishedUrl, setPublishedUrl] = useState("");
   const [publishing, setPublishing] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [styleGuide, setStyleGuide] = useState<StyleGuide | null>(null);
+  const [pendingScreenshot, setPendingScreenshot] = useState<string | null>(null);
 
   function handleFormLoad(url: string, s: FormStructure) {
     setFormUrl(url);
@@ -22,6 +24,8 @@ export default function Home() {
     setGeneratedHtml("");
     setHistory([]);
     setPublishedUrl("");
+    setStyleGuide(null);
+    setPendingScreenshot(null);
   }
 
   async function handlePublish() {
@@ -51,17 +55,17 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen bg-white">
-      {/* URL Bar */}
       <UrlBar onLoad={handleFormLoad} disabled={false} />
 
-      {/* Main area */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Preview pane */}
         <div className="flex-1 border-r border-gray-200 overflow-hidden">
-          <PreviewPane originalUrl={formUrl} generatedHtml={generatedHtml} />
+          <PreviewPane
+            originalUrl={formUrl}
+            generatedHtml={generatedHtml}
+            onScreenshotCapture={setPendingScreenshot}
+          />
         </div>
 
-        {/* Chat panel */}
         <div className="w-80 xl:w-96 flex-shrink-0 overflow-hidden">
           <ChatPanel
             structure={structure}
@@ -69,6 +73,10 @@ export default function Home() {
             onHtmlUpdate={setGeneratedHtml}
             history={history}
             onHistoryUpdate={setHistory}
+            styleGuide={styleGuide}
+            onStyleGuideUpdate={setStyleGuide}
+            pendingScreenshot={pendingScreenshot}
+            onScreenshotConsumed={() => setPendingScreenshot(null)}
           />
         </div>
       </div>
@@ -85,21 +93,14 @@ export default function Home() {
 
         {publishedUrl ? (
           <>
-            <span className="text-sm text-gray-600 truncate">
-              {publishedUrl}
-            </span>
+            <span className="text-sm text-gray-600 truncate">{publishedUrl}</span>
             <button
               onClick={handleCopy}
               className="px-3 py-1.5 border border-gray-300 text-sm rounded-lg hover:bg-white text-gray-700"
             >
               {copied ? "Copied!" : "Copy"}
             </button>
-            <a
-              href={publishedUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-blue-600 hover:underline"
-            >
+            <a href={publishedUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
               Open ↗
             </a>
           </>
