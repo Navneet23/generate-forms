@@ -275,8 +275,9 @@ export async function generateForm(
     log(`\n=== [GEMINI] FUNCTION CALLING — Loop iteration ${loopIteration} ===`);
     log(`[GEMINI] Gemini requested ${functionCalls.length} function call(s)`);
 
-    // Process all function calls
+    // Process all function calls — separate functionResponse parts from vision parts
     const functionResponses: Part[] = [];
+    const visionFollowUp: Part[] = [];
 
     for (const part of functionCalls) {
       if (!("functionCall" in part) || !part.functionCall) continue;
@@ -305,7 +306,7 @@ export async function generateForm(
           log(`[GEMINI]     MIME: ${image.mimeType}`);
           log(`[GEMINI]     Base64 size: ${image.base64.length} chars`);
 
-          // Return the URL and send the image as vision input
+          // functionResponse goes in first message (cannot mix with other types)
           functionResponses.push({
             functionResponse: {
               name: "generate_image",
@@ -317,11 +318,11 @@ export async function generateForm(
             },
           } as Part);
 
-          // Also send the actual image so Gemini can see it for color picking
-          functionResponses.push({
+          // Vision input goes in a separate follow-up message
+          visionFollowUp.push({
             inlineData: { mimeType: image.mimeType, data: image.base64 },
           });
-          functionResponses.push({
+          visionFollowUp.push({
             text: `Above is the generated ${image.imageType} image. Its CDN URL is: ${image.url}. Use this URL in the HTML. Pick form colors that complement this image.`,
           });
         } catch (err) {
@@ -341,20 +342,16 @@ export async function generateForm(
       }
     }
 
-    // Send function responses back to Gemini
-    log(`[GEMINI] >>> Sending ${functionResponses.length} function response part(s) back to Gemini...`);
-    const fnResponseSummary = functionResponses
-      .filter((p) => "functionResponse" in p || "text" in p)
-      .map((p) => {
-        if ("functionResponse" in p && p.functionResponse) return `  functionResponse(${p.functionResponse.name}): ${JSON.stringify(p.functionResponse.response)}`;
-        if ("text" in p && p.text) return `  text: ${(p.text as string).slice(0, 120)}...`;
-        if ("inlineData" in p) return `  inlineData (image for vision)`;
-        return `  (other part)`;
-      })
-      .join("\n");
-    log(`[GEMINI] Function response parts:\n${fnResponseSummary}`);
+    // Send function responses first (functionResponse-only message)
+    log(`[GEMINI] >>> Sending ${functionResponses.length} function response(s) back to Gemini...`);
     log(`=== [GEMINI] END FUNCTION CALLING — Loop iteration ${loopIteration} ===\n`);
     response = await chat.sendMessage(functionResponses);
+
+    // Then send vision follow-up so Gemini can see the actual images for color picking
+    if (visionFollowUp.length > 0) {
+      log(`[GEMINI] >>> Sending ${visionFollowUp.length} vision follow-up part(s) (images + instructions)...`);
+      response = await chat.sendMessage(visionFollowUp);
+    }
   }
 
   const text = response.response.text();

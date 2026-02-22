@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import fs from "fs";
 import path from "path";
 
-const IMAGE_MODEL_ID = "gemini-2.0-flash-exp";
+const IMAGE_MODEL_ID = "gemini-2.5-flash-image";
 const LOG_FILE = path.join(process.cwd(), "debug.log");
 
 function log(...args: unknown[]) {
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
       model: IMAGE_MODEL_ID,
       generationConfig: {
         // @ts-expect-error - responseModalities is supported but not typed yet
-        responseModalities: ["image", "text"],
+        responseModalities: ["TEXT", "IMAGE"],
       },
     });
 
