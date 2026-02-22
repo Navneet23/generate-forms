@@ -4,9 +4,9 @@ import {
   HistoryTurn,
   StyleGuide,
   GeneratedImage,
-  ImageGenerator,
 } from "@/lib/gemini";
 import { FormStructure } from "@/lib/scraper";
+import { generateImage } from "@/lib/image-gen";
 
 export async function POST(req: NextRequest) {
   try {
@@ -39,21 +39,6 @@ export async function POST(req: NextRequest) {
 
     const submitUrl = `${req.nextUrl.origin}/api/submit/${structure.formId}`;
 
-    // Create image generator callback that calls our generate-image API
-    const imageGenerator: ImageGenerator = async (params) => {
-      const res = await fetch(
-        `${req.nextUrl.origin}/api/generate-image`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(params),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Image generation failed");
-      return data as GeneratedImage;
-    };
-
     const result = await generateForm(
       structure,
       prompt,
@@ -63,7 +48,7 @@ export async function POST(req: NextRequest) {
       screenshotBase64,
       styleGuide,
       includeImages ?? false,
-      imageGenerator,
+      generateImage,
       activeImages
     );
 

@@ -11,12 +11,13 @@ import path from "path";
 
 const MODEL_ID = "gemini-3-flash-preview";
 
-const LOG_FILE = path.join(process.cwd(), "debug.log");
+const IS_LOCAL = !process.env.VERCEL;
+const LOG_FILE = IS_LOCAL ? path.join(process.cwd(), "debug.log") : null;
 
 function log(...args: unknown[]) {
   const line = args.map((a) => (typeof a === "string" ? a : JSON.stringify(a, null, 2))).join(" ");
   console.log(line);
-  fs.appendFileSync(LOG_FILE, line + "\n");
+  if (LOG_FILE) fs.appendFileSync(LOG_FILE, line + "\n");
 }
 
 export interface HistoryTurn {
@@ -166,7 +167,9 @@ export async function generateForm(
   }
 
   const systemPrompt = buildSystemPrompt(structure, submitUrl);
-  fs.writeFileSync(LOG_FILE, `=== Debug log started at ${new Date().toISOString()} ===\n`);
+  if (LOG_FILE) {
+    fs.writeFileSync(LOG_FILE, `=== Debug log started at ${new Date().toISOString()} ===\n`);
+  }
   log("\n=== [GEMINI] SYSTEM PROMPT ===");
   log(systemPrompt);
   log("=== [GEMINI] END SYSTEM PROMPT ===\n");
