@@ -5,7 +5,7 @@ import UrlBar from "@/components/UrlBar";
 import PreviewPane from "@/components/PreviewPane";
 import ChatPanel from "@/components/ChatPanel";
 import { FormStructure } from "@/lib/scraper";
-import { HistoryTurn, StyleGuide } from "@/lib/gemini";
+import { HistoryTurn, StyleGuide, GeneratedImage } from "@/lib/gemini";
 
 export default function Home() {
   const [formUrl, setFormUrl] = useState("");
@@ -18,6 +18,8 @@ export default function Home() {
   const [styleGuide, setStyleGuide] = useState<StyleGuide | null>(null);
   const [pendingScreenshot, setPendingScreenshot] = useState<string | null>(null);
   const [screenshotMode, setScreenshotMode] = useState(false);
+  const [includeImages, setIncludeImages] = useState(true);
+  const [activeImages, setActiveImages] = useState<GeneratedImage[]>([]);
 
   function handleFormLoad(url: string, s: FormStructure) {
     setFormUrl(url);
@@ -28,6 +30,7 @@ export default function Home() {
     setStyleGuide(null);
     setPendingScreenshot(null);
     setScreenshotMode(false);
+    setActiveImages([]);
   }
 
   function handleScreenshotCapture(base64: string) {
@@ -88,6 +91,10 @@ export default function Home() {
             onScreenshotConsumed={() => setPendingScreenshot(null)}
             screenshotMode={screenshotMode}
             onToggleScreenshotMode={() => setScreenshotMode((v) => !v)}
+            includeImages={includeImages}
+            onToggleIncludeImages={() => setIncludeImages((v) => !v)}
+            activeImages={activeImages}
+            onActiveImagesUpdate={setActiveImages}
           />
         </div>
       </div>
