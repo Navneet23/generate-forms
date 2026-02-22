@@ -29,6 +29,9 @@ interface Props {
   // Screenshot capture: when set, PreviewPane passes the base64 here
   pendingScreenshot: string | null;
   onScreenshotConsumed: () => void;
+  // Screenshot mode toggle
+  screenshotMode: boolean;
+  onToggleScreenshotMode: () => void;
 }
 
 export default function ChatPanel({
@@ -41,6 +44,8 @@ export default function ChatPanel({
   onStyleGuideUpdate,
   pendingScreenshot,
   onScreenshotConsumed,
+  screenshotMode,
+  onToggleScreenshotMode,
 }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -294,6 +299,24 @@ export default function ChatPanel({
               </div>
             )}
           </div>
+
+          {/* Screenshot button — only shown when AI form exists */}
+          {!!generatedHtml && (
+            <button
+              onClick={onToggleScreenshotMode}
+              title={screenshotMode ? "Cancel screenshot (Esc)" : "Select a region to attach to your message"}
+              className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
+                screenshotMode
+                  ? "bg-blue-600 border-blue-600 text-white"
+                  : "border-gray-300 text-gray-500 hover:bg-gray-100"
+              }`}
+            >
+              {/* Crop / selection icon */}
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 1v2H1v1h2v7H1v1h2v2h1v-2h7v2h1v-2h2v-1h-2V4h2V3h-2V1h-1v2H4V1H3zm1 3h7v7H4V4z" fill="currentColor"/>
+              </svg>
+            </button>
+          )}
 
           {/* Style guide button */}
           <button

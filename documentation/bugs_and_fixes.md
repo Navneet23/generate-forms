@@ -45,7 +45,7 @@ Access-Control-Allow-Methods: POST, OPTIONS
 Access-Control-Allow-Headers: Content-Type
 ```
 
-**File:** `app/api/submit/[formId]/route.ts`
+**File:** `app/app/api/submit/[formId]/route.ts`
 
 ---
 
@@ -74,20 +74,61 @@ Access-Control-Allow-Headers: Content-Type
 
 ---
 
-## Bug 6 — Form submission returning 500 after multi-step form submit (in progress)
+## Bug 6 — Form submission returning 500 after multi-step form submit
 
 **Symptom:** Clicking Submit on the final review page of an AI-generated multi-step form returns HTTP 500 from `/api/submit/[formId]`.
 
-**Root cause (suspected):** The AI-generated form may send checkbox field values as a JSON array (e.g. `["Option A", "Option B"]`) or as `null`/empty string for unanswered checkboxes. The original proxy typed the body as `Record<string, string>` and passed all values directly to `URLSearchParams`, which stringifies arrays as `"Option A,Option B"` instead of appending each value separately — Google Forms requires a separate entry per selected option.
+**Root cause (confirmed via browser investigation):** The proxy itself was not at fault. The failure was caused by two issues in the AI-generated form's JavaScript:
 
-A secondary suspect is that Google Forms returns an unexpected HTTP status code for certain submissions (e.g. an opaque redirect with status `0`), which the proxy was treating as failure.
+1. **Checkbox values sent as a comma-joined string** — the AI was not explicitly told to send checkbox selections as an array. Some generated forms sent `"Option A,Option B"` as a single string instead of `["Option A", "Option B"]`. Google Forms requires a separate `URLSearchParams` entry per selected option; the comma-string was rejected.
 
-**Partial fix applied:**
-- Changed body type to `Record<string, string | string[]>`; array values are now appended individually to `URLSearchParams` (correct format for checkboxes)
-- Empty/null/undefined values are skipped rather than sent as empty strings
-- Status `0` (opaque redirect from `redirect: "manual"`) is now treated as success alongside 200 and 302
-- Improved server-side error logging: Google's response body (first 500 chars) is now logged when an unexpected status is received
+2. **Opaque redirect misread as failure** — Google Forms responds to a successful `formResponse` POST with an HTTP 302 redirect. When fetched with `redirect: "manual"`, the browser reports this as status `0`. The proxy was treating `0` as an error.
 
-**Status:** Issue persists — root cause not yet fully confirmed. Server-side logs should now surface the exact Google response on next reproduction.
+**Fix:**
+- Proxy: body type changed to `Record<string, string | string[]>`; arrays appended individually to `URLSearchParams`
+- Proxy: status `0` now treated as success alongside 200 and 302
+- Proxy: empty/null/undefined values skipped
+- System prompt rule 5 updated: explicitly instructs AI to send checkbox values as a JSON array of strings
+- System prompt improved server-side error logging retained for future diagnosis
 
-**File:** `app/app/api/submit/[formId]/route.ts`
+**Status:** Resolved
+
+**Files:** `app/app/api/submit/[formId]/route.ts`, `app/lib/gemini.ts`
+
+---
+
+## Bug 7 — Screenshot overlay blocking form interaction in preview
+
+**Symptom:** After the first AI generation, the creator could not click, scroll, or interact with the form in the preview pane at all. Every hover showed a crosshair cursor.
+
+**Root cause:** The screenshot selection overlay (`position: absolute; inset: 0`) was always rendered on top of the AI-generated iframe, capturing all mouse events. There was no way to interact with the form without first removing or disabling the overlay.
+
+**Fix:** Made screenshot mode opt-in. The overlay is now only rendered when the creator explicitly activates it by clicking the crop icon button in the chat toolbar. While inactive, the iframe receives all mouse events normally. After a screenshot is captured (or Escape is pressed), the overlay deactivates automatically.
+
+- Removed the always-on overlay from `PreviewPane`
+- Added `screenshotMode: boolean` prop; overlay only mounts when `true`
+- Added crop icon button to `ChatPanel` toolbar (visible only when a generated form exists); toggles `screenshotMode` in `page.tsx`
+- Preview toolbar hint text only shown when screenshot mode is active
+
+**Files:** `app/components/PreviewPane.tsx`, `app/components/ChatPanel.tsx`, `app/app/page.tsx`
+
+---
+
+## Bug 8 — AI-generated multi-step forms: missing review step, no auto-advance, white background
+
+**Symptom:** Three related issues observed in question-by-question generated forms:
+1. The review step was sometimes skipped or rendered empty with no answer values
+2. Single-selection questions (dropdown, multiple choice, linear scale) required an extra "Next" button click after selecting — slow and unintuitive
+3. Generated forms had a plain white page background, not matching any intended style
+
+**Root cause:** The system prompt did not include explicit rules for these behaviours, so the AI produced inconsistent results.
+
+**Fix:** Added rules 11 and 12 to the system prompt in `lib/gemini.ts`:
+- Rule 11: Page must fill full viewport (`min-height: 100vh`) with a background colour
+- Rule 12a: Review step is mandatory in all question-by-question layouts — no exceptions
+- Rule 12b: Single-selection questions (multiple_choice, dropdown, linear_scale) must auto-advance on selection
+- Rule 12c: Auto-advance steps must show helper text ("Select an option to continue")
+- Rule 12d: Multi-select/text questions still use an explicit Next button
+- Rule 12e: Pressing Enter on any step advances to the next step (except inside `<textarea>`)
+
+**File:** `app/lib/gemini.ts`

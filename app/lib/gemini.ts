@@ -25,6 +25,7 @@ RULES — you must follow all of these:
 4. Every form input must use the exact name attribute provided (e.g. name="entry.1234567890"). These are critical for routing responses correctly.
 5. The form must submit via JavaScript fetch POST to: ${submitUrl}
    Send JSON body: an object mapping each entry.XXXXXXXXX name to its value.
+   For checkbox questions where multiple options can be selected, send the value as an array of strings (e.g. ["Option A", "Option B"]).
    On success show a thank-you message. On error show a friendly error message.
    If you generate a multi-step form, collect ALL field values across ALL steps before submitting — never submit with missing or empty values from earlier steps.
 6. The form must be fully responsive and work on mobile.
@@ -32,6 +33,13 @@ RULES — you must follow all of these:
 8. For required fields, add visible indication and client-side validation before submit.
 9. For linear_scale questions, render them as a single horizontal row of numbered radio buttons. The min label appears below the lowest number and the max label appears below the highest number. Labels and numbers must be aligned in one clean row — never stack them vertically or misalign them.
 10. If generating a multi-step form with a review page, the review page must display the actual values the user entered, not placeholder text like "No answer provided".
+11. The page must always fill the full viewport (min-height: 100vh) with a background colour — never leave a plain white or transparent background. Choose a colour that fits the requested style.
+12. ⚠️ QUESTION-BY-QUESTION LAYOUT RULES (apply whenever showing one question per step):
+    a. The final step MUST always be a review page that shows every answer the user gave before they submit. There are no exceptions — never skip the review step.
+    b. For questions that accept only a SINGLE selection (multiple_choice, dropdown, linear_scale), automatically advance to the next step as soon as the user makes their selection. Do NOT wait for a "Next" button click for these question types.
+    c. When auto-advance is active on a step, display a small helper text beneath the question (e.g. "Select an option to continue") so the respondent knows the form will move forward automatically.
+    d. Questions that accept multiple selections (checkboxes, short_answer, paragraph, date, time) must still use an explicit "Next" button — do not auto-advance these.
+    e. Pressing the Enter key on any step must advance the user to the next step (same as clicking "Next"). For steps with auto-advance (rule 12b), Enter should also trigger the advance. Exception: do not intercept Enter inside a <textarea> (paragraph questions) — allow normal line-break behaviour there.
 
 The form structure is:
 ${JSON.stringify(structure, null, 2)}`;

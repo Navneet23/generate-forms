@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   originalUrl: string;
   generatedHtml: string;
   onScreenshotCapture: (base64: string) => void;
+  screenshotMode: boolean;
+  onScreenshotModeChange: (active: boolean) => void;
 }
 
 type ViewMode = "desktop" | "mobile";
@@ -17,7 +19,7 @@ interface Selection {
   endY: number;
 }
 
-export default function PreviewPane({ originalUrl, generatedHtml, onScreenshotCapture }: Props) {
+export default function PreviewPane({ originalUrl, generatedHtml, onScreenshotCapture, screenshotMode, onScreenshotModeChange }: Props) {
   const [viewMode, setViewMode] = useState<ViewMode>("desktop");
   const [selecting, setSelecting] = useState(false);
   const [selection, setSelection] = useState<Selection | null>(null);
@@ -26,6 +28,20 @@ export default function PreviewPane({ originalUrl, generatedHtml, onScreenshotCa
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const showGenerated = generatedHtml.length > 0;
+
+  // Cancel screenshot mode on Escape
+  useEffect(() => {
+    if (!screenshotMode) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onScreenshotModeChange(false);
+        setSelecting(false);
+        setSelection(null);
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [screenshotMode, onScreenshotModeChange]);
 
   function getOverlayCoords(e: React.MouseEvent) {
     const rect = overlayRef.current!.getBoundingClientRect();
@@ -138,9 +154,9 @@ export default function PreviewPane({ originalUrl, generatedHtml, onScreenshotCa
         >
           Mobile
         </button>
-        {showGenerated && (
-          <span className="ml-auto text-xs text-green-600 font-medium">
-            {capturing ? "Capturing..." : "AI generated · drag to select region"}
+        {showGenerated && screenshotMode && (
+          <span className="ml-auto text-xs text-blue-600 font-medium animate-pulse">
+            {capturing ? "Capturing..." : "Drag to select a region"}
           </span>
         )}
       </div>
@@ -169,29 +185,33 @@ export default function PreviewPane({ originalUrl, generatedHtml, onScreenshotCa
                   className="w-full h-full border-0"
                   title="Generated form preview"
                 />
-                {/* Screenshot selection overlay */}
-                <div
-                  ref={overlayRef}
-                  className="absolute inset-0"
-                  style={{ cursor: selecting ? "crosshair" : "crosshair", zIndex: 10 }}
-                  onMouseDown={onMouseDown}
-                  onMouseMove={onMouseMove}
-                  onMouseUp={onMouseUp}
-                  onMouseLeave={onMouseUp}
-                >
-                  {/* Selection rectangle */}
-                  {selRect && selRect.width > 0 && (
-                    <div
-                      className="absolute border-2 border-blue-500 bg-blue-100/20 pointer-events-none"
-                      style={{
-                        left: selRect.left,
-                        top: selRect.top,
-                        width: selRect.width,
-                        height: selRect.height,
-                      }}
-                    />
-                  )}
-                </div>
+                {/* Screenshot selection overlay — only active when screenshotMode is on */}
+                {screenshotMode && (
+                  <div
+                    ref={overlayRef}
+                    className="absolute inset-0"
+                    style={{ cursor: "crosshair", zIndex: 10 }}
+                    onMouseDown={onMouseDown}
+                    onMouseMove={onMouseMove}
+                    onMouseUp={onMouseUp}
+                    onMouseLeave={() => { if (selecting) onMouseUp(); }}
+                  >
+                    {/* Subtle tint so it's obvious screenshot mode is active */}
+                    <div className="absolute inset-0 bg-blue-500/5 pointer-events-none" />
+                    {/* Selection rectangle */}
+                    {selRect && selRect.width > 0 && (
+                      <div
+                        className="absolute border-2 border-blue-500 bg-blue-100/20 pointer-events-none"
+                        style={{
+                          left: selRect.left,
+                          top: selRect.top,
+                          width: selRect.width,
+                          height: selRect.height,
+                        }}
+                      />
+                    )}
+                  </div>
+                )}
               </>
             ) : (
               <iframe

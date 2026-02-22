@@ -17,6 +17,7 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [styleGuide, setStyleGuide] = useState<StyleGuide | null>(null);
   const [pendingScreenshot, setPendingScreenshot] = useState<string | null>(null);
+  const [screenshotMode, setScreenshotMode] = useState(false);
 
   function handleFormLoad(url: string, s: FormStructure) {
     setFormUrl(url);
@@ -26,6 +27,12 @@ export default function Home() {
     setPublishedUrl("");
     setStyleGuide(null);
     setPendingScreenshot(null);
+    setScreenshotMode(false);
+  }
+
+  function handleScreenshotCapture(base64: string) {
+    setPendingScreenshot(base64);
+    setScreenshotMode(false);
   }
 
   async function handlePublish() {
@@ -62,7 +69,9 @@ export default function Home() {
           <PreviewPane
             originalUrl={formUrl}
             generatedHtml={generatedHtml}
-            onScreenshotCapture={setPendingScreenshot}
+            onScreenshotCapture={handleScreenshotCapture}
+            screenshotMode={screenshotMode}
+            onScreenshotModeChange={setScreenshotMode}
           />
         </div>
 
@@ -77,6 +86,8 @@ export default function Home() {
             onStyleGuideUpdate={setStyleGuide}
             pendingScreenshot={pendingScreenshot}
             onScreenshotConsumed={() => setPendingScreenshot(null)}
+            screenshotMode={screenshotMode}
+            onToggleScreenshotMode={() => setScreenshotMode((v) => !v)}
           />
         </div>
       </div>
