@@ -39,6 +39,7 @@ app/
 └── lib/
     ├── scraper.ts                      # Extracts + normalises FB_PUBLIC_LOAD_DATA_
     ├── gemini.ts                       # Gemini prompt layer (multimodal + function calling for image generation)
+    ├── image-gen.ts                    # Shared image generation logic (Nano Banana + Vercel Blob upload)
     └── store.ts                        # Upstash Redis published form store
 ```
 
@@ -66,7 +67,8 @@ Creator types prompt → POST /api/generate
     → Gemini receives generate_image function declaration (if images enabled)
     → Gemini decides whether images would enhance the form
     → If yes: Gemini calls generate_image (one or more times via function calling)
-        → POST /api/generate-image
+        → lib/image-gen.ts called directly (not via HTTP — avoids Vercel
+          deployment protection blocking self-fetch on preview deployments)
         → Nano Banana generates image (base64 PNG)
         → Image uploaded to Vercel Blob → CDN URL returned
         → Function response sent back to Gemini
@@ -187,22 +189,28 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 
 ---
 
-### `app/app/api/generate-image/route.ts`
+### `lib/image-gen.ts`
 
-Generates AI images using Nano Banana (`gemini-2.5-flash-image`) and uploads them to Vercel Blob.
-
-**Request parameters** (from Gemini's function call):
-- `prompt` — detailed image generation prompt written by Gemini
-- `imageType` — `background`, `header`, or `accent`
-- `colorPalette` — dominant colors for the image
-- `aspectRatio` — e.g. `16:9` for headers, `flexible` for backgrounds
+Shared image generation logic used by both the generate route (via direct function call during Gemini's function calling loop) and the standalone `/api/generate-image` endpoint.
 
 **Processing:**
 1. Enhances the prompt with type-specific instructions (e.g. "keep subtle" for backgrounds)
-2. Calls Nano Banana with `responseModalities: ["TEXT", "IMAGE"]`
+2. Calls Nano Banana (`gemini-2.5-flash-image`) with `responseModalities: ["TEXT", "IMAGE"]`
 3. Extracts the base64 PNG from the response
 4. Uploads to Vercel Blob → returns permanent CDN URL
-5. Returns URL + base64 + mimeType to the caller
+5. Returns URL + base64 + mimeType
+
+**Why a shared lib instead of HTTP self-fetch:** Vercel preview deployments have deployment protection that blocks unauthenticated requests to the same deployment. An internal `fetch("/api/generate-image")` from `/api/generate` would get a 401. Calling the function directly avoids this entirely.
+
+### `app/app/api/generate-image/route.ts`
+
+Thin HTTP wrapper around `lib/image-gen.ts`. Exposes image generation as a standalone API endpoint. Delegates all logic to the shared lib.
+
+**Request parameters:**
+- `prompt` — detailed image generation prompt
+- `imageType` — `background`, `header`, or `accent`
+- `colorPalette` — dominant colors for the image
+- `aspectRatio` — e.g. `16:9` for headers, `flexible` for backgrounds
 
 ---
 

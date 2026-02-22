@@ -72,7 +72,7 @@ const generateImageFunctionDecl: FunctionDeclaration = {
   },
 };
 
-function buildSystemPrompt(structure: FormStructure, submitUrl: string): string {
+function buildSystemPrompt(structure: FormStructure, submitUrl: string, includeImages?: boolean): string {
   return `You are an expert frontend developer who specialises in building beautiful, custom HTML forms.
 
 You will be given a Google Form structure and a styling request. Your job is to output a COMPLETE, SELF-CONTAINED HTML page that renders the form with the requested visual design.
@@ -107,7 +107,7 @@ RULES — you must follow all of these:
     e. Pressing the Enter key on any step must advance the user to the next step (same as clicking "Next"). For steps with auto-advance (rule 12b), Enter should also trigger the advance. Exception: do not intercept Enter inside a <textarea> (paragraph questions) — allow normal line-break behaviour there.
     f. Every step after the first must include a "Back" button that returns the user to the previous step. The review page must also have a Back button. Only the very first question step should have no Back button.
 
-IMAGE GENERATION GUIDELINES (when the generate_image tool is available):
+${includeImages ? `IMAGE GENERATION GUIDELINES (when the generate_image tool is available):
 - You have access to a generate_image tool that creates AI images for the form.
 - Decide whether images would genuinely enhance this form. Good candidates: event registrations, creative/branded forms, themed forms. Poor candidates: simple internal surveys, feedback forms, plain data collection.
 - If you decide images would help, call generate_image with a detailed, specific prompt. Describe the style, mood, subject, and composition. Never request text/words/letters in images.
@@ -116,7 +116,8 @@ IMAGE GENERATION GUIDELINES (when the generate_image tool is available):
 - For background images: use CSS background-image with background-size: cover. Always add a semi-transparent overlay so form text remains readable.
 - For header images: place at the top with appropriate height (200-300px), use object-fit: cover, make it responsive.
 - For accent images: size appropriately and position to support the form theme without overwhelming the content.
-- Reference generated images by their returned URL in the HTML.
+- Reference generated images by their returned URL in the HTML.` : `IMAGE RULES:
+- Do NOT include any images in the form. Do not use <img> tags, background-image CSS, or any external image URLs. The form should be styled with colors, gradients, and CSS only.`}
 
 The form structure is:
 ${JSON.stringify(structure, null, 2)}
@@ -166,7 +167,7 @@ export async function generateForm(
     });
   }
 
-  const systemPrompt = buildSystemPrompt(structure, submitUrl);
+  const systemPrompt = buildSystemPrompt(structure, submitUrl, includeImages);
   if (LOG_FILE) {
     fs.writeFileSync(LOG_FILE, `=== Debug log started at ${new Date().toISOString()} ===\n`);
   }
