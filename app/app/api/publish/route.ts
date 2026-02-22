@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     const id = nanoid(10);
-    save(id, { html, formId, createdAt: new Date().toISOString() });
+    await save(id, { html, formId, createdAt: new Date().toISOString() });
 
     const url = `${req.nextUrl.origin}/f/${id}`;
     return NextResponse.json({ url, id });

@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const record = get(id);
+  const record = await get(id);
 
   if (!record) {
     return new Response("<h1>Form not found</h1>", {

@@ -48,9 +48,9 @@ export async function POST(
     }
 
     const responseText = await googleRes.text().catch(() => "(unreadable)");
-    console.error("Google Forms submission unexpected status:", googleRes.status, responseText.slice(0, 500));
+    console.error("Google Forms submission unexpected status:", googleRes.status, "body:", formData.toString().slice(0, 300), "response:", responseText.slice(0, 500));
     return NextResponse.json(
-      { error: "Submission failed. Please try again." },
+      { error: "Submission failed. Please try again.", googleStatus: googleRes.status, sentBody: formData.toString().slice(0, 500) },
       { status: 500, headers: CORS_HEADERS }
     );
   } catch (err: unknown) {

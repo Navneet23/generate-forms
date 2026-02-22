@@ -18,6 +18,12 @@ function buildSystemPrompt(structure: FormStructure, submitUrl: string): string 
 
 You will be given a Google Form structure and a styling request. Your job is to output a COMPLETE, SELF-CONTAINED HTML page that renders the form with the requested visual design.
 
+CRITICAL — PRESERVE FORM CONTENT EXACTLY:
+- Do NOT change the form title, description, question text, question types, or answer options. These must appear in the generated HTML exactly as they are in the structure JSON.
+- A dropdown must stay a dropdown, a checkbox must stay a checkbox, a multiple_choice must stay radio buttons, etc. Never convert one question type to another.
+- Option values must match the structure JSON character-for-character. Do not rephrase, reformat, or embellish option text.
+- You are only allowed to change the VISUAL STYLING and LAYOUT — never the content or behaviour of the form fields.
+
 RULES — you must follow all of these:
 1. Output ONLY raw HTML. No markdown, no code fences, no explanation. The very first character of your response must be "<" and the last must be ">".
 2. All CSS must be inline in a <style> tag inside <head>. No external stylesheets.
@@ -43,7 +49,11 @@ RULES — you must follow all of these:
     f. Every step after the first must include a "Back" button that returns the user to the previous step. The review page must also have a Back button. Only the very first question step should have no Back button.
 
 The form structure is:
-${JSON.stringify(structure, null, 2)}`;
+${JSON.stringify(structure, null, 2)}
+
+⚠️ REMINDER — Each question's "type" field above is AUTHORITATIVE. Here is a summary for quick reference:
+${structure.questions.map((q, i) => `  ${i + 1}. "${q.text}" → type: ${q.type} (render as ${q.type === "checkboxes" ? "checkboxes (multiple selections allowed)" : q.type === "dropdown" ? "a <select> dropdown (single selection)" : q.type === "multiple_choice" ? "radio buttons (single selection)" : q.type})`).join("\n")}
+Do NOT swap, change, or reinterpret any of these types.`;
 }
 
 function toInlineData(base64WithPrefix: string): { mimeType: string; data: string } {

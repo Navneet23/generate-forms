@@ -48,12 +48,34 @@ export async function POST(req: NextRequest) {
 
     const safeUrl = await validateUrl(url);
 
-    // Lazy import puppeteer so it only loads when this route is called
-    const puppeteer = await import("puppeteer");
-    const browser = await puppeteer.default.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    // Puppeteer requires a Chrome binary which is not available on Vercel serverless.
+    // Use @sparticuz/chromium for serverless environments, fall back to regular puppeteer locally.
+    let browser;
+    try {
+      const chromium = await import("@sparticuz/chromium").then(m => m.default).catch(() => null);
+      if (chromium) {
+        // Serverless environment (Vercel)
+        const puppeteer = await import("puppeteer-core");
+        browser = await puppeteer.default.launch({
+          args: chromium.args,
+          defaultViewport: { width: 1280, height: 800 },
+          executablePath: await chromium.executablePath(),
+          headless: true as boolean,
+        });
+      } else {
+        // Local development — use full puppeteer
+        const puppeteer = await import("puppeteer");
+        browser = await puppeteer.default.launch({
+          headless: true,
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
+      }
+    } catch {
+      return NextResponse.json(
+        { error: "Website screenshot is not available in this environment. Use image upload instead." },
+        { status: 501 }
+      );
+    }
 
     try {
       const page = await browser.newPage();
