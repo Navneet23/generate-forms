@@ -8,7 +8,9 @@
 | Language | TypeScript |
 | Styling (tool UI) | Tailwind CSS |
 | AI Model | Gemini 3 Flash Preview (`@google/generative-ai`) |
-| Storage | In-memory Map (server-side, lost on restart) |
+| Image Generation | Gemini 2.5 Flash Image / Nano Banana (`gemini-2.5-flash-image`) |
+| Image Storage | Vercel Blob (CDN-backed permanent URLs) |
+| Storage | Upstash Redis (published forms, 7-day TTL) |
 | Runtime | Node.js via Next.js dev server |
 
 ---
@@ -22,7 +24,8 @@ app/
 │   ├── layout.tsx                      # HTML shell, metadata
 │   ├── api/
 │   │   ├── scrape/route.ts             # Scrapes Google Form structure
-│   │   ├── generate/route.ts           # Calls Gemini, returns HTML
+│   │   ├── generate/route.ts           # Calls Gemini, returns HTML (handles function calling loop)
+│   │   ├── generate-image/route.ts     # AI image generation via Nano Banana + Vercel Blob upload
 │   │   ├── publish/route.ts            # Freezes HTML, returns shareable URL
 │   │   ├── submit/[formId]/route.ts    # Proxies submissions to Google Forms
 │   │   ├── upload/route.ts             # Hosts uploaded images (CDN/permanent)
@@ -31,12 +34,13 @@ app/
 ├── components/
 │   ├── UrlBar.tsx                      # URL input + Load Form button
 │   ├── PreviewPane.tsx                 # iframe preview (baseline + AI-generated); opt-in screenshot overlay
-│   ├── ChatPanel.tsx                   # Chat UI, triggers generation, screenshot/upload/style guide buttons
+│   ├── ChatPanel.tsx                   # Chat UI, triggers generation, screenshot/upload/style guide/images buttons
 │   └── StyleGuideDialog.tsx            # Modal for uploading or URL-capturing a visual style reference
 └── lib/
     ├── scraper.ts                      # Extracts + normalises FB_PUBLIC_LOAD_DATA_
-    ├── gemini.ts                       # Gemini prompt layer (multimodal: screenshot + style guide)
-    └── store.ts                        # In-memory published form store
+    ├── gemini.ts                       # Gemini prompt layer (multimodal + function calling for image generation)
+    ├── image-gen.ts                    # Shared image generation logic (Nano Banana + Vercel Blob upload)
+    └── store.ts                        # Upstash Redis published form store
 ```
 
 ---
@@ -53,20 +57,31 @@ Creator pastes URL
     → Preview pane shows original form in iframe
 ```
 
-### 2. AI Generation
+### 2. AI Generation (with optional image generation)
 ```
 Creator types prompt → POST /api/generate
     → Sends: FormStructure + prompt + conversation history + previous HTML
               + optional screenshot base64 (selected region)
               + optional style guide (image base64 or website screenshot)
-    → Gemini returns complete self-contained HTML page
+              + includeImages flag + activeImages from previous turns
+    → Gemini receives generate_image function declaration (if images enabled)
+    → Gemini decides whether images would enhance the form
+    → If yes: Gemini calls generate_image (one or more times via function calling)
+        → lib/image-gen.ts called directly (not via HTTP — avoids Vercel
+          deployment protection blocking self-fetch on preview deployments)
+        → Nano Banana generates image (base64 PNG)
+        → Image uploaded to Vercel Blob → CDN URL returned
+        → Function response sent back to Gemini
+        → Generated image sent as vision input (separate message) so Gemini
+          can see actual colors and pick complementary form theme
+    → Gemini returns complete self-contained HTML page (with image URLs embedded)
     → Preview pane replaces original iframe with AI-generated srcdoc iframe
 ```
 
 ### 3. Publish
 ```
 Creator clicks Publish → POST /api/publish
-    → Server assigns nanoid, stores HTML + formId in memory
+    → Server assigns nanoid, stores HTML + formId in Redis (7-day TTL)
     → Returns shareable URL: /f/{id}
     → GET /f/{id} serves frozen HTML as text/html
 ```
@@ -129,7 +144,7 @@ Unsupported types (grids, file upload) are silently skipped.
 
 ### `lib/gemini.ts`
 
-Wraps the Gemini API. Builds a system prompt with the form structure and rules, then starts a chat session with conversation history for iterative refinement.
+Wraps the Gemini API. Builds a system prompt with the form structure and rules, then starts a chat session with conversation history for iterative refinement. Supports function calling for AI image generation.
 
 **Model:** `gemini-3-flash-preview`
 
@@ -141,7 +156,7 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 5. Submit via fetch POST to the proxy URL; checkbox values sent as arrays; multi-step forms collect all values before submitting
 6. Fully responsive
 7. Always render form title and description at the top
-8. Required field validation before submit
+8. Required field validation before submit — only for fields with `required: true` in the form structure; optional fields must remain optional
 9. Linear scale: single horizontal row of radio buttons with labels under min/max values
 10. Multi-step review pages must show actual entered values, not placeholder text
 11. Page must fill full viewport (`min-height: 100vh`) with a background colour — never plain white
@@ -153,7 +168,49 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
     - (e) Pressing Enter on any step advances to the next step (except inside `<textarea>`)
     - (f) Every step after the first must include a Back button; the review page also has a Back button
 
+**Image generation guidelines** (when `generate_image` tool is provided):
+- Gemini decides whether images would enhance the form based on context
+- Good candidates: event registrations, creative/branded forms, themed forms
+- Poor candidates: simple surveys, feedback forms, plain data collection
+- Image types: `background` (subtle, low-contrast), `header` (visually striking banner), `accent` (decorative)
+- After receiving generated images as vision input, Gemini picks complementary form colors
+
+**Function calling flow:**
+1. Gemini receives `generate_image` function declaration (when "Include images" is enabled)
+2. Gemini may call it zero, one, or multiple times in `AUTO` mode
+3. Each call triggers image generation via Nano Banana + Vercel Blob upload
+4. Function responses (URLs) are sent back in one message
+5. Generated images are sent as vision input in a separate follow-up message (Gemini SDK does not allow mixing `functionResponse` with other part types)
+6. Gemini produces final HTML after seeing the actual generated images
+
 **Conversation history:** last 10 turns are sent with each request for iterative refinement.
+
+**Active images:** On subsequent generations, previously generated images are re-sent as vision input so Gemini maintains color coherence across edits.
+
+---
+
+### `lib/image-gen.ts`
+
+Shared image generation logic used by both the generate route (via direct function call during Gemini's function calling loop) and the standalone `/api/generate-image` endpoint.
+
+**Processing:**
+1. Enhances the prompt with type-specific instructions (e.g. "keep subtle" for backgrounds)
+2. Calls Nano Banana (`gemini-2.5-flash-image`) with `responseModalities: ["TEXT", "IMAGE"]`
+3. Extracts the base64 PNG from the response
+4. Uploads to Vercel Blob → returns permanent CDN URL
+5. Returns URL + base64 + mimeType
+
+**Why a shared lib instead of HTTP self-fetch:** Vercel preview deployments have deployment protection that blocks unauthenticated requests to the same deployment. An internal `fetch("/api/generate-image")` from `/api/generate` would get a 401. Calling the function directly avoids this entirely.
+
+### `app/app/api/generate-image/route.ts`
+
+Thin HTTP wrapper around `lib/image-gen.ts`. Exposes image generation as a standalone API endpoint. Delegates all logic to the shared lib.
+
+**Request parameters:**
+- `prompt` — detailed image generation prompt
+- `imageType` — `background`, `header`, or `accent`
+- `colorPalette` — dominant colors for the image
+- `aspectRatio` — e.g. `16:9` for headers, `flexible` for backgrounds
 
 ---
 
@@ -169,6 +226,16 @@ Access-Control-Allow-Headers: Content-Type
 ```
 
 ---
+
+### `components/ChatPanel.tsx`
+
+Chat interface with toolbar buttons:
+- **+ button** — upload image to embed in form
+- **Screenshot button** — select a region of the preview to attach to message (only shown when AI form exists)
+- **Style guide button** — open style reference dialog
+- **Include images button** — toggle AI image generation (purple when active, checked by default)
+
+Tracks `activeImages` (generated images from previous turns) and sends them with each generation request for color coherence.
 
 ### `components/PreviewPane.tsx`
 
@@ -188,7 +255,7 @@ Optional "focus on" text field narrows AI interpretation. Style guide persists f
 
 ### `lib/store.ts`
 
-In-memory `Map` keyed by nanoid. Stores published form HTML and formId. Data is lost on server restart — acceptable for MVP prototype. Replace with Redis or a database for production.
+Upstash Redis store keyed by nanoid. Stores published form HTML and formId with a 7-day TTL.
 
 ---
 
@@ -197,3 +264,7 @@ In-memory `Map` keyed by nanoid. Stores published form HTML and formId. Data is 
 | Variable | Required | Description |
 |---|---|---|
 | `GEMINI_API_KEY` | Yes | Google AI Studio API key |
+| `BLOB_READ_WRITE_TOKEN` | Yes | Vercel Blob authentication token for image uploads |
+| `KV_REST_API_URL` | Yes | Upstash Redis REST URL |
+| `KV_REST_API_TOKEN` | Yes | Upstash Redis auth token |
+| `KV_REST_API_READ_ONLY_TOKEN` | Yes | Upstash Redis read-only token |

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FormStructure } from "@/lib/scraper";
-import { HistoryTurn, StyleGuide } from "@/lib/gemini";
+import { HistoryTurn, StyleGuide, GeneratedImage } from "@/lib/gemini";
 import StyleGuideDialog from "./StyleGuideDialog";
 
 interface Message {
@@ -32,6 +32,11 @@ interface Props {
   // Screenshot mode toggle
   screenshotMode: boolean;
   onToggleScreenshotMode: () => void;
+  // Image generation
+  includeImages: boolean;
+  onToggleIncludeImages: () => void;
+  activeImages: GeneratedImage[];
+  onActiveImagesUpdate: (images: GeneratedImage[]) => void;
 }
 
 export default function ChatPanel({
@@ -46,6 +51,10 @@ export default function ChatPanel({
   onScreenshotConsumed,
   screenshotMode,
   onToggleScreenshotMode,
+  includeImages,
+  onToggleIncludeImages,
+  activeImages,
+  onActiveImagesUpdate,
 }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -136,15 +145,22 @@ export default function ChatPanel({
           previousHtml: generatedHtml,
           screenshotBase64: currentAttachment?.source === "screenshot" ? currentAttachment.base64 : undefined,
           styleGuide: styleGuide ?? undefined,
+          includeImages,
+          activeImages: includeImages ? activeImages : undefined,
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Generation failed");
 
+      const imageCount = data.generatedImages?.length ?? 0;
+      const statusText = imageCount > 0
+        ? `Form updated with ${imageCount} generated image${imageCount > 1 ? "s" : ""} — see preview →`
+        : "Form updated — see preview →";
+
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", text: "Form updated — see preview →" },
+        { role: "assistant", text: statusText },
       ]);
       onHtmlUpdate(data.html);
       onHistoryUpdate([
@@ -152,6 +168,11 @@ export default function ChatPanel({
         { role: "user", text: fullPrompt },
         { role: "model", text: data.html },
       ]);
+
+      // Track generated images for future re-sending
+      if (data.generatedImages && data.generatedImages.length > 0) {
+        onActiveImagesUpdate([...activeImages, ...data.generatedImages]);
+      }
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Something went wrong";
       setError(msg);
@@ -235,7 +256,9 @@ export default function ChatPanel({
         {loading && (
           <div className="flex justify-start">
             <div className="bg-gray-100 rounded-2xl px-4 py-2 text-sm text-gray-500">
-              <span className="animate-pulse">Generating...</span>
+              <span className="animate-pulse">
+                {includeImages ? "Generating (may include images)..." : "Generating..."}
+              </span>
             </div>
           </div>
         )}
@@ -329,6 +352,20 @@ export default function ChatPanel({
             }`}
           >
             {styleGuide ? "Style guide ✓" : "Style guide"}
+          </button>
+
+          {/* Include images toggle chip */}
+          <button
+            onClick={onToggleIncludeImages}
+            disabled={!structure}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors disabled:opacity-40 ${
+              includeImages
+                ? "bg-purple-50 border-purple-300 text-purple-700"
+                : "border-gray-300 text-gray-600 hover:bg-gray-50"
+            }`}
+            title={includeImages ? "AI may generate images for the form" : "Image generation is disabled"}
+          >
+            {includeImages ? "Images ✓" : "Images"}
           </button>
         </div>
 
