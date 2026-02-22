@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI, Part } from "@google/generative-ai";
 import { FormStructure } from "./scraper";
 
-const MODEL_ID = "gemini-3.0-flash";
+const MODEL_ID = "gemini-3-flash-preview";
 
 export interface HistoryTurn {
   role: "user" | "model";

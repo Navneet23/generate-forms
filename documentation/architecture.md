@@ -7,7 +7,7 @@
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling (tool UI) | Tailwind CSS |
-| AI Model | Gemini 3.0 Flash (`@google/generative-ai`) |
+| AI Model | Gemini 3 Flash Preview (`@google/generative-ai`) |
 | Storage | In-memory Map (server-side, lost on restart) |
 | Runtime | Node.js via Next.js dev server |
 
@@ -131,7 +131,7 @@ Unsupported types (grids, file upload) are silently skipped.
 
 Wraps the Gemini API. Builds a system prompt with the form structure and rules, then starts a chat session with conversation history for iterative refinement.
 
-**Model:** `gemini-3.0-flash`
+**Model:** `gemini-3-flash-preview`
 
 **System prompt rules enforced:**
 1. Output raw HTML only — no markdown, no code fences
