@@ -7,7 +7,7 @@
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling (tool UI) | Tailwind CSS |
-| AI Model | Gemini 2.0 Flash (`@google/generative-ai`) |
+| AI Model | Gemini 3.0 Flash (`@google/generative-ai`) |
 | Storage | In-memory Map (server-side, lost on restart) |
 | Runtime | Node.js via Next.js dev server |
 
@@ -131,7 +131,7 @@ Unsupported types (grids, file upload) are silently skipped.
 
 Wraps the Gemini API. Builds a system prompt with the form structure and rules, then starts a chat session with conversation history for iterative refinement.
 
-**Model:** `gemini-2.0-flash`
+**Model:** `gemini-3.0-flash`
 
 **System prompt rules enforced:**
 1. Output raw HTML only — no markdown, no code fences
@@ -151,6 +151,7 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
     - (c) Auto-advance steps show helper text: "Select an option to continue"
     - (d) Multi-select/text questions (checkboxes, short_answer, paragraph, date, time) use an explicit Next button
     - (e) Pressing Enter on any step advances to the next step (except inside `<textarea>`)
+    - (f) Every step after the first must include a Back button; the review page also has a Back button
 
 **Conversation history:** last 10 turns are sent with each request for iterative refinement.
 
@@ -180,7 +181,7 @@ Renders the form preview. Two modes:
 ### `components/StyleGuideDialog.tsx`
 
 Modal dialog for providing a visual style reference to the AI. Two input modes:
-- **Upload an image** — read client-side as base64, passed directly to Gemini as vision input; not stored server-side
+- **Upload an image** — read client-side as base64 (supports file picker, drag-drop, and clipboard paste via Ctrl+V / Cmd+V), passed directly to Gemini as vision input; not stored server-side
 - **Use a website** — URL is sent to `POST /api/screenshot`; server captures the page and returns a base64 screenshot
 
 Optional "focus on" text field narrows AI interpretation. Style guide persists for the session and is re-attached on every subsequent AI call.

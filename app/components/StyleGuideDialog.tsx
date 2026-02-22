@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StyleGuide } from "@/lib/gemini";
 
 interface Props {
@@ -65,6 +65,26 @@ export default function StyleGuideDialog({ current, onApply, onClose }: Props) {
     onClose();
   }
 
+  // Listen for paste events to support Ctrl+V / Cmd+V image from clipboard
+  useEffect(() => {
+    if (mode !== "image") return;
+    function onPaste(e: ClipboardEvent) {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          e.preventDefault();
+          const file = item.getAsFile();
+          if (file) handleImageFile(file);
+          return;
+        }
+      }
+    }
+    window.addEventListener("paste", onPaste);
+    return () => window.removeEventListener("paste", onPaste);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
   const previewSrc = mode === "image" ? imagePreview : websitePreview;
   const canApply = mode === "image" ? !!imageBase64 : !!websitePreview;
 
@@ -109,7 +129,7 @@ export default function StyleGuideDialog({ current, onApply, onClose }: Props) {
               {imagePreview ? (
                 <img src={imagePreview} alt="Style guide preview" className="max-h-40 mx-auto rounded object-cover" />
               ) : (
-                <p className="text-sm text-gray-400">Drop image here or click to browse</p>
+                <p className="text-sm text-gray-400">Paste, drop, or click to add an image</p>
               )}
               <input
                 ref={fileRef}

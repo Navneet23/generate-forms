@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI, Part } from "@google/generative-ai";
 import { FormStructure } from "./scraper";
 
-const MODEL_ID = "gemini-2.0-flash";
+const MODEL_ID = "gemini-3.0-flash";
 
 export interface HistoryTurn {
   role: "user" | "model";
@@ -40,6 +40,7 @@ RULES — you must follow all of these:
     c. When auto-advance is active on a step, display a small helper text beneath the question (e.g. "Select an option to continue") so the respondent knows the form will move forward automatically.
     d. Questions that accept multiple selections (checkboxes, short_answer, paragraph, date, time) must still use an explicit "Next" button — do not auto-advance these.
     e. Pressing the Enter key on any step must advance the user to the next step (same as clicking "Next"). For steps with auto-advance (rule 12b), Enter should also trigger the advance. Exception: do not intercept Enter inside a <textarea> (paragraph questions) — allow normal line-break behaviour there.
+    f. Every step after the first must include a "Back" button that returns the user to the previous step. The review page must also have a Back button. Only the very first question step should have no Back button.
 
 The form structure is:
 ${JSON.stringify(structure, null, 2)}`;
