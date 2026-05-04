@@ -14,6 +14,7 @@ export default function Home() {
   const [history, setHistory] = useState<HistoryTurn[]>([]);
   const [publishedUrl, setPublishedUrl] = useState("");
   const [publishing, setPublishing] = useState(false);
+  const [publishError, setPublishError] = useState("");
   const [copied, setCopied] = useState(false);
   const [styleGuide, setStyleGuide] = useState<StyleGuide | null>(null);
   const [pendingScreenshot, setPendingScreenshot] = useState<string | null>(null);
@@ -41,6 +42,7 @@ export default function Home() {
   async function handlePublish() {
     if (!generatedHtml || !structure) return;
     setPublishing(true);
+    setPublishError("");
     try {
       const res = await fetch("/api/publish", {
         method: "POST",
@@ -51,7 +53,8 @@ export default function Home() {
       if (!res.ok) throw new Error(data.error ?? "Publish failed");
       setPublishedUrl(data.url);
     } catch (e) {
-      console.error(e);
+      const msg = e instanceof Error ? e.message : "Publish failed";
+      setPublishError(msg);
     } finally {
       setPublishing(false);
     }
@@ -109,7 +112,9 @@ export default function Home() {
           {publishing ? "Publishing..." : "Publish"}
         </button>
 
-        {publishedUrl ? (
+        {publishError ? (
+          <span className="text-sm text-red-600">{publishError}</span>
+        ) : publishedUrl ? (
           <>
             <span className="text-sm text-gray-600 truncate">{publishedUrl}</span>
             <button

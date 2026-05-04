@@ -8,7 +8,7 @@
 | Language | TypeScript |
 | Styling (tool UI) | Tailwind CSS |
 | AI Model | Gemini 3 Flash Preview (`@google/generative-ai`) |
-| Image Generation | Gemini 2.5 Flash Image / Nano Banana (`gemini-2.5-flash-image`) |
+| Image Generation | User-selectable: Gemini 2.5 Flash Image (`gemini-2.5-flash-image`) or Gemini 3.1 Flash Image (`gemini-3.1-flash-image-preview`) |
 | Image Storage | Vercel Blob (CDN-backed permanent URLs) |
 | Storage | Upstash Redis (published forms, 7-day TTL) |
 | Runtime | Node.js via Next.js dev server |
@@ -63,8 +63,9 @@ Creator types prompt → POST /api/generate
     → Sends: FormStructure + prompt + conversation history + previous HTML
               + optional screenshot base64 (selected region)
               + optional style guide (image base64 or website screenshot)
-              + includeImages flag + activeImages from previous turns
-    → Gemini receives generate_image function declaration (if images enabled)
+              + imageModel selection (none / gemini-2.5 / gemini-3.1)
+              + activeImages from previous turns
+    → Gemini receives generate_image function declaration (if imageModel ≠ none)
     → Gemini decides whether images would enhance the form
     → If yes: Gemini calls generate_image (one or more times via function calling)
         → lib/image-gen.ts called directly (not via HTTP — avoids Vercel
@@ -176,7 +177,7 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 - After receiving generated images as vision input, Gemini picks complementary form colors
 
 **Function calling flow:**
-1. Gemini receives `generate_image` function declaration (when "Include images" is enabled)
+1. Gemini receives `generate_image` function declaration (when an image model is selected)
 2. Gemini may call it zero, one, or multiple times in `AUTO` mode
 3. Each call triggers image generation via Nano Banana + Vercel Blob upload
 4. Function responses (URLs) are sent back in one message
@@ -193,9 +194,15 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 
 Shared image generation logic used by both the generate route (via direct function call during Gemini's function calling loop) and the standalone `/api/generate-image` endpoint.
 
+**Supported models** (user-selectable from the UI):
+- `gemini-2.5-flash-image` — previous gen, default selection
+- `gemini-3.1-flash-image-preview` — newer, faster, may have higher demand
+
+**Error handling:** Exports `ImageGenError` class that parses Gemini SDK errors to extract HTTP status codes (e.g. 429 Too Many Requests, 503 Service Unavailable). Error codes and messages are surfaced to the user in the chat UI.
+
 **Processing:**
 1. Enhances the prompt with type-specific instructions (e.g. "keep subtle" for backgrounds)
-2. Calls Nano Banana (`gemini-2.5-flash-image`) with `responseModalities: ["TEXT", "IMAGE"]`
+2. Calls the user-selected image model with `responseModalities: ["TEXT", "IMAGE"]`
 3. Extracts the base64 PNG from the response
 4. Uploads to Vercel Blob → returns permanent CDN URL
 5. Returns URL + base64 + mimeType
@@ -204,13 +211,14 @@ Shared image generation logic used by both the generate route (via direct functi
 
 ### `app/app/api/generate-image/route.ts`
 
-Thin HTTP wrapper around `lib/image-gen.ts`. Exposes image generation as a standalone API endpoint. Delegates all logic to the shared lib.
+Thin HTTP wrapper around `lib/image-gen.ts`. Exposes image generation as a standalone API endpoint. Delegates all logic to the shared lib. Returns structured error responses with HTTP status code and message on failure.
 
 **Request parameters:**
 - `prompt` — detailed image generation prompt
 - `imageType` — `background`, `header`, or `accent`
 - `colorPalette` — dominant colors for the image
 - `aspectRatio` — e.g. `16:9` for headers, `flexible` for backgrounds
+- `modelId` — (optional) image model to use, defaults to `gemini-2.5-flash-image`
 
 ---
 
@@ -233,9 +241,11 @@ Chat interface with toolbar buttons:
 - **+ button** — upload image to embed in form
 - **Screenshot button** — select a region of the preview to attach to message (only shown when AI form exists)
 - **Style guide button** — open style reference dialog
-- **Include images button** — toggle AI image generation (purple when active, checked by default)
+- **Image model dropdown** — select image generation model: "No images", "Gemini 2.5 Flash image" (default), or "Gemini 3.1 Flash image". Purple when a model is selected.
 
 Tracks `activeImages` (generated images from previous turns) and sends them with each generation request for color coherence.
+
+**Error display:** Image generation errors (e.g. API quota exceeded, service unavailable) are shown in amber warning bubbles with the HTTP status code and message. Publish errors are shown inline in the publish bar.
 
 ### `components/PreviewPane.tsx`
 
@@ -255,7 +265,7 @@ Optional "focus on" text field narrows AI interpretation. Style guide persists f
 
 ### `lib/store.ts`
 
-Upstash Redis store keyed by nanoid. Stores published form HTML and formId with a 7-day TTL.
+Upstash Redis store keyed by nanoid. Stores published form HTML and formId with a 7-day TTL. Supports both `publish_KV_REST_API_*` (Vercel KV integration) and `KV_REST_API_*` (legacy) env var naming.
 
 ---
 
@@ -265,6 +275,7 @@ Upstash Redis store keyed by nanoid. Stores published form HTML and formId with 
 |---|---|---|
 | `GEMINI_API_KEY` | Yes | Google AI Studio API key |
 | `BLOB_READ_WRITE_TOKEN` | Yes | Vercel Blob authentication token for image uploads |
-| `KV_REST_API_URL` | Yes | Upstash Redis REST URL |
-| `KV_REST_API_TOKEN` | Yes | Upstash Redis auth token |
-| `KV_REST_API_READ_ONLY_TOKEN` | Yes | Upstash Redis read-only token |
+| `publish_KV_REST_API_URL` | Yes | Upstash Redis REST URL (set by Vercel KV integration) |
+| `publish_KV_REST_API_TOKEN` | Yes | Upstash Redis auth token (set by Vercel KV integration) |
+| `KV_REST_API_URL` | Fallback | Legacy Upstash Redis REST URL (used if `publish_*` vars not set) |
+| `KV_REST_API_TOKEN` | Fallback | Legacy Upstash Redis auth token |

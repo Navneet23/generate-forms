@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generateImage } from "@/lib/image-gen";
+import { generateImage, ImageGenError } from "@/lib/image-gen";
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,8 +13,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(result);
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Image generation failed";
-    console.error("[IMAGE-GEN] ERROR:", message);
-    return NextResponse.json({ error: message }, { status: 500 });
+    const imgErr = err instanceof ImageGenError ? err : ImageGenError.fromError(err);
+    console.error("[IMAGE-GEN] ERROR:", imgErr.code, imgErr.message);
+    return NextResponse.json(
+      { error: imgErr.message, code: imgErr.code },
+      { status: imgErr.code ?? 500 }
+    );
   }
 }

@@ -153,7 +153,7 @@ export async function generateForm(
   includeImages?: boolean,
   imageGenerator?: ImageGenerator,
   activeImages?: GeneratedImage[]
-): Promise<{ html: string; images: GeneratedImage[] }> {
+): Promise<{ html: string; images: GeneratedImage[]; imageErrors: { code: number | null; message: string }[] }> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
 
@@ -254,6 +254,7 @@ export async function generateForm(
   log("[GEMINI] >>> Sending initial message to Gemini...");
   let response = await chat.sendMessage(parts);
   const generatedImages: GeneratedImage[] = [];
+  const imageErrors: { code: number | null; message: string }[] = [];
 
   // Function calling loop — Gemini may call generate_image zero or more times
   let loopIteration = 0;
@@ -332,7 +333,9 @@ export async function generateForm(
         } catch (err) {
           const errorMsg =
             err instanceof Error ? err.message : "Image generation failed";
-          log(`[GEMINI] <<< Image generation FAILED: ${errorMsg}`);
+          const errorCode = (err as { code?: number }).code ?? null;
+          log(`[GEMINI] <<< Image generation FAILED (${errorCode}): ${errorMsg}`);
+          imageErrors.push({ code: errorCode, message: errorMsg });
           functionResponses.push({
             functionResponse: {
               name: "generate_image",
@@ -377,5 +380,5 @@ export async function generateForm(
   }
   log("=== [GEMINI] END FINAL RESULT ===\n");
 
-  return { html, images: generatedImages };
+  return { html, images: generatedImages, imageErrors };
 }

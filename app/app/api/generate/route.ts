@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       html: result.html,
       generatedImages: result.images,
+      imageErrors: result.imageErrors.length > 0 ? result.imageErrors : undefined,
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Generation failed";

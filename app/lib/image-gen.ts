@@ -5,6 +5,27 @@ import { GeneratedImage } from "./gemini";
 
 export type ImageModelId = "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview";
 
+export class ImageGenError extends Error {
+  code: number | null;
+  constructor(message: string, code: number | null = null) {
+    super(message);
+    this.name = "ImageGenError";
+    this.code = code;
+  }
+
+  static fromError(err: unknown): ImageGenError {
+    if (err instanceof ImageGenError) return err;
+    const message = err instanceof Error ? err.message : String(err);
+    // Parse Gemini SDK errors like "[429 Too Many Requests] ..."
+    const match = message.match(/\[(\d{3})\s+([^\]]+)\]/);
+    if (match) {
+      const code = parseInt(match[1]);
+      return new ImageGenError(`${match[2]}: ${message.replace(/.*\[\d{3}\s+[^\]]+\]\s*/, "")}`, code);
+    }
+    return new ImageGenError(message);
+  }
+}
+
 export async function generateImage(params: {
   prompt: string;
   imageType: "background" | "header" | "accent";
@@ -44,12 +65,17 @@ export async function generateImage(params: {
     },
   });
 
-  const result = await model.generateContent(fullPrompt);
+  let result;
+  try {
+    result = await model.generateContent(fullPrompt);
+  } catch (err) {
+    throw ImageGenError.fromError(err);
+  }
   const response = result.response;
   const parts = response.candidates?.[0]?.content?.parts;
 
   if (!parts) {
-    throw new Error("No response from image generation model");
+    throw new ImageGenError("No response from image generation model");
   }
 
   const imagePart = parts.find(
@@ -58,7 +84,7 @@ export async function generateImage(params: {
   );
 
   if (!imagePart?.inlineData) {
-    throw new Error("No image generated — model returned text only");
+    throw new ImageGenError("No image generated — model returned text only");
   }
 
   const { mimeType, data: base64Data } = imagePart.inlineData;
