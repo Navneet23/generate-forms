@@ -7,8 +7,8 @@ export interface PublishedForm {
 }
 
 const redis = new Redis({
-  url: process.env.KV_REST_API_URL!,
-  token: process.env.KV_REST_API_TOKEN!,
+  url: (process.env.publish_KV_REST_API_URL ?? process.env.KV_REST_API_URL)!,
+  token: (process.env.publish_KV_REST_API_TOKEN ?? process.env.KV_REST_API_TOKEN)!,
 });
 
 const TTL_SECONDS = 7 * 24 * 60 * 60; // 7 days

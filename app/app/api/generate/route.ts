@@ -6,7 +6,7 @@ import {
   GeneratedImage,
 } from "@/lib/gemini";
 import { FormStructure } from "@/lib/scraper";
-import { generateImage } from "@/lib/image-gen";
+import { generateImage, ImageModelId } from "@/lib/image-gen";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       previousHtml,
       screenshotBase64,
       styleGuide,
-      includeImages,
+      imageModel,
       activeImages,
     }: {
       structure: FormStructure;
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       previousHtml: string;
       screenshotBase64?: string;
       styleGuide?: StyleGuide;
-      includeImages?: boolean;
+      imageModel?: ImageModelId | "none";
       activeImages?: GeneratedImage[];
     } = await req.json();
 
@@ -38,6 +38,11 @@ export async function POST(req: NextRequest) {
     }
 
     const submitUrl = `${req.nextUrl.origin}/api/submit/${structure.formId}`;
+    const includeImages = imageModel != null && imageModel !== "none";
+    const boundImageGenerator = includeImages
+      ? (params: { prompt: string; imageType: "background" | "header" | "accent"; colorPalette: string; aspectRatio: string }) =>
+          generateImage({ ...params, modelId: imageModel as ImageModelId })
+      : undefined;
 
     const result = await generateForm(
       structure,
@@ -47,14 +52,15 @@ export async function POST(req: NextRequest) {
       submitUrl,
       screenshotBase64,
       styleGuide,
-      includeImages ?? false,
-      generateImage,
+      includeImages,
+      boundImageGenerator,
       activeImages
     );
 
     return NextResponse.json({
       html: result.html,
       generatedImages: result.images,
+      imageErrors: result.imageErrors.length > 0 ? result.imageErrors : undefined,
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Generation failed";

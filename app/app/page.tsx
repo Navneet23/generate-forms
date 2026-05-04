@@ -14,11 +14,12 @@ export default function Home() {
   const [history, setHistory] = useState<HistoryTurn[]>([]);
   const [publishedUrl, setPublishedUrl] = useState("");
   const [publishing, setPublishing] = useState(false);
+  const [publishError, setPublishError] = useState("");
   const [copied, setCopied] = useState(false);
   const [styleGuide, setStyleGuide] = useState<StyleGuide | null>(null);
   const [pendingScreenshot, setPendingScreenshot] = useState<string | null>(null);
   const [screenshotMode, setScreenshotMode] = useState(false);
-  const [includeImages, setIncludeImages] = useState(true);
+  const [imageModel, setImageModel] = useState<"none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview">("gemini-2.5-flash-image");
   const [activeImages, setActiveImages] = useState<GeneratedImage[]>([]);
 
   function handleFormLoad(url: string, s: FormStructure) {
@@ -41,6 +42,7 @@ export default function Home() {
   async function handlePublish() {
     if (!generatedHtml || !structure) return;
     setPublishing(true);
+    setPublishError("");
     try {
       const res = await fetch("/api/publish", {
         method: "POST",
@@ -51,7 +53,8 @@ export default function Home() {
       if (!res.ok) throw new Error(data.error ?? "Publish failed");
       setPublishedUrl(data.url);
     } catch (e) {
-      console.error(e);
+      const msg = e instanceof Error ? e.message : "Publish failed";
+      setPublishError(msg);
     } finally {
       setPublishing(false);
     }
@@ -91,8 +94,8 @@ export default function Home() {
             onScreenshotConsumed={() => setPendingScreenshot(null)}
             screenshotMode={screenshotMode}
             onToggleScreenshotMode={() => setScreenshotMode((v) => !v)}
-            includeImages={includeImages}
-            onToggleIncludeImages={() => setIncludeImages((v) => !v)}
+            imageModel={imageModel}
+            onImageModelChange={setImageModel}
             activeImages={activeImages}
             onActiveImagesUpdate={setActiveImages}
           />
@@ -109,7 +112,9 @@ export default function Home() {
           {publishing ? "Publishing..." : "Publish"}
         </button>
 
-        {publishedUrl ? (
+        {publishError ? (
+          <span className="text-sm text-red-600">{publishError}</span>
+        ) : publishedUrl ? (
           <>
             <span className="text-sm text-gray-600 truncate">{publishedUrl}</span>
             <button
