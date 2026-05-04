@@ -3,7 +3,7 @@ import { put } from "@vercel/blob";
 import { nanoid } from "nanoid";
 import { GeneratedImage } from "./gemini";
 
-const IMAGE_MODEL_ID = "gemini-2.5-flash-image";
+const IMAGE_MODEL_ID = "gemini-3.1-flash-image-preview";
 
 export async function generateImage(params: {
   prompt: string;
