@@ -3,20 +3,20 @@ import { put } from "@vercel/blob";
 import { nanoid } from "nanoid";
 import { GeneratedImage } from "./gemini";
 
-const IMAGE_MODEL_ID = "gemini-3.1-flash-image-preview";
+export type ImageModelId = "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview";
 
 export async function generateImage(params: {
   prompt: string;
   imageType: "background" | "header" | "accent";
   colorPalette: string;
   aspectRatio: string;
+  modelId: ImageModelId;
 }): Promise<GeneratedImage> {
-  const { prompt, imageType, colorPalette, aspectRatio } = params;
+  const { prompt, imageType, colorPalette, aspectRatio, modelId } = params;
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
 
-  // Build the image generation prompt with context
   const fullPrompt = [
     prompt,
     colorPalette ? `Use these dominant colors: ${colorPalette}.` : "",
@@ -32,12 +32,12 @@ export async function generateImage(params: {
     .filter(Boolean)
     .join(" ");
 
-  console.log(`[IMAGE-GEN] Model: ${IMAGE_MODEL_ID}, type: ${imageType}`);
+  console.log(`[IMAGE-GEN] Model: ${modelId}, type: ${imageType}`);
   console.log(`[IMAGE-GEN] Prompt: ${prompt}`);
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: IMAGE_MODEL_ID,
+    model: modelId,
     generationConfig: {
       // @ts-expect-error - responseModalities is supported but not typed yet
       responseModalities: ["TEXT", "IMAGE"],

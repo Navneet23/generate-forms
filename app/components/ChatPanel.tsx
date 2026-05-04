@@ -33,8 +33,8 @@ interface Props {
   screenshotMode: boolean;
   onToggleScreenshotMode: () => void;
   // Image generation
-  includeImages: boolean;
-  onToggleIncludeImages: () => void;
+  imageModel: "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview";
+  onImageModelChange: (model: "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview") => void;
   activeImages: GeneratedImage[];
   onActiveImagesUpdate: (images: GeneratedImage[]) => void;
 }
@@ -51,8 +51,8 @@ export default function ChatPanel({
   onScreenshotConsumed,
   screenshotMode,
   onToggleScreenshotMode,
-  includeImages,
-  onToggleIncludeImages,
+  imageModel,
+  onImageModelChange,
   activeImages,
   onActiveImagesUpdate,
 }: Props) {
@@ -145,8 +145,8 @@ export default function ChatPanel({
           previousHtml: generatedHtml,
           screenshotBase64: currentAttachment?.source === "screenshot" ? currentAttachment.base64 : undefined,
           styleGuide: styleGuide ?? undefined,
-          includeImages,
-          activeImages: includeImages ? activeImages : undefined,
+          imageModel,
+          activeImages: imageModel !== "none" ? activeImages : undefined,
         }),
       });
 
@@ -257,7 +257,7 @@ export default function ChatPanel({
           <div className="flex justify-start">
             <div className="bg-gray-100 rounded-2xl px-4 py-2 text-sm text-gray-500">
               <span className="animate-pulse">
-                {includeImages ? "Generating (may include images)..." : "Generating..."}
+                {imageModel !== "none" ? "Generating (may include images)..." : "Generating..."}
               </span>
             </div>
           </div>
@@ -354,19 +354,21 @@ export default function ChatPanel({
             {styleGuide ? "Style guide ✓" : "Style guide"}
           </button>
 
-          {/* Include images toggle chip */}
-          <button
-            onClick={onToggleIncludeImages}
+          {/* Image model selector */}
+          <select
+            value={imageModel}
+            onChange={(e) => onImageModelChange(e.target.value as "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview")}
             disabled={!structure}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors disabled:opacity-40 ${
-              includeImages
+            className={`px-2 py-1.5 rounded-lg text-xs font-medium border transition-colors disabled:opacity-40 ${
+              imageModel !== "none"
                 ? "bg-purple-50 border-purple-300 text-purple-700"
-                : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                : "border-gray-300 text-gray-600"
             }`}
-            title={includeImages ? "AI may generate images for the form" : "Image generation is disabled"}
           >
-            {includeImages ? "Images ✓" : "Images"}
-          </button>
+            <option value="none">No images</option>
+            <option value="gemini-2.5-flash-image">Gemini 2.5 Flash image</option>
+            <option value="gemini-3.1-flash-image-preview">Gemini 3.1 Flash image</option>
+          </select>
         </div>
 
         {/* Text input + send */}
