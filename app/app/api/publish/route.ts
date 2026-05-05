@@ -4,7 +4,11 @@ import { save } from "@/lib/store";
 
 export async function POST(req: NextRequest) {
   try {
-    const { html, formId }: { html: string; formId: string } = await req.json();
+    const {
+      html,
+      formId,
+      imageKeys,
+    }: { html: string; formId: string; imageKeys?: string[] } = await req.json();
 
     if (!html || !formId) {
       return NextResponse.json(
@@ -18,6 +22,9 @@ export async function POST(req: NextRequest) {
       html,
       formId,
       createdAt: new Date().toISOString(),
+      imageKeys: imageKeys
+        ? Array.from(new Set(imageKeys.filter(Boolean)))
+        : [],
     });
 
     const url = `${req.nextUrl.origin}/f/${id}`;

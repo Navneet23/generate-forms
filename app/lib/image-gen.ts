@@ -105,6 +105,7 @@ export async function generateImage(params: {
 
   return {
     url: blob.url,
+    key: blob.pathname,
     imageType,
     base64: base64Data,
     mimeType,

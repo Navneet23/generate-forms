@@ -32,6 +32,7 @@ export interface StyleGuide {
 
 export interface GeneratedImage {
   url: string;
+  key: string;
   imageType: "background" | "header" | "accent";
   base64: string;
   mimeType: string;
