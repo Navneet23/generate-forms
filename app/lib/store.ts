@@ -56,6 +56,27 @@ export async function extendForm(id: string): Promise<PublishedForm | null> {
   return updated;
 }
 
+export async function listAllImageKeys(): Promise<Set<string>> {
+  const keys = new Set<string>();
+  let cursor = "0";
+  do {
+    const result: [string, string[]] = await redis.scan(cursor, {
+      match: "*",
+      count: 100,
+    });
+    cursor = result[0];
+    const batch = result[1];
+    if (batch.length > 0) {
+      const records = await Promise.all(batch.map((id) => get(id)));
+      for (const r of records) {
+        if (!r) continue;
+        for (const k of r.imageKeys) keys.add(k);
+      }
+    }
+  } while (cursor !== "0");
+  return keys;
+}
+
 export async function get(id: string): Promise<PublishedForm | null> {
   const data = await redis.get<string>(id);
   if (!data) return null;
