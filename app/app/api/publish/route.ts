@@ -14,10 +14,14 @@ export async function POST(req: NextRequest) {
     }
 
     const id = nanoid(10);
-    await save(id, { html, formId, createdAt: new Date().toISOString() });
+    const record = await save(id, {
+      html,
+      formId,
+      createdAt: new Date().toISOString(),
+    });
 
     const url = `${req.nextUrl.origin}/f/${id}`;
-    return NextResponse.json({ url, id });
+    return NextResponse.json({ url, id, expiresAt: record.expiresAt });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Publish failed";
     return NextResponse.json({ error: message }, { status: 500 });

@@ -13,6 +13,7 @@ export default function Home() {
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [history, setHistory] = useState<HistoryTurn[]>([]);
   const [publishedUrl, setPublishedUrl] = useState("");
+  const [publishedExpiresAt, setPublishedExpiresAt] = useState("");
   const [publishing, setPublishing] = useState(false);
   const [publishError, setPublishError] = useState("");
   const [copied, setCopied] = useState(false);
@@ -28,6 +29,7 @@ export default function Home() {
     setGeneratedHtml("");
     setHistory([]);
     setPublishedUrl("");
+    setPublishedExpiresAt("");
     setStyleGuide(null);
     setPendingScreenshot(null);
     setScreenshotMode(false);
@@ -52,6 +54,7 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Publish failed");
       setPublishedUrl(data.url);
+      setPublishedExpiresAt(data.expiresAt ?? "");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Publish failed";
       setPublishError(msg);
@@ -126,6 +129,14 @@ export default function Home() {
             <a href={publishedUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
               Open ↗
             </a>
+            {publishedExpiresAt ? (
+              <span className="text-xs text-gray-500">
+                Expires{" "}
+                {new Date(publishedExpiresAt).toLocaleDateString(undefined, {
+                  dateStyle: "long",
+                })}
+              </span>
+            ) : null}
           </>
         ) : (
           <span className="text-xs text-gray-400">
