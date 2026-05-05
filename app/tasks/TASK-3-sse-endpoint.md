@@ -1,4 +1,7 @@
-# TASK-3: Convert /api/generate to SSE streaming endpoint
+# TASK-3: Convert /api/generate to SSE streaming endpoint — COMPLETED
+
+## Status
+**COMPLETED** — Wave 2
 
 ## Phase
 Phase 1 — Backend Foundation

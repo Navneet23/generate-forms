@@ -1,4 +1,7 @@
-# TASK-6: Expand message type system for timeline messages
+# TASK-6: Expand message type system for timeline messages — COMPLETED
+
+## Status
+**COMPLETED** — Wave 3
 
 ## Phase
 Phase 2 — Frontend

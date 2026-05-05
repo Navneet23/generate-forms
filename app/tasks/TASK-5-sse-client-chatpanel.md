@@ -1,4 +1,7 @@
-# TASK-5: Replace fetch+JSON with SSE streaming reader in ChatPanel
+# TASK-5: Replace fetch+JSON with SSE streaming reader in ChatPanel — COMPLETED
+
+## Status
+**COMPLETED** — Wave 3
 
 ## Phase
 Phase 2 — Frontend
