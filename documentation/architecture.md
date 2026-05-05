@@ -10,7 +10,7 @@
 | AI Model | Gemini 3 Flash Preview (`@google/generative-ai`) |
 | Image Generation | User-selectable: Gemini 2.5 Flash Image (`gemini-2.5-flash-image`) or Gemini 3.1 Flash Image (`gemini-3.1-flash-image-preview`) |
 | Image Storage | Vercel Blob (CDN-backed permanent URLs) |
-| Storage | Upstash Redis (published forms, 7-day TTL) |
+| Storage | Upstash Redis (published forms, 30-day default TTL, extendable to 1 year) |
 | Runtime | Node.js via Next.js dev server |
 
 ---
@@ -82,9 +82,22 @@ Creator types prompt → POST /api/generate
 ### 3. Publish
 ```
 Creator clicks Publish → POST /api/publish
-    → Server assigns nanoid, stores HTML + formId in Redis (7-day TTL)
-    → Returns shareable URL: /f/{id}
+    → Server assigns nanoid, stores HTML + formId + imageKeys in Redis (30-day TTL)
+    → Returns shareable URL: /f/{id} and an expiresAt timestamp
+    → Creator may optionally hit POST /api/forms/{id}/extend (one-time, idempotent)
+      to bump the TTL to 1 year
     → GET /f/{id} serves frozen HTML as text/html
+```
+
+### 3a. Image lifecycle / sweeper
+```
+Daily cron → GET /api/cron/sweep-blobs
+    → Lists every Vercel Blob in the bucket
+    → Builds the set of imageKeys still referenced by live form records
+      (via Redis SCAN over published forms)
+    → Deletes blobs that are not referenced AND not freshly uploaded
+      (1-hour safety window protects in-flight publishes)
+    → See documentation/persisted-forms.md for operational details
 ```
 
 ### 4. Submission
@@ -265,7 +278,7 @@ Optional "focus on" text field narrows AI interpretation. Style guide persists f
 
 ### `lib/store.ts`
 
-Upstash Redis store keyed by nanoid. Stores published form HTML and formId with a 7-day TTL. Supports both `publish_KV_REST_API_*` (Vercel KV integration) and `KV_REST_API_*` (legacy) env var naming.
+Upstash Redis store keyed by nanoid. Stores `PublishedForm { html, formId, createdAt, expiresAt, extended, imageKeys }` with a 30-day default TTL. Exposes `save`, `get`, `extendForm` (one-time bump to 365 days), and `listAllImageKeys` (used by the sweeper to find live blob references). Pre-feature records that lack the new fields are tolerated: `expiresAt` is derived from `createdAt + 7 days`, `extended` defaults to `false`, `imageKeys` defaults to `[]`. Supports both `publish_KV_REST_API_*` (Vercel KV integration) and `KV_REST_API_*` (legacy) env var naming.
 
 ---
 
@@ -279,3 +292,4 @@ Upstash Redis store keyed by nanoid. Stores published form HTML and formId with 
 | `publish_KV_REST_API_TOKEN` | Yes | Upstash Redis auth token (set by Vercel KV integration) |
 | `KV_REST_API_URL` | Fallback | Legacy Upstash Redis REST URL (used if `publish_*` vars not set) |
 | `KV_REST_API_TOKEN` | Fallback | Legacy Upstash Redis auth token |
+| `CRON_SECRET` | Yes | Bearer token Vercel Cron sends to the sweeper at `GET /api/cron/sweep-blobs` |
