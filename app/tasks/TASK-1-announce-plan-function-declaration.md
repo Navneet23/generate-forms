@@ -1,4 +1,7 @@
-# TASK-1: Add announce_plan function declaration to Gemini tools
+# TASK-1: Add announce_plan function declaration to Gemini tools — COMPLETED
+
+## Status
+**COMPLETED** — Wave 1, commit 41b10fe
 
 ## Phase
 Phase 1 — Backend Foundation

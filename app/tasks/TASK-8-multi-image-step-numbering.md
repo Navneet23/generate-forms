@@ -1,4 +1,7 @@
-# TASK-8: Handle multiple image generation steps with numbering
+# TASK-8: Handle multiple image generation steps with numbering — COMPLETED
+
+## Status
+**COMPLETED** — Wave 1, commit 41b10fe (implemented together with TASK-4 since both involve TimelineMessage component)
 
 ## Phase
 Phase 3 — Robustness

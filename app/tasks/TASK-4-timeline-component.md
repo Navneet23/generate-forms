@@ -1,4 +1,7 @@
-# TASK-4: Build Timeline UI component
+# TASK-4: Build Timeline UI component — COMPLETED
+
+## Status
+**COMPLETED** — Wave 1, commit 41b10fe
 
 ## Phase
 Phase 2 — Frontend

@@ -1,4 +1,7 @@
-# TASK-2: Add onProgress callback to generateForm
+# TASK-2: Add onProgress callback to generateForm — COMPLETED
+
+## Status
+**COMPLETED** — Wave 1, commit 41b10fe
 
 ## Phase
 Phase 1 — Backend Foundation

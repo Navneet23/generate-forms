@@ -4,7 +4,7 @@
 
 This plan covers the implementation of real-time progress timeline for AI form generation, replacing the static "Generating..." spinner with a live vertical timeline of steps streamed via Server-Sent Events (SSE). The feature spans backend (SSE streaming, new Gemini function call) and frontend (timeline UI, SSE parsing, message type expansion).
 
-**Total tasks: 11**
+**Total tasks: 11** (5 completed, 6 remaining)
 **Estimated total effort: 12-17 days**
 **Phases: 4**
 
@@ -87,17 +87,17 @@ This is the longest dependency chain and determines the minimum timeline:
 
 | # | Task | Phase | Priority | Effort | Dependencies | Key Files |
 |---|------|-------|----------|--------|--------------|-----------|
-| 1 | Add `announce_plan` function declaration | Phase 1 | P0 | Small | None | `lib/gemini.ts` |
-| 2 | Add `onProgress` callback to `generateForm` | Phase 1 | P0 | Medium | TASK-1 | `lib/gemini.ts` |
-| 3 | Convert `/api/generate` to SSE endpoint | Phase 1 | P0 | Medium | TASK-2 | `app/api/generate/route.ts` |
-| 4 | Build Timeline UI component | Phase 2 | P0 | Medium | None | `components/TimelineMessage.tsx` (new) |
-| 5 | Replace fetch+JSON with SSE reader in ChatPanel | Phase 2 | P0 | Large | TASK-3, TASK-4 | `components/ChatPanel.tsx` |
-| 6 | Expand message type system for timelines | Phase 2 | P0 | Small | TASK-4 | `components/ChatPanel.tsx` |
-| 7 | Implement SSE error handling and recovery | Phase 3 | P1 | Medium | TASK-3, TASK-5 | `components/ChatPanel.tsx`, `app/api/generate/route.ts` |
-| 8 | Handle multiple image steps with numbering | Phase 3 | P1 | Small | TASK-2, TASK-4 | `lib/gemini.ts`, `components/TimelineMessage.tsx` |
-| 9 | Handle missing `announce_plan` gracefully | Phase 3 | P1 | Small | TASK-1, TASK-2 | `lib/gemini.ts` |
-| 10 | Add tests for SSE and timeline logic | Phase 4 | P1 | Large | TASK-3, TASK-4, TASK-5 | New test files |
-| 11 | Update architecture documentation | Phase 4 | P2 | Small | TASK-1-5 | Existing docs, inline comments |
+| 1 | Add `announce_plan` function declaration | Phase 1 | P0 | Small | None | `lib/gemini.ts` | **DONE** |
+| 2 | Add `onProgress` callback to `generateForm` | Phase 1 | P0 | Medium | TASK-1 | `lib/gemini.ts` | **DONE** |
+| 3 | Convert `/api/generate` to SSE endpoint | Phase 1 | P0 | Medium | TASK-2 | `app/api/generate/route.ts` | Pending |
+| 4 | Build Timeline UI component | Phase 2 | P0 | Medium | None | `components/TimelineMessage.tsx` (new) | **DONE** |
+| 5 | Replace fetch+JSON with SSE reader in ChatPanel | Phase 2 | P0 | Large | TASK-3, TASK-4 | `components/ChatPanel.tsx` | Pending |
+| 6 | Expand message type system for timelines | Phase 2 | P0 | Small | TASK-4 | `components/ChatPanel.tsx` | Pending |
+| 7 | Implement SSE error handling and recovery | Phase 3 | P1 | Medium | TASK-3, TASK-5 | `components/ChatPanel.tsx`, `app/api/generate/route.ts` | Pending |
+| 8 | Handle multiple image steps with numbering | Phase 3 | P1 | Small | TASK-2, TASK-4 | `lib/gemini.ts`, `components/TimelineMessage.tsx` | **DONE** |
+| 9 | Handle missing `announce_plan` gracefully | Phase 3 | P1 | Small | TASK-1, TASK-2 | `lib/gemini.ts` | **DONE** |
+| 10 | Add tests for SSE and timeline logic | Phase 4 | P1 | Large | TASK-3, TASK-4, TASK-5 | New test files | Pending |
+| 11 | Update architecture documentation | Phase 4 | P2 | Small | TASK-1-5 | Existing docs, inline comments | Pending |
 
 ---
 
@@ -124,11 +124,11 @@ Not every task maps 1:1 to a subagent. Some tasks are too small or tightly coupl
 ### Execution order and parallelism
 
 ```
-Wave 1 (parallel):
+Wave 1 (parallel):                       ✅ COMPLETED (commit 41b10fe)
   ├── Agent A: TASK-1 + TASK-2 + TASK-9  (lib/gemini.ts)
   └── Agent C: TASK-4 + TASK-8           (components/TimelineMessage.tsx — new file)
 
-Wave 2 (after Agent A completes):
+Wave 2 (after Agent A completes):        ⬅ NEXT
   └── Agent B: TASK-3                    (app/api/generate/route.ts)
 
 Wave 3 (after Agents B and C complete):

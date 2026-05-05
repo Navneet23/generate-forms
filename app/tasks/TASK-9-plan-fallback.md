@@ -1,4 +1,7 @@
-# TASK-9: Handle missing announce_plan gracefully
+# TASK-9: Handle missing announce_plan gracefully — COMPLETED
+
+## Status
+**COMPLETED** — Wave 1, commit 41b10fe (implemented together with TASK-1 and TASK-2 since all modify gemini.ts)
 
 ## Phase
 Phase 3 — Robustness
