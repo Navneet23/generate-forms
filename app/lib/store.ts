@@ -22,6 +22,7 @@ const redis = new Redis({
 });
 
 const TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
+const EXTENDED_TTL_SECONDS = 365 * 24 * 60 * 60; // 1 year
 // Used only to derive expiresAt for pre-feature records that lack the field.
 const LEGACY_TTL_SECONDS = 7 * 24 * 60 * 60;
 
@@ -40,6 +41,19 @@ export async function save(
   };
   await redis.set(id, JSON.stringify(record), { ex: TTL_SECONDS });
   return record;
+}
+
+export async function extendForm(id: string): Promise<PublishedForm | null> {
+  const record = await get(id);
+  if (!record) return null;
+  if (record.extended) return record;
+
+  const expiresAt = new Date(
+    Date.now() + EXTENDED_TTL_SECONDS * 1000
+  ).toISOString();
+  const updated: PublishedForm = { ...record, extended: true, expiresAt };
+  await redis.set(id, JSON.stringify(updated), { ex: EXTENDED_TTL_SECONDS });
+  return updated;
 }
 
 export async function get(id: string): Promise<PublishedForm | null> {
