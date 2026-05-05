@@ -11,7 +11,7 @@ const redis = new Redis({
   token: (process.env.publish_KV_REST_API_TOKEN ?? process.env.KV_REST_API_TOKEN)!,
 });
 
-const TTL_SECONDS = 7 * 24 * 60 * 60; // 7 days
+const TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 
 export async function save(id: string, record: PublishedForm): Promise<void> {
   await redis.set(id, JSON.stringify(record), { ex: TTL_SECONDS });
