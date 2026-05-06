@@ -87,14 +87,14 @@ const generateImageFunctionDecl: FunctionDeclaration = {
 const announcePlanFunctionDecl: FunctionDeclaration = {
   name: "announce_plan",
   description:
-    "Announce your plan before generating the form. You MUST call this function first, before generating any HTML or calling generate_image. Provide a brief summary of what you will build.",
+    "Announce your visual design plan before generating the form. You MUST call this function first, before generating any HTML or calling generate_image. Describe only visual/layout decisions (colors, fonts, layout style, images). Your plan must NEVER include changing question text, option labels, or form title — those are immutable.",
   parameters: {
     type: SchemaType.OBJECT,
     properties: {
       summary: {
         type: SchemaType.STRING,
         description:
-          "A brief 1-2 sentence summary of your plan: what style/theme you will use, whether images will be included, and any key design decisions.",
+          "A brief 1-2 sentence summary of your visual design plan: what style/theme, colors, and layout you will use, and whether images will be included. Do NOT mention changing any form text content — only describe visual changes.",
       },
     },
     required: ["summary"],
@@ -111,6 +111,7 @@ CRITICAL — PRESERVE FORM CONTENT EXACTLY:
 - A dropdown must stay a dropdown, a checkbox must stay a checkbox, a multiple_choice must stay radio buttons, etc. Never convert one question type to another.
 - Option values must match the structure JSON character-for-character. Do not rephrase, reformat, or embellish option text.
 - You are only allowed to change the VISUAL STYLING and LAYOUT — never the content or behaviour of the form fields.
+- Even if the user asks to "make it fun", "make it quirky", or similar — that applies ONLY to visual design (colors, fonts, animations, layout, images). The text content of questions, options, title, and description must NEVER change.
 
 RULES — you must follow all of these:
 1. Output ONLY raw HTML. No markdown, no code fences, no explanation. The very first character of your response must be "<" and the last must be ">".
@@ -156,7 +157,8 @@ ${structure.questions.map((q, i) => `  ${i + 1}. "${q.text}" → type: ${q.type}
 Do NOT swap, change, or reinterpret any of these types.
 
 IMPORTANT — ANNOUNCE YOUR PLAN FIRST:
-Before generating any HTML or calling generate_image, you MUST call the announce_plan function with a brief summary of your design plan. This helps the user understand what you are building. Always call announce_plan as your very first action.`;
+Before generating any HTML or calling generate_image, you MUST call the announce_plan function with a brief summary of your VISUAL design plan. This helps the user understand what you are building. Always call announce_plan as your very first action.
+Remember: your plan and output must NEVER alter form text content. The title, description, question text, and option labels from the structure JSON above are READ-ONLY — copy them verbatim into the HTML.`;
 }
 
 function toInlineData(base64WithPrefix: string): { mimeType: string; data: string } {
