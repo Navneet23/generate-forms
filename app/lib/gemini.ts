@@ -336,6 +336,8 @@ export async function generateForm(
       (p) => "functionCall" in p && p.functionCall?.name === "generate_image"
     ).length;
     let imageIndexInBatch = 0;
+    // Snapshot the count before this batch so numbering is stable
+    const imagesBeforeBatch = generatedImages.length;
 
     for (const part of sortedFunctionCalls) {
       if (!("functionCall" in part) || !part.functionCall) continue;
@@ -362,8 +364,8 @@ export async function generateForm(
         } as Part);
       } else if (name === "generate_image" && imageGenerator) {
         imageIndexInBatch++;
-        const currentImageIndex = generatedImages.length + imageIndexInBatch;
-        const totalImageCount = generatedImages.length + imageCallsInBatch;
+        const currentImageIndex = imagesBeforeBatch + imageIndexInBatch;
+        const totalImageCount = imagesBeforeBatch + imageCallsInBatch;
 
         try {
           log(`[GEMINI] >>> Calling image generator...`);
@@ -492,6 +494,8 @@ export async function generateForm(
     });
   }
   log("=== [GEMINI] END FINAL RESULT ===\n");
+
+  onProgress?.({ type: "step", step: "html_gen", status: "completed" });
 
   return { html, images: generatedImages, imageErrors };
 }

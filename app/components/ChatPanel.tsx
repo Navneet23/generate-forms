@@ -42,19 +42,40 @@ interface Props {
 const stepLabelMap: Record<string, string> = {
   analyze: "Analyzing request...",
   plan: "Planning approach...",
-  image_gen: "Generating image...",
-  color_match: "Matching colors...",
+  image_gen: "Generate images",
+  color_match: "Match colors",
   html_gen: "Generating form HTML...",
 };
 
-function findMatchingStep(steps: TimelineStep[], event: { step: string; status: string; imageIndex?: number }): number {
-  for (let i = steps.length - 1; i >= 0; i--) {
-    if (steps[i].step === event.step && steps[i].status === 'started') {
-      if (event.imageIndex !== undefined) {
-        if (steps[i].imageIndex === event.imageIndex) return i;
-      } else {
+function createTemplateSteps(includeImages: boolean): TimelineStep[] {
+  const now = Date.now();
+  const steps: TimelineStep[] = [
+    { step: "analyze", label: "Analyzing request...", status: "pending", startedAt: now },
+    { step: "plan", label: "Planning approach...", status: "pending", startedAt: now },
+  ];
+  if (includeImages) {
+    steps.push(
+      { step: "image_gen", label: "Generate images", status: "pending", startedAt: now },
+      { step: "color_match", label: "Match colors", status: "pending", startedAt: now },
+    );
+  }
+  steps.push({ step: "html_gen", label: "Generating form HTML...", status: "pending", startedAt: now });
+  return steps;
+}
+
+function findMatchingStep(steps: TimelineStep[], stepName: string, imageIndex?: number): number {
+  // For image steps with an index, find exact match
+  if (imageIndex !== undefined) {
+    for (let i = steps.length - 1; i >= 0; i--) {
+      if (steps[i].step === stepName && steps[i].imageIndex === imageIndex) {
         return i;
       }
+    }
+  }
+  // For non-indexed steps, find by name with started or pending status
+  for (let i = steps.length - 1; i >= 0; i--) {
+    if (steps[i].step === stepName && (steps[i].status === 'started' || steps[i].status === 'pending')) {
+      if (steps[i].imageIndex === undefined) return i;
     }
   }
   return -1;
@@ -63,26 +84,87 @@ function findMatchingStep(steps: TimelineStep[], event: { step: string; status: 
 function processStepEvent(event: Record<string, unknown>, steps: TimelineStep[]) {
   const stepName = event.step as string;
   const status = event.status as "started" | "completed" | "failed";
+  const imageIndex = event.imageIndex as number | undefined;
+  const imageCount = event.imageCount as number | undefined;
+  const imageType = event.imageType as string | undefined;
+
+  if (stepName === "image_gen" && status === "started" && imageIndex !== undefined) {
+    // Insert individual image step before the placeholder or color_match
+    // Find the placeholder image_gen step
+    const placeholderIdx = steps.findIndex(s => s.step === "image_gen" && s.imageIndex === undefined);
+    const colorMatchIdx = steps.findIndex(s => s.step === "color_match" && s.imageIndex === undefined);
+    const insertIdx = colorMatchIdx >= 0 ? colorMatchIdx : (placeholderIdx >= 0 ? placeholderIdx + 1 : steps.length);
+
+    // Remove the generic placeholder if this is the first image
+    if (placeholderIdx >= 0) {
+      steps.splice(placeholderIdx, 1);
+      // Adjust insertIdx if placeholder was before it
+      const adjustedInsertIdx = placeholderIdx < insertIdx ? insertIdx - 1 : insertIdx;
+
+      steps.splice(adjustedInsertIdx, 0, {
+        step: "image_gen",
+        label: stepLabelMap["image_gen"],
+        status: "started",
+        detail: event.detail as string | undefined,
+        startedAt: Date.now(),
+        imageIndex,
+        imageCount,
+        imageType,
+      });
+    } else {
+      // Subsequent images — insert before color_match
+      const cmIdx = steps.findIndex(s => s.step === "color_match");
+      const insIdx = cmIdx >= 0 ? cmIdx : steps.length;
+      steps.splice(insIdx, 0, {
+        step: "image_gen",
+        label: stepLabelMap["image_gen"],
+        status: "started",
+        detail: event.detail as string | undefined,
+        startedAt: Date.now(),
+        imageIndex,
+        imageCount,
+        imageType,
+      });
+    }
+    return;
+  }
 
   if (status === 'started') {
-    steps.push({
-      step: stepName,
-      label: stepLabelMap[stepName] || stepName,
-      status: 'started',
-      detail: event.detail as string | undefined,
-      startedAt: Date.now(),
-      imageIndex: event.imageIndex as number | undefined,
-      imageCount: event.imageCount as number | undefined,
-    });
+    // Transition pending template step to started
+    const idx = findMatchingStep(steps, stepName, imageIndex);
+    if (idx >= 0 && steps[idx].status === 'pending') {
+      steps[idx] = { ...steps[idx], status: 'started', startedAt: Date.now(), detail: event.detail as string | undefined };
+    } else if (idx < 0) {
+      // Unknown step — append
+      steps.push({
+        step: stepName,
+        label: stepLabelMap[stepName] || stepName,
+        status: 'started',
+        detail: event.detail as string | undefined,
+        startedAt: Date.now(),
+        imageIndex,
+        imageCount,
+        imageType,
+      });
+    }
   } else if (status === 'completed' || status === 'failed') {
-    const idx = findMatchingStep(steps, { step: stepName, status, imageIndex: event.imageIndex as number | undefined });
+    const idx = findMatchingStep(steps, stepName, imageIndex);
     if (idx >= 0) {
       steps[idx] = {
         ...steps[idx],
         status,
         completedAt: Date.now(),
         detail: (event.detail as string) || steps[idx].detail,
+        imageType: imageType || steps[idx].imageType,
       };
+    }
+  }
+}
+
+function markImagesSkipped(steps: TimelineStep[]) {
+  for (let i = 0; i < steps.length; i++) {
+    if ((steps[i].step === "image_gen" || steps[i].step === "color_match") && steps[i].status === "pending") {
+      steps[i] = { ...steps[i], status: "skipped" };
     }
   }
 }
@@ -212,8 +294,19 @@ export default function ChatPanel({
       const decoder = new TextDecoder();
       let buffer = '';
       const genStartTime = Date.now();
-      const currentSteps: TimelineStep[] = [];
+      const includeImages = imageModel !== "none";
+      const currentSteps: TimelineStep[] = createTemplateSteps(includeImages);
       let receivedResult = false;
+      let hadImageEvents = false;
+
+      // Show template immediately
+      setMessages(prev => [...prev, {
+        role: "assistant" as const,
+        type: "timeline" as const,
+        steps: [...currentSteps],
+        totalDuration: 0,
+        collapsed: false,
+      }]);
 
       const updateTimeline = () => {
         const totalDuration = Date.now() - genStartTime;
@@ -246,6 +339,11 @@ export default function ChatPanel({
             const event = JSON.parse(part.slice(6));
 
             if (event.type === 'step') {
+              if (event.step === 'image_gen') hadImageEvents = true;
+              // If html_gen starts and no images were generated, mark image steps as skipped
+              if (event.step === 'html_gen' && !hadImageEvents && includeImages) {
+                markImagesSkipped(currentSteps);
+              }
               processStepEvent(event, currentSteps);
               updateTimeline();
             } else if (event.type === 'result') {
