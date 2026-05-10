@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { FormStructure } from "@/lib/scraper";
 import { HistoryTurn, StyleGuide, GeneratedImage } from "@/lib/gemini";
 import StyleGuideDialog from "./StyleGuideDialog";
+import TimelineMessage, { TimelineStep } from "./TimelineMessage";
 
-interface Message {
-  role: "user" | "assistant";
-  text: string;
-  imagePreview?: string; // thumbnail shown in the message bubble
-}
+type Message =
+  | { role: "user"; text: string; imagePreview?: string }
+  | { role: "assistant"; text: string }
+  | { role: "assistant"; type: "timeline"; steps: TimelineStep[]; totalDuration: number; collapsed: boolean };
 
 interface AttachedImage {
   base64: string;       // full base64 for AI
@@ -37,6 +37,136 @@ interface Props {
   onImageModelChange: (model: "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview") => void;
   activeImages: GeneratedImage[];
   onActiveImagesUpdate: (images: GeneratedImage[]) => void;
+}
+
+const stepLabelMap: Record<string, string> = {
+  analyze: "Analyzing request...",
+  plan: "Planning approach...",
+  image_gen: "Generate images",
+  color_match: "Match colors",
+  html_gen: "Generating form HTML...",
+};
+
+function createTemplateSteps(includeImages: boolean): TimelineStep[] {
+  const now = Date.now();
+  const steps: TimelineStep[] = [
+    { step: "analyze", label: "Analyzing request...", status: "pending", startedAt: now },
+    { step: "plan", label: "Planning approach...", status: "pending", startedAt: now },
+  ];
+  if (includeImages) {
+    steps.push(
+      { step: "image_gen", label: "Generate images", status: "pending", startedAt: now },
+      { step: "color_match", label: "Match colors", status: "pending", startedAt: now },
+    );
+  }
+  steps.push({ step: "html_gen", label: "Generating form HTML...", status: "pending", startedAt: now });
+  return steps;
+}
+
+function findMatchingStep(steps: TimelineStep[], stepName: string, imageIndex?: number): number {
+  // For image steps with an index, find exact match
+  if (imageIndex !== undefined) {
+    for (let i = steps.length - 1; i >= 0; i--) {
+      if (steps[i].step === stepName && steps[i].imageIndex === imageIndex) {
+        return i;
+      }
+    }
+  }
+  // For non-indexed steps, find by name with started or pending status
+  for (let i = steps.length - 1; i >= 0; i--) {
+    if (steps[i].step === stepName && (steps[i].status === 'started' || steps[i].status === 'pending')) {
+      if (steps[i].imageIndex === undefined) return i;
+    }
+  }
+  return -1;
+}
+
+function processStepEvent(event: Record<string, unknown>, steps: TimelineStep[]) {
+  const stepName = event.step as string;
+  const status = event.status as "started" | "completed" | "failed";
+  const imageIndex = event.imageIndex as number | undefined;
+  const imageCount = event.imageCount as number | undefined;
+  const imageType = event.imageType as string | undefined;
+
+  if (stepName === "image_gen" && status === "started" && imageIndex !== undefined) {
+    // Insert individual image step before the placeholder or color_match
+    // Find the placeholder image_gen step
+    const placeholderIdx = steps.findIndex(s => s.step === "image_gen" && s.imageIndex === undefined);
+    const colorMatchIdx = steps.findIndex(s => s.step === "color_match" && s.imageIndex === undefined);
+    const insertIdx = colorMatchIdx >= 0 ? colorMatchIdx : (placeholderIdx >= 0 ? placeholderIdx + 1 : steps.length);
+
+    // Remove the generic placeholder if this is the first image
+    if (placeholderIdx >= 0) {
+      steps.splice(placeholderIdx, 1);
+      // Adjust insertIdx if placeholder was before it
+      const adjustedInsertIdx = placeholderIdx < insertIdx ? insertIdx - 1 : insertIdx;
+
+      steps.splice(adjustedInsertIdx, 0, {
+        step: "image_gen",
+        label: stepLabelMap["image_gen"],
+        status: "started",
+        detail: event.detail as string | undefined,
+        startedAt: Date.now(),
+        imageIndex,
+        imageCount,
+        imageType,
+      });
+    } else {
+      // Subsequent images — insert before color_match
+      const cmIdx = steps.findIndex(s => s.step === "color_match");
+      const insIdx = cmIdx >= 0 ? cmIdx : steps.length;
+      steps.splice(insIdx, 0, {
+        step: "image_gen",
+        label: stepLabelMap["image_gen"],
+        status: "started",
+        detail: event.detail as string | undefined,
+        startedAt: Date.now(),
+        imageIndex,
+        imageCount,
+        imageType,
+      });
+    }
+    return;
+  }
+
+  if (status === 'started') {
+    // Transition pending template step to started
+    const idx = findMatchingStep(steps, stepName, imageIndex);
+    if (idx >= 0 && steps[idx].status === 'pending') {
+      steps[idx] = { ...steps[idx], status: 'started', startedAt: Date.now(), detail: event.detail as string | undefined };
+    } else if (idx < 0) {
+      // Unknown step — append
+      steps.push({
+        step: stepName,
+        label: stepLabelMap[stepName] || stepName,
+        status: 'started',
+        detail: event.detail as string | undefined,
+        startedAt: Date.now(),
+        imageIndex,
+        imageCount,
+        imageType,
+      });
+    }
+  } else if (status === 'completed' || status === 'failed') {
+    const idx = findMatchingStep(steps, stepName, imageIndex);
+    if (idx >= 0) {
+      steps[idx] = {
+        ...steps[idx],
+        status,
+        completedAt: Date.now(),
+        detail: (event.detail as string) || steps[idx].detail,
+        imageType: imageType || steps[idx].imageType,
+      };
+    }
+  }
+}
+
+function markImagesSkipped(steps: TimelineStep[]) {
+  for (let i = 0; i < steps.length; i++) {
+    if ((steps[i].step === "image_gen" || steps[i].step === "color_match") && steps[i].status === "pending") {
+      steps[i] = { ...steps[i], status: "skipped" };
+    }
+  }
 }
 
 export default function ChatPanel({
@@ -67,6 +197,7 @@ export default function ChatPanel({
   const [uploading, setUploading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   // Auto-attach screenshot when PreviewPane captures one
   useEffect(() => {
@@ -112,6 +243,9 @@ export default function ChatPanel({
   async function send(prompt: string) {
     if (!structure || !prompt.trim() || loading) return;
 
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = new AbortController();
+
     setLastPrompt(prompt);
     setInput("");
     setError("");
@@ -148,41 +282,150 @@ export default function ChatPanel({
           imageModel,
           activeImages: imageModel !== "none" ? activeImages : undefined,
         }),
+        signal: abortControllerRef.current!.signal,
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Generation failed");
-
-      const imageCount = data.generatedImages?.length ?? 0;
-      const imageErrorMsgs: string[] = (data.imageErrors ?? []).map(
-        (e: { code: number | null; message: string }) =>
-          `Image generation failed${e.code ? ` (${e.code})` : ""}: ${e.message}`
-      );
-
-      let statusText = imageCount > 0
-        ? `Form updated with ${imageCount} generated image${imageCount > 1 ? "s" : ""} — see preview →`
-        : "Form updated — see preview →";
-
-      if (imageErrorMsgs.length > 0) {
-        statusText += "\n" + imageErrorMsgs.join("\n");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error ?? "Generation failed");
       }
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", text: statusText },
-      ]);
-      onHtmlUpdate(data.html);
-      onHistoryUpdate([
-        ...history,
-        { role: "user", text: fullPrompt },
-        { role: "model", text: data.html },
-      ]);
+      const reader = res.body!.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      const genStartTime = Date.now();
+      const includeImages = imageModel !== "none";
+      const currentSteps: TimelineStep[] = createTemplateSteps(includeImages);
+      let receivedResult = false;
+      let hadImageEvents = false;
 
-      // Track generated images for future re-sending
-      if (data.generatedImages && data.generatedImages.length > 0) {
-        onActiveImagesUpdate([...activeImages, ...data.generatedImages]);
+      // Show template immediately
+      setMessages(prev => [...prev, {
+        role: "assistant" as const,
+        type: "timeline" as const,
+        steps: [...currentSteps],
+        totalDuration: 0,
+        collapsed: false,
+      }]);
+
+      const updateTimeline = () => {
+        const totalDuration = Date.now() - genStartTime;
+        setMessages(prev => {
+          const last = prev[prev.length - 1];
+          const timelineMsg: Message = {
+            role: "assistant" as const,
+            type: "timeline" as const,
+            steps: [...currentSteps],
+            totalDuration,
+            collapsed: false,
+          };
+          if (last && 'type' in last && last.type === 'timeline') {
+            return [...prev.slice(0, -1), timelineMsg];
+          }
+          return [...prev, timelineMsg];
+        });
+      };
+
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const parts = buffer.split('\n\n');
+          buffer = parts.pop() || '';
+
+          for (const part of parts) {
+            if (!part.startsWith('data: ')) continue;
+            const event = JSON.parse(part.slice(6));
+
+            if (event.type === 'step') {
+              if (event.step === 'image_gen') hadImageEvents = true;
+              // If html_gen starts and no images were generated, mark image steps as skipped
+              if (event.step === 'html_gen' && !hadImageEvents && includeImages) {
+                markImagesSkipped(currentSteps);
+              }
+              processStepEvent(event, currentSteps);
+              updateTimeline();
+            } else if (event.type === 'result') {
+              receivedResult = true;
+              const totalDuration = Date.now() - genStartTime;
+              setMessages(prev => {
+                const last = prev[prev.length - 1];
+                const finalTimeline: Message = {
+                  role: "assistant" as const,
+                  type: "timeline" as const,
+                  steps: [...currentSteps],
+                  totalDuration,
+                  collapsed: false,
+                };
+                const updated = (last && 'type' in last && last.type === 'timeline')
+                  ? [...prev.slice(0, -1), finalTimeline]
+                  : [...prev, finalTimeline];
+
+                const imageCount = event.generatedImages?.length ?? 0;
+                const imageErrorMsgs: string[] = (event.imageErrors ?? []).map(
+                  (e: { code: number | null; message: string }) =>
+                    `Image generation failed${e.code ? ` (${e.code})` : ""}: ${e.message}`
+                );
+                let statusText = imageCount > 0
+                  ? `Form updated with ${imageCount} generated image${imageCount > 1 ? "s" : ""} — see preview →`
+                  : "Form updated — see preview →";
+                if (imageErrorMsgs.length > 0) {
+                  statusText += "\n" + imageErrorMsgs.join("\n");
+                }
+                return [...updated, { role: "assistant" as const, text: statusText }];
+              });
+
+              onHtmlUpdate(event.html);
+              onHistoryUpdate([
+                ...history,
+                { role: "user", text: fullPrompt },
+                { role: "model", text: event.html },
+              ]);
+
+              if (event.generatedImages?.length > 0) {
+                onActiveImagesUpdate([...activeImages, ...event.generatedImages]);
+              }
+            } else if (event.type === 'error') {
+              throw new Error(event.message);
+            }
+          }
+        }
+      } catch (readError) {
+        // Re-throw errors from our own code (error events, JSON parse, etc.)
+        if (readError instanceof Error && !(readError instanceof TypeError)) {
+          throw readError;
+        }
+        // Network/TypeError during streaming (e.g., failed to fetch body)
+        currentSteps.push({
+          step: 'connection',
+          label: 'Connection error',
+          status: 'failed',
+          detail: readError instanceof Error ? readError.message : 'Network error',
+          startedAt: Date.now(),
+          completedAt: Date.now(),
+        });
+        updateTimeline();
+        setError("Connection error during generation");
+        return;
+      }
+
+      // Connection drop: stream ended without result event
+      if (!receivedResult) {
+        currentSteps.push({
+          step: 'connection',
+          label: 'Connection lost',
+          status: 'failed',
+          detail: 'The connection was interrupted before generation completed. Click "Regenerate last response" to retry.',
+          startedAt: Date.now(),
+          completedAt: Date.now(),
+        });
+        updateTimeline();
+        setError("Connection lost during generation");
       }
     } catch (e: unknown) {
+      // Don't show error if request was intentionally aborted
+      if (e instanceof DOMException && e.name === 'AbortError') return;
       const msg = e instanceof Error ? e.message : "Something went wrong";
       setError(msg);
       setMessages((prev) => [
@@ -239,32 +482,50 @@ export default function ChatPanel({
           </div>
         )}
         {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div className="max-w-[85%] space-y-1">
-              {msg.imagePreview && (
-                <img
-                  src={msg.imagePreview}
-                  alt="Attached"
-                  className="rounded-lg max-h-32 object-cover border border-gray-200"
+          <div key={i} className={`flex ${'text' in msg && msg.role === "user" ? "justify-end" : "justify-start"}`}>
+            {'type' in msg && msg.type === 'timeline' ? (
+              <div className="max-w-[85%]">
+                <TimelineMessage
+                  steps={msg.steps}
+                  totalDuration={msg.totalDuration}
+                  collapsed={msg.collapsed}
+                  onToggleCollapse={() => {
+                    setMessages(prev => prev.map((m, j) =>
+                      j === i && 'type' in m && m.type === 'timeline'
+                        ? { ...m, collapsed: !m.collapsed }
+                        : m
+                    ));
+                  }}
+                  isLive={loading && i === messages.length - 1}
                 />
-              )}
-              <div
-                className={`rounded-2xl px-4 py-2 text-sm whitespace-pre-line ${
-                  msg.role === "user"
-                    ? "bg-blue-600 text-white"
-                    : msg.text.startsWith("Error:")
-                    ? "bg-red-50 text-red-700 border border-red-200"
-                    : msg.text.includes("Image generation failed")
-                    ? "bg-amber-50 text-amber-800 border border-amber-200"
-                    : "bg-gray-100 text-gray-800"
-                }`}
-              >
-                {msg.text}
               </div>
-            </div>
+            ) : (
+              <div className="max-w-[85%] space-y-1">
+                {'imagePreview' in msg && msg.imagePreview && (
+                  <img
+                    src={msg.imagePreview}
+                    alt="Attached"
+                    className="rounded-lg max-h-32 object-cover border border-gray-200"
+                  />
+                )}
+                <div
+                  className={`rounded-2xl px-4 py-2 text-sm whitespace-pre-line ${
+                    msg.role === "user"
+                      ? "bg-blue-600 text-white"
+                      : ('text' in msg && msg.text.startsWith("Error:"))
+                      ? "bg-red-50 text-red-700 border border-red-200"
+                      : ('text' in msg && msg.text.includes("Image generation failed"))
+                      ? "bg-amber-50 text-amber-800 border border-amber-200"
+                      : "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  {'text' in msg ? msg.text : ''}
+                </div>
+              </div>
+            )}
           </div>
         ))}
-        {loading && (
+        {loading && !(messages.length > 0 && 'type' in messages[messages.length - 1] && (messages[messages.length - 1] as { type?: string }).type === 'timeline') && (
           <div className="flex justify-start">
             <div className="bg-gray-100 rounded-2xl px-4 py-2 text-sm text-gray-500">
               <span className="animate-pulse">

@@ -24,7 +24,7 @@ app/
 │   ├── layout.tsx                      # HTML shell, metadata
 │   ├── api/
 │   │   ├── scrape/route.ts             # Scrapes Google Form structure
-│   │   ├── generate/route.ts           # Calls Gemini, returns HTML (handles function calling loop)
+│   │   ├── generate/route.ts           # SSE streaming endpoint — calls Gemini, streams progress events, returns HTML
 │   │   ├── generate-image/route.ts     # AI image generation via Nano Banana + Vercel Blob upload
 │   │   ├── publish/route.ts            # Freezes HTML, returns shareable URL
 │   │   ├── submit/[formId]/route.ts    # Proxies submissions to Google Forms
@@ -34,7 +34,8 @@ app/
 ├── components/
 │   ├── UrlBar.tsx                      # URL input + Load Form button
 │   ├── PreviewPane.tsx                 # iframe preview (baseline + AI-generated); opt-in screenshot overlay
-│   ├── ChatPanel.tsx                   # Chat UI, triggers generation, screenshot/upload/style guide/images buttons
+│   ├── ChatPanel.tsx                   # Chat UI, SSE streaming, timeline rendering, toolbar buttons
+│   ├── TimelineMessage.tsx             # Progress timeline component (live + collapsed views)
 │   └── StyleGuideDialog.tsx            # Modal for uploading or URL-capturing a visual style reference
 └── lib/
     ├── scraper.ts                      # Extracts + normalises FB_PUBLIC_LOAD_DATA_
@@ -57,7 +58,7 @@ Creator pastes URL
     → Preview pane shows original form in iframe
 ```
 
-### 2. AI Generation (with optional image generation)
+### 2. AI Generation (SSE streaming with progress timeline)
 ```
 Creator types prompt → POST /api/generate
     → Sends: FormStructure + prompt + conversation history + previous HTML
@@ -65,19 +66,30 @@ Creator types prompt → POST /api/generate
               + optional style guide (image base64 or website screenshot)
               + imageModel selection (none / gemini-2.5 / gemini-3.1)
               + activeImages from previous turns
-    → Gemini receives generate_image function declaration (if imageModel ≠ none)
-    → Gemini decides whether images would enhance the form
-    → If yes: Gemini calls generate_image (one or more times via function calling)
-        → lib/image-gen.ts called directly (not via HTTP — avoids Vercel
-          deployment protection blocking self-fetch on preview deployments)
-        → Nano Banana generates image (base64 PNG)
-        → Image uploaded to Vercel Blob → CDN URL returned
-        → Function response sent back to Gemini
-        → Generated image sent as vision input (separate message) so Gemini
-          can see actual colors and pick complementary form theme
-    → Gemini returns complete self-contained HTML page (with image URLs embedded)
-    → Preview pane replaces original iframe with AI-generated srcdoc iframe
+    → Returns: Server-Sent Events (SSE) stream
+    → Event flow:
+        1. "analyze/started" — immediately on entry
+        2. Gemini calls announce_plan → "plan/completed" with summary
+        3. Gemini calls generate_image (0-N times) → "image_gen/started|completed|failed" per image
+        4. Vision follow-up for color matching → "color_match/started|completed" per image
+        5. Final HTML generation → "html_gen/started|completed"
+        6. Final result event with HTML, images, errors → stream closes
+    → Frontend renders live progress timeline during generation
+    → On completion: preview pane replaces iframe with AI-generated srcdoc
 ```
+
+**SSE event format:** `data: {json}\n\n`
+
+| Event type | Fields | When |
+|---|---|---|
+| `step` | `step`, `status`, `detail?`, `imageType?`, `imageIndex?`, `imageCount?` | During generation |
+| `result` | `html`, `generatedImages`, `imageErrors?` | Generation complete |
+| `error` | `message` | Unrecoverable failure |
+
+**Error handling:**
+- Individual step failures (e.g. image_gen/failed) don't stop generation
+- Fatal errors emit `{ type: "error" }` and close the stream
+- Connection drops (stream ends without result) show "Connection lost" with retry option
 
 ### 3. Publish
 ```
@@ -189,13 +201,20 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 - Image types: `background` (subtle, low-contrast), `header` (visually striking banner), `accent` (decorative)
 - After receiving generated images as vision input, Gemini picks complementary form colors
 
+**Function declarations:**
+- `announce_plan` — Gemini MUST call this first to announce its generation plan (summary). Enables the progress timeline to show what the AI intends to do. If skipped, a fallback plan event is emitted automatically.
+- `generate_image` — (when image model selected) Gemini may call zero, one, or multiple times in `AUTO` mode.
+
 **Function calling flow:**
-1. Gemini receives `generate_image` function declaration (when an image model is selected)
-2. Gemini may call it zero, one, or multiple times in `AUTO` mode
-3. Each call triggers image generation via Nano Banana + Vercel Blob upload
-4. Function responses (URLs) are sent back in one message
-5. Generated images are sent as vision input in a separate follow-up message (Gemini SDK does not allow mixing `functionResponse` with other part types)
-6. Gemini produces final HTML after seeing the actual generated images
+1. Gemini receives `announce_plan` + `generate_image` (when an image model is selected)
+2. Gemini calls `announce_plan` first with a plan summary
+3. Gemini may call `generate_image` zero or more times
+4. Each image call triggers generation via selected model + Vercel Blob upload
+5. Function responses (URLs) are sent back in one message
+6. Generated images are sent as vision input in a separate follow-up message (Gemini SDK does not allow mixing `functionResponse` with other part types)
+7. Gemini produces final HTML after seeing the actual generated images
+
+**Progress callback (`onProgress`):** The `generateForm` function accepts an optional callback that receives `ProgressEvent` objects at each stage. The SSE endpoint passes a `send` function as this callback to stream events to the client in real-time.
 
 **Conversation history:** last 10 turns are sent with each request for iterative refinement.
 
@@ -248,6 +267,20 @@ Access-Control-Allow-Headers: Content-Type
 
 ---
 
+### `components/TimelineMessage.tsx`
+
+Renders a vertical progress timeline for form generation steps. Used during live generation (with animated spinners) and in chat history (completed timelines with collapse/expand).
+
+**Props:** `steps: TimelineStep[]`, `totalDuration: number`, `collapsed: boolean`, `onToggleCollapse: () => void`, `isLive: boolean`
+
+**Step states:** `started` (amber spinner), `completed` (green checkmark), `failed` (red X icon)
+
+**Multi-image support:** When multiple images are generated, steps show numbered labels ("Generating image 1: ...", "Generating image 2: ...") using `imageIndex` and `imageCount` fields.
+
+**Collapsed view:** Single-line summary "Form generated in N steps (Xs)" with expand link.
+
+---
+
 ### `components/ChatPanel.tsx`
 
 Chat interface with toolbar buttons:
@@ -258,7 +291,11 @@ Chat interface with toolbar buttons:
 
 Tracks `activeImages` (generated images from previous turns) and sends them with each generation request for color coherence.
 
-**Error display:** Image generation errors (e.g. API quota exceeded, service unavailable) are shown in amber warning bubbles with the HTTP status code and message. Publish errors are shown inline in the publish bar.
+**SSE streaming:** Uses `ReadableStream` reader to consume SSE events from `/api/generate`. Renders a live `TimelineMessage` during generation that updates in real-time as step events arrive. Supports `AbortController` for cancelling in-flight requests.
+
+**Message types:** Discriminated union supporting text messages (user/assistant bubbles) and timeline messages (rendered as `TimelineMessage` component with collapse/expand state per message).
+
+**Error display:** Image generation errors (e.g. API quota exceeded, service unavailable) are shown in amber warning bubbles with the HTTP status code and message. Connection drops and fatal errors are shown in the timeline with retry via "Regenerate last response". Publish errors are shown inline in the publish bar.
 
 ### `components/PreviewPane.tsx`
 

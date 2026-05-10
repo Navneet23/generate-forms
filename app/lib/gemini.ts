@@ -38,6 +38,17 @@ export interface GeneratedImage {
   mimeType: string;
 }
 
+// TASK-2: Progress event type for generation timeline
+export type ProgressEvent = {
+  type: "step";
+  step: string;
+  status: "started" | "completed" | "failed";
+  detail?: string;
+  imageType?: string;
+  imageIndex?: number;
+  imageCount?: number;
+};
+
 // Function declaration for generate_image tool
 const generateImageFunctionDecl: FunctionDeclaration = {
   name: "generate_image",
@@ -73,6 +84,24 @@ const generateImageFunctionDecl: FunctionDeclaration = {
   },
 };
 
+// TASK-1: Function declaration for announce_plan tool
+const announcePlanFunctionDecl: FunctionDeclaration = {
+  name: "announce_plan",
+  description:
+    "Announce your visual design plan before generating the form. You MUST call this function first, before generating any HTML or calling generate_image. Describe only visual/layout decisions (colors, fonts, layout style, images). Your plan must NEVER include changing question text, option labels, or form title — those are immutable.",
+  parameters: {
+    type: SchemaType.OBJECT,
+    properties: {
+      summary: {
+        type: SchemaType.STRING,
+        description:
+          "A brief 1-2 sentence summary of your visual design plan: what style/theme, colors, and layout you will use, and whether images will be included. Do NOT mention changing any form text content — only describe visual changes.",
+      },
+    },
+    required: ["summary"],
+  },
+};
+
 function buildSystemPrompt(structure: FormStructure, submitUrl: string, includeImages?: boolean): string {
   return `You are an expert frontend developer who specialises in building beautiful, custom HTML forms.
 
@@ -83,6 +112,7 @@ CRITICAL — PRESERVE FORM CONTENT EXACTLY:
 - A dropdown must stay a dropdown, a checkbox must stay a checkbox, a multiple_choice must stay radio buttons, etc. Never convert one question type to another.
 - Option values must match the structure JSON character-for-character. Do not rephrase, reformat, or embellish option text.
 - You are only allowed to change the VISUAL STYLING and LAYOUT — never the content or behaviour of the form fields.
+- Even if the user asks to "make it fun", "make it quirky", or similar — that applies ONLY to visual design (colors, fonts, animations, layout, images). The text content of questions, options, title, and description must NEVER change.
 
 RULES — you must follow all of these:
 1. Output ONLY raw HTML. No markdown, no code fences, no explanation. The very first character of your response must be "<" and the last must be ">".
@@ -125,7 +155,11 @@ ${JSON.stringify(structure, null, 2)}
 
 ⚠️ REMINDER — Each question's "type" field above is AUTHORITATIVE. Here is a summary for quick reference:
 ${structure.questions.map((q, i) => `  ${i + 1}. "${q.text}" → type: ${q.type} (render as ${q.type === "checkboxes" ? "checkboxes (multiple selections allowed)" : q.type === "dropdown" ? "a <select> dropdown (single selection)" : q.type === "multiple_choice" ? "radio buttons (single selection)" : q.type})`).join("\n")}
-Do NOT swap, change, or reinterpret any of these types.`;
+Do NOT swap, change, or reinterpret any of these types.
+
+IMPORTANT — ANNOUNCE YOUR PLAN FIRST:
+Before generating any HTML or calling generate_image, you MUST call the announce_plan function with a brief summary of your VISUAL design plan. This helps the user understand what you are building. Always call announce_plan as your very first action.
+Remember: your plan and output must NEVER alter form text content. The title, description, question text, and option labels from the structure JSON above are READ-ONLY — copy them verbatim into the HTML.`;
 }
 
 function toInlineData(base64WithPrefix: string): { mimeType: string; data: string } {
@@ -153,20 +187,20 @@ export async function generateForm(
   styleGuide?: StyleGuide,
   includeImages?: boolean,
   imageGenerator?: ImageGenerator,
-  activeImages?: GeneratedImage[]
+  activeImages?: GeneratedImage[],
+  onProgress?: (event: ProgressEvent) => void
 ): Promise<{ html: string; images: GeneratedImage[]; imageErrors: { code: number | null; message: string }[] }> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
 
   const genAI = new GoogleGenerativeAI(apiKey);
 
-  // Build tools array — only include generate_image when images are enabled
-  const tools: Tool[] = [];
+  // Build tools array — always include announce_plan, conditionally include generate_image
+  const functionDeclarations: FunctionDeclaration[] = [announcePlanFunctionDecl];
   if (includeImages && imageGenerator) {
-    tools.push({
-      functionDeclarations: [generateImageFunctionDecl],
-    });
+    functionDeclarations.push(generateImageFunctionDecl);
   }
+  const tools: Tool[] = [{ functionDeclarations }];
 
   const systemPrompt = buildSystemPrompt(structure, submitUrl, includeImages);
   if (LOG_FILE) {
@@ -178,7 +212,7 @@ export async function generateForm(
 
   log("[GEMINI] Model:", MODEL_ID);
   log("[GEMINI] Include images:", includeImages);
-  log("[GEMINI] Tools provided:", tools.length > 0 ? "generate_image" : "none");
+  log("[GEMINI] Tools provided:", functionDeclarations.map(f => f.name).join(", "));
   log("[GEMINI] Active images from previous turns:", activeImages?.length ?? 0);
   log("[GEMINI] History turns:", history.length, "(using last", Math.min(history.length, 10), ")");
 
@@ -253,11 +287,17 @@ export async function generateForm(
 
   // Send message and handle function calling loop
   log("[GEMINI] >>> Sending initial message to Gemini...");
+  onProgress?.({ type: "step", step: "analyze", status: "started" });
   let response = await chat.sendMessage(parts);
+  // Auto-complete analyze when first response arrives
+  onProgress?.({ type: "step", step: "analyze", status: "completed" });
   const generatedImages: GeneratedImage[] = [];
   const imageErrors: { code: number | null; message: string }[] = [];
 
-  // Function calling loop — Gemini may call generate_image zero or more times
+  // TASK-1 & TASK-9: Track whether announce_plan was called
+  let announcePlanCalled = false;
+
+  // Function calling loop — Gemini may call announce_plan and/or generate_image
   let loopIteration = 0;
   while (true) {
     loopIteration++;
@@ -281,11 +321,28 @@ export async function generateForm(
     log(`\n=== [GEMINI] FUNCTION CALLING — Loop iteration ${loopIteration} ===`);
     log(`[GEMINI] Gemini requested ${functionCalls.length} function call(s)`);
 
+    // TASK-1: Sort function calls so announce_plan is processed before generate_image
+    const sortedFunctionCalls = [...functionCalls].sort((a, b) => {
+      const nameA = ("functionCall" in a && a.functionCall?.name) || "";
+      const nameB = ("functionCall" in b && b.functionCall?.name) || "";
+      if (nameA === "announce_plan") return -1;
+      if (nameB === "announce_plan") return 1;
+      return 0;
+    });
+
     // Process all function calls — separate functionResponse parts from vision parts
     const functionResponses: Part[] = [];
     const visionFollowUp: Part[] = [];
 
-    for (const part of functionCalls) {
+    // Count image calls in this batch for progress tracking
+    const imageCallsInBatch = sortedFunctionCalls.filter(
+      (p) => "functionCall" in p && p.functionCall?.name === "generate_image"
+    ).length;
+    let imageIndexInBatch = 0;
+    // Snapshot the count before this batch so numbering is stable
+    const imagesBeforeBatch = generatedImages.length;
+
+    for (const part of sortedFunctionCalls) {
       if (!("functionCall" in part) || !part.functionCall) continue;
 
       const { name, args } = part.functionCall;
@@ -293,10 +350,40 @@ export async function generateForm(
       log(`[GEMINI] Function call: ${name}`);
       log(`[GEMINI] Args:`, JSON.stringify(args, null, 2));
 
-      if (name === "generate_image" && imageGenerator) {
+      // TASK-1: Handle announce_plan
+      if (name === "announce_plan") {
+        const typedArgs = args as Record<string, string>;
+        const summary = typedArgs.summary || "";
+        log(`[GEMINI] Plan announced: ${summary}`);
+        announcePlanCalled = true;
+
+        onProgress?.({ type: "step", step: "plan", status: "completed", detail: summary });
+
+        functionResponses.push({
+          functionResponse: {
+            name: "announce_plan",
+            response: { success: true },
+          },
+        } as Part);
+      } else if (name === "generate_image" && imageGenerator) {
+        imageIndexInBatch++;
+        const currentImageIndex = imagesBeforeBatch + imageIndexInBatch;
+        const totalImageCount = imagesBeforeBatch + imageCallsInBatch;
+
         try {
           log(`[GEMINI] >>> Calling image generator...`);
           const typedArgs = args as Record<string, string>;
+
+          onProgress?.({
+            type: "step",
+            step: "image_gen",
+            status: "started",
+            detail: typedArgs.prompt,
+            imageType: typedArgs.imageType,
+            imageIndex: currentImageIndex,
+            imageCount: totalImageCount,
+          });
+
           const image = await imageGenerator({
             prompt: typedArgs.prompt,
             imageType: typedArgs.imageType as "background" | "header" | "accent",
@@ -311,6 +398,15 @@ export async function generateForm(
           log(`[GEMINI]     Type: ${image.imageType}`);
           log(`[GEMINI]     MIME: ${image.mimeType}`);
           log(`[GEMINI]     Base64 size: ${image.base64.length} chars`);
+
+          onProgress?.({
+            type: "step",
+            step: "image_gen",
+            status: "completed",
+            imageType: image.imageType,
+            imageIndex: currentImageIndex,
+            imageCount: totalImageCount,
+          });
 
           // functionResponse goes in first message (cannot mix with other types)
           functionResponses.push({
@@ -337,6 +433,17 @@ export async function generateForm(
           const errorCode = (err as { code?: number }).code ?? null;
           log(`[GEMINI] <<< Image generation FAILED (${errorCode}): ${errorMsg}`);
           imageErrors.push({ code: errorCode, message: errorMsg });
+
+          onProgress?.({
+            type: "step",
+            step: "image_gen",
+            status: "failed",
+            detail: errorMsg,
+            imageType: (args as Record<string, string>).imageType,
+            imageIndex: currentImageIndex,
+            imageCount: totalImageCount,
+          });
+
           functionResponses.push({
             functionResponse: {
               name: "generate_image",
@@ -358,9 +465,19 @@ export async function generateForm(
     // Then send vision follow-up so Gemini can see the actual images for color picking
     if (visionFollowUp.length > 0) {
       log(`[GEMINI] >>> Sending ${visionFollowUp.length} vision follow-up part(s) (images + instructions)...`);
+      onProgress?.({ type: "step", step: "color_match", status: "started" });
       response = await chat.sendMessage(visionFollowUp);
+      onProgress?.({ type: "step", step: "color_match", status: "completed" });
     }
   }
+
+  // TASK-9: If announce_plan was never called, emit a fallback plan event
+  if (!announcePlanCalled) {
+    onProgress?.({ type: "step", step: "plan", status: "completed", detail: "Generating form based on your request" });
+  }
+
+  // TASK-2: Emit html_gen events
+  onProgress?.({ type: "step", step: "html_gen", status: "started" });
 
   const text = response.response.text();
 
@@ -380,6 +497,8 @@ export async function generateForm(
     });
   }
   log("=== [GEMINI] END FINAL RESULT ===\n");
+
+  onProgress?.({ type: "step", step: "html_gen", status: "completed" });
 
   return { html, images: generatedImages, imageErrors };
 }
