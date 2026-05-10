@@ -13,6 +13,11 @@ export default function Home() {
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [history, setHistory] = useState<HistoryTurn[]>([]);
   const [publishedUrl, setPublishedUrl] = useState("");
+  const [publishedFormId, setPublishedFormId] = useState("");
+  const [publishedExpiresAt, setPublishedExpiresAt] = useState("");
+  const [publishedExtended, setPublishedExtended] = useState(false);
+  const [extending, setExtending] = useState(false);
+  const [extendError, setExtendError] = useState("");
   const [publishing, setPublishing] = useState(false);
   const [publishError, setPublishError] = useState("");
   const [copied, setCopied] = useState(false);
@@ -28,6 +33,10 @@ export default function Home() {
     setGeneratedHtml("");
     setHistory([]);
     setPublishedUrl("");
+    setPublishedFormId("");
+    setPublishedExpiresAt("");
+    setPublishedExtended(false);
+    setExtendError("");
     setStyleGuide(null);
     setPendingScreenshot(null);
     setScreenshotMode(false);
@@ -47,11 +56,21 @@ export default function Home() {
       const res = await fetch("/api/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html: generatedHtml, formId: structure.formId }),
+        body: JSON.stringify({
+          html: generatedHtml,
+          formId: structure.formId,
+          imageKeys: Array.from(
+            new Set(activeImages.map((i) => i.key).filter(Boolean))
+          ),
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Publish failed");
       setPublishedUrl(data.url);
+      setPublishedFormId(data.id ?? "");
+      setPublishedExpiresAt(data.expiresAt ?? "");
+      setPublishedExtended(false);
+      setExtendError("");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Publish failed";
       setPublishError(msg);
@@ -64,6 +83,27 @@ export default function Home() {
     navigator.clipboard.writeText(publishedUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  async function handleExtend() {
+    if (!publishedFormId || extending || publishedExtended) return;
+    setExtending(true);
+    setExtendError("");
+    try {
+      const res = await fetch(
+        `/api/forms/${encodeURIComponent(publishedFormId)}/extend`,
+        { method: "POST" }
+      );
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Extend failed");
+      setPublishedExpiresAt(data.expiresAt ?? "");
+      setPublishedExtended(true);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Extend failed";
+      setExtendError(msg);
+    } finally {
+      setExtending(false);
+    }
   }
 
   return (
@@ -126,6 +166,28 @@ export default function Home() {
             <a href={publishedUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
               Open ↗
             </a>
+            {publishedExpiresAt ? (
+              <span className="text-xs text-gray-500">
+                Expires{" "}
+                {new Date(publishedExpiresAt).toLocaleDateString(undefined, {
+                  dateStyle: "long",
+                })}
+              </span>
+            ) : null}
+            {publishedExtended ? (
+              <span className="text-xs text-green-700">Kept for 1 year ✓</span>
+            ) : (
+              <button
+                onClick={handleExtend}
+                disabled={extending || !publishedFormId}
+                className="px-3 py-1.5 border border-gray-300 text-sm rounded-lg hover:bg-white text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {extending ? "Extending…" : "Keep it for 1 year"}
+              </button>
+            )}
+            {extendError ? (
+              <span className="text-xs text-red-600">{extendError}</span>
+            ) : null}
           </>
         ) : (
           <span className="text-xs text-gray-400">
