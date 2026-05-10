@@ -220,6 +220,8 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 
 **Active images:** On subsequent generations, previously generated images are re-sent as vision input so Gemini maintains color coherence across edits.
 
+**Known limitation — rare question text drift:** Despite the system prompt's strong language preserving form text verbatim (reinforced in commit `f5599da`), Gemini occasionally paraphrases question text or option labels — e.g. *"Rate your current baking/decorating experience."* rendered as *"Rate your current experience"*. This is non-deterministic and infrequent; retrying the generation usually produces correct output. A structural fix (post-generation diff against `structure.questions[].text` with auto-retry or auto-correction) is the right long-term solution but is out of scope.
+
 ---
 
 ### `lib/image-gen.ts`
