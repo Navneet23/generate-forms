@@ -130,13 +130,17 @@ RULES — you must follow all of these:
 9. For linear_scale questions, render them as a single horizontal row of numbered radio buttons. The min label appears below the lowest number and the max label appears below the highest number. Labels and numbers must be aligned in one clean row — never stack them vertically or misalign them.
 10. If generating a multi-step form with a review page, the review page must display the actual values the user entered, not placeholder text like "No answer provided".
 11. The page must always fill the full viewport (min-height: 100vh) with a background colour — never leave a plain white or transparent background. Choose a colour that fits the requested style.
-12. ⚠️ QUESTION-BY-QUESTION LAYOUT RULES (apply whenever showing one question per step):
+12. ⚠️ VISUAL DISTINCTION BETWEEN QUESTION TYPES:
+    - multiple_choice (radio buttons): render each option with a ROUND radio indicator (○ / ●). Only ONE option can be selected at a time.
+    - checkboxes: render each option with a SQUARE checkbox indicator (☐ / ☑). MULTIPLE options can be selected. Always add a helper text below the question such as "Select all that apply" to make it clear multiple selections are allowed.
+    - These two types must NEVER look the same. The visual indicator shape (round vs square) and the selection hint are required to distinguish them.
+13. ⚠️ QUESTION-BY-QUESTION LAYOUT RULES (apply whenever showing one question per step):
     a. The final step MUST always be a review page that shows every answer the user gave before they submit. There are no exceptions — never skip the review step.
-    b. For questions that accept only a SINGLE selection (multiple_choice, dropdown, linear_scale), automatically advance to the next step as soon as the user makes their selection. Do NOT wait for a "Next" button click for these question types.
-    c. When auto-advance is active on a step, display a small helper text beneath the question (e.g. "Select an option to continue") so the respondent knows the form will move forward automatically.
-    d. Questions that accept multiple selections (checkboxes, short_answer, paragraph, date, time) must still use an explicit "Next" button — do not auto-advance these.
-    e. Pressing the Enter key on any step must advance the user to the next step (same as clicking "Next"). For steps with auto-advance (rule 12b), Enter should also trigger the advance. Exception: do not intercept Enter inside a <textarea> (paragraph questions) — allow normal line-break behaviour there.
-    f. Every step after the first must include a "Back" button that returns the user to the previous step. The review page must also have a Back button. Only the very first question step should have no Back button.
+    b. For single-selection questions (multiple_choice, dropdown, linear_scale), auto-advance on selection is allowed. However, a "Next" button must ALSO be present on these steps so the user can navigate manually.
+    c. For multi-input questions (checkboxes, short_answer, paragraph, date, time), do NOT auto-advance — the user must click "Next" to proceed.
+    d. Every step after the first must include a "Back" button that returns the user to the previous step. The review page must also have a Back button. Only the very first question step should have no Back button.
+    e. When the user clicks "Next" on a required question without providing an answer, show a validation message (e.g. "This question is required") and do NOT advance. Optional questions may be skipped freely.
+    f. Pressing the Enter key on any step must advance the user to the next step (same as clicking "Next"), subject to the same required-field validation. Exception: do not intercept Enter inside a <textarea> (paragraph questions) — allow normal line-break behaviour there.
 
 ${includeImages ? `IMAGE GENERATION GUIDELINES (when the generate_image tool is available):
 - You have access to a generate_image tool that creates AI images for the form.
