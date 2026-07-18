@@ -102,6 +102,20 @@ const announcePlanFunctionDecl: FunctionDeclaration = {
   },
 };
 
+// QI-1/QI-2: Canonical Google Forms footer — mirrors the real Google Forms responder
+// footer: notices, links (Contact form owner / Terms / Privacy / Report abuse) and the
+// grey "Google Forms" text wordmark. Provided verbatim in the SI so the model copies it
+// exactly; data-gforms-footer lets the future validator find it.
+function buildGoogleFormsFooter(formId: string): string {
+  const formUrl = `https://docs.google.com/forms/d/e/${formId}/viewform`;
+  return `<footer data-gforms-footer style="font-size:12px;line-height:1.8;text-align:center;font-family:Arial,Helvetica,sans-serif;">
+  <div>Never submit passwords through Google Forms.</div>
+  <div>This content is neither created nor endorsed by Google. - <a href="${formUrl}" target="_blank" rel="noopener">Contact form owner</a> - <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> - <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></div>
+  <div>Does this form look suspicious? <a href="https://docs.google.com/forms/d/e/${formId}/abuse" target="_blank" rel="noopener">Report</a></div>
+  <div aria-label="Google Forms" style="font-size:20px;color:#5f6368;margin-top:14px;"><span style="font-weight:500;">Google</span> <span style="font-weight:400;">Forms</span></div>
+</footer>`;
+}
+
 function buildSystemPrompt(structure: FormStructure, submitUrl: string, includeImages?: boolean): string {
   return `You are an expert frontend developer who specialises in building beautiful, custom HTML forms.
 
@@ -124,23 +138,34 @@ RULES — you must follow all of these:
    For checkbox questions where multiple options can be selected, send the value as an array of strings (e.g. ["Option A", "Option B"]).
    On success show a thank-you message. On error show a friendly error message.
    If you generate a multi-step form, collect ALL field values across ALL steps before submitting — never submit with missing or empty values from earlier steps.
-6. The form must be fully responsive and work on mobile.
+6. The form must be fully responsive and work on mobile. No fixed pixel widths on the main form container — use a max-width content column with auto margins on wide screens. Question text, answer options, and input text must be at least 16px on mobile (secondary text like helper hints and the rule-18 footer is exempt and should stay small). Spacing must adapt to screen size: on narrow screens (≤480px) reduce horizontal padding to 16-24px and compress vertical gaps — never reuse large desktop padding/margin values unchanged on mobile. Cards, steps, and containers must size to their content: never give them fixed heights, large min-heights, or space-between stretching that leaves big empty gaps between a question and its Next button. (Rule 11's full-viewport background applies to the PAGE background only — not to the form card.)
 7. Render ALL questions from the structure in order. Do not skip any. Always render the form title and description at the top.
 8. For required fields, add visible indication and client-side validation before submit. ⚠️ Only mark a field as required if its "required" property is true in the structure JSON. If a question has "required": false, it MUST remain optional — do not add required attributes, asterisks, or validation to optional fields.
-9. For linear_scale questions, render them as a single horizontal row of numbered radio buttons. The min label appears below the lowest number and the max label appears below the highest number. Labels and numbers must be aligned in one clean row — never stack them vertically or misalign them.
+9. For linear_scale questions, render them as a single horizontal row of numbered radio buttons. The min label appears below the lowest number and the max label appears below the highest number. Labels and numbers must be aligned in one clean row — never stack them vertically or misalign them. On narrow screens the row must compress evenly while keeping touch targets at least ~40px; if the scale genuinely cannot fit, allow horizontal scrolling within the scale container — never overflow the viewport or clip the endpoint labels.
 10. If generating a multi-step form with a review page, the review page must display the actual values the user entered, not placeholder text like "No answer provided".
 11. The page must always fill the full viewport (min-height: 100vh) with a background colour — never leave a plain white or transparent background. Choose a colour that fits the requested style.
-12. ⚠️ VISUAL DISTINCTION BETWEEN QUESTION TYPES:
+12. ⚠️ VISUAL DISTINCTION & SELECTION FEEDBACK:
     - multiple_choice (radio buttons): render each option with a ROUND radio indicator (○ / ●). Only ONE option can be selected at a time.
     - checkboxes: render each option with a SQUARE checkbox indicator (☐ / ☑). MULTIPLE options can be selected. Always add a helper text below the question such as "Select all that apply" to make it clear multiple selections are allowed.
     - These two types must NEVER look the same. The visual indicator shape (round vs square) and the selection hint are required to distinguish them.
-13. ⚠️ QUESTION-BY-QUESTION LAYOUT RULES (apply whenever showing one question per step):
+    - Every selectable option (radio, checkbox, dropdown, linear-scale point) must have a clearly visible SELECTED state — a filled indicator AND a background or border change — plus a hover state on pointer devices and a visible keyboard-focus state. A respondent must never be unsure whether their selection registered.
+13. LAYOUT CHOICE: if the creator's request or style guide specifies or clearly implies a layout (e.g. single-page, question-by-question, multi-section), follow it exactly. If no layout is specified, choose whichever layout best fits the form's length and tone. Never mix layouts within one form. On iterative edits, preserve the existing layout unless the creator asks to change it.
+14. ⚠️ QUESTION-BY-QUESTION LAYOUT RULES (apply whenever showing one question per step):
     a. The final step MUST always be a review page that shows every answer the user gave before they submit. There are no exceptions — never skip the review step.
     b. For single-selection questions (multiple_choice, dropdown, linear_scale), auto-advance on selection is allowed. However, a "Next" button must ALSO be present on these steps so the user can navigate manually.
     c. For multi-input questions (checkboxes, short_answer, paragraph, date, time), do NOT auto-advance — the user must click "Next" to proceed.
     d. Every step after the first must include a "Back" button that returns the user to the previous step. The review page must also have a Back button. Only the very first question step should have no Back button.
     e. When the user clicks "Next" on a required question without providing an answer, show a validation message (e.g. "This question is required") and do NOT advance. Optional questions may be skipped freely.
     f. Pressing the Enter key on any step must advance the user to the next step (same as clicking "Next"), subject to the same required-field validation. Exception: do not intercept Enter inside a <textarea> (paragraph questions) — allow normal line-break behaviour there.
+15. PLACEHOLDERS: text inputs may use only generic placeholder text — "Your answer" for short_answer and paragraph, or a neutral format hint (e.g. "DD/MM/YYYY") for date/time. Never invent themed, decorative, or question-specific placeholder copy.
+16. CONTRAST: all text must meet approximately WCAG AA contrast — 4.5:1 for body text, 3:1 for large headings — against its actual rendered background. When text sits on an image or gradient, add an overlay or text shadow sufficient to restore contrast. This includes the footer notices (rule 18).
+17. OVERFLOW: never clip or overflow text. All text must wrap within its container (use overflow-wrap), long question text and option labels must wrap gracefully, and text containers must not have fixed heights. Any intentionally scrollable region must show a scrollbar. Check against the longest question and option text in the structure.
+18. ⚠️ GOOGLE FORMS FOOTER — required on every generated form. The page must end with this footer, copied EXACTLY as given below. You may adjust its spacing, alignment, font size, and mute its text colour to harmonise with the design — but NEVER change the notice text, the link labels, the link URLs, or the "Google Forms" wordmark:
+${buildGoogleFormsFooter(structure.formId)}
+    - The "Google Forms" wordmark must remain grey text exactly as given — never replace it with an icon, logo image, or SVG.
+    - Keep the footer's inline font sizes exactly as given (12px notices, 20px wordmark) on ALL screen sizes — the footer is secondary text and is exempt from rule 6's 16px minimum. Do not scale it up, and do not let it inherit the page's display font.
+    - Footer links must be visibly underlined. The footer must stay legible and meet the contrast rule (16).
+    - In multi-step layouts, the footer must appear at minimum on the first step and the final (review) step.
 
 ${includeImages ? `IMAGE GENERATION GUIDELINES (when the generate_image tool is available):
 - You have access to a generate_image tool that creates AI images for the form.
@@ -152,7 +177,7 @@ ${includeImages ? `IMAGE GENERATION GUIDELINES (when the generate_image tool is 
 - For header images: place at the top with appropriate height (200-300px), use object-fit: cover, make it responsive.
 - For accent images: size appropriately and position to support the form theme without overwhelming the content.
 - Reference generated images by their returned URL in the HTML.` : `IMAGE RULES:
-- Do NOT include any images in the form. Do not use <img> tags, background-image CSS, or any external image URLs. The form should be styled with colors, gradients, and CSS only.`}
+- Do NOT include any images in the form. Do not use <img> tags, background-image CSS, or any external image URLs. The form should be styled with colors, gradients, and CSS only. (The text-based Google Forms footer required by rule 18 is unaffected by this rule.)`}
 
 The form structure is:
 ${JSON.stringify(structure, null, 2)}
@@ -250,7 +275,7 @@ export async function generateForm(
       ? ` Focus specifically on: ${styleGuide.focusNote}.`
       : "";
     parts.push({
-      text: `Use the visual style of the image above as a reference.${focusText} Do not embed the image in the form.`,
+      text: `The image above is a visual style guide. Deliberately extract and apply its visual language: colour palette (dominant + accent colours), typography feel (serif/sans, weight, formality), spacing and density, corner radius and border treatment, and overall mood.${focusText} If the creator's request asks to follow this image's layout, replicate its layout/structure as closely as the form content allows; otherwise use it only as a visual style reference and do not clone its layout. Never embed this image itself in the form.`,
     });
     log("[GEMINI] Part: style guide image (inlineData) + text");
   }
