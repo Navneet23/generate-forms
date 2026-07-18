@@ -84,5 +84,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSelmLC0m1UQOHL6udyRC1eAk33ac_Y8V1NHHcSkN1-RDS-6aA/viewform",
     "questionCount": 8
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/pet-doctors-surgery-release.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/pet-doctors-surgery-release.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/re_hU_BFTF",
+      "publishId": "re_hU_BFTF",
+      "expiresAt": "2027-07-18T18:14:07.365Z",
+      "imageCount": 1,
+      "htmlLength": 16213,
+      "durationMs": 69394,
+      "at": "2026-07-18T18:14:07.500Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/R-FWpoSY9f",
+      "publishId": "R-FWpoSY9f",
+      "expiresAt": "2027-07-18T18:15:15.286Z",
+      "imageCount": 1,
+      "htmlLength": 17144,
+      "durationMs": 67911,
+      "at": "2026-07-18T18:15:15.415Z"
+    }
+  }
 }

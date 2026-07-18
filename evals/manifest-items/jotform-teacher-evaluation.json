@@ -124,5 +124,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdAWTS2pNU6iU3bzG33GiKJb8m65RZHDgHWfBJizDGklDwlkw/viewform",
     "questionCount": 12
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-teacher-evaluation.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-teacher-evaluation.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/0nuicST5NG",
+      "publishId": "0nuicST5NG",
+      "expiresAt": "2027-07-18T17:55:05.191Z",
+      "imageCount": 0,
+      "htmlLength": 24380,
+      "durationMs": 54414,
+      "at": "2026-07-18T17:55:05.329Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/lkrHMmVRsO",
+      "publishId": "lkrHMmVRsO",
+      "expiresAt": "2027-07-18T17:55:40.170Z",
+      "imageCount": 0,
+      "htmlLength": 26767,
+      "durationMs": 34973,
+      "at": "2026-07-18T17:55:40.308Z"
+    }
+  }
 }

@@ -126,5 +126,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfBABDy2BGaKs2jgeKgejhybF7OC8yLwkpk_Z-Ya3tEMLh9jA/viewform",
     "questionCount": 13
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-medical-history.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-medical-history.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/KEB2LyGdAz",
+      "publishId": "KEB2LyGdAz",
+      "expiresAt": "2027-07-18T17:49:04.639Z",
+      "imageCount": 2,
+      "htmlLength": 31060,
+      "durationMs": 112490,
+      "at": "2026-07-18T17:49:04.771Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/u0qgmqqeAF",
+      "publishId": "u0qgmqqeAF",
+      "expiresAt": "2027-07-18T17:50:30.499Z",
+      "imageCount": 1,
+      "htmlLength": 30117,
+      "durationMs": 85896,
+      "at": "2026-07-18T17:50:30.670Z"
+    }
+  }
 }

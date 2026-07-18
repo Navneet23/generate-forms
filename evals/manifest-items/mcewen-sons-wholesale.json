@@ -128,5 +128,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdN8vRz_WlndZiP4Wmzbn3JuIQkOtdTQBUhD0i_E2bK_JUj0g/viewform",
     "questionCount": 15
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/mcewen-sons-wholesale.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/mcewen-sons-wholesale.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/bNM2UI-1OK",
+      "publishId": "bNM2UI-1OK",
+      "expiresAt": "2027-07-18T18:11:31.682Z",
+      "imageCount": 1,
+      "htmlLength": 19830,
+      "durationMs": 76786,
+      "at": "2026-07-18T18:11:31.798Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/A_Q7Um8TEm",
+      "publishId": "A_Q7Um8TEm",
+      "expiresAt": "2027-07-18T18:12:53.943Z",
+      "imageCount": 1,
+      "htmlLength": 20476,
+      "durationMs": 82359,
+      "at": "2026-07-18T18:12:54.162Z"
+    }
+  }
 }

@@ -115,5 +115,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScr5ZSiNMPZ7VCQ0TMDUivuqWVGEr24_rY0Pa77McYzDW5DdA/viewform",
     "questionCount": 10
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/crossfit-virtuosity-intake.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/crossfit-virtuosity-intake.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/oNEZtF_qV1",
+      "publishId": "oNEZtF_qV1",
+      "expiresAt": "2027-07-18T17:48:09.661Z",
+      "imageCount": 1,
+      "htmlLength": 31260,
+      "durationMs": 89456,
+      "at": "2026-07-18T17:48:09.778Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/aF2yJz0cMU",
+      "publishId": "aF2yJz0cMU",
+      "expiresAt": "2027-07-18T17:49:49.379Z",
+      "imageCount": 1,
+      "htmlLength": 37952,
+      "durationMs": 99730,
+      "at": "2026-07-18T17:49:49.511Z"
+    }
+  }
 }

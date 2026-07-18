@@ -1,16 +1,38 @@
 # Eval Set Creation — Requirements
 
-## Status: COMPLETE (2026-07-18)
+## Status: COMPLETE incl. generation stage (2026-07-18)
 
 All 37 eval items built and verified (2 dead-link sources skipped). Deliverables:
 - 37 published Google Forms (user's account), all verified publicly scrapable
 - 37 hero screenshots in `evals/style-guides/` + Vercel Blob URLs
 - `evals/manifest.json` (+ per-item shards in `evals/manifest-items/`)
-- Google Doc "Forms Restyler — Eval Set" with form/style-guide/prompt per row
-  (Paperform style-guide images were fixed manually in the doc afterwards)
 - 14 items flagged `thinExtraction` (SPA sources rendered only their first
   screen; questions inferred from form purpose) — spot-checked and accepted
 - Run details, fixes, and operational lessons: `evals/tools/README.md`
+
+### Generation stage (restyled forms for rating)
+
+68/68 restyled forms generated via `evals/tools/generate-restyled.mjs`
+(34 items × 2 configs; Paperform's 3 items pending corrected style guides):
+- **Config A**: `gemini-2.5-flash-image` · **Config B**: `gemini-3.1-flash-image-preview`
+- Generation ran against the LOCAL dev server so the working-tree SI (the thing
+  under evaluation) is what generated the forms — prod was on an older SI.
+  The baked localhost submit URL is rewritten to the prod origin before publish.
+- Published + extended to 1-year persistence via the prod deployment
+  (`https://app-red-phi-88.vercel.app/f/{id}`); shared Redis/Blob makes this work.
+- 9/34 items generated 0 images in both configs (surveys — the SI's intended
+  judgment); for those rows A-vs-B measures generation variance, not image models.
+- **Google Doc v2** (form + style guide + prompt + both generated links per row):
+  https://docs.google.com/document/d/1-4ee_G6DtGyIoqfizjqnqd4-BvyPxFX1UIeXoQ38Msg/edit
+  (v1 doc retains the manually-fixed Paperform images; the Drive connector cannot
+  edit docs in place, so v2 is a separate file)
+
+### Remaining
+
+- Drop corrected `paperform-*.png` files into `evals/style-guides/`, then:
+  `node generate-restyled.mjs --only=paperform-client-onboarding,paperform-restaurant-order,paperform-event-registration`
+  and regenerate/publish the doc (v3)
+- Rating pass per `evals/rater_instructions.md`
 
 ## Goal
 

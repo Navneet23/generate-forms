@@ -102,5 +102,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdkD3Q8D_r3p152ZoXYh8ZgqDKMwKuRtNrEp2zKUPaYi8m6Xw/viewform",
     "questionCount": 11
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/atelier-eva-tattoo.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/atelier-eva-tattoo.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/5aYZce4U-t",
+      "publishId": "5aYZce4U-t",
+      "expiresAt": "2027-07-18T17:36:59.073Z",
+      "imageCount": 1,
+      "htmlLength": 28221,
+      "durationMs": 121410,
+      "at": "2026-07-18T17:36:59.220Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/OstP18C7y5",
+      "publishId": "OstP18C7y5",
+      "expiresAt": "2027-07-18T17:38:33.298Z",
+      "imageCount": 1,
+      "htmlLength": 32059,
+      "durationMs": 94206,
+      "at": "2026-07-18T17:38:33.428Z"
+    }
+  }
 }

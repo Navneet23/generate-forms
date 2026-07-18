@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T14:09:28.456Z",
+  "generatedAt": "2026-07-18T18:20:32.188Z",
   "items": {
     "atelier-eva-tattoo": {
       "id": "atelier-eva-tattoo",
@@ -105,7 +105,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdkD3Q8D_r3p152ZoXYh8ZgqDKMwKuRtNrEp2zKUPaYi8m6Xw/viewform",
         "questionCount": 11
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/atelier-eva-tattoo.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/atelier-eva-tattoo.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/5aYZce4U-t",
+          "publishId": "5aYZce4U-t",
+          "expiresAt": "2027-07-18T17:36:59.073Z",
+          "imageCount": 1,
+          "htmlLength": 28221,
+          "durationMs": 121410,
+          "at": "2026-07-18T17:36:59.220Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/OstP18C7y5",
+          "publishId": "OstP18C7y5",
+          "expiresAt": "2027-07-18T17:38:33.298Z",
+          "imageCount": 1,
+          "htmlLength": 32059,
+          "durationMs": 94206,
+          "at": "2026-07-18T17:38:33.428Z"
+        }
+      }
     },
     "barrys-lead-gen": {
       "id": "barrys-lead-gen",
@@ -207,7 +229,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScQ1syijogakuJE8u1P3G89NKkVo3ULJoJTibpEkC1jYIdubA/viewform",
         "questionCount": 9
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/barrys-lead-gen.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/barrys-lead-gen.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/GuktZaqRhd",
+          "publishId": "GuktZaqRhd",
+          "expiresAt": "2027-07-18T17:15:12.973Z",
+          "imageCount": 1,
+          "htmlLength": 32306,
+          "durationMs": 94729,
+          "at": "2026-07-18T17:15:13.096Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/wIaHJa1U0Y",
+          "publishId": "wIaHJa1U0Y",
+          "expiresAt": "2027-07-18T17:16:27.392Z",
+          "imageCount": 1,
+          "htmlLength": 24460,
+          "durationMs": 74538,
+          "at": "2026-07-18T17:16:27.639Z"
+        }
+      }
     },
     "colgate-oral-health-quiz": {
       "id": "colgate-oral-health-quiz",
@@ -348,7 +392,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd1po6CpxNgiQxpxr-4IQT5U0K6dg19-GXor3JXnD7AjyTKzg/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/colgate-oral-health-quiz.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/colgate-oral-health-quiz.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/kokbmMvtHf",
+          "publishId": "kokbmMvtHf",
+          "expiresAt": "2027-07-18T18:05:46.187Z",
+          "imageCount": 1,
+          "htmlLength": 38870,
+          "durationMs": 105018,
+          "at": "2026-07-18T18:05:46.307Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ahKKgUz_kq",
+          "publishId": "ahKKgUz_kq",
+          "expiresAt": "2027-07-18T18:07:20.072Z",
+          "imageCount": 1,
+          "htmlLength": 30047,
+          "durationMs": 93890,
+          "at": "2026-07-18T18:07:20.199Z"
+        }
+      }
     },
     "crossfit-virtuosity-feedback": {
       "id": "crossfit-virtuosity-feedback",
@@ -521,6 +587,28 @@
         "editUrl": "https://docs.google.com/forms/d/1a4pv8Lcp38UPNvEfrz92-jDTgSgr7IQJ4yRfXO31Lvk/edit",
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdbtQ8tG-SXDTA3ZGmUq-_ceicrcT_Jn3rNMfE4xmLzlAcSNA/viewform",
         "questionCount": 10
+      },
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/7fapZJPAcx",
+          "publishId": "7fapZJPAcx",
+          "expiresAt": "2027-07-18T17:54:56.376Z",
+          "imageCount": 1,
+          "htmlLength": 34386,
+          "durationMs": 124199,
+          "at": "2026-07-18T17:54:56.493Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/CVqRiRdmBl",
+          "publishId": "CVqRiRdmBl",
+          "expiresAt": "2027-07-18T17:52:48.650Z",
+          "imageCount": 1,
+          "htmlLength": 29928,
+          "durationMs": 107498,
+          "at": "2026-07-18T17:52:48.785Z"
+        }
       }
     },
     "crossfit-virtuosity-intake": {
@@ -640,7 +728,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScr5ZSiNMPZ7VCQ0TMDUivuqWVGEr24_rY0Pa77McYzDW5DdA/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/crossfit-virtuosity-intake.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/crossfit-virtuosity-intake.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/oNEZtF_qV1",
+          "publishId": "oNEZtF_qV1",
+          "expiresAt": "2027-07-18T17:48:09.661Z",
+          "imageCount": 1,
+          "htmlLength": 31260,
+          "durationMs": 89456,
+          "at": "2026-07-18T17:48:09.778Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/aF2yJz0cMU",
+          "publishId": "aF2yJz0cMU",
+          "expiresAt": "2027-07-18T17:49:49.379Z",
+          "imageCount": 1,
+          "htmlLength": 37952,
+          "durationMs": 99730,
+          "at": "2026-07-18T17:49:49.511Z"
+        }
+      }
     },
     "dainty-florals-order": {
       "id": "dainty-florals-order",
@@ -776,7 +886,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdBTbkwSlE0Q-4QlFSImg4y8VYI832D9PTCgiX0vrD2SlMb7Q/viewform",
         "questionCount": 12
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/dainty-florals-order.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/dainty-florals-order.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/Axtklnv3iU",
+          "publishId": "Axtklnv3iU",
+          "expiresAt": "2027-07-18T17:17:38.491Z",
+          "imageCount": 1,
+          "htmlLength": 21631,
+          "durationMs": 70215,
+          "at": "2026-07-18T17:17:38.706Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/QzVFUYnBpL",
+          "publishId": "QzVFUYnBpL",
+          "expiresAt": "2027-07-18T17:19:01.416Z",
+          "imageCount": 1,
+          "htmlLength": 24943,
+          "durationMs": 82831,
+          "at": "2026-07-18T17:19:01.539Z"
+        }
+      }
     },
     "extreme-realities-apparel": {
       "id": "extreme-realities-apparel",
@@ -889,7 +1021,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfI3uogaNqJRHaRQeLd80170z6yRUnSOTrmpMIcIeJtcfwt7Q/viewform",
         "questionCount": 12
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/extreme-realities-apparel.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/extreme-realities-apparel.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/XUUaGwiyDR",
+          "publishId": "XUUaGwiyDR",
+          "expiresAt": "2027-07-18T18:08:34.838Z",
+          "imageCount": 1,
+          "htmlLength": 17807,
+          "durationMs": 71425,
+          "at": "2026-07-18T18:08:34.970Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ECDyeFqrjp",
+          "publishId": "ECDyeFqrjp",
+          "expiresAt": "2027-07-18T18:10:10.985Z",
+          "imageCount": 1,
+          "htmlLength": 16541,
+          "durationMs": 96141,
+          "at": "2026-07-18T18:10:11.115Z"
+        }
+      }
     },
     "fillout-checkout": {
       "id": "fillout-checkout",
@@ -983,7 +1137,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSe0TkZZDgCe9qbZVRFsUo6Nlu2pyFRKj0yIN7fW9l-56OPfDw/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-checkout.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-checkout.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/nHKfbREUyb",
+          "publishId": "nHKfbREUyb",
+          "expiresAt": "2027-07-18T18:13:15.709Z",
+          "imageCount": 2,
+          "htmlLength": 17513,
+          "durationMs": 81285,
+          "at": "2026-07-18T18:13:15.837Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/y1Z5Jey0C2",
+          "publishId": "y1Z5Jey0C2",
+          "expiresAt": "2027-07-18T18:14:34.806Z",
+          "imageCount": 1,
+          "htmlLength": 14708,
+          "durationMs": 79101,
+          "at": "2026-07-18T18:14:34.940Z"
+        }
+      }
     },
     "fillout-event-registration": {
       "id": "fillout-event-registration",
@@ -1080,7 +1256,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScjFLImjTOyR8Hx6zw7N6Yl8wlGl15oL1gPC60NI2VHznyV_Q/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-event-registration.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-event-registration.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/8_fzsQVkYO",
+          "publishId": "8_fzsQVkYO",
+          "expiresAt": "2027-07-18T18:10:17.128Z",
+          "imageCount": 1,
+          "htmlLength": 28295,
+          "durationMs": 80719,
+          "at": "2026-07-18T18:10:17.246Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/AjS2ChKJOL",
+          "publishId": "AjS2ChKJOL",
+          "expiresAt": "2027-07-18T18:11:50.978Z",
+          "imageCount": 1,
+          "htmlLength": 26343,
+          "durationMs": 93851,
+          "at": "2026-07-18T18:11:51.100Z"
+        }
+      }
     },
     "fillout-onboarding-survey": {
       "id": "fillout-onboarding-survey",
@@ -1170,7 +1368,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdQNlUfhYuA_QK9hB1_MTpNBDcHmZSfHKYHFeujohbyd9TMIw/viewform",
         "questionCount": 7
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-onboarding-survey.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-onboarding-survey.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/DKoyRkUuCp",
+          "publishId": "DKoyRkUuCp",
+          "expiresAt": "2027-07-18T18:04:56.545Z",
+          "imageCount": 0,
+          "htmlLength": 28841,
+          "durationMs": 38319,
+          "at": "2026-07-18T18:04:56.679Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/3Xgyd1Uf0a",
+          "publishId": "3Xgyd1Uf0a",
+          "expiresAt": "2027-07-18T18:05:37.363Z",
+          "imageCount": 0,
+          "htmlLength": 28068,
+          "durationMs": 40797,
+          "at": "2026-07-18T18:05:37.479Z"
+        }
+      }
     },
     "fillout-real-estate": {
       "id": "fillout-real-estate",
@@ -1328,7 +1548,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScF2BXtp2YzZEY7WiO5gbe9kEcZBSn3ZnJK6VDeWtteqLAl0Q/viewform",
         "questionCount": 15
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-real-estate.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-real-estate.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/eVEkSa5Q5E",
+          "publishId": "eVEkSa5Q5E",
+          "expiresAt": "2027-07-18T18:07:18.766Z",
+          "imageCount": 1,
+          "htmlLength": 35721,
+          "durationMs": 98642,
+          "at": "2026-07-18T18:07:18.945Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ExeTX6nI8d",
+          "publishId": "ExeTX6nI8d",
+          "expiresAt": "2027-07-18T18:08:52.927Z",
+          "imageCount": 1,
+          "htmlLength": 31951,
+          "durationMs": 94093,
+          "at": "2026-07-18T18:08:53.043Z"
+        }
+      }
     },
     "fillout-software-survey": {
       "id": "fillout-software-survey",
@@ -1434,7 +1676,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfqLTlcUv2ELs2fvVpjT4Znt1MLD6l_PMW-JwSi0bCILIpcAQ/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-software-survey.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-software-survey.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/gh6asOj2W2",
+          "publishId": "gh6asOj2W2",
+          "expiresAt": "2027-07-18T17:20:35.698Z",
+          "imageCount": 0,
+          "htmlLength": 27350,
+          "durationMs": 39660,
+          "at": "2026-07-18T17:20:35.828Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/PoADxcTDhP",
+          "publishId": "PoADxcTDhP",
+          "expiresAt": "2027-07-18T17:21:13.173Z",
+          "imageCount": 0,
+          "htmlLength": 25588,
+          "durationMs": 37508,
+          "at": "2026-07-18T17:21:13.338Z"
+        }
+      }
     },
     "founders-factory-application": {
       "id": "founders-factory-application",
@@ -1561,7 +1825,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdMe83HPgR6XNawum5l06RTzCu1rBXnqxybq6xdTJCSDZTjsQ/viewform",
         "questionCount": 12
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/founders-factory-application.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/founders-factory-application.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/OZJ_i3otAy",
+          "publishId": "OZJ_i3otAy",
+          "expiresAt": "2027-07-18T17:40:03.093Z",
+          "imageCount": 1,
+          "htmlLength": 31714,
+          "durationMs": 86254,
+          "at": "2026-07-18T17:40:03.241Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/VRlQTNQfoc",
+          "publishId": "VRlQTNQfoc",
+          "expiresAt": "2027-07-18T17:40:43.278Z",
+          "imageCount": 0,
+          "htmlLength": 32648,
+          "durationMs": 40238,
+          "at": "2026-07-18T17:40:43.484Z"
+        }
+      }
     },
     "jotform-course-registration": {
       "id": "jotform-course-registration",
@@ -1681,7 +1967,35 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfhO3-0jFlXI6P2Al-xOzq8O0DXOrZGvNfKZAhzLaW1hsrFng/viewform",
         "questionCount": 12
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-course-registration.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-course-registration.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/e8NlilYRP3",
+          "publishId": "e8NlilYRP3",
+          "expiresAt": "2027-07-18T17:43:42.638Z",
+          "imageCount": 1,
+          "imageErrors": [
+            {
+              "code": null,
+              "message": "No response from image generation model"
+            }
+          ],
+          "htmlLength": 21086,
+          "durationMs": 82162,
+          "at": "2026-07-18T17:43:42.771Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/akAecEjpE0",
+          "publishId": "akAecEjpE0",
+          "expiresAt": "2027-07-18T17:44:51.641Z",
+          "imageCount": 1,
+          "htmlLength": 20213,
+          "durationMs": 68996,
+          "at": "2026-07-18T17:44:51.771Z"
+        }
+      }
     },
     "jotform-medical-history": {
       "id": "jotform-medical-history",
@@ -1811,7 +2125,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfBABDy2BGaKs2jgeKgejhybF7OC8yLwkpk_Z-Ya3tEMLh9jA/viewform",
         "questionCount": 13
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-medical-history.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-medical-history.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/KEB2LyGdAz",
+          "publishId": "KEB2LyGdAz",
+          "expiresAt": "2027-07-18T17:49:04.639Z",
+          "imageCount": 2,
+          "htmlLength": 31060,
+          "durationMs": 112490,
+          "at": "2026-07-18T17:49:04.771Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/u0qgmqqeAF",
+          "publishId": "u0qgmqqeAF",
+          "expiresAt": "2027-07-18T17:50:30.499Z",
+          "imageCount": 1,
+          "htmlLength": 30117,
+          "durationMs": 85896,
+          "at": "2026-07-18T17:50:30.670Z"
+        }
+      }
     },
     "jotform-photography-order": {
       "id": "jotform-photography-order",
@@ -1935,7 +2271,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScadz-7jF7aC71G0yYbgdCJ-as5W8jvqzYoKJ0Ajq2YD21pOg/viewform",
         "questionCount": 12
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-photography-order.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-photography-order.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/-yIg6IMXQi",
+          "publishId": "-yIg6IMXQi",
+          "expiresAt": "2027-07-18T17:46:00.056Z",
+          "imageCount": 1,
+          "htmlLength": 16279,
+          "durationMs": 61416,
+          "at": "2026-07-18T17:46:00.209Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/F6u68OTqjd",
+          "publishId": "F6u68OTqjd",
+          "expiresAt": "2027-07-18T17:47:08.964Z",
+          "imageCount": 1,
+          "htmlLength": 18476,
+          "durationMs": 68914,
+          "at": "2026-07-18T17:47:09.126Z"
+        }
+      }
     },
     "jotform-teacher-evaluation": {
       "id": "jotform-teacher-evaluation",
@@ -2063,7 +2421,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdAWTS2pNU6iU3bzG33GiKJb8m65RZHDgHWfBJizDGklDwlkw/viewform",
         "questionCount": 12
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-teacher-evaluation.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-teacher-evaluation.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/0nuicST5NG",
+          "publishId": "0nuicST5NG",
+          "expiresAt": "2027-07-18T17:55:05.191Z",
+          "imageCount": 0,
+          "htmlLength": 24380,
+          "durationMs": 54414,
+          "at": "2026-07-18T17:55:05.329Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/lkrHMmVRsO",
+          "publishId": "lkrHMmVRsO",
+          "expiresAt": "2027-07-18T17:55:40.170Z",
+          "imageCount": 0,
+          "htmlLength": 26767,
+          "durationMs": 34973,
+          "at": "2026-07-18T17:55:40.308Z"
+        }
+      }
     },
     "jotform-vehicle-inspection": {
       "id": "jotform-vehicle-inspection",
@@ -2192,7 +2572,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeh4HyDog8WM2XHpmMV-KI4pRzMqIiSpZfiM8c3Qvy0gs1OAA/viewform",
         "questionCount": 13
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-vehicle-inspection.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-vehicle-inspection.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/n-typkaYvj",
+          "publishId": "n-typkaYvj",
+          "expiresAt": "2027-07-18T17:51:52.062Z",
+          "imageCount": 1,
+          "htmlLength": 23230,
+          "durationMs": 78162,
+          "at": "2026-07-18T17:51:52.182Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ssiPeChzb0",
+          "publishId": "ssiPeChzb0",
+          "expiresAt": "2027-07-18T17:54:06.750Z",
+          "imageCount": 1,
+          "htmlLength": 26528,
+          "durationMs": 134679,
+          "at": "2026-07-18T17:54:06.866Z"
+        }
+      }
     },
     "katto-product-rec": {
       "id": "katto-product-rec",
@@ -2290,7 +2692,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd8wQefNU5EQVG9_4Zp_1GICIH0qpIDOoMf6ZyE9To4QpZ-Ew/viewform",
         "questionCount": 7
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/katto-product-rec.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/katto-product-rec.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/Bp1zf5EBqX",
+          "publishId": "Bp1zf5EBqX",
+          "expiresAt": "2027-07-18T17:42:10.877Z",
+          "imageCount": 1,
+          "htmlLength": 26483,
+          "durationMs": 84237,
+          "at": "2026-07-18T17:42:11.038Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/WiqFXIeYz_",
+          "publishId": "WiqFXIeYz_",
+          "expiresAt": "2027-07-18T17:43:36.455Z",
+          "imageCount": 1,
+          "htmlLength": 30084,
+          "durationMs": 85602,
+          "at": "2026-07-18T17:43:36.643Z"
+        }
+      }
     },
     "loccitane-product-quiz": {
       "id": "loccitane-product-quiz",
@@ -2399,7 +2823,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdsEJWXERqDFMXYkPs3evbNEMnISVwM8HsWbBfZalTxsN4eGg/viewform",
         "questionCount": 8
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/loccitane-product-quiz.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/loccitane-product-quiz.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/l9c3ryUuAI",
+          "publishId": "l9c3ryUuAI",
+          "expiresAt": "2027-07-18T18:02:38.185Z",
+          "imageCount": 1,
+          "htmlLength": 32178,
+          "durationMs": 83339,
+          "at": "2026-07-18T18:02:38.318Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/P8szM13Mm3",
+          "publishId": "P8szM13Mm3",
+          "expiresAt": "2027-07-18T18:03:57.636Z",
+          "imageCount": 1,
+          "htmlLength": 24515,
+          "durationMs": 79461,
+          "at": "2026-07-18T18:03:57.783Z"
+        }
+      }
     },
     "mcewen-sons-wholesale": {
       "id": "mcewen-sons-wholesale",
@@ -2531,7 +2977,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdN8vRz_WlndZiP4Wmzbn3JuIQkOtdTQBUhD0i_E2bK_JUj0g/viewform",
         "questionCount": 15
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/mcewen-sons-wholesale.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/mcewen-sons-wholesale.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/bNM2UI-1OK",
+          "publishId": "bNM2UI-1OK",
+          "expiresAt": "2027-07-18T18:11:31.682Z",
+          "imageCount": 1,
+          "htmlLength": 19830,
+          "durationMs": 76786,
+          "at": "2026-07-18T18:11:31.798Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/A_Q7Um8TEm",
+          "publishId": "A_Q7Um8TEm",
+          "expiresAt": "2027-07-18T18:12:53.943Z",
+          "imageCount": 1,
+          "htmlLength": 20476,
+          "durationMs": 82359,
+          "at": "2026-07-18T18:12:54.162Z"
+        }
+      }
     },
     "paperform-client-onboarding": {
       "id": "paperform-client-onboarding",
@@ -2972,7 +3440,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSelmLC0m1UQOHL6udyRC1eAk33ac_Y8V1NHHcSkN1-RDS-6aA/viewform",
         "questionCount": 8
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/pet-doctors-surgery-release.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/pet-doctors-surgery-release.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/re_hU_BFTF",
+          "publishId": "re_hU_BFTF",
+          "expiresAt": "2027-07-18T18:14:07.365Z",
+          "imageCount": 1,
+          "htmlLength": 16213,
+          "durationMs": 69394,
+          "at": "2026-07-18T18:14:07.500Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/R-FWpoSY9f",
+          "publishId": "R-FWpoSY9f",
+          "expiresAt": "2027-07-18T18:15:15.286Z",
+          "imageCount": 1,
+          "htmlLength": 17144,
+          "durationMs": 67911,
+          "at": "2026-07-18T18:15:15.415Z"
+        }
+      }
     },
     "somnifix-sleeper-quiz": {
       "id": "somnifix-sleeper-quiz",
@@ -3089,7 +3579,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScMctr1z9GDxTdQLN_GH9EA_afxjsU11cVG0fsguIpW9elmdw/viewform",
         "questionCount": 9
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/somnifix-sleeper-quiz.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/somnifix-sleeper-quiz.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/tAiZePkN_b",
+          "publishId": "tAiZePkN_b",
+          "expiresAt": "2027-07-18T17:59:38.755Z",
+          "imageCount": 1,
+          "htmlLength": 31347,
+          "durationMs": 89760,
+          "at": "2026-07-18T17:59:38.869Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/pJiTR8GtBh",
+          "publishId": "pJiTR8GtBh",
+          "expiresAt": "2027-07-18T18:01:11.625Z",
+          "imageCount": 1,
+          "htmlLength": 30836,
+          "durationMs": 92869,
+          "at": "2026-07-18T18:01:11.741Z"
+        }
+      }
     },
     "tally-checkout": {
       "id": "tally-checkout",
@@ -3191,7 +3703,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSesrOVf1bqePrwzd4b0gBNZyXUiIDRyGMmjMKUE462YDDu8oQ/viewform",
         "questionCount": 9
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-checkout.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-checkout.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/LbdeFeHBEN",
+          "publishId": "LbdeFeHBEN",
+          "expiresAt": "2027-07-18T18:00:37.929Z",
+          "imageCount": 1,
+          "htmlLength": 26579,
+          "durationMs": 75315,
+          "at": "2026-07-18T18:00:38.047Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ixSU_2CErk",
+          "publishId": "ixSU_2CErk",
+          "expiresAt": "2027-07-18T18:01:53.098Z",
+          "imageCount": 1,
+          "htmlLength": 19224,
+          "durationMs": 75189,
+          "at": "2026-07-18T18:01:53.242Z"
+        }
+      }
     },
     "tally-discord-application": {
       "id": "tally-discord-application",
@@ -3282,7 +3816,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSecNj63-UaJUz3X9mEimUP9lUyUxF3FQpqFMyt3ECPfbA-k5A/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-discord-application.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-discord-application.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/7mSIVDuaAS",
+          "publishId": "7mSIVDuaAS",
+          "expiresAt": "2027-07-18T18:03:05.707Z",
+          "imageCount": 1,
+          "htmlLength": 18981,
+          "durationMs": 69440,
+          "at": "2026-07-18T18:03:05.868Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/4LOCgVUdy-",
+          "publishId": "4LOCgVUdy-",
+          "expiresAt": "2027-07-18T18:04:15.135Z",
+          "imageCount": 1,
+          "htmlLength": 18820,
+          "durationMs": 69417,
+          "at": "2026-07-18T18:04:15.292Z"
+        }
+      }
     },
     "tally-feature-request": {
       "id": "tally-feature-request",
@@ -3366,7 +3922,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSe9_DWtoShoJp5-HlIxR93S07adILVCw_qa-jWIeoSzkE-IKA/viewform",
         "questionCount": 7
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-feature-request.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-feature-request.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/PxZFmJayIX",
+          "publishId": "PxZFmJayIX",
+          "expiresAt": "2027-07-18T17:19:27.395Z",
+          "imageCount": 0,
+          "htmlLength": 16939,
+          "durationMs": 25311,
+          "at": "2026-07-18T17:19:27.561Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/5-G2Htom1y",
+          "publishId": "5-G2Htom1y",
+          "expiresAt": "2027-07-18T17:19:55.085Z",
+          "imageCount": 0,
+          "htmlLength": 17508,
+          "durationMs": 27682,
+          "at": "2026-07-18T17:19:55.247Z"
+        }
+      }
     },
     "tally-user-research": {
       "id": "tally-user-research",
@@ -3462,7 +4040,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdc3L1i6zWqHUYHJDQ3Wx_Yb94eWEjrds8Golr01c_V9WjYVg/viewform",
         "questionCount": 11
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-user-research.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-user-research.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/3fFcgoM2OV",
+          "publishId": "3fFcgoM2OV",
+          "expiresAt": "2027-07-18T17:58:54.515Z",
+          "imageCount": 0,
+          "htmlLength": 13567,
+          "durationMs": 26892,
+          "at": "2026-07-18T17:58:54.629Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/qd0Zb2VhP3",
+          "publishId": "qd0Zb2VhP3",
+          "expiresAt": "2027-07-18T17:59:18.168Z",
+          "imageCount": 0,
+          "htmlLength": 14084,
+          "durationMs": 23669,
+          "at": "2026-07-18T17:59:18.301Z"
+        }
+      }
     },
     "tally-waiting-list": {
       "id": "tally-waiting-list",
@@ -3585,7 +4185,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdYv8BGX4GZMDB9ekZ0fKkaDZqnl_m1ecZSY22FSP2MZFZeeg/viewform",
         "questionCount": 9
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-waiting-list.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-waiting-list.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/plcgH3LIxU",
+          "publishId": "plcgH3LIxU",
+          "expiresAt": "2027-07-18T17:56:58.429Z",
+          "imageCount": 1,
+          "htmlLength": 24820,
+          "durationMs": 74595,
+          "at": "2026-07-18T17:56:58.560Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/hbU5FM4Z_N",
+          "publishId": "hbU5FM4Z_N",
+          "expiresAt": "2027-07-18T17:58:23.881Z",
+          "imageCount": 1,
+          "htmlLength": 29542,
+          "durationMs": 85430,
+          "at": "2026-07-18T17:58:23.996Z"
+        }
+      }
     },
     "typeform-customer-needs": {
       "id": "typeform-customer-needs",
@@ -3702,7 +4324,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdH5bymiN1RwqwbcnUGITt-jpYFOsH_ut806iQNUQnYQnnRIw/viewform",
         "questionCount": 9
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-customer-needs.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-customer-needs.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/k25vpAtguf",
+          "publishId": "k25vpAtguf",
+          "expiresAt": "2027-07-18T18:16:37.779Z",
+          "imageCount": 1,
+          "htmlLength": 30132,
+          "durationMs": 78171,
+          "at": "2026-07-18T18:16:37.895Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/HiKHhri5vv",
+          "publishId": "HiKHhri5vv",
+          "expiresAt": "2027-07-18T18:17:14.175Z",
+          "imageCount": 0,
+          "htmlLength": 32873,
+          "durationMs": 36394,
+          "at": "2026-07-18T18:17:14.292Z"
+        }
+      }
     },
     "typeform-lead-gen-quiz": {
       "id": "typeform-lead-gen-quiz",
@@ -3810,7 +4454,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSer7Rq-EXniARwn46ZlMRLfWhGP7YyD-wE0tMp9Okw2k6cMmQ/viewform",
         "questionCount": 8
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-lead-gen-quiz.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-lead-gen-quiz.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/-TjCIlbruj",
+          "publishId": "-TjCIlbruj",
+          "expiresAt": "2027-07-18T17:36:33.602Z",
+          "imageCount": 1,
+          "htmlLength": 34381,
+          "durationMs": 93733,
+          "at": "2026-07-18T17:36:33.828Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/c6j0OzspjT",
+          "publishId": "c6j0OzspjT",
+          "expiresAt": "2027-07-18T17:37:56.218Z",
+          "imageCount": 1,
+          "htmlLength": 30059,
+          "durationMs": 82516,
+          "at": "2026-07-18T17:37:56.348Z"
+        }
+      }
     },
     "typeform-lead-generation": {
       "id": "typeform-lead-generation",
@@ -3909,7 +4575,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdR9-dwfPknXrk8GoR0_NDlFMhJTm0lITUxNpJOHYKV4JQ3NQ/viewform",
         "questionCount": 8
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-lead-generation.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-lead-generation.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ORGtS0hnzF",
+          "publishId": "ORGtS0hnzF",
+          "expiresAt": "2027-07-18T18:18:39.114Z",
+          "imageCount": 1,
+          "htmlLength": 26837,
+          "durationMs": 81853,
+          "at": "2026-07-18T18:18:39.254Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/k08srE-_m2",
+          "publishId": "k08srE-_m2",
+          "expiresAt": "2027-07-18T18:20:06.670Z",
+          "imageCount": 1,
+          "htmlLength": 22491,
+          "durationMs": 87528,
+          "at": "2026-07-18T18:20:06.786Z"
+        }
+      }
     },
     "typeform-product-feedback": {
       "id": "typeform-product-feedback",
@@ -4017,7 +4705,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdGpyjS3nRXOKR3IsUZ68GwQIEAMV5L0yGmV_Quy-_P6UINIw/viewform",
         "questionCount": 9
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-product-feedback.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-product-feedback.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/-e271vnopB",
+          "publishId": "-e271vnopB",
+          "expiresAt": "2027-07-18T17:42:17.330Z",
+          "imageCount": 1,
+          "htmlLength": 32449,
+          "durationMs": 122042,
+          "at": "2026-07-18T17:42:17.487Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/rO-CIbW4Ly",
+          "publishId": "rO-CIbW4Ly",
+          "expiresAt": "2027-07-18T17:40:12.015Z",
+          "imageCount": 1,
+          "htmlLength": 33287,
+          "durationMs": 107711,
+          "at": "2026-07-18T17:40:12.147Z"
+        }
+      }
     },
     "wa-green-energy-eligibility": {
       "id": "wa-green-energy-eligibility",
@@ -4122,7 +4832,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScgFsbq-DwAs3aUVXQkXEfPZgy8wZ2UNwxUFJnscqmB_b6Q7Q/viewform",
         "questionCount": 10
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wa-green-energy-eligibility.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wa-green-energy-eligibility.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/6MuUK0EhNb",
+          "publishId": "6MuUK0EhNb",
+          "expiresAt": "2027-07-18T17:56:38.648Z",
+          "imageCount": 1,
+          "htmlLength": 30588,
+          "durationMs": 98700,
+          "at": "2026-07-18T17:56:38.891Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/ru8M-VDKe1",
+          "publishId": "ru8M-VDKe1",
+          "expiresAt": "2027-07-18T17:58:05.374Z",
+          "imageCount": 1,
+          "htmlLength": 28550,
+          "durationMs": 86628,
+          "at": "2026-07-18T17:58:05.522Z"
+        }
+      }
     },
     "wwf-cities-feedback": {
       "id": "wwf-cities-feedback",
@@ -4247,7 +4979,29 @@
         "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfr-4r6Xv-_KF98byKHTmcFEK6QmPRH-P43hUSziCssXxksgA/viewform",
         "questionCount": 8
       },
-      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wwf-cities-feedback.png"
+      "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wwf-cities-feedback.png",
+      "generated": {
+        "gemini-2.5-flash-image": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/mnbp2g_OgH",
+          "publishId": "mnbp2g_OgH",
+          "expiresAt": "2027-07-18T17:45:05.182Z",
+          "imageCount": 1,
+          "htmlLength": 30213,
+          "durationMs": 85346,
+          "at": "2026-07-18T17:45:05.297Z"
+        },
+        "gemini-3.1-flash-image-preview": {
+          "status": "done",
+          "url": "https://app-red-phi-88.vercel.app/f/MDx71CAlXL",
+          "publishId": "MDx71CAlXL",
+          "expiresAt": "2027-07-18T17:46:37.130Z",
+          "imageCount": 1,
+          "htmlLength": 27593,
+          "durationMs": 91946,
+          "at": "2026-07-18T17:46:37.247Z"
+        }
+      }
     }
   }
 }

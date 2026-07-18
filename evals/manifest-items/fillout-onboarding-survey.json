@@ -86,5 +86,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdQNlUfhYuA_QK9hB1_MTpNBDcHmZSfHKYHFeujohbyd9TMIw/viewform",
     "questionCount": 7
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-onboarding-survey.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/fillout-onboarding-survey.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/DKoyRkUuCp",
+      "publishId": "DKoyRkUuCp",
+      "expiresAt": "2027-07-18T18:04:56.545Z",
+      "imageCount": 0,
+      "htmlLength": 28841,
+      "durationMs": 38319,
+      "at": "2026-07-18T18:04:56.679Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/3Xgyd1Uf0a",
+      "publishId": "3Xgyd1Uf0a",
+      "expiresAt": "2027-07-18T18:05:37.363Z",
+      "imageCount": 0,
+      "htmlLength": 28068,
+      "durationMs": 40797,
+      "at": "2026-07-18T18:05:37.479Z"
+    }
+  }
 }

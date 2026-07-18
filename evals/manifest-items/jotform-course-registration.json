@@ -116,5 +116,33 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfhO3-0jFlXI6P2Al-xOzq8O0DXOrZGvNfKZAhzLaW1hsrFng/viewform",
     "questionCount": 12
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-course-registration.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-course-registration.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/e8NlilYRP3",
+      "publishId": "e8NlilYRP3",
+      "expiresAt": "2027-07-18T17:43:42.638Z",
+      "imageCount": 1,
+      "imageErrors": [
+        {
+          "code": null,
+          "message": "No response from image generation model"
+        }
+      ],
+      "htmlLength": 21086,
+      "durationMs": 82162,
+      "at": "2026-07-18T17:43:42.771Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/akAecEjpE0",
+      "publishId": "akAecEjpE0",
+      "expiresAt": "2027-07-18T17:44:51.641Z",
+      "imageCount": 1,
+      "htmlLength": 20213,
+      "durationMs": 68996,
+      "at": "2026-07-18T17:44:51.771Z"
+    }
+  }
 }

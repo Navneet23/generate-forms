@@ -113,5 +113,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScMctr1z9GDxTdQLN_GH9EA_afxjsU11cVG0fsguIpW9elmdw/viewform",
     "questionCount": 9
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/somnifix-sleeper-quiz.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/somnifix-sleeper-quiz.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/tAiZePkN_b",
+      "publishId": "tAiZePkN_b",
+      "expiresAt": "2027-07-18T17:59:38.755Z",
+      "imageCount": 1,
+      "htmlLength": 31347,
+      "durationMs": 89760,
+      "at": "2026-07-18T17:59:38.869Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/pJiTR8GtBh",
+      "publishId": "pJiTR8GtBh",
+      "expiresAt": "2027-07-18T18:01:11.625Z",
+      "imageCount": 1,
+      "htmlLength": 30836,
+      "durationMs": 92869,
+      "at": "2026-07-18T18:01:11.741Z"
+    }
+  }
 }

@@ -137,5 +137,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd1po6CpxNgiQxpxr-4IQT5U0K6dg19-GXor3JXnD7AjyTKzg/viewform",
     "questionCount": 10
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/colgate-oral-health-quiz.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/colgate-oral-health-quiz.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/kokbmMvtHf",
+      "publishId": "kokbmMvtHf",
+      "expiresAt": "2027-07-18T18:05:46.187Z",
+      "imageCount": 1,
+      "htmlLength": 38870,
+      "durationMs": 105018,
+      "at": "2026-07-18T18:05:46.307Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/ahKKgUz_kq",
+      "publishId": "ahKKgUz_kq",
+      "expiresAt": "2027-07-18T18:07:20.072Z",
+      "imageCount": 1,
+      "htmlLength": 30047,
+      "durationMs": 93890,
+      "at": "2026-07-18T18:07:20.199Z"
+    }
+  }
 }

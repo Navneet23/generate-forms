@@ -94,5 +94,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd8wQefNU5EQVG9_4Zp_1GICIH0qpIDOoMf6ZyE9To4QpZ-Ew/viewform",
     "questionCount": 7
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/katto-product-rec.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/katto-product-rec.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/Bp1zf5EBqX",
+      "publishId": "Bp1zf5EBqX",
+      "expiresAt": "2027-07-18T17:42:10.877Z",
+      "imageCount": 1,
+      "htmlLength": 26483,
+      "durationMs": 84237,
+      "at": "2026-07-18T17:42:11.038Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/WiqFXIeYz_",
+      "publishId": "WiqFXIeYz_",
+      "expiresAt": "2027-07-18T17:43:36.455Z",
+      "imageCount": 1,
+      "htmlLength": 30084,
+      "durationMs": 85602,
+      "at": "2026-07-18T17:43:36.643Z"
+    }
+  }
 }

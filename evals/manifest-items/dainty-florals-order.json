@@ -132,5 +132,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdBTbkwSlE0Q-4QlFSImg4y8VYI832D9PTCgiX0vrD2SlMb7Q/viewform",
     "questionCount": 12
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/dainty-florals-order.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/dainty-florals-order.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/Axtklnv3iU",
+      "publishId": "Axtklnv3iU",
+      "expiresAt": "2027-07-18T17:17:38.491Z",
+      "imageCount": 1,
+      "htmlLength": 21631,
+      "durationMs": 70215,
+      "at": "2026-07-18T17:17:38.706Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/QzVFUYnBpL",
+      "publishId": "QzVFUYnBpL",
+      "expiresAt": "2027-07-18T17:19:01.416Z",
+      "imageCount": 1,
+      "htmlLength": 24943,
+      "durationMs": 82831,
+      "at": "2026-07-18T17:19:01.539Z"
+    }
+  }
 }

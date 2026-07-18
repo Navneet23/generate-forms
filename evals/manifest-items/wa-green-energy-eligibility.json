@@ -101,5 +101,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScgFsbq-DwAs3aUVXQkXEfPZgy8wZ2UNwxUFJnscqmB_b6Q7Q/viewform",
     "questionCount": 10
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wa-green-energy-eligibility.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wa-green-energy-eligibility.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/6MuUK0EhNb",
+      "publishId": "6MuUK0EhNb",
+      "expiresAt": "2027-07-18T17:56:38.648Z",
+      "imageCount": 1,
+      "htmlLength": 30588,
+      "durationMs": 98700,
+      "at": "2026-07-18T17:56:38.891Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/ru8M-VDKe1",
+      "publishId": "ru8M-VDKe1",
+      "expiresAt": "2027-07-18T17:58:05.374Z",
+      "imageCount": 1,
+      "htmlLength": 28550,
+      "durationMs": 86628,
+      "at": "2026-07-18T17:58:05.522Z"
+    }
+  }
 }

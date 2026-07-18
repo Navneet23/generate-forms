@@ -15,6 +15,7 @@ scraper can read it.
 | `upload-style-guides.mjs` | Uploads screenshots to Vercel Blob (linkable URLs for the doc) |
 | `generate-doc.mjs` | Builds `evals/eval-set-doc.html` — the table uploaded to Drive as a Google Doc |
 | `auth.mjs` | One-time OAuth loopback flow for the Forms API |
+| `generate-restyled.mjs` | Generates restyled forms per item (2 image-model configs) by driving the app: local `/api/generate` (working-tree SI) → submit-URL rewrite → prod `/api/publish` + 1-year extend |
 | `lib/` | extract / recreate / gforms / verify / manifest / env modules |
 
 ## State model
@@ -56,6 +57,31 @@ Unknown flags abort the run (they used to silently mean "run everything").
 After a full run: `node aggregate.mjs && node upload-style-guides.mjs && node generate-doc.mjs`,
 then upload `evals/eval-set-doc.html` to Drive as a Google Doc (HTML converts to
 a native table).
+
+## Generating restyled forms (the eval subjects)
+
+```
+node generate-restyled.mjs --only=<id>[,<id>...]   # specific items
+node generate-restyled.mjs --all                   # every ready item
+node generate-restyled.mjs --retry-failed          # failed configs only
+```
+
+Requirements & behaviour:
+- The LOCAL dev server must be running (`npm run dev` in `app/`) — generation
+  intentionally targets localhost so the **working-tree system instructions**
+  are what gets evaluated. Never point generation at prod: prod may run an
+  older SI, silently invalidating the eval.
+- Publish + 1-year extend go to the prod deployment (`EVAL_PROD_BASE`, default
+  `https://app-red-phi-88.vercel.app`) so links are public. This works because
+  local and prod share the same Upstash Redis and Vercel Blob.
+- The generated HTML bakes the submit proxy URL from the generating origin;
+  the script rewrites `localhost:3000/api/submit/...` → prod before publishing
+  and refuses to publish if the rewrite finds nothing.
+- Results are stored per item under `generated[<image-model-id>]` in the shard
+  (URL, publish id, expiry, image count, duration). Resumable per config;
+  parallel-safe across DIFFERENT ids (subagent batches).
+- Transient Gemini 503s happen; a single rerun of the same command resumes and
+  usually recovers.
 
 ## Known behaviours & lessons (July 2026 run)
 

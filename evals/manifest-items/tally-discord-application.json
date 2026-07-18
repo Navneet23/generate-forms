@@ -87,5 +87,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSecNj63-UaJUz3X9mEimUP9lUyUxF3FQpqFMyt3ECPfbA-k5A/viewform",
     "questionCount": 10
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-discord-application.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/tally-discord-application.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/7mSIVDuaAS",
+      "publishId": "7mSIVDuaAS",
+      "expiresAt": "2027-07-18T18:03:05.707Z",
+      "imageCount": 1,
+      "htmlLength": 18981,
+      "durationMs": 69440,
+      "at": "2026-07-18T18:03:05.868Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/4LOCgVUdy-",
+      "publishId": "4LOCgVUdy-",
+      "expiresAt": "2027-07-18T18:04:15.135Z",
+      "imageCount": 1,
+      "htmlLength": 18820,
+      "durationMs": 69417,
+      "at": "2026-07-18T18:04:15.292Z"
+    }
+  }
 }

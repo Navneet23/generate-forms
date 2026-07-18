@@ -109,5 +109,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfI3uogaNqJRHaRQeLd80170z6yRUnSOTrmpMIcIeJtcfwt7Q/viewform",
     "questionCount": 12
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/extreme-realities-apparel.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/extreme-realities-apparel.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/XUUaGwiyDR",
+      "publishId": "XUUaGwiyDR",
+      "expiresAt": "2027-07-18T18:08:34.838Z",
+      "imageCount": 1,
+      "htmlLength": 17807,
+      "durationMs": 71425,
+      "at": "2026-07-18T18:08:34.970Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/ECDyeFqrjp",
+      "publishId": "ECDyeFqrjp",
+      "expiresAt": "2027-07-18T18:10:10.985Z",
+      "imageCount": 1,
+      "htmlLength": 16541,
+      "durationMs": 96141,
+      "at": "2026-07-18T18:10:11.115Z"
+    }
+  }
 }

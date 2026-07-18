@@ -125,5 +125,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeh4HyDog8WM2XHpmMV-KI4pRzMqIiSpZfiM8c3Qvy0gs1OAA/viewform",
     "questionCount": 13
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-vehicle-inspection.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-vehicle-inspection.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/n-typkaYvj",
+      "publishId": "n-typkaYvj",
+      "expiresAt": "2027-07-18T17:51:52.062Z",
+      "imageCount": 1,
+      "htmlLength": 23230,
+      "durationMs": 78162,
+      "at": "2026-07-18T17:51:52.182Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/ssiPeChzb0",
+      "publishId": "ssiPeChzb0",
+      "expiresAt": "2027-07-18T17:54:06.750Z",
+      "imageCount": 1,
+      "htmlLength": 26528,
+      "durationMs": 134679,
+      "at": "2026-07-18T17:54:06.866Z"
+    }
+  }
 }

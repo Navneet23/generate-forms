@@ -120,5 +120,27 @@
     "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScadz-7jF7aC71G0yYbgdCJ-as5W8jvqzYoKJ0Ajq2YD21pOg/viewform",
     "questionCount": 12
   },
-  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-photography-order.png"
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/jotform-photography-order.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/-yIg6IMXQi",
+      "publishId": "-yIg6IMXQi",
+      "expiresAt": "2027-07-18T17:46:00.056Z",
+      "imageCount": 1,
+      "htmlLength": 16279,
+      "durationMs": 61416,
+      "at": "2026-07-18T17:46:00.209Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/F6u68OTqjd",
+      "publishId": "F6u68OTqjd",
+      "expiresAt": "2027-07-18T17:47:08.964Z",
+      "imageCount": 1,
+      "htmlLength": 18476,
+      "durationMs": 68914,
+      "at": "2026-07-18T17:47:09.126Z"
+    }
+  }
 }
