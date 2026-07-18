@@ -1,0 +1,108 @@
+{
+  "id": "typeform-product-feedback",
+  "sourceUrl": "https://www.typeform.com/templates/product-feedback",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.typeform.com/to/NM3F4S?typeform-embed-id=16755454507804857&typeform-embed=embed-widget&typeform-source=typeform.com&typeform-medium=embed-sdk&typeform-medium-version=next&typeform-embed-handles-redirect=1&typeform-embed-no-heading=true",
+  "screenshot": "style-guides/typeform-product-feedback.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "What did you think of our products?\nYour feedback helps us create more things you’ll love.\nGive feedback",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T14:00:04.541Z",
+  "structure": {
+    "title": "Product Feedback Form",
+    "description": "What did you think of our products? Your feedback helps us create more things you’ll love.",
+    "questions": [
+      {
+        "text": "Overall, how satisfied are you with our product?",
+        "type": "linear_scale",
+        "required": true,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Not at all satisfied",
+        "highLabel": "Extremely satisfied"
+      },
+      {
+        "text": "Which product or service did you recently use?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "How often do you use this product?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Daily",
+          "Weekly",
+          "Monthly",
+          "Rarely",
+          "This was my first time"
+        ]
+      },
+      {
+        "text": "What features do you find most valuable? (Select all that apply)",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Ease of use",
+          "Design and Aesthetics",
+          "Performance/Speed",
+          "Price/Value",
+          "Customer Support"
+        ]
+      },
+      {
+        "text": "How would you rate the quality of the product?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Poor",
+        "highLabel": "Excellent"
+      },
+      {
+        "text": "What is one thing we could do to improve the product?",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "How likely are you to recommend our products to a friend or colleague?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 0,
+        "high": 10,
+        "lowLabel": "Not likely",
+        "highLabel": "Very likely"
+      },
+      {
+        "text": "Would you be open to us contacting you to discuss your feedback further?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": false
+      }
+    ]
+  },
+  "form": {
+    "formId": "1_utCw3IUkUWJQt0CK74bUQMJ0CMge3aRz_godvkWGvE",
+    "editUrl": "https://docs.google.com/forms/d/1_utCw3IUkUWJQt0CK74bUQMJ0CMge3aRz_godvkWGvE/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdGpyjS3nRXOKR3IsUZ68GwQIEAMV5L0yGmV_Quy-_P6UINIw/viewform",
+    "questionCount": 9
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-product-feedback.png"
+}

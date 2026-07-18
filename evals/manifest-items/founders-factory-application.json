@@ -1,0 +1,127 @@
+{
+  "id": "founders-factory-application",
+  "sourceUrl": "https://form.typeform.com/to/WlDiIsRh",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.typeform.com/to/WlDiIsRh",
+  "screenshot": "style-guides/founders-factory-application.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Skip to main content\nSign up\nSorry, you can't access this typeform until its creator says so.\n\nUnless... did you create this typeform?\n\nLog in\n\nBut if you didn't...\n\nFollow the white rabbit\nCookie consent\nWe use our own and third-party cookies to show you more relevant content based on your browsing and navigation history. Please accept or manage your cookie settings below. Here's ourcookie policy\nCookie settings\nAccept all cookies",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:52:36.862Z",
+  "structure": {
+    "title": "Founders Factory Application Form",
+    "description": "Apply to join Founders Factory. Tell us more about your startup and team for a chance to join our accelerator or venture studio programs.",
+    "questions": [
+      {
+        "text": "Full Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Company Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Company Website",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Which program are you applying for?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Venture Studio (Building from scratch)",
+          "Accelerator (Scaling an existing startup)"
+        ]
+      },
+      {
+        "text": "Primary Sector",
+        "type": "dropdown",
+        "required": true,
+        "options": [
+          "Fintech",
+          "Healthtech",
+          "Climate Tech",
+          "AI & Big Data",
+          "Retail & Consumer",
+          "Media & Entertainment",
+          "Other"
+        ]
+      },
+      {
+        "text": "Current Funding Stage",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Pre-seed",
+          "Seed",
+          "Series A",
+          "Bootstrapped"
+        ]
+      },
+      {
+        "text": "Describe your startup in one sentence",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "What is the core problem you are solving?",
+        "type": "paragraph",
+        "required": true
+      },
+      {
+        "text": "Link to Pitch Deck",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "How many full-time employees are in the team?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "1-2",
+          "3-5",
+          "6-10",
+          "11-20",
+          "20+"
+        ]
+      },
+      {
+        "text": "Where did you hear about Founders Factory?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "LinkedIn",
+          "Twitter",
+          "Referral",
+          "News/Press",
+          "Event",
+          "Other"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1FPxFQX6jKG4CNmzNdil5qvMqIm02VVQqHtgTs_DyTR4",
+    "editUrl": "https://docs.google.com/forms/d/1FPxFQX6jKG4CNmzNdil5qvMqIm02VVQqHtgTs_DyTR4/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdMe83HPgR6XNawum5l06RTzCu1rBXnqxybq6xdTJCSDZTjsQ/viewform",
+    "questionCount": 12
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/founders-factory-application.png"
+}

@@ -1,0 +1,102 @@
+{
+  "id": "barrys-lead-gen",
+  "sourceUrl": "https://barrysbootcamp.typeform.com/to/TtkoNGnR",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://barrysbootcamp.typeform.com/to/TtkoNGnR",
+  "screenshot": "style-guides/barrys-lead-gen.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Barry's is excited to invite the community of NYC Wellness Guide to take 2 classes on us at our Noho studio from Oct 15, 2025 to Oct 29, 2025!\nIf you're new to Barry's, create an account at barrys.com and complete this form to secure a spot.\nSign Up Now\nTakes 1 minute",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:51:59.767Z",
+  "structure": {
+    "title": "Barry's x NYC Wellness Guide: 2 Classes on Us",
+    "description": "Exclusive invitation for the NYC Wellness Guide community to experience 2 classes at our Noho studio. Please ensure you have created an account at barrys.com before completing this sign-up.",
+    "questions": [
+      {
+        "text": "First Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Last Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Have you created an account at barrys.com?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes, I have an account",
+          "No, I will create one now"
+        ]
+      },
+      {
+        "text": "Is this your first time at Barry's?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes, I'm a first-timer!",
+          "No, I've been to Barry's before"
+        ]
+      },
+      {
+        "text": "Which class times work best for you at our Noho studio?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Early Morning (before 9am)",
+          "Mid-day (11am - 2pm)",
+          "Late Afternoon / Evening (after 5pm)",
+          "Weekends"
+        ]
+      },
+      {
+        "text": "How did you hear about this NYC Wellness Guide promotion?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "NYC Wellness Guide Email",
+          "Instagram",
+          "Word of Mouth",
+          "Other"
+        ]
+      },
+      {
+        "text": "How ready are you to hit the Red Room?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "A little nervous",
+        "highLabel": "Ready to run!"
+      }
+    ]
+  },
+  "form": {
+    "formId": "1mao7Mw9-jIwlwAqKzVWNp-1NPlX-GlU0vgdSiNy3ZSY",
+    "editUrl": "https://docs.google.com/forms/d/1mao7Mw9-jIwlwAqKzVWNp-1NPlX-GlU0vgdSiNy3ZSY/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScQ1syijogakuJE8u1P3G89NKkVo3ULJoJTibpEkC1jYIdubA/viewform",
+    "questionCount": 9
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/barrys-lead-gen.png"
+}

@@ -1,0 +1,88 @@
+{
+  "id": "pet-doctors-surgery-release",
+  "sourceUrl": "https://form.jotform.com/201757711188055",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [
+    {
+      "stage": "recreate",
+      "message": "question 5 (multiple_choice) needs >= 2 options",
+      "at": "2026-07-18T13:57:55.487Z"
+    },
+    {
+      "stage": "recreate",
+      "message": "question 5 (multiple_choice) needs >= 2 options",
+      "at": "2026-07-18T13:58:07.155Z"
+    }
+  ],
+  "resolvedFormUrl": "https://form.jotform.com/201757711188055",
+  "screenshot": "style-guides/pet-doctors-surgery-release.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Dental Surgery Release & Dental Authorization Form\nPets Name\n\nEach patient's case is unique and presents a different set of circumstances. You have been given only an estimate of the procedure in good faith. The full extent of care required cannot be ascertained until after cleaning and taking x-rays of all the teeth. You will be called with a more accurate estimate during the procedure. This estimate may be significantly different from the original estimate.\n\nI have read and understand the above statement - Please initial below:\n\nWe require that you are reachable by phone while your pet is here so that we may keep you apprised of your pet's status and any recommended changes to their treatment. If you are not reachable we will only perform the services indicated within the initial estimate up to the high end of the estimate. This may result in your pet needing a second anesthetic procedure in some cases. \n\nI have read and understand the above statement - Please initial below:\n\nCleaning a pet's teeth without X-rays often results in missed opportunities to improve the quality of life and health of your pet. Pets simply cannot tell us when their teeth are diseased, and some never show that they are in pain even though they are. In many cases, X-rays are the only way for your veterinarian to know your pet has a serious dental problem that can be treated, relieving discomfort. With this in mind we recommend full-mouth dental radiographs annually with every dental procedure. \n\nI authorize full-mouth intra oral dental radiographs (x-rays) :\nYES\nNO\n\nI have read and understand the above and I hereby release The Pet Doctors of Sherman Oaks and its employees or agents from liability for any reason resulting from the act of declining any of the above services.\n\nName\nFirst Name\nLast Name\nThe best contact number(s) to be reached at while your pet is in our care (the day of the procedure):\nPhone Number\nSignature\nClear\nDate\nDate\nSubmit\nPowered by Jotform",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T14:04:37.189Z",
+  "structure": {
+    "title": "Dental Surgery Release & Dental Authorization Form",
+    "description": "This form authorizes dental procedures and radiographs for your pet, while outlining policies regarding estimates and emergency contact during the procedure.",
+    "questions": [
+      {
+        "text": "Pet's Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "I have read and understand the statement regarding surgical estimates - Please initial below:",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "I have read and understand the statement regarding being reachable by phone - Please initial below:",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "I authorize full-mouth intra oral dental radiographs (x-rays):",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "YES",
+          "NO"
+        ]
+      },
+      {
+        "text": "I have read and understand the release of liability for declining services - Please initial below:",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Owner Name (First and Last)",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "The best contact number(s) to be reached at while your pet is in our care (the day of the procedure):",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Date",
+        "type": "date",
+        "required": true
+      }
+    ]
+  },
+  "form": {
+    "formId": "1PuP2ob80Xou-VH6E7g7gnhOFcp-EkueBUcouue1H8iQ",
+    "editUrl": "https://docs.google.com/forms/d/1PuP2ob80Xou-VH6E7g7gnhOFcp-EkueBUcouue1H8iQ/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSelmLC0m1UQOHL6udyRC1eAk33ac_Y8V1NHHcSkN1-RDS-6aA/viewform",
+    "questionCount": 8
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/pet-doctors-surgery-release.png"
+}

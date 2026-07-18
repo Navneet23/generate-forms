@@ -1,0 +1,106 @@
+{
+  "id": "atelier-eva-tattoo",
+  "sourceUrl": "https://85dmqyk0qa8.typeform.com/to/L293EOk4",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://85dmqyk0qa8.typeform.com/to/L293EOk4",
+  "screenshot": "style-guides/atelier-eva-tattoo.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "Start your tattoo request\nTakes about 1 minute. Request a specific artist or let us recommend the best fit.\nBegin",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:52:17.160Z",
+  "structure": {
+    "title": "Atelier Eva Tattoo Request Form",
+    "description": "Start your tattoo request. Request a specific artist or let us recommend the best fit for your project.",
+    "questions": [
+      {
+        "text": "First and Last Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Artist Preference",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Request a specific artist",
+          "Recommend the best fit for my idea"
+        ]
+      },
+      {
+        "text": "Artist Name (if you have one in mind)",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Please describe your tattoo idea in detail",
+        "type": "paragraph",
+        "required": true
+      },
+      {
+        "text": "Placement on your body (e.g., forearm, ribs, etc.)",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Approximate size of the tattoo (in inches)",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Color Preference",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Black and Gray",
+          "Color"
+        ]
+      },
+      {
+        "text": "Is this a cover-up of an existing tattoo?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "General Availability",
+        "type": "checkboxes",
+        "required": true,
+        "options": [
+          "Weekdays",
+          "Weekends",
+          "Mornings",
+          "Afternoons"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1bwU7iszgiWip92HEuQJkXfBUZlrV0erTxWAd4lhe4tM",
+    "editUrl": "https://docs.google.com/forms/d/1bwU7iszgiWip92HEuQJkXfBUZlrV0erTxWAd4lhe4tM/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdkD3Q8D_r3p152ZoXYh8ZgqDKMwKuRtNrEp2zKUPaYi8m6Xw/viewform",
+    "questionCount": 11
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/atelier-eva-tattoo.png"
+}

@@ -1,0 +1,123 @@
+{
+  "id": "paperform-restaurant-order",
+  "sourceUrl": "https://paperform.co/templates/restaurant-order-form/",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://shop.paperform.co/&quot;],&quot;description&quot;:[0,&quot;Get",
+  "screenshot": "style-guides/paperform-restaurant-order.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "SKIP TO CONTENT\nHOME\nLIMITED EDITION MERCH\nHOODIES\nUSD\n404\n\nPAGE NOT FOUND.\n\nGo Back Home\nUSD\nCONTACT SUPPORT\nTERMS OF SERVICE\nPRIVACY POLICY\nRETURNS & FAQ\n© 2026 PAPERFORM\nPOWERED BY FOURTHWALL",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:52:08.257Z",
+  "structure": {
+    "title": "Restaurant Order Form",
+    "description": "Please use this form to place your food order for pickup or delivery. Provide your contact details and select your meal options below.",
+    "questions": [
+      {
+        "text": "Full Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Order Type",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Pickup",
+          "Delivery"
+        ]
+      },
+      {
+        "text": "Delivery Address (if applicable)",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Select Your Main Dish",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Classic Cheeseburger",
+          "Garden Veggie Pizza",
+          "Grilled Chicken Caesar Salad",
+          "Spicy Penne Pasta",
+          "BBQ Pulled Pork Sandwich"
+        ]
+      },
+      {
+        "text": "Choose Your Sides",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "French Fries",
+          "Sweet Potato Fries",
+          "Onion Rings",
+          "Side Salad",
+          "Coleslaw"
+        ]
+      },
+      {
+        "text": "Select a Beverage",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Coke",
+          "Diet Coke",
+          "Sprite",
+          "Iced Tea",
+          "Lemonade",
+          "Bottled Water"
+        ]
+      },
+      {
+        "text": "Dietary Restrictions or Allergies",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Special Instructions for the Kitchen",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Preferred Pickup/Delivery Time",
+        "type": "time",
+        "required": true
+      },
+      {
+        "text": "How satisfied have you been with our ordering process in the past?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Not Satisfied",
+        "highLabel": "Very Satisfied"
+      }
+    ]
+  },
+  "form": {
+    "formId": "1qA_52svEC3YK8bbvJeTIAG-eGE7aFE1aIzMTeOSA8ZE",
+    "editUrl": "https://docs.google.com/forms/d/1qA_52svEC3YK8bbvJeTIAG-eGE7aFE1aIzMTeOSA8ZE/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSefNrnTqn3vCk9cpBTgWmgT-sebm04ejWnKCB_Ge_mGyJ3BNA/viewform",
+    "questionCount": 12
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/paperform-restaurant-order.png"
+}

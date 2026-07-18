@@ -1,0 +1,119 @@
+{
+  "id": "crossfit-virtuosity-intake",
+  "sourceUrl": "https://form.typeform.com/to/bpgUNBNP",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.typeform.com/to/bpgUNBNP",
+  "screenshot": "style-guides/crossfit-virtuosity-intake.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "We'd love to meet you and discuss your training goals!\nPlease fill out this form and we'll match you with a coach who has similar availability and relevant expertise for a free assessment session.\nStart\nTakes 1 minute",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:54:44.443Z",
+  "structure": {
+    "title": "Crossfit Virtuosity Training Intake",
+    "description": "We'd love to meet you and discuss your training goals! Fill out this form and we'll match you with a coach for a free assessment session.",
+    "questions": [
+      {
+        "text": "What is your full name?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "What are your primary training goals?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Build Strength",
+          "Weight Loss",
+          "Improve Mobility",
+          "Learn CrossFit",
+          "General Health & Fitness",
+          "Sport-specific Performance"
+        ]
+      },
+      {
+        "text": "Do you have any previous experience with CrossFit?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Yes, I am an experienced CrossFitter",
+          "I've tried it a few times",
+          "No, I am completely new to CrossFit"
+        ]
+      },
+      {
+        "text": "How would you describe your current fitness level?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Beginner (Just starting out)",
+          "Intermediate (Regularly active)",
+          "Advanced (Consistent intense training)"
+        ]
+      },
+      {
+        "text": "Please list any injuries or medical conditions we should be aware of.",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "What is your general availability for an assessment session?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Weekday Mornings",
+          "Weekday Afternoons",
+          "Weekday Evenings",
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      {
+        "text": "On a scale of 1 to 5, how motivated are you to start your training journey?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Not very",
+        "highLabel": "Ready to go!"
+      },
+      {
+        "text": "How did you hear about us?",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Google Search",
+          "Social Media",
+          "Friend/Referral",
+          "Walk-by",
+          "Other"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1Qwv_gf13d9Y3YRXtSFC1pKVgR5hf6gJl6Iu2S1k9138",
+    "editUrl": "https://docs.google.com/forms/d/1Qwv_gf13d9Y3YRXtSFC1pKVgR5hf6gJl6Iu2S1k9138/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScr5ZSiNMPZ7VCQ0TMDUivuqWVGEr24_rY0Pa77McYzDW5DdA/viewform",
+    "questionCount": 10
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/crossfit-virtuosity-intake.png"
+}

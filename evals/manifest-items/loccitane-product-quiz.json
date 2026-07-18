@@ -1,0 +1,109 @@
+{
+  "id": "loccitane-product-quiz",
+  "sourceUrl": "https://successteam.typeform.com/to/KMrm1uSC",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://successteam.typeform.com/to/KMrm1uSC",
+  "screenshot": "style-guides/loccitane-product-quiz.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "WELCOME TO YOUR SKINCARE DIAGNOSIS\nFind the skincare products and routine that works best for your skin with our personalised skincare diagnosis tool. It only takes 2 minutes to complete\nStart\nTakes 1 minute 30 seconds",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:56:16.205Z",
+  "structure": {
+    "title": "Personalised Skincare Diagnosis",
+    "description": "Find the skincare products and routine that works best for your skin with our personalised skincare diagnosis tool. It only takes 2 minutes to complete.",
+    "questions": [
+      {
+        "text": "How would you describe your skin type?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Dry (tight, flaky, or rough)",
+          "Oily (shiny, enlarged pores)",
+          "Combination (oily T-zone, dry cheeks)",
+          "Normal (balanced, no major concerns)"
+        ]
+      },
+      {
+        "text": "What is your primary skin concern?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Hydration and Moisture",
+          "Fine lines and Wrinkles",
+          "Dullness and Lack of Radiance",
+          "Dark spots and Uneven skin tone",
+          "Loss of Firmness",
+          "Sensitivity and Redness"
+        ]
+      },
+      {
+        "text": "Are you concerned about the area around your eyes?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes, dark circles and puffiness",
+          "Yes, fine lines and 'crow's feet'",
+          "No, I am satisfied with my eye area"
+        ]
+      },
+      {
+        "text": "Which texture do you prefer for your moisturiser?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Rich and creamy",
+          "Lightweight and fluid",
+          "Refreshing gel-like texture",
+          "Silky oil"
+        ]
+      },
+      {
+        "text": "What is your age range?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Under 25",
+          "25 - 34",
+          "35 - 44",
+          "45 - 54",
+          "55+"
+        ]
+      },
+      {
+        "text": "How much does environmental pollution or sun exposure affect your daily life?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Not at all",
+        "highLabel": "Significantly"
+      },
+      {
+        "text": "What is your first name?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Please provide your email address to receive your personalised skincare routine.",
+        "type": "short_answer",
+        "required": true
+      }
+    ]
+  },
+  "form": {
+    "formId": "1fPSJ1tChK1fmwgRxiGFSLNziGWmVMMRSVGIFUsW4XXs",
+    "editUrl": "https://docs.google.com/forms/d/1fPSJ1tChK1fmwgRxiGFSLNziGWmVMMRSVGIFUsW4XXs/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdsEJWXERqDFMXYkPs3evbNEMnISVwM8HsWbBfZalTxsN4eGg/viewform",
+    "questionCount": 8
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/loccitane-product-quiz.png"
+}

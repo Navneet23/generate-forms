@@ -1,0 +1,108 @@
+{
+  "id": "typeform-lead-gen-quiz",
+  "sourceUrl": "https://www.typeform.com/templates/ecommerce-lead-generation-quiz-template",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.typeform.com/to/QurPHBFr?typeform-embed-id=7745432223700544&typeform-embed=embed-widget&typeform-source=typeform.com&typeform-medium=embed-sdk&typeform-medium-version=next&typeform-embed-handles-redirect=1&typeform-embed-no-heading=true",
+  "screenshot": "style-guides/typeform-lead-gen-quiz.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "Want 15% off your next purchase?\nSign up for our newsletter and we’ll send you an exclusive discount.\nSign up\nTakes 45 sec",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:59:36.154Z",
+  "structure": {
+    "title": "Ecommerce Lead Generation Quiz",
+    "description": "Sign up for our newsletter to receive an exclusive 15% discount on your next purchase.",
+    "questions": [
+      {
+        "text": "What is your first name?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "What is your email address?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Which product categories are you most interested in?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Clothing",
+          "Accessories",
+          "Home Decor",
+          "Beauty & Wellness",
+          "Gadgets"
+        ]
+      },
+      {
+        "text": "How often do you shop online for these items?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Weekly",
+          "Monthly",
+          "Once every few months",
+          "Rarely"
+        ]
+      },
+      {
+        "text": "What's your primary style preference?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Minimalist & Modern",
+          "Bold & Colorful",
+          "Classic & Professional",
+          "Bohemian & Relaxed"
+        ]
+      },
+      {
+        "text": "Are you shopping for yourself or someone else today?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Mainly for myself",
+          "Looking for a gift",
+          "A bit of both"
+        ]
+      },
+      {
+        "text": "How did you hear about us?",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Instagram",
+          "TikTok",
+          "Google Search",
+          "Friend or Family",
+          "Online Advertisement"
+        ]
+      },
+      {
+        "text": "On a scale of 1-10, how likely are you to recommend us to a friend?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 10,
+        "lowLabel": "Not likely",
+        "highLabel": "Very likely"
+      }
+    ]
+  },
+  "form": {
+    "formId": "1TtRITF5GS0GSSzlndznySLO-aZLBJwTRtD4bHRBlV9I",
+    "editUrl": "https://docs.google.com/forms/d/1TtRITF5GS0GSSzlndznySLO-aZLBJwTRtD4bHRBlV9I/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSer7Rq-EXniARwn46ZlMRLfWhGP7YyD-wE0tMp9Okw2k6cMmQ/viewform",
+    "questionCount": 8
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-lead-gen-quiz.png"
+}

@@ -1,0 +1,141 @@
+{
+  "id": "colgate-oral-health-quiz",
+  "sourceUrl": "https://www.knowyouroq.com/quiz/",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://www.knowyouroq.com/quiz/",
+  "screenshot": "style-guides/colgate-oral-health-quiz.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "We take your privacy seriously\n\nWe use cookies and similar technologies to understand how you use our website and to create more valuable experiences for you. These cookies may be used for different purposes, including personalized advertising and measuring site usage. To learn more please see our cookie policy.\n\nAccept All\nManage Cookies\nKnow Your OQ™\n\n©2022 Colgate-Palmolive Company. All rights reserved.\n\nSign up for updates Take the Quiz Terms of Use Privacy Policy Children’s Privacy Policy Cookie Policy Do Not Sell My Personal Information Colgate-Palmolive Family of Brands",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:56:40.919Z",
+  "structure": {
+    "title": "Know Your OQ™: Oral Health Quiz",
+    "description": "Take this quiz to understand your oral health habits and discover how you can improve your daily routine for a healthier smile.",
+    "questions": [
+      {
+        "text": "How many times a day do you brush your teeth?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Twice a day or more",
+          "Once a day",
+          "A few times a week",
+          "Rarely"
+        ]
+      },
+      {
+        "text": "How often do you floss or use an interdental cleaner?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Every day",
+          "2-3 times a week",
+          "Once a week",
+          "Rarely or never"
+        ]
+      },
+      {
+        "text": "What type of toothbrush do you currently use?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Manual toothbrush",
+          "Electric toothbrush"
+        ]
+      },
+      {
+        "text": "When was your last professional dental check-up?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Less than 6 months ago",
+          "6-12 months ago",
+          "1-2 years ago",
+          "More than 2 years ago"
+        ]
+      },
+      {
+        "text": "Do your gums ever bleed when you brush or floss?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes, frequently",
+          "Sometimes",
+          "Rarely",
+          "Never"
+        ]
+      },
+      {
+        "text": "On a scale of 1 to 5, how sensitive are your teeth to hot or cold temperatures?",
+        "type": "linear_scale",
+        "required": true,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Not sensitive",
+        "highLabel": "Very sensitive"
+      },
+      {
+        "text": "Which of these oral health concerns do you have? (Select all that apply)",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Cavities",
+          "Gum health",
+          "Teeth whitening",
+          "Bad breath",
+          "Tooth sensitivity"
+        ]
+      },
+      {
+        "text": "How often do you consume sugary snacks or drinks (soda, candy, juice)?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Multiple times a day",
+          "Once a day",
+          "A few times a week",
+          "Rarely"
+        ]
+      },
+      {
+        "text": "Do you regularly use a mouthwash containing fluoride?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "What is your age range?",
+        "type": "dropdown",
+        "required": true,
+        "options": [
+          "Under 18",
+          "18-24",
+          "25-34",
+          "35-44",
+          "45-54",
+          "55-64",
+          "65+"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1Ok-aLyN4StXlD3qjn3uKfHXUGO0T7f1c7oK7iyUcDJ0",
+    "editUrl": "https://docs.google.com/forms/d/1Ok-aLyN4StXlD3qjn3uKfHXUGO0T7f1c7oK7iyUcDJ0/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd1po6CpxNgiQxpxr-4IQT5U0K6dg19-GXor3JXnD7AjyTKzg/viewform",
+    "questionCount": 10
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/colgate-oral-health-quiz.png"
+}
