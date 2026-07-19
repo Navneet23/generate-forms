@@ -1,0 +1,113 @@
+{
+  "id": "paperform-event-registration",
+  "sourceUrl": "https://paperform.co/templates/event-registration/",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://shop.paperform.co/&quot;],&quot;description&quot;:[0,&quot;Get",
+  "screenshot": "style-guides/paperform-event-registration.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "SKIP TO CONTENT\nHOME\nLIMITED EDITION MERCH\nHOODIES\nUSD\n404\n\nPAGE NOT FOUND.\n\nGo Back Home\nUSD\nCONTACT SUPPORT\nTERMS OF SERVICE\nPRIVACY POLICY\nRETURNS & FAQ\n© 2026 PAPERFORM\nPOWERED BY FOURTHWALL",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:52:42.156Z",
+  "structure": {
+    "title": "Event Registration Form",
+    "description": "Please complete this form to register for our upcoming event. Make sure to provide accurate information for ticketing and merchandise purposes.",
+    "questions": [
+      {
+        "text": "Full Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Which session will you be attending?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Morning Session",
+          "Afternoon Session",
+          "Full Day Pass"
+        ]
+      },
+      {
+        "text": "Dietary Requirements",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "None",
+          "Vegetarian",
+          "Vegan",
+          "Gluten-Free",
+          "Dairy-Free",
+          "Nut Allergy"
+        ]
+      },
+      {
+        "text": "Hoodie Size (Limited Edition Merch)",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large",
+          "XX-Large"
+        ]
+      },
+      {
+        "text": "How did you hear about this event?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Social Media",
+          "Email Newsletter",
+          "Word of Mouth",
+          "Online Advertisement"
+        ]
+      },
+      {
+        "text": "Emergency Contact Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Emergency Contact Phone Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "I agree to the Terms of Service and Privacy Policy.",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1LGbvPhiHWoumZYvOs4ZjdU0y6VMKwm8hOX3iMcsjilU",
+    "editUrl": "https://docs.google.com/forms/d/1LGbvPhiHWoumZYvOs4ZjdU0y6VMKwm8hOX3iMcsjilU/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfcHajC_L8jsalLTec10VBTiWDvB-6A962krsDp_cdvSvGEew/viewform",
+    "questionCount": 10
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/paperform-event-registration.png"
+}

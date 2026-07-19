@@ -1,0 +1,127 @@
+{
+  "id": "wa-green-energy-eligibility",
+  "sourceUrl": "https://successteam.typeform.com/to/MKEYcK2Y",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://successteam.typeform.com/to/MKEYcK2Y",
+  "screenshot": "style-guides/wa-green-energy-eligibility.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "1\nZIP Code*\nView which of the following Washington Solar Programs could be available at your address:\n\n-$10,400 Solar Energy Credit (ITC)\n-Sales and Use Refund for Solar Systems\n-1:1 Net Metering Program\n \nWashington Solar Programs are designed to reward and incentivize the use of clean renewable energy. \nEnter ZIP Code Below:\nOK\n2\nStreet Address*\nExample: 123 Main St\nOK",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:55:29.345Z",
+  "structure": {
+    "title": "Washington Solar Eligibility Quiz",
+    "description": "Determine your eligibility for Washington Solar Programs, including the $10,400 Solar Energy Credit, Sales and Use Refunds, and 1:1 Net Metering.",
+    "questions": [
+      {
+        "text": "ZIP Code",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Street Address (Example: 123 Main St)",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Are you a homeowner?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "On average, how much is your monthly electric bill?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Under $100",
+          "$101 - $150",
+          "$151 - $200",
+          "$201 - $300",
+          "Over $300"
+        ]
+      },
+      {
+        "text": "Who is your current electric utility provider?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "How much direct sunlight does your roof receive during the day?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Mostly Shaded",
+        "highLabel": "Full Sun"
+      },
+      {
+        "text": "What type of roof do you have?",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Asphalt Shingle",
+          "Metal",
+          "Tile",
+          "Flat",
+          "Other"
+        ]
+      },
+      {
+        "text": "Full Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": true
+      }
+    ]
+  },
+  "form": {
+    "formId": "1w7Q9iuOSD4QV5jjbxGQS33r6m38Ginz2OUJYrGPtFSc",
+    "editUrl": "https://docs.google.com/forms/d/1w7Q9iuOSD4QV5jjbxGQS33r6m38Ginz2OUJYrGPtFSc/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScgFsbq-DwAs3aUVXQkXEfPZgy8wZ2UNwxUFJnscqmB_b6Q7Q/viewform",
+    "questionCount": 10
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wa-green-energy-eligibility.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/6MuUK0EhNb",
+      "publishId": "6MuUK0EhNb",
+      "expiresAt": "2027-07-18T17:56:38.648Z",
+      "imageCount": 1,
+      "htmlLength": 30588,
+      "durationMs": 98700,
+      "at": "2026-07-18T17:56:38.891Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/ru8M-VDKe1",
+      "publishId": "ru8M-VDKe1",
+      "expiresAt": "2027-07-18T17:58:05.374Z",
+      "imageCount": 1,
+      "htmlLength": 28550,
+      "durationMs": 86628,
+      "at": "2026-07-18T17:58:05.522Z"
+    }
+  }
+}

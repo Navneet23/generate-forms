@@ -1,0 +1,120 @@
+{
+  "id": "katto-product-rec",
+  "sourceUrl": "https://form.typeform.com/to/vZuhodBp",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.typeform.com/to/vZuhodBp",
+  "screenshot": "style-guides/katto-product-rec.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "Discover your perfect knife by answering a few short questions.\nStart →",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:52:54.378Z",
+  "structure": {
+    "title": "Katto | Find Your Perfect Knife",
+    "description": "Discover your perfect handcrafted knife by answering a few short questions about your cooking style and preferences.",
+    "questions": [
+      {
+        "text": "How would you describe your skill level in the kitchen?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Beginner / Occasional Cook",
+          "Enthusiastic Home Cook",
+          "Professional Chef"
+        ]
+      },
+      {
+        "text": "What do you find yourself prepping most often? (Select all that apply)",
+        "type": "checkboxes",
+        "required": true,
+        "options": [
+          "Vegetables",
+          "Meat",
+          "Fish",
+          "Bread",
+          "Fruit"
+        ]
+      },
+      {
+        "text": "How would you describe your hand size?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Small",
+          "Medium",
+          "Large"
+        ]
+      },
+      {
+        "text": "Which handle material do you find most aesthetically pleasing?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Dark Walnut",
+          "Rosewood",
+          "Pale Beech"
+        ]
+      },
+      {
+        "text": "On a scale of 1 to 5, do you prefer a knife that feels heavy and substantial or light and nimble?",
+        "type": "linear_scale",
+        "required": true,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Heavy & Sturdy",
+        "highLabel": "Light & Nimble"
+      },
+      {
+        "text": "How much time are you willing to spend on knife maintenance (e.g., hand-washing, oiling)?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "I want something very low maintenance",
+          "I'm happy to take care of my tools to keep them sharp"
+        ]
+      },
+      {
+        "text": "Where should we send your personalized recommendation?",
+        "type": "short_answer",
+        "required": true
+      }
+    ]
+  },
+  "form": {
+    "formId": "1KkrTzxytg87Bn8h824hIqX4OHGBVyBqWDH0tvTHekCc",
+    "editUrl": "https://docs.google.com/forms/d/1KkrTzxytg87Bn8h824hIqX4OHGBVyBqWDH0tvTHekCc/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd8wQefNU5EQVG9_4Zp_1GICIH0qpIDOoMf6ZyE9To4QpZ-Ew/viewform",
+    "questionCount": 7
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/katto-product-rec.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/Bp1zf5EBqX",
+      "publishId": "Bp1zf5EBqX",
+      "expiresAt": "2027-07-18T17:42:10.877Z",
+      "imageCount": 1,
+      "htmlLength": 26483,
+      "durationMs": 84237,
+      "at": "2026-07-18T17:42:11.038Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/WiqFXIeYz_",
+      "publishId": "WiqFXIeYz_",
+      "expiresAt": "2027-07-18T17:43:36.455Z",
+      "imageCount": 1,
+      "htmlLength": 30084,
+      "durationMs": 85602,
+      "at": "2026-07-18T17:43:36.643Z"
+    }
+  }
+}

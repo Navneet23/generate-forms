@@ -1,0 +1,117 @@
+{
+  "id": "paperform-client-onboarding",
+  "sourceUrl": "https://paperform.co/templates/client-onboarding/",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://shop.paperform.co/&quot;],&quot;description&quot;:[0,&quot;Get",
+  "screenshot": "style-guides/paperform-client-onboarding.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "SKIP TO CONTENT\nHOME\nLIMITED EDITION MERCH\nHOODIES\nUSD\n404\n\nPAGE NOT FOUND.\n\nGo Back Home\nUSD\nCONTACT SUPPORT\nTERMS OF SERVICE\nPRIVACY POLICY\nRETURNS & FAQ\n© 2026 PAPERFORM\nPOWERED BY FOURTHWALL",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T14:03:04.700Z",
+  "structure": {
+    "title": "Client Onboarding Form",
+    "description": "Welcome! Please fill out this form to provide the necessary information for us to begin our collaboration and tailor our services to your business needs.",
+    "questions": [
+      {
+        "text": "Full Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Company Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Which service are you primarily interested in?",
+        "type": "dropdown",
+        "required": true,
+        "options": [
+          "Digital Marketing",
+          "Web Design & Development",
+          "Brand Strategy",
+          "Content Creation",
+          "Other"
+        ]
+      },
+      {
+        "text": "Please describe your business goals for this project.",
+        "type": "paragraph",
+        "required": true
+      },
+      {
+        "text": "What is your estimated budget for this project?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Under $1,000",
+          "$1,000 - $5,000",
+          "$5,000 - $10,000",
+          "$10,000+"
+        ]
+      },
+      {
+        "text": "Requested Start Date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "text": "Preferred Communication Method",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Email",
+          "Phone Call",
+          "Video Meeting (Zoom/Google Meet)",
+          "Slack/Messaging"
+        ]
+      },
+      {
+        "text": "How did you hear about us?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Search Engine",
+          "Social Media",
+          "Referral",
+          "Advertisement"
+        ]
+      },
+      {
+        "text": "I agree to the terms of service and privacy policy.",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1NgN_OOpQQeRgo64OdM5A-R52dW3Vo3nKBPoROjA30FA",
+    "editUrl": "https://docs.google.com/forms/d/1NgN_OOpQQeRgo64OdM5A-R52dW3Vo3nKBPoROjA30FA/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdUiuHivYfTtm2hGy9aagwpA38LNS3rDgsT_jmP6VoE-pvjbA/viewform",
+    "questionCount": 11
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/paperform-client-onboarding.png"
+}

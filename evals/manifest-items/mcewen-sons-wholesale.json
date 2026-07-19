@@ -1,0 +1,154 @@
+{
+  "id": "mcewen-sons-wholesale",
+  "sourceUrl": "https://form.jotform.com/frankmcewen2/mcewen-and-sons-wholesale-order",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [
+    {
+      "stage": "recreate",
+      "message": "question 15 (multiple_choice) needs >= 2 options",
+      "at": "2026-07-18T13:57:22.267Z"
+    },
+    {
+      "stage": "recreate",
+      "message": "question 15 (multiple_choice) needs >= 2 options",
+      "at": "2026-07-18T13:57:37.970Z"
+    }
+  ],
+  "resolvedFormUrl": "https://form.jotform.com/frankmcewen2/mcewen-and-sons-wholesale-order",
+  "screenshot": "style-guides/mcewen-sons-wholesale.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Customer Contact Information and Wholesale Order Form\nWhen placing an order, please fill out this form and submit it at least 3 business days in advance to guarantee fulfillment.\nCustomer Contact Information\nPlease complete the items marked with a red asterisk (*) so that we can ensure that we have the most updated contact, shipping, billing, and business information for you. Please complete the rest of the form if it is relevant to you. You may also use the bottom of this form to place a new wholesale order.\nCustomer Information\nBusiness Name*\nState Sales Tax Number*\nAlabama only\nPrimary Contact*\nFirst Name\nLast Name\nContact Number*\nFormat: (000) 000-0000.\nE-mail*\nexample@example.com\nAccounts Payable Information\nComplete this ONLY IF different than primary contact.\nAP Contact Name (who handles invoices/payments?)\nFirst Name\nLast Name\nAP Email Address (where should invoices/statements be sent?)\nexample@example.com\nAP Phone (optional)\nPlease enter a valid phone number.\nFormat: (000) 000-0000.\nBilling Address\nStreet Address\nStreet Address Line 2\nCity\nState / Province\nPostal / Zip Code\nPlease Select\nAfghanistan\nAlbania\nAlgeria\nAmerican Samoa\nAndorra\nAngola\nAnguilla\nAntigua and Barbuda\nArgentina\nArmenia\nAruba\nAustralia\nAustria\nAzerbaijan\nThe Bahamas\nBahrain\nBangladesh\nBarbados\nBelarus\nBelgium\nBelize\nBenin\nBermuda\nBhutan\nBolivia\nBosnia and Herzegovina\nBotswana\nBrazil\nBrunei\nBulgaria\nBurkina Faso\nBurundi\nCambodia\nCameroon\nCanada\nCape Verde\nCayman Islands\nCentral African Republic\nChad\nChile\nChina\nChristmas Island\nCocos (Keeling) Islands\nColombia\nComoros\nCongo\nCook Islands\nCosta Rica\nCote d'Ivoire\nCroatia\nCuba\nCuraçao\nCyprus\nCzech Republic\nDemocratic Republic of the Congo\nDenmark\nDjibouti\nDominica\nDominican Republic\nEcuador\nEgypt\nEl Salvador\nEquatorial Guinea\nEritrea\nEstonia\nEthiopia\nFalkland Islands\nFaroe Islands\nFiji\nFinland\nFrance\nFrench Polynesia\nGabon\nThe Gambia\nGeorgia\nGermany\nGhana\nGibraltar\nGreece\nGreenland\nGrenada\nGuadeloupe\nGuam\nGuatemala\nGuernsey\nGuinea\nGuinea-Bissau\nGuyana\nHaiti\nHonduras\nHong Kong\nHungary\nIceland\nIndia\nIndonesia\nIran\nIraq\nIreland\nIsrael\nItaly\nJamaica\nJapan\nJersey\nJordan\nKazakhstan\nKenya\nKiribati\nNorth Korea\nSouth Korea\nKosovo\nKuwait\nKyrgyzstan\nLaos\nLatvia\nLebanon\nLesotho\nLiberia\nLibya\nLiechtenstein\nLithuania\nLuxembourg\nMacau\nMacedonia\nMadagascar\nMalawi\nMalaysia\nMaldives\nMali\nMalta\nMarshall Islands\nMartinique\nMauritania\nMauritius\nMayotte\nMexico\nMicronesia\nMoldova\nMonaco\nMongolia\nMontenegro\nMontserrat\nMorocco\nMozambique\nMyanmar\nNagorno-Karabakh\nNamibia\nNauru\nNepal\nNetherlands\nNetherlands Antilles\nNew Caledonia\nNew Zealand\nNicaragua\nNiger\nNigeria\nNiue\nNorfolk Island\nTurkish Republic of Northern Cyprus\nNorthern Mariana\nNorway\nOman\nPakistan\nPalau\nPalestine\nPanama\nPapua New Guinea\nParaguay\nPeru\nPhilippines\nPitcairn Islands\nPoland\nPortugal\nPuerto Rico\nQatar\nRepublic of the Congo\nRomania\nRussia\nRwanda\nSaint Barthelemy\nSaint Helena\nSaint Kitts and Nevis\nSaint Lucia\nSaint Martin\nSaint Pierre and Miquelon\nSaint Vincent and the Grenadines\nSamoa\nSan Marino\nSao Tome and Principe\nSaudi Arabia\nSenegal\nSerbia\nSeychelles\nSierra Leone\nSingapore\nSlovakia\nSlovenia\nSolomon Islands\nSomalia\nSomaliland\nSouth Africa\nSouth Ossetia\nSouth Sudan\nSpain\nSri Lanka\nSudan\nSuriname\nSvalbard\neSwatini\nSweden\nSwitzerland\nSyria\nTaiwan\nTajikistan\nTanzania\nThailand\nTimor-Leste\nTogo\nTokelau\nTonga\nTransnistria Pridnestrovie\nTrinidad and Tobago\nTristan da Cunha\nTunisia\nTurkey\nTurkmenistan\nTurks and Caicos Islands\nTuvalu\nUganda\nUkraine\nUnited Arab Emirates\nUnited Kingdom\nUnited States\nUruguay\nUzbekistan\nVanuatu\nVatican City\nVenezuela\nVietnam\nBritish Virgin Islands\nIsle of Man\nUS Virgin Islands\nWallis and Futuna\nWestern Sahara\nYemen\nZambia\nZimbabwe\nOther\nCountry\nIs shipping/delivery address same as billing address?\nYes\nNo\nMcEwen & Sons Products\nCategories:\nAll\nGrits\nWhite Grits\n$5.95\n$5.95\n\n\nItem subtotal:\n$0.00\n$0.00\nBlue Grits\n$6.95\n$6.95\n\n\nItem subtotal:\n$0.00\n$0.00\nSpeckled Grits\n$5.95\n$5.95\n\n\nItem subtotal:\n$0.00\n$0.00\nYellow Grits\n$6.95\n$6.95\n\n\nItem subtotal:\n$0.00\n$0.00\nCrimson Grits\n$7.95\n$7.95\n\n\nItem subtotal:\n$0.00\n$0.00\nDirty Grits\n\nA mix of our blue and yellow grits that combines the deep, nutty flavor of our blue corn grits with the sweet, classic flavor of our yellow grits. Prepared in the same manner as our classic grits recipe, this product puts a new spin on some old favorites.\n\n$8.95\n$8.95\n\n\nItem subtotal:\n$0.00\n$0.00\nCornmeal - Coarse\nPolenta\nCornmeal - Fine\nMixed Products\nSelf-Rising Cornmeal\n$5.95\n$5.95\n\n\nItem subtotal:\n$0.00\n$0.00\nHush Puppy Mix\n$5.95\n$5.95\nSold Out\nSold Out\n\n\nItem subtotal:\n$0.00\n$0.00\nFish Batter\n$5.95\n$5.95\nSold Out\nSold Out\n\n\nItem subtotal:\n$0.00\n$0.00\nOther\nSubtotal\n$0.00\n$\n0.00\nPreferred Fulfillment\nPreferred Ship/Delivery Date\nNote: normal Birmingham deliveries happen on Fridays\nDelivery Method\nPlease Select\nLocal Delivery\nShip (UPS, Fedex, USPS)\nPick-up\nSpecial Instructions/Notes for Invoice\nConfirmation\nI confirm the order details above are correct\nYes\nPlace Order",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T14:04:25.101Z",
+  "structure": {
+    "title": "Customer Contact Information and Wholesale Order Form",
+    "description": "Please fill out this form and submit it at least 3 business days in advance to guarantee fulfillment. This ensures we have updated contact, shipping, and billing information for your wholesale account.",
+    "questions": [
+      {
+        "text": "Business Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "State Sales Tax Number (Alabama only)",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Primary Contact Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Contact Number",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "E-mail",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "AP Contact Name (who handles invoices/payments?)",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "AP Email Address",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Billing Address (Street, City, State, Zip)",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Is shipping/delivery address same as billing address?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "White Grits ($5.95) - Quantity",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Yellow Grits ($6.95) - Quantity",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Preferred Ship/Delivery Date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "text": "Delivery Method",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Local Delivery",
+          "Ship (UPS, Fedex, USPS)",
+          "Pick-up"
+        ]
+      },
+      {
+        "text": "Special Instructions/Notes for Invoice",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "I confirm the order details above are correct",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1BjcPetfvKa5W0OZgEhNyu6Fww5P04DOJDmm7sfirEXE",
+    "editUrl": "https://docs.google.com/forms/d/1BjcPetfvKa5W0OZgEhNyu6Fww5P04DOJDmm7sfirEXE/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdN8vRz_WlndZiP4Wmzbn3JuIQkOtdTQBUhD0i_E2bK_JUj0g/viewform",
+    "questionCount": 15
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/mcewen-sons-wholesale.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/bNM2UI-1OK",
+      "publishId": "bNM2UI-1OK",
+      "expiresAt": "2027-07-18T18:11:31.682Z",
+      "imageCount": 1,
+      "htmlLength": 19830,
+      "durationMs": 76786,
+      "at": "2026-07-18T18:11:31.798Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/A_Q7Um8TEm",
+      "publishId": "A_Q7Um8TEm",
+      "expiresAt": "2027-07-18T18:12:53.943Z",
+      "imageCount": 1,
+      "htmlLength": 20476,
+      "durationMs": 82359,
+      "at": "2026-07-18T18:12:54.162Z"
+    }
+  }
+}

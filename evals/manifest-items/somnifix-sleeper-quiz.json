@@ -1,0 +1,139 @@
+{
+  "id": "somnifix-sleeper-quiz",
+  "sourceUrl": "https://successteam.typeform.com/to/hM1fCFfF",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://successteam.typeform.com/to/hM1fCFfF",
+  "screenshot": "style-guides/somnifix-sleeper-quiz.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "Want to find out if SomniFix Strips are right for you? Take our quiz to find out!\nStart\nTakes 1 minute",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:55:52.212Z",
+  "structure": {
+    "title": "SomniFix Sleeper Type Quiz",
+    "description": "Take this quick quiz to see if SomniFix Mouth Strips are the right solution for your sleep needs and breathing habits.",
+    "questions": [
+      {
+        "text": "Do you primarily breathe through your mouth while you sleep?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No",
+          "I am not sure"
+        ]
+      },
+      {
+        "text": "Do you often wake up with a dry mouth or a parched throat?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No",
+          "Occasionally"
+        ]
+      },
+      {
+        "text": "How would you rate your typical sleep quality?",
+        "type": "linear_scale",
+        "required": true,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Very Poor",
+        "highLabel": "Excellent"
+      },
+      {
+        "text": "Do you or your partner experience issues with your snoring?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "Do you currently use a CPAP machine or an oral appliance for sleep apnea?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes, a CPAP machine",
+          "Yes, an oral appliance",
+          "No"
+        ]
+      },
+      {
+        "text": "Do you have a beard or significant facial hair around your mouth?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "text": "What is your main goal for improving your sleep?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Reduce snoring",
+          "Stop mouth breathing",
+          "Improve energy levels",
+          "Better CPAP compliance"
+        ]
+      },
+      {
+        "text": "What is your primary sleep position?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Back",
+          "Side",
+          "Stomach",
+          "Toss and turn"
+        ]
+      },
+      {
+        "text": "Email address to receive your sleeper type results",
+        "type": "short_answer",
+        "required": true
+      }
+    ]
+  },
+  "form": {
+    "formId": "1ovrFOB2p1wgwrP9bSBIYYqJwZPHewB7QX2kGMa1euEE",
+    "editUrl": "https://docs.google.com/forms/d/1ovrFOB2p1wgwrP9bSBIYYqJwZPHewB7QX2kGMa1euEE/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScMctr1z9GDxTdQLN_GH9EA_afxjsU11cVG0fsguIpW9elmdw/viewform",
+    "questionCount": 9
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/somnifix-sleeper-quiz.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/tAiZePkN_b",
+      "publishId": "tAiZePkN_b",
+      "expiresAt": "2027-07-18T17:59:38.755Z",
+      "imageCount": 1,
+      "htmlLength": 31347,
+      "durationMs": 89760,
+      "at": "2026-07-18T17:59:38.869Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/pJiTR8GtBh",
+      "publishId": "pJiTR8GtBh",
+      "expiresAt": "2027-07-18T18:01:11.625Z",
+      "imageCount": 1,
+      "htmlLength": 30836,
+      "durationMs": 92869,
+      "at": "2026-07-18T18:01:11.741Z"
+    }
+  }
+}

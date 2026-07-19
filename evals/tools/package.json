@@ -1,0 +1,17 @@
+{
+  "name": "eval-set-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pipeline that builds the eval set: extracts competitor forms, recreates them as Google Forms, captures style-guide screenshots.",
+  "scripts": {
+    "auth": "node auth.mjs",
+    "run": "node run.mjs"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@vercel/blob": "^2.6.1",
+    "googleapis": "^173.0.0",
+    "puppeteer": "^24.37.5"
+  }
+}

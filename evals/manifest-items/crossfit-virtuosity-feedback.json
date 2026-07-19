@@ -1,0 +1,195 @@
+{
+  "id": "crossfit-virtuosity-feedback",
+  "sourceUrl": "https://form.typeform.com/to/vHG4OuOh",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [
+    {
+      "stage": "create",
+      "message": "No OAuth token at /Users/priyadarshiniashokan/Navneet/noCodeTools/evals/tools/credentials/token.json — run \"npm run auth\" first",
+      "at": "2026-07-18T12:57:57.485Z"
+    },
+    {
+      "stage": "create",
+      "message": "forms.forms.setPublishSettings is not a function",
+      "at": "2026-07-18T13:34:10.352Z"
+    }
+  ],
+  "resolvedFormUrl": "https://form.typeform.com/to/vHG4OuOh",
+  "screenshot": "style-guides/crossfit-virtuosity-feedback.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "Thank you in advance for helping us make CFV the best it can be!\nPlease answer as much of this as you have time for: all feedback is helpful.\nStart\nTakes 7+ minutes",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T14:09:28.383Z",
+  "structure": {
+    "title": "Crossfit Virtuosity Member Feedback Form",
+    "description": "Thank you in advance for helping us make CFV the best it can be! Please answer as much of this as you have time for: all feedback is helpful.",
+    "questions": [
+      {
+        "text": "Overall, how satisfied are you with your experience at CrossFit Virtuosity?",
+        "type": "linear_scale",
+        "required": true,
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      },
+      {
+        "text": "How long have you been a member with us?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Less than 3 months",
+          "3 to 12 months",
+          "1 to 3 years",
+          "More than 3 years"
+        ]
+      },
+      {
+        "text": "How would you rate the quality of coaching and instruction?",
+        "type": "linear_scale",
+        "required": false,
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "text": "How satisfied are you with the current class programming and WOD variety?",
+        "type": "linear_scale",
+        "required": false,
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "text": "How do you feel about the cleanliness and maintenance of the facility?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Very satisfied",
+          "Satisfied",
+          "Neutral",
+          "Dissatisfied",
+          "Very dissatisfied"
+        ]
+      },
+      {
+        "text": "Are there any specific pieces of equipment you would like to see added or replaced?",
+        "type": "paragraph",
+        "required": false,
+        "options": []
+      },
+      {
+        "text": "How do you feel about the current class schedule?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "The schedule is perfect",
+          "I need more early morning classes",
+          "I need more evening classes",
+          "I need more weekend options",
+          "I need more open gym time"
+        ]
+      },
+      {
+        "text": "How would you rate the community and atmosphere at the gym?",
+        "type": "linear_scale",
+        "required": false,
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "text": "What is one thing we could change to immediately improve your experience?",
+        "type": "paragraph",
+        "required": false,
+        "options": []
+      },
+      {
+        "text": "How likely are you to recommend CrossFit Virtuosity to a friend or colleague?",
+        "type": "linear_scale",
+        "required": false,
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      },
+      {
+        "text": "Is there anything else you'd like to share or any specific staff members you'd like to shout out?",
+        "type": "paragraph",
+        "required": false,
+        "options": []
+      }
+    ]
+  },
+  "form": {
+    "formId": "unknown-original-run",
+    "editUrl": null,
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScCAs5Uxy16y9ZE6O2Tj1q8J6a29-SuCm9DDx6CoGGbJ3QG6Q/viewform",
+    "questionCount": 11
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/crossfit-virtuosity-feedback.png",
+  "orphanedForm": {
+    "formId": "1a4pv8Lcp38UPNvEfrz92-jDTgSgr7IQJ4yRfXO31Lvk",
+    "editUrl": "https://docs.google.com/forms/d/1a4pv8Lcp38UPNvEfrz92-jDTgSgr7IQJ4yRfXO31Lvk/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdbtQ8tG-SXDTA3ZGmUq-_ceicrcT_Jn3rNMfE4xmLzlAcSNA/viewform",
+    "questionCount": 10
+  },
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/7fapZJPAcx",
+      "publishId": "7fapZJPAcx",
+      "expiresAt": "2027-07-18T17:54:56.376Z",
+      "imageCount": 1,
+      "htmlLength": 34386,
+      "durationMs": 124199,
+      "at": "2026-07-18T17:54:56.493Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/CVqRiRdmBl",
+      "publishId": "CVqRiRdmBl",
+      "expiresAt": "2027-07-18T17:52:48.650Z",
+      "imageCount": 1,
+      "htmlLength": 29928,
+      "durationMs": 107498,
+      "at": "2026-07-18T17:52:48.785Z"
+    }
+  }
+}

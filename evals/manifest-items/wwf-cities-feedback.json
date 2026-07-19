@@ -1,0 +1,147 @@
+{
+  "id": "wwf-cities-feedback",
+  "sourceUrl": "https://welovecities.org/#ideas",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://welovecities.org/#ideas",
+  "screenshot": "style-guides/wwf-cities-feedback.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Consent\nDetails\nAbout\nThis website uses cookies\nWe use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.\nConsent Selection\nNecessary\nPreferences\nStatistics\nMarketing\nDeny\nAllow selection\nAllow all\nSelect your favourite city\nEnglish\nEnglish\nSelect your favourite city\nTell us your ideas\nShare your love\nHow it works\nWhy we love cities\nWhat’s it all about?\nCommon questions\nJoin millions of people shaping a greener future for our cities\nVote for your favorite city\nTell us your ideas\nShare your love\nVote for your favorite city\n\nSelect a country to get started\n\nDENMARK\nFINLAND\nGERMANY\nNORWAY\nSWEDEN\nUK\nUSA\nARGENTINA\nCANADA\nCAMEROON\nCHILE\nCOLOMBIA\nCOSTA RICA\nCÔTE D’IVOIRE\nECUADOR\nGUATEMALA\nFRANCE\nJORDAN\nINDONESIA\nINDIA\nMEXICO\nMALAYSIA\nVIETNAM\nTURKEY\nSWITZERLAND\nSOUTH AFRICA\nPHILIPPINES\nPERU\nTell us your ideas\n\nSubmitting an improvement idea also counts as a vote.\n\nI’M CURIOUS\nShare your love\n\nInvite your friends to join you in shaping a greener urban future.\n\nI’M CURIOUS\nHow it works\n\nLearn more about We Love Cities.\n\nI’M CURIOUS\nWHY WE LOVE CITIES\nOver 50% of people live in cities – generating over 70% of our climate footprint\n\nBut cities also offer an immense opportunity to create better places to live while contributing to a healthier\nplanet. Through better transport, green buildings, harnessing the power of nature, wasting less and loving\nmore, cities can lead the way to a climate-friendly future.\n\nWe love to get around\nWe love the power of nature\nWe love green buildings\nWe love clean living\nWe love to eat\nWHAT’S IT ALL ABOUT\nBuilding a future in which people live in harmony with nature\nGlobal engagement\n\nWe Love Cities has reached over 450 million people globally since its inception in 2013. Over 150 cities have participated, with over 14 million citizen engagements and more than 200,000 citizen improvement suggestions shared to city officials.\n\nRun by WWF\n\nThe initiative is run by WWF — the world’s leading nature conservation organization — passionate about building a future in which people live in harmony with nature.\n\nTo thrive and prosper\n\nAs a key aspect of that mission, we support the creation and development of cities that enable all people to thrive and prosper while respecting the ecological limits of our one and only planet!\n\nFAQ\nCommon questions\nWhat is the We Love Cities campaign?\n\nWe Love Cities is a public engagement campaign that allows people across the world to express support for sustainable urban development by voting for their favorite finalist from WWFs One Planet City Challenge and posting improvement suggestions for these cities. The One Planet City Challenge is the world’s largest and longest running city challenge. You can read more about it here. With the We Love Cities campaign we aim to:\n\nInspire and raise awareness for the sustainability progress being made in cities.\n\nGive the general public an opportunity to celebrate, vote and upgrade their city through making suggestions to decision makers.\n\nReward communities and strengthen the bond between the public and decision makers.\n\nDoes the number of votes a city receives in the We Love Cities campaign have an influence on the selection of the national and global winners of the One Planet City Challenge?\n\nNo. The We Love Cities campaign has no influence on the outcome of the One Planet City Challenge (OPCC). The OPCC winners are selected through a jury process based on the data reported by the cities on the internationally recognized unified reporting platform hosted by ICLEI and CDP.\n\nWhy are there no cities from my country involved?\n\nThe cities profiled here are all finalists in WWF’s biennial One Planet City Challenge.\n\nIf you would like to suggest your city for the One Planet City Challenge, you can do so on this form here. \n\nIf your country is included in the One Planet City Challenge but your city is not profiled here, either your city chose not to participate in the Challenge or it participated but didn’t make it past the pre-selection process. In either case please encourage your mayor or public officials to inspire the world by developing and reporting really ambitious climate action plans next year.\n\nPrivacy Policy\n© 2023 WWF — World Wide Fund For Nature",
+    "jsonState": "\n{\"baseUrl\":\"https://s.w.org/images/core/emoji/17.0.2/72x72/\",\"ext\":\".png\",\"svgUrl\":\"https://s.w.org/images/core/emoji/17.0.2/svg/\",\"svgExt\":\".svg\",\"source\":{\"concatemoji\":\"https://welovecities.org/wp-includes/js/wp-emoji-release.min.js?ver=7.0.2\"}}\n",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:53:14.379Z",
+  "structure": {
+    "title": "WWF - We Love Cities Feedback",
+    "description": "Join millions of people shaping a greener future for our cities. Vote for your favorite city and share your ideas for sustainable urban improvement.",
+    "questions": [
+      {
+        "text": "Select a country to get started",
+        "type": "dropdown",
+        "required": true,
+        "options": [
+          "DENMARK",
+          "FINLAND",
+          "GERMANY",
+          "NORWAY",
+          "SWEDEN",
+          "UK",
+          "USA",
+          "ARGENTINA",
+          "CANADA",
+          "CAMEROON",
+          "CHILE",
+          "COLOMBIA",
+          "COSTA RICA",
+          "CÔTE D’IVOIRE",
+          "ECUADOR",
+          "GUATEMALA",
+          "FRANCE",
+          "JORDAN",
+          "INDONESIA",
+          "INDIA",
+          "MEXICO",
+          "MALAYSIA",
+          "VIETNAM",
+          "TURKEY",
+          "SWITZERLAND",
+          "SOUTH AFRICA",
+          "PHILIPPINES",
+          "PERU"
+        ]
+      },
+      {
+        "text": "Which city would you like to vote for?",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Tell us your ideas: How can this city improve its climate footprint?",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Which of these sustainable city features do you value most?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Better transport",
+          "Green buildings",
+          "Harnessing the power of nature",
+          "Wasting less",
+          "Clean living",
+          "Sustainable food"
+        ]
+      },
+      {
+        "text": "How would you rate the current sustainability progress being made in this city?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Needs improvement",
+        "highLabel": "Excellent"
+      },
+      {
+        "text": "What is your main motivation for participating in this campaign?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "To celebrate my city's progress",
+          "To suggest specific upgrades to decision makers",
+          "To raise awareness for climate action",
+          "To learn more about sustainable urban development"
+        ]
+      },
+      {
+        "text": "Email Address",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Would you like to join millions of people shaping a greener future by receiving WWF updates?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Yes, sign me up",
+          "No, thank you"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "formId": "1xwRmmHBAt-ur7ykXzARRfUnrUjKt69N3wZ0I-PswYBY",
+    "editUrl": "https://docs.google.com/forms/d/1xwRmmHBAt-ur7ykXzARRfUnrUjKt69N3wZ0I-PswYBY/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfr-4r6Xv-_KF98byKHTmcFEK6QmPRH-P43hUSziCssXxksgA/viewform",
+    "questionCount": 8
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/wwf-cities-feedback.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/mnbp2g_OgH",
+      "publishId": "mnbp2g_OgH",
+      "expiresAt": "2027-07-18T17:45:05.182Z",
+      "imageCount": 1,
+      "htmlLength": 30213,
+      "durationMs": 85346,
+      "at": "2026-07-18T17:45:05.297Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/MDx71CAlXL",
+      "publishId": "MDx71CAlXL",
+      "expiresAt": "2027-07-18T17:46:37.130Z",
+      "imageCount": 1,
+      "htmlLength": 27593,
+      "durationMs": 91946,
+      "at": "2026-07-18T17:46:37.247Z"
+    }
+  }
+}

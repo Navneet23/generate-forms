@@ -40,6 +40,7 @@ app/
 └── lib/
     ├── scraper.ts                      # Extracts + normalises FB_PUBLIC_LOAD_DATA_
     ├── gemini.ts                       # Gemini prompt layer (multimodal + function calling for image generation)
+    ├── validate-form.ts                # QI-4/QI-6 post-generation groundedness & submit-wiring validator
     ├── image-gen.ts                    # Shared image generation logic (Nano Banana + Vercel Blob upload)
     └── store.ts                        # Upstash Redis published form store
 ```
@@ -174,25 +175,31 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 
 **Model:** `gemini-3-flash-preview`
 
-**System prompt rules enforced:**
+**System prompt rules enforced** (revised per `requirements/quality_improvements.md`):
 1. Output raw HTML only — no markdown, no code fences
 2. All CSS inline in `<style>` tag
 3. All JS inline in `<script>` tag
 4. All inputs use exact `entry.XXXXXXXXX` name attributes
 5. Submit via fetch POST to the proxy URL; checkbox values sent as arrays; multi-step forms collect all values before submitting
-6. Fully responsive
+6. Fully responsive with mobile-specific constraints: no fixed widths on the main container; question/option/input text ≥16px on mobile (secondary text exempt); spacing compresses on narrow screens (16-24px horizontal padding ≤480px); cards/steps size to content — no fixed heights, min-heights, or space-between stretching
 7. Always render form title and description at the top
 8. Required field validation before submit — only for fields with `required: true` in the form structure; optional fields must remain optional
-9. Linear scale: single horizontal row of radio buttons with labels under min/max values
+9. Linear scale: single horizontal row of radio buttons with labels under min/max values; on narrow screens the row compresses evenly (~40px min touch targets) or scrolls within its container — never overflows the viewport
 10. Multi-step review pages must show actual entered values, not placeholder text
-11. Page must fill full viewport (`min-height: 100vh`) with a background colour — never plain white
-12. Question-by-question layout rules:
+11. Page must fill full viewport (`min-height: 100vh`) with a background colour — never plain white (applies to the page background only, not the form card)
+12. Visual distinction & selection feedback: radio buttons round (single-select), checkboxes square with "Select all that apply" hint (multi-select) — never visually identical; every selectable option has visible selected, hover, and keyboard-focus states
+13. Layout choice: if the prompt or style guide specifies/implies a layout, follow it exactly; otherwise the model chooses freely; never mix layouts; preserve the existing layout across iterative edits unless asked to change it
+14. Question-by-question layout rules:
     - (a) Final step MUST always be a review page — no exceptions
-    - (b) Single-selection questions (multiple_choice, dropdown, linear_scale) auto-advance on selection
-    - (c) Auto-advance steps show helper text: "Select an option to continue"
-    - (d) Multi-select/text questions (checkboxes, short_answer, paragraph, date, time) use an explicit Next button
-    - (e) Pressing Enter on any step advances to the next step (except inside `<textarea>`)
-    - (f) Every step after the first must include a Back button; the review page also has a Back button
+    - (b) Single-selection questions (multiple_choice, dropdown, linear_scale) may auto-advance on selection, but a Next button must also be present
+    - (c) Multi-input questions (checkboxes, short_answer, paragraph, date, time) never auto-advance — explicit Next only
+    - (d) Every step after the first must include a Back button; the review page also has a Back button
+    - (e) Clicking Next on an unanswered required question shows a validation message and does not advance; optional questions may be skipped
+    - (f) Pressing Enter on any step advances (subject to the same validation; except inside `<textarea>`)
+15. Placeholders: generic only ("Your answer", neutral format hints) — never invented/themed placeholder copy
+16. Contrast: ~WCAG AA (4.5:1 body, 3:1 large headings) against actual rendered background; overlay/text-shadow required over images and gradients
+17. Overflow: text always wraps, no fixed-height text containers, scrollable regions show a scrollbar
+18. Google Forms footer — required on every form: canonical HTML produced by `buildGoogleFormsFooter(formId)` and interpolated verbatim into the SI. Mirrors the real responder footer: "Never submit passwords…" notice; "This content is neither created nor endorsed by Google." with Contact form owner (→ original form URL), Terms of Service, and Privacy Policy links; "Does this form look suspicious? Report" (→ the form's `/abuse` URL); and the grey "Google Forms" text wordmark (never an icon/image). Fixed inline sizes (12px notices, 20px wordmark) exempt from rule 6's minimum; `data-gforms-footer` marker for future validation. In multi-step layouts the footer appears at minimum on the first and final steps.
 
 **Image generation guidelines** (when `generate_image` tool is provided):
 - Gemini decides whether images would enhance the form based on context
@@ -220,7 +227,7 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 
 **Active images:** On subsequent generations, previously generated images are re-sent as vision input so Gemini maintains color coherence across edits.
 
-**Known limitation — rare question text drift:** Despite the system prompt's strong language preserving form text verbatim (reinforced in commit `f5599da`), Gemini occasionally paraphrases question text or option labels — e.g. *"Rate your current baking/decorating experience."* rendered as *"Rate your current experience"*. This is non-deterministic and infrequent; retrying the generation usually produces correct output. A structural fix (post-generation diff against `structure.questions[].text` with auto-retry or auto-correction) is the right long-term solution but is out of scope.
+**Question text drift — mitigated by the QI-4 validator (2026-07-19):** Gemini occasionally paraphrases question text or option labels despite the system prompt's verbatim rules (prompt strengthening in `f5599da` reduced but did not eliminate it; measured baseline: 7.4% of generations). `generateForm()` now runs `lib/validate-form.ts` after HTML generation: it diffs title/description/question text/option labels/`entry.*` names/submit wiring against the `FormStructure`, and on error-severity violations sends a corrective follow-up in the same chat session (max 2 retries), emitting `validate` step events for the timeline. If violations persist, the HTML is returned with `validation.violations` in the result so the UI can warn — a generation is never hard-failed. Text found only inside `<script>` strings counts as verbatim (JS-rendered layouts are legal); wiring facts that exist only in scripts downgrade to warnings (not statically verifiable). Validated by regenerating the eval set: 0 uncorrected drift in 66/68 generations, 5 corrective retries all successful.
 
 ---
 
@@ -314,6 +321,8 @@ Modal dialog for providing a visual style reference to the AI. Two input modes:
 - **Use a website** — URL is sent to `POST /api/screenshot`; server captures the page and returns a base64 screenshot
 
 Optional "focus on" text field narrows AI interpretation. Style guide persists for the session and is re-attached on every subsequent AI call.
+
+The style-guide prompt instructs the model to extract the reference's visual language (palette, typography feel, spacing/density, corner treatment, mood). By default the reference's layout is NOT cloned — but if the creator's prompt asks to follow the image's layout (e.g. "similar layout"), the model replicates its layout/structure as well.
 
 ### `lib/store.ts`
 

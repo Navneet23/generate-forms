@@ -1,0 +1,139 @@
+{
+  "id": "typeform-customer-needs",
+  "sourceUrl": "https://www.typeform.com/templates/customer-needs-survey-template",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.typeform.com/to/i9MOhLoo?typeform-embed-id=4402849429361021&typeform-embed=embed-widget&typeform-source=typeform.com&typeform-medium=embed-sdk&typeform-medium-version=next&typeform-embed-handles-redirect=1&typeform-embed-no-heading=true",
+  "screenshot": "style-guides/typeform-customer-needs.png",
+  "thinExtraction": true,
+  "extraction": {
+    "text": "We'd like to know more about your\npurchasing decisions\nStart",
+    "jsonState": "",
+    "thinExtraction": true
+  },
+  "updatedAt": "2026-07-18T13:58:40.911Z",
+  "structure": {
+    "title": "Customer Needs Survey",
+    "description": "We'd like to know more about your purchasing decisions to better serve your needs. Please take a few minutes to share your preferences with us.",
+    "questions": [
+      {
+        "text": "What is the primary factor that influences your purchasing decisions?",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Price",
+          "Product Quality",
+          "Brand Reputation",
+          "Specific Features",
+          "Customer Reviews"
+        ]
+      },
+      {
+        "text": "Which of these features are most important to you in a product?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Ease of use",
+          "Durability",
+          "Innovative design",
+          "Customer support",
+          "Environmental impact"
+        ]
+      },
+      {
+        "text": "How often do you research products online before making a purchase?",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Always",
+          "Often",
+          "Sometimes",
+          "Rarely",
+          "Never"
+        ]
+      },
+      {
+        "text": "How important is brand loyalty to your final decision?",
+        "type": "linear_scale",
+        "required": false,
+        "low": 1,
+        "high": 5,
+        "lowLabel": "Not at all",
+        "highLabel": "Extremely"
+      },
+      {
+        "text": "What are the biggest challenges or pain points you experience with current products in this category?",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Where do you typically find information about new brands or products?",
+        "type": "checkboxes",
+        "required": false,
+        "options": [
+          "Social Media",
+          "Search Engines",
+          "Friends or Family recommendations",
+          "Email newsletters",
+          "In-store displays"
+        ]
+      },
+      {
+        "text": "What is your typical budget range for a purchase like this?",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "Under $50",
+          "$50 - $200",
+          "$200 - $500",
+          "$500 - $1,000",
+          "Over $1,000"
+        ]
+      },
+      {
+        "text": "Around what date did you make your most recent significant purchase?",
+        "type": "date",
+        "required": false
+      },
+      {
+        "text": "Is there anything else you would like us to know about your purchasing habits?",
+        "type": "paragraph",
+        "required": false
+      }
+    ]
+  },
+  "form": {
+    "formId": "1uJy6vNhiw_hlY2phgafsDtgDWHp1XJlbUnrfG8KIkG4",
+    "editUrl": "https://docs.google.com/forms/d/1uJy6vNhiw_hlY2phgafsDtgDWHp1XJlbUnrfG8KIkG4/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdH5bymiN1RwqwbcnUGITt-jpYFOsH_ut806iQNUQnYQnnRIw/viewform",
+    "questionCount": 9
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/typeform-customer-needs.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/k25vpAtguf",
+      "publishId": "k25vpAtguf",
+      "expiresAt": "2027-07-18T18:16:37.779Z",
+      "imageCount": 1,
+      "htmlLength": 30132,
+      "durationMs": 78171,
+      "at": "2026-07-18T18:16:37.895Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/HiKHhri5vv",
+      "publishId": "HiKHhri5vv",
+      "expiresAt": "2027-07-18T18:17:14.175Z",
+      "imageCount": 0,
+      "htmlLength": 32873,
+      "durationMs": 36394,
+      "at": "2026-07-18T18:17:14.292Z"
+    }
+  }
+}

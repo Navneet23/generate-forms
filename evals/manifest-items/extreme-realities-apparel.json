@@ -1,0 +1,135 @@
+{
+  "id": "extreme-realities-apparel",
+  "sourceUrl": "https://form.jotform.com/extremerealitiesdesign/custom-apparel-order-form",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [],
+  "resolvedFormUrl": "https://form.jotform.com/extremerealitiesdesign/custom-apparel-order-form",
+  "screenshot": "style-guides/extreme-realities-apparel.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Custom Apparel Order Form\nOrder Date\nDate\nCustomer Billing & Shipping Information\nLocal Pick Up\nNo shipping needed\nName*\nFirst Name\nLast Name\nBilling/Shipping Address*\nStreet Address\nStreet Address Line 2\nCity\nState / Province\nPostal / Zip Code\nEmail*\nexample@example.com\nPhone Number\nFormat: (000) 000-0000.\n\nDue Date (if applicable): Turnaround times vary by season and workload. While we’ll do our best to meet rush requests, due dates cannot be guaranteed.\n\nDue Date\nDate\nNext",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:57:41.028Z",
+  "structure": {
+    "title": "Custom Apparel Order Form",
+    "description": "Please provide your details and order specifications for custom apparel. Note that while we aim to meet rush requests, due dates cannot be guaranteed due to seasonal workload.",
+    "questions": [
+      {
+        "text": "Order Date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "text": "Local Pick Up",
+        "type": "multiple_choice",
+        "required": false,
+        "options": [
+          "Yes - No shipping needed",
+          "No - Ship to my address"
+        ]
+      },
+      {
+        "text": "Full Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Billing/Shipping Address",
+        "type": "paragraph",
+        "required": true
+      },
+      {
+        "text": "Email",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Phone Number",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Requested Due Date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "text": "Type of Apparel",
+        "type": "dropdown",
+        "required": true,
+        "options": [
+          "T-Shirt",
+          "Hoodie",
+          "Sweatshirt",
+          "Long Sleeve",
+          "Tank Top",
+          "Hat",
+          "Other"
+        ]
+      },
+      {
+        "text": "Apparel Color(s)",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Size Breakdown and Quantities (e.g., 5 Small, 10 Large)",
+        "type": "paragraph",
+        "required": true
+      },
+      {
+        "text": "Design Placement",
+        "type": "checkboxes",
+        "required": true,
+        "options": [
+          "Front Chest",
+          "Left Chest",
+          "Full Back",
+          "Sleeve",
+          "Other"
+        ]
+      },
+      {
+        "text": "Design Description and Instructions",
+        "type": "paragraph",
+        "required": true
+      }
+    ]
+  },
+  "form": {
+    "formId": "1JMxCDT2zxGWeMJ9sk9tTXngyaX37Xdl3bjpDsfulJNY",
+    "editUrl": "https://docs.google.com/forms/d/1JMxCDT2zxGWeMJ9sk9tTXngyaX37Xdl3bjpDsfulJNY/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfI3uogaNqJRHaRQeLd80170z6yRUnSOTrmpMIcIeJtcfwt7Q/viewform",
+    "questionCount": 12
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/extreme-realities-apparel.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/XUUaGwiyDR",
+      "publishId": "XUUaGwiyDR",
+      "expiresAt": "2027-07-18T18:08:34.838Z",
+      "imageCount": 1,
+      "htmlLength": 17807,
+      "durationMs": 71425,
+      "at": "2026-07-18T18:08:34.970Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/ECDyeFqrjp",
+      "publishId": "ECDyeFqrjp",
+      "expiresAt": "2027-07-18T18:10:10.985Z",
+      "imageCount": 1,
+      "htmlLength": 16541,
+      "durationMs": 96141,
+      "at": "2026-07-18T18:10:11.115Z"
+    }
+  }
+}

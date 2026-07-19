@@ -1,0 +1,158 @@
+{
+  "id": "dainty-florals-order",
+  "sourceUrl": "https://form.jotform.com/221946623097058",
+  "stages": {
+    "extract": "done",
+    "recreate": "done",
+    "create": "done",
+    "verify": "done"
+  },
+  "errors": [
+    {
+      "stage": "verify",
+      "message": "1/12 question(s) missing from public payload: \"Feedback & Review (Tell us about your experience o\"",
+      "at": "2026-07-18T13:57:10.890Z"
+    },
+    {
+      "stage": "verify",
+      "message": "1/12 question(s) missing from public payload: \"Feedback & Review (Tell us about your experience o\"",
+      "at": "2026-07-18T13:57:14.667Z"
+    }
+  ],
+  "resolvedFormUrl": "https://form.jotform.com/221946623097058",
+  "screenshot": "style-guides/dainty-florals-order.png",
+  "thinExtraction": false,
+  "extraction": {
+    "text": "Order Form\nYour Name\nFirst Name\nLast Name\nDelivery or Pick Up\nDelivery\nPick up\nDate of Delivery or Pick Up\n(Same day order fee is $25.00)\nDelivery Address\n(Delivery fees will vary depending on location, pick up is no fee) (Please include street address, city, state, zip) *delivery available for Memphis, TN + surrounding areas only*\nPick Up Time\nPlease Select\n10:00am\n11:00am\n12:00pm\n1:00pm\n2:00pm\n3:00pm\n4:00pm\n5:00pm\nPlease ONLY select a time if you’re choosing to pick up! If you choose delivery, we will deliver it on the day you choose, usually anytime between 10am and 3pm. We can not guarantee delivery times unless we specifically work that out for your order.\nAny specific colors you do or do not want included?\n(specific flowers can be out of season so please only specify certain colors you will or will not want included in the arrangement(s) — if you do not have a preference please type “no preference”)\nName of Recipient\nCard Message\n(no extra cost, type your message and we will hand write a card and place it in an envelope with recipient’s name to go with the arrangement)\nPreferred form of contact — Phone Number or Email\n(Drop your phone number or email address to communicate and to send invoice to)\nPrice List\nSelect Arrangement Size\nBelow you will select your desired arrangement size. Please keep in mind that the photos used for each size does NOT represent the colors or flowers that will be used for your personal order. The reference photos are strictly examples to provide customers with the height & size of each arrangement option.\nPetite\n\nexample photo for height/ size reference only\n\n$55.00\n$55.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nPosy\n\nexample photo for height/ size reference only\n\n$75.00\n$75.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nDainty\n\nexample photo for height/ size reference only\n\n$110.00\n$110.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nCluster\n\nexample photo for height/ size reference only\n\n$145.00\n$145.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nBlossom\n\nexample photo for height/ size reference only\n\n$175.00\n$175.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nThoughtful\n\nexample photo for height/ size reference only\n\n$215.00\n$215.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSmall Floating Arrangement (no vase)\n\nexample photo for height/ size reference only\n\n$95.00\n$95.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nMedium Floating Arrangement (no vase)\n\nexample photo for height/ size reference only\n\n$125.00\n$125.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nLarge Floating Arrangement (no vase)\n\nexample photo for height/ size reference only\n\n$165.00\n$165.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSympathy Spray\n\nexample photo for height/ size reference only\n\n$250.00\n$250.00\nQuantity\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\nItem subtotal:\n$0.00\n$0.00\nSubtotal\n$0.00\n$\n0.00\nTax\n$0.00\n$\n0.00\nTotal\n$0.00\n$\n0.00\nForm of Payment\nCredit / Debit Card (3.5% service fee)\nPayPal (2.9% service fee)\nVenmo\nCash or Check\nYour total will change if you choose delivery —\nOnce the distance of your delivery location is calculated, delivery fee will be added then a final invoice will be sent to your preferred form of contact.\nT H A N K Y O U !\nFor your order! Dainty Florals is a small business and we truly appreciate your support! We look forward to serving you with excellent customer service. For all other inquiries please text/call 901.581.1167 or email daintyfloralsmemphis@gmail.com\nPlease verify that you are human*\nEmail\nexample@example.com\nSubmit\nPowered by Jotform\nPlease Press Submit to Receive Final Invoice & Payment Instructions!\nW R I T E A R E V I E W\nIt would mean a lot to us to hear your feedback! Please tell us about your arrangement or experience with Dainty Florals so we can remember your kind words or share something with us that we could improve on. Let us know if we can share your review to our Instagram for potential clients to see what kind of service Dainty Florals provides our customers with. xx The DF team",
+    "jsonState": "",
+    "thinExtraction": false
+  },
+  "updatedAt": "2026-07-18T13:58:57.344Z",
+  "structure": {
+    "title": "Dainty Florals Order Form",
+    "description": "Please fill out this form to place your floral order. A final invoice including any applicable delivery fees will be sent to your preferred form of contact.",
+    "questions": [
+      {
+        "text": "Your Name",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Delivery or Pick Up",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Delivery",
+          "Pick up"
+        ]
+      },
+      {
+        "text": "Date of Delivery or Pick Up",
+        "type": "date",
+        "required": true
+      },
+      {
+        "text": "Delivery Address (Include street, city, state, zip - Memphis, TN area only)",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Pick Up Time",
+        "type": "dropdown",
+        "required": false,
+        "options": [
+          "10:00am",
+          "11:00am",
+          "12:00pm",
+          "1:00pm",
+          "2:00pm",
+          "3:00pm",
+          "4:00pm",
+          "5:00pm"
+        ]
+      },
+      {
+        "text": "Any specific colors you do or do not want included?",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Name of Recipient",
+        "type": "short_answer",
+        "required": false
+      },
+      {
+        "text": "Card Message (No extra cost, message will be hand-written)",
+        "type": "paragraph",
+        "required": false
+      },
+      {
+        "text": "Preferred form of contact — Phone Number or Email",
+        "type": "short_answer",
+        "required": true
+      },
+      {
+        "text": "Select Arrangement Size",
+        "type": "checkboxes",
+        "required": true,
+        "options": [
+          "Petite ($55.00)",
+          "Posy ($75.00)",
+          "Dainty ($110.00)",
+          "Cluster ($145.00)",
+          "Blossom ($175.00)",
+          "Thoughtful ($215.00)",
+          "Small Floating Arrangement (no vase) ($95.00)",
+          "Medium Floating Arrangement (no vase) ($125.00)",
+          "Large Floating Arrangement (no vase) ($165.00)",
+          "Sympathy Spray ($250.00)"
+        ]
+      },
+      {
+        "text": "Form of Payment",
+        "type": "multiple_choice",
+        "required": true,
+        "options": [
+          "Credit / Debit Card (3.5% service fee)",
+          "PayPal (2.9% service fee)",
+          "Venmo",
+          "Cash or Check"
+        ]
+      },
+      {
+        "text": "Feedback & Review (Tell us about your experience or if we can share your review on Instagram)",
+        "type": "paragraph",
+        "required": false
+      }
+    ]
+  },
+  "form": {
+    "formId": "1B5uHck8mZ22eKeTHhLU1hD741byekPnPp5YconiHyzY",
+    "editUrl": "https://docs.google.com/forms/d/1B5uHck8mZ22eKeTHhLU1hD741byekPnPp5YconiHyzY/edit",
+    "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdBTbkwSlE0Q-4QlFSImg4y8VYI832D9PTCgiX0vrD2SlMb7Q/viewform",
+    "questionCount": 12
+  },
+  "styleGuideUrl": "https://rnmgd4zbyge7l4dl.public.blob.vercel-storage.com/eval-style-guides/dainty-florals-order.png",
+  "generated": {
+    "gemini-2.5-flash-image": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/Axtklnv3iU",
+      "publishId": "Axtklnv3iU",
+      "expiresAt": "2027-07-18T17:17:38.491Z",
+      "imageCount": 1,
+      "htmlLength": 21631,
+      "durationMs": 70215,
+      "at": "2026-07-18T17:17:38.706Z"
+    },
+    "gemini-3.1-flash-image-preview": {
+      "status": "done",
+      "url": "https://app-red-phi-88.vercel.app/f/QzVFUYnBpL",
+      "publishId": "QzVFUYnBpL",
+      "expiresAt": "2027-07-18T17:19:01.416Z",
+      "imageCount": 1,
+      "htmlLength": 24943,
+      "durationMs": 82831,
+      "at": "2026-07-18T17:19:01.539Z"
+    }
+  }
+}
