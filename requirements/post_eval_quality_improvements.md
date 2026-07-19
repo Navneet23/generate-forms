@@ -373,11 +373,11 @@ reproduce under comprehensive mode on the same evidence.
 |---|---|---|
 | When | Milestones: after an SI change lands, before merge to main, calibration | Every SI tuning iteration; CI-shaped |
 | Model | Sonnet (`claude-sonnet-5`) | Haiku (`claude-haiku-4-5-20251001`) |
-| Paid via | **Pro subscription** — shell out to Claude Code headless: `claude -p "<judge prompt with absolute screenshot paths>" --output-format json --allowedTools Read` (the model reads the images via Read; the JSON result's `usage` field gives real token counts) | API, Batch endpoint (50% off; regression runs are latency-insensitive and must not compete with the interactive session budget). Base64 images, prompt static-first for caching |
+| Paid via | **Pro subscription** — shell out to Claude Code headless: `claude -p "<judge prompt with absolute screenshot paths>" --output-format json --allowedTools Read` (the model reads the images via Read; the JSON result's `usage` field gives real token counts) | **Pro subscription too** — same headless invocation with `--model claude-haiku-4-5-20251001`. Haiku consumes far less of the plan quota than Sonnet, and delta-scoped runs keep the footprint small |
 | Screenshots | 5–6: first step + one middle step + review step at ~900px wide, ONE full-resolution 1440×900 desktop (legibility flag needs real pixels), one mobile ~390px | 3: first step, one later step, mobile — all downscaled to ~750px wide (tokens scale with pixel area) |
 | Output | All flags + evidence, per-dimension scores, short rationale; pairwise A-vs-B on contested pairs only (flags differ or scores within 1 point), each pair run twice with positions swapped (position bias) | Flags + one-line evidence only. No scores, no rationale, no pairwise |
 | Est. tokens/form | ~15k in / ~1.5k out | ~4–5k in / ~300 out |
-| Est. 40-form run | **~600k input tokens** ≈ around half a Pro session (estimate — see budget guardrails) | ~180k Haiku tokens ≈ cents via Batch API |
+| Est. 40-form run | **~600k input Sonnet tokens** ≈ around half a Pro session (estimate — see budget guardrails) | ~180k Haiku tokens — a small fraction of a session (Haiku is weighted far cheaper against plan limits than Sonnet) |
 | Extra behavior | — | `--baseline=<report.json>`: output is a diff (new flags raised / cleared vs baseline); exit non-zero on new flags. Delta-aware via `--items=` (only forms an SI change touched) |
 
 #### Budget guardrails (required, not optional)
@@ -387,7 +387,12 @@ above as an estimate to be replaced by measurement:
 
 1. `--budget=<tokens>` argument: keep a running total from each call's
    `usage` field; abort cleanly (fail-closed) when crossing it, leaving the
-   report resumable.
+   report resumable. **Both modes draw from the same Pro plan quota** (they
+   only differ in model weight), so the budget flag applies to both, and
+   judge runs should be scheduled away from heavy interactive sessions.
+   Escape hatch if regression frequency ever outgrows the plan: the same
+   prompt works via the API Batch endpoint (50% off, base64 images) — a
+   config switch, not a redesign.
 2. Resumable report (house pattern): rerunning with the same `--report=`
    skips rows that already have a non-error result — a session-cap hit at
    form 28 resumes at 29 after the window resets.
@@ -450,7 +455,7 @@ instrument that cannot reproduce known ground truth does not gate anything.
 3. Calibration run on the 15 rated rows; iterate on the judge prompt until
    the three gates pass.
 4. Regression mode (same prompt minus scores/rationale, smaller screenshot
-   set, Haiku via Batch API); validate the subset rule against
-   comprehensive results.
+   set, same headless invocation with `--model claude-haiku-4-5-20251001`);
+   validate the subset rule against comprehensive results.
 5. Wire regression mode into the eval loop next to check-drift; document
    both modes in `evals/tools/README.md`.

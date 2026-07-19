@@ -74,9 +74,10 @@ Manual eyeballing remains the final call on visual appeal, but regression signal
 change drops from a rating session to minutes.
 
 **Detailed spec now exists (2026-07-19):** see `post_eval_quality_improvements.md`,
-"Item 5 — LLM auto-judge" — two modes (comprehensive Sonnet-on-subscription /
-regression Haiku-on-Batch-API), budget guardrails, output schema, and calibration
-gates against the 15 human-rated rows. Implement from that spec, not from this sketch.
+"Item 5 — LLM auto-judge" — two modes (comprehensive Sonnet / regression Haiku,
+both on the Pro subscription via headless Claude Code), budget guardrails, output
+schema, and calibration gates against the 15 human-rated rows. Implement from that
+spec, not from this sketch.
 
 **Important:** Eval **multi-turn**, not just single-shot. The real product flow is 3+
 iterative edits; drift and quality decay across edits is a distinct failure mode that a
