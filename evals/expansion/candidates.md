@@ -5,6 +5,11 @@ session (screenshot → `evals/expansion/candidates/*.png`), then the owner cura
 gate (distinctiveness test) picks the pilot set: 8 form-type (2 per tier) + ~4 brand
 images. Record the final source URL per kept image here.
 
+**How to run the capture:** follow "Sourcing procedure — step-by-step" in
+`requirements/eval_set_expansion.md` (Option A: Claude drives Chrome; Option B:
+headless `evals/tools/capture-candidate.mjs` + owner picks/captures gallery images).
+The judging checklist and file-naming rules live there too.
+
 ## Tier 1 — designer showcases / UI-pattern libraries (target: 2)
 
 Starting points (verified live 2026-07-19 via search):
