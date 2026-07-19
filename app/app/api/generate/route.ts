@@ -96,6 +96,7 @@ export async function POST(req: NextRequest) {
           html: result.html,
           generatedImages: result.images,
           imageErrors: result.imageErrors.length > 0 ? result.imageErrors : undefined,
+          validation: result.validation,
         });
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Generation failed";

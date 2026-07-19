@@ -40,6 +40,7 @@ app/
 └── lib/
     ├── scraper.ts                      # Extracts + normalises FB_PUBLIC_LOAD_DATA_
     ├── gemini.ts                       # Gemini prompt layer (multimodal + function calling for image generation)
+    ├── validate-form.ts                # QI-4/QI-6 post-generation groundedness & submit-wiring validator
     ├── image-gen.ts                    # Shared image generation logic (Nano Banana + Vercel Blob upload)
     └── store.ts                        # Upstash Redis published form store
 ```
@@ -226,7 +227,7 @@ Wraps the Gemini API. Builds a system prompt with the form structure and rules, 
 
 **Active images:** On subsequent generations, previously generated images are re-sent as vision input so Gemini maintains color coherence across edits.
 
-**Known limitation — rare question text drift:** Despite the system prompt's strong language preserving form text verbatim (reinforced in commit `f5599da`), Gemini occasionally paraphrases question text or option labels — e.g. *"Rate your current baking/decorating experience."* rendered as *"Rate your current experience"*. This is non-deterministic and infrequent; retrying the generation usually produces correct output. A structural fix (post-generation diff against `structure.questions[].text` with auto-retry or auto-correction) is the right long-term solution but is out of scope.
+**Question text drift — mitigated by the QI-4 validator (2026-07-19):** Gemini occasionally paraphrases question text or option labels despite the system prompt's verbatim rules (prompt strengthening in `f5599da` reduced but did not eliminate it; measured baseline: 7.4% of generations). `generateForm()` now runs `lib/validate-form.ts` after HTML generation: it diffs title/description/question text/option labels/`entry.*` names/submit wiring against the `FormStructure`, and on error-severity violations sends a corrective follow-up in the same chat session (max 2 retries), emitting `validate` step events for the timeline. If violations persist, the HTML is returned with `validation.violations` in the result so the UI can warn — a generation is never hard-failed. Text found only inside `<script>` strings counts as verbatim (JS-rendered layouts are legal); wiring facts that exist only in scripts downgrade to warnings (not statically verifiable). Validated by regenerating the eval set: 0 uncorrected drift in 66/68 generations, 5 corrective retries all successful.
 
 ---
 

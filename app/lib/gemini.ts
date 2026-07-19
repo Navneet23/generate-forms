@@ -6,6 +6,12 @@ import {
   Tool,
 } from "@google/generative-ai";
 import { FormStructure } from "./scraper";
+import {
+  validateGeneratedForm,
+  validationErrors,
+  buildCorrectionPrompt,
+  Violation,
+} from "./validate-form";
 import fs from "fs";
 import path from "path";
 
@@ -218,7 +224,12 @@ export async function generateForm(
   imageGenerator?: ImageGenerator,
   activeImages?: GeneratedImage[],
   onProgress?: (event: ProgressEvent) => void
-): Promise<{ html: string; images: GeneratedImage[]; imageErrors: { code: number | null; message: string }[] }> {
+): Promise<{
+  html: string;
+  images: GeneratedImage[];
+  imageErrors: { code: number | null; message: string }[];
+  validation?: { violations: Violation[]; retries: number };
+}> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
 
@@ -508,13 +519,14 @@ export async function generateForm(
   // TASK-2: Emit html_gen events
   onProgress?.({ type: "step", step: "html_gen", status: "started" });
 
-  const text = response.response.text();
+  const stripFences = (t: string) =>
+    t
+      .replace(/^```html\s*/i, "")
+      .replace(/^```\s*/i, "")
+      .replace(/\s*```$/i, "")
+      .trim();
 
-  const html = text
-    .replace(/^```html\s*/i, "")
-    .replace(/^```\s*/i, "")
-    .replace(/\s*```$/i, "")
-    .trim();
+  let html = stripFences(response.response.text());
 
   log("\n=== [GEMINI] FINAL RESULT ===");
   log(`[GEMINI] Generated HTML length: ${html.length} chars`);
@@ -529,5 +541,51 @@ export async function generateForm(
 
   onProgress?.({ type: "step", step: "html_gen", status: "completed" });
 
-  return { html, images: generatedImages, imageErrors };
+  // QI-4/QI-6: validate the generated HTML against the form structure and
+  // submit contract; on error-severity violations, ask the model to correct
+  // itself (bounded retries), never hard-failing a generation the creator
+  // could still accept.
+  const MAX_VALIDATION_RETRIES = 2;
+  onProgress?.({ type: "step", step: "validate", status: "started" });
+  let violations = validateGeneratedForm(html, structure, submitUrl);
+  let retries = 0;
+  while (validationErrors(violations).length > 0 && retries < MAX_VALIDATION_RETRIES) {
+    retries++;
+    const errs = validationErrors(violations);
+    log(`[GEMINI] Validation found ${errs.length} error(s); corrective retry ${retries}/${MAX_VALIDATION_RETRIES}`);
+    errs.forEach((v) => log(`[GEMINI]   - ${v.code}: ${v.message}`));
+    onProgress?.({
+      type: "step",
+      step: "validate",
+      status: "started",
+      detail: `Fixing ${errs.length} issue${errs.length === 1 ? "" : "s"} (attempt ${retries})`,
+    });
+    const corrected = await chat.sendMessage(buildCorrectionPrompt(violations));
+    html = stripFences(corrected.response.text());
+    violations = validateGeneratedForm(html, structure, submitUrl);
+  }
+  const finalErrors = validationErrors(violations);
+  if (finalErrors.length === 0) {
+    onProgress?.({
+      type: "step",
+      step: "validate",
+      status: "completed",
+      detail: retries > 0 ? `Passed after ${retries} fix attempt${retries === 1 ? "" : "s"}` : undefined,
+    });
+  } else {
+    log(`[GEMINI] Validation still failing after ${retries} retries: ${finalErrors.map((v) => v.code).join(", ")}`);
+    onProgress?.({
+      type: "step",
+      step: "validate",
+      status: "failed",
+      detail: `${finalErrors.length} unresolved issue${finalErrors.length === 1 ? "" : "s"} — review before publishing`,
+    });
+  }
+
+  return {
+    html,
+    images: generatedImages,
+    imageErrors,
+    validation: violations.length > 0 || retries > 0 ? { violations, retries } : undefined,
+  };
 }

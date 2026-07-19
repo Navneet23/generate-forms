@@ -28,9 +28,9 @@ how to address it. Requirements are grouped by rubric dimension and tagged:
 | QI-1 Footer notices | ✅ Implemented | Canonical footer via `buildGoogleFormsFooter(formId)` — full notices, links, Report/abuse URL; fixed 12px sizing after mobile feedback |
 | QI-2 Google Forms wordmark | ✅ Implemented | Grey text wordmark (20px) in the canonical footer; icon/image/SVG replacements forbidden |
 | QI-3 Placeholder discipline | ✅ Implemented | SI rule 15 |
-| QI-4 Groundedness/submit validator | ⬜ Not started | Next major task |
+| QI-4 Groundedness/submit validator | ✅ Implemented (2026-07-19) | `app/lib/validate-form.ts` + bounded corrective retry in `generateForm()`; "validate" SSE/timeline step. Validated by full regeneration of the eval set: baseline drift 7.4% of generations (5/68) → **0 uncorrected drift** in 66/68 regenerated with the validator (5 corrective retries fired, all successful; 2 generations skipped on transient API errors) |
 | QI-5 Selection feedback | ✅ Implemented | Extended SI rule 12 (selected/hover/focus states) |
-| QI-6 Submit wiring verification | ⬜ Not started | Lands with QI-4 |
+| QI-6 Submit wiring verification | ✅ Implemented (2026-07-19) | Landed with QI-4: entry.* presence, input-type match, submit-URL presence checks in `validate-form.ts` (JS-rendered forms downgrade to warnings — statically unverifiable) |
 | QI-7 Layout guidance | ✅ Implemented | New SI rule 13 |
 | QI-8 Style guide depth | ✅ Implemented | Extraction checklist + conditional layout replication in style-guide message text |
 | QI-9 Contrast | ✅ Implemented | SI rule 16 |

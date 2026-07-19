@@ -45,6 +45,7 @@ const stepLabelMap: Record<string, string> = {
   image_gen: "Generate images",
   color_match: "Match colors",
   html_gen: "Generating form HTML...",
+  validate: "Validating against original form...",
 };
 
 function createTemplateSteps(includeImages: boolean): TimelineStep[] {
@@ -60,6 +61,7 @@ function createTemplateSteps(includeImages: boolean): TimelineStep[] {
     );
   }
   steps.push({ step: "html_gen", label: "Generating form HTML...", status: "pending", startedAt: now });
+  steps.push({ step: "validate", label: "Validating against original form...", status: "pending", startedAt: now });
   return steps;
 }
 
@@ -372,6 +374,14 @@ export default function ChatPanel({
                   : "Form updated — see preview →";
                 if (imageErrorMsgs.length > 0) {
                   statusText += "\n" + imageErrorMsgs.join("\n");
+                }
+                const unresolved = (event.validation?.violations ?? []).filter(
+                  (v: { severity: string }) => v.severity === "error"
+                );
+                if (unresolved.length > 0) {
+                  statusText +=
+                    `\n⚠ Validation: ${unresolved.length} groundedness issue${unresolved.length > 1 ? "s" : ""} could not be auto-fixed — ` +
+                    unresolved.map((v: { message: string }) => v.message).join(" ");
                 }
                 return [...updated, { role: "assistant" as const, text: statusText }];
               });

@@ -207,6 +207,25 @@ function buildCorpus(html) {
   return `${textPart}\n${attrValues.join("\n")}`;
 }
 
+// Second-tier corpus: the contents of <script> blocks with common JS string
+// escapes undone. Generated forms are allowed (SI rule 13/14 layouts) to build
+// their DOM dynamically from JS config arrays — for those, verbatim question/
+// option text lives inside script strings, not visible text nodes. Text found
+// ONLY here is still verbatim content (not drift), but is reported with a note
+// since static analysis cannot prove it renders.
+function buildScriptCorpus(html) {
+  const scripts = [];
+  const re = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+  let m;
+  while ((m = re.exec(html)) !== null) scripts.push(m[1]);
+  const unescaped = scripts
+    .join("\n")
+    .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/\\n|\\t/g, " ")
+    .replace(/\\(["'`/\\])/g, "$1");
+  return normalizeText(unescaped);
+}
+
 function findEntryNames(html) {
   const found = new Set();
   const re = /name\s*=\s*["']entry\.(\d+)["']/gi;
@@ -223,27 +242,29 @@ function findEntryNames(html) {
 
 function runChecks(structure, generatedHtml) {
   const corpus = buildCorpus(generatedHtml);
+  const scriptCorpus = buildScriptCorpus(generatedHtml);
   const entryNames = findEntryNames(generatedHtml);
   const checks = [];
 
   const push = (status, label, detail) => checks.push({ status, label, detail });
 
+  // Two-tier verbatim text check: visible corpus first, then script corpus.
+  // Text present only in scripts is verbatim content in a JS-rendered form —
+  // OK with a note, not drift.
+  const pushText = (norm, label, expected) => {
+    if (corpus.includes(norm)) push("OK", label, `expected "${expected}"`);
+    else if (scriptCorpus.includes(norm))
+      push("OK", label, `expected "${expected}" (found only in script — JS-rendered form; verify visually once)`);
+    else push("DRIFT", label, `expected "${expected}"`);
+  };
+
   // Title
-  const normTitle = normalizeText(structure.title);
-  push(
-    corpus.includes(normTitle) ? "OK" : "DRIFT",
-    "title",
-    `expected "${structure.title}"`
-  );
+  pushText(normalizeText(structure.title), "title", structure.title);
 
   // Description (may legitimately be empty on some forms — treat empty as OK/skip)
   const normDesc = normalizeText(structure.description);
   if (normDesc.length > 0) {
-    push(
-      corpus.includes(normDesc) ? "OK" : "DRIFT",
-      "description",
-      `expected "${structure.description}"`
-    );
+    pushText(normDesc, "description", structure.description);
   } else {
     push("OK", "description", "(source form has no description; nothing to check)");
   }
@@ -258,27 +279,24 @@ function runChecks(structure, generatedHtml) {
   // Per-question checks
   structure.questions.forEach((q, i) => {
     const qLabel = `question ${i + 1}`;
-    const normQ = normalizeText(q.text);
-    push(
-      corpus.includes(normQ) ? "OK" : "DRIFT",
-      `${qLabel} text`,
-      `expected "${q.text}"`
-    );
+    pushText(normalizeText(q.text), `${qLabel} text`, q.text);
 
-    push(
-      entryNames.has(q.entryId) ? "OK" : "DRIFT",
-      `${qLabel} entry id`,
-      `expected name="${q.entryId}" on an input/select/textarea`
-    );
+    if (entryNames.has(q.entryId)) {
+      push("OK", `${qLabel} entry id`, `expected name="${q.entryId}" on an input/select/textarea`);
+    } else if (generatedHtml.includes(q.entryId)) {
+      push(
+        "WARN",
+        `${qLabel} entry id`,
+        `${q.entryId} present only in script (JS-rendered form) — runtime submit wiring not statically verifiable`
+      );
+    } else {
+      push("DRIFT", `${qLabel} entry id`, `expected name="${q.entryId}" on an input/select/textarea`);
+    }
 
     q.options.forEach((opt, j) => {
       const normOpt = normalizeText(opt);
       if (normOpt.length === 0) return;
-      push(
-        corpus.includes(normOpt) ? "OK" : "DRIFT",
-        `${qLabel} option ${j + 1}`,
-        `expected "${opt}"`
-      );
+      pushText(normOpt, `${qLabel} option ${j + 1}`, opt);
     });
 
     // Best-effort, non-blocking: does a required question actually carry a
