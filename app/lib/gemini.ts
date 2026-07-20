@@ -142,7 +142,7 @@ RULES — you must follow all of these:
 5. The form must submit via JavaScript fetch POST to: ${submitUrl}
    Send JSON body: an object mapping each entry.XXXXXXXXX name to its value.
    For checkbox questions where multiple options can be selected, send the value as an array of strings (e.g. ["Option A", "Option B"]).
-   On success show a thank-you message. On error show a friendly error message.
+   On success, show a confirmation per rule 21. On error show a friendly error message and leave the form's entered values intact so the respondent can retry.
    If you generate a multi-step form, collect ALL field values across ALL steps before submitting — never submit with missing or empty values from earlier steps.
 6. The form must be fully responsive and work on mobile. No fixed pixel widths on the main form container — use a max-width content column with auto margins on wide screens. Question text, answer options, and input text must be at least 16px on mobile (secondary text like helper hints and the rule-18 footer is exempt and should stay small). Spacing must adapt to screen size: on narrow screens (≤480px) reduce horizontal padding to 16-24px and compress vertical gaps — never reuse large desktop padding/margin values unchanged on mobile. Cards, steps, and containers must size to their content: never give them fixed heights, large min-heights, or space-between stretching that leaves big empty gaps between a question and its Next button. (Rule 11's full-viewport background applies to the PAGE background only — not to the form card.)
 7. Render ALL questions from the structure in order. Do not skip any. Always render the form title and description at the top.
@@ -171,17 +171,23 @@ ${buildGoogleFormsFooter(structure.formId)}
     - The "Google Forms" wordmark must remain grey text exactly as given — never replace it with an icon, logo image, or SVG.
     - Keep the footer's inline font sizes exactly as given (12px notices, 20px wordmark) on ALL screen sizes — the footer is secondary text and is exempt from rule 6's 16px minimum. Do not scale it up, and do not let it inherit the page's display font.
     - Footer links must be visibly underlined. The footer must stay legible and meet the contrast rule (16).
-    - In multi-step layouts, the footer must appear at minimum on the first step and the final (review) step.
+19. NO INVENTED VALIDATION: only enforce the required-field checks described in rule 8 and the input types given in the structure JSON. Never add format validation the original form does not have — no URL/email/phone pattern checks, no length limits, no custom "invalid" error states beyond what rule 8 already requires. A respondent must be able to submit anything the real Google Form would accept.
+20. ⚠️ PERSISTENT BRAND CHROME ACROSS STEPS: in any multi-step layout, the branding/hero treatment, any disclaimers or notices, and the rule-18 footer must appear on EVERY step (or in a fixed region visible on every step) — never only on the first and/or last step. Content on each step should end near the footer with no large empty gap; a respondent must never need to scroll past dead whitespace to see a disclaimer or the footer.
+21. WIDGET CONVENTIONS:
+    - Date/time fields: the entire visible field (not just the text glyphs) must open the picker on click — wrap the native input so clicking anywhere on its styled container calls the input's showPicker() if available, falling back to focusing the input.
+    - Personal-data inputs must carry the matching autocomplete attribute so browser autofill works: name, email, tel, street-address, postal-code, etc., chosen from the question's semantics. Leave autocomplete unset on fields where it would be wrong (e.g. free-text survey answers).
+    - After a successful submit, replace the form with a dedicated confirmation view matching the form's visual theme — never show the confirmation as an inline banner above a still-visible form.
 
 ${includeImages ? `IMAGE GENERATION GUIDELINES (when the generate_image tool is available):
 - You have access to a generate_image tool that creates AI images for the form.
 - Decide whether images would genuinely enhance this form. Good candidates: event registrations, creative/branded forms, themed forms. Poor candidates: simple internal surveys, feedback forms, plain data collection.
-- If you decide images would help, call generate_image with a detailed, specific prompt. Describe the style, mood, subject, and composition. Never request text/words/letters in images.
+- If you decide images would help, call generate_image with a detailed, specific prompt. Describe the style, mood, subject, and composition. Never request text/words/letters in images. If a style guide or generated brand colors are available, name their specific dominant colors (as hex values or precise color names) in the image prompt so the image stays on-brand — do not leave color choice to chance.
 - You can call generate_image multiple times for different image types (e.g. one header + one background).
 - After receiving generated images, you will see them as vision input. Use the actual colors in the image to pick complementary form colors (background, text, buttons, borders) for visual coherence.
 - For background images: use CSS background-image with background-size: cover. Always add a semi-transparent overlay so form text remains readable.
-- For header images: place at the top with appropriate height (200-300px), use object-fit: cover, make it responsive.
+- For header images: place at the top with appropriate height (200-300px on desktop, less on mobile — never taller than roughly 40% of the viewport height), use object-fit: cover, make it responsive.
 - For accent images: size appropriately and position to support the form theme without overwhelming the content.
+- If neither the prompt nor the style guide gives enough signal to choose a coherent, on-brand image, do NOT generate one — a plain CSS-styled form is better than a generic or off-brand image.
 - Reference generated images by their returned URL in the HTML.` : `IMAGE RULES:
 - Do NOT include any images in the form. Do not use <img> tags, background-image CSS, or any external image URLs. The form should be styled with colors, gradients, and CSS only. (The text-based Google Forms footer required by rule 18 is unaffected by this rule.)`}
 
@@ -286,7 +292,11 @@ export async function generateForm(
       ? ` Focus specifically on: ${styleGuide.focusNote}.`
       : "";
     parts.push({
-      text: `The image above is a visual style guide. Deliberately extract and apply its visual language: colour palette (dominant + accent colours), typography feel (serif/sans, weight, formality), spacing and density, corner radius and border treatment, and overall mood.${focusText} If the creator's request asks to follow this image's layout, replicate its layout/structure as closely as the form content allows; otherwise use it only as a visual style reference and do not clone its layout. Never embed this image itself in the form.`,
+      text: `The image above is a visual style guide. First judge WHAT KIND of reference it is, then apply it accordingly:
+• If it is a FORM or form-like screenshot (a designed form, survey, quiz, or multi-field page): treat it as the target look and match BOTH halves — (1) its visual theme: colour palette (dominant + accent, as specific hex values), typography feel (serif/sans, weight, formality), spacing and density, corner radius and border treatment, overall mood; AND (2) its layout: where any hero/header image sits (left, right, top, background, or none), whether content is in a card or runs full-bleed, and single- vs multi-column / one-question-per-screen vs scrolling — as closely as the form content allows.
+• If it is a BRAND or non-form image (logo, poster, packaging, product shot, brand page, or mood image): it has NO form layout to copy. Extract its colour palette (dominant + accent, as specific hex values), typography feel, and mood, and apply them to the form. Take the LAYOUT from the creator's prompt; if the prompt does not specify one, choose the layout that best fits the form's length and tone.
+In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for different colours, a different theme, or a different layout than the guide shows, follow the prompt and do NOT force the guide's version — fall back to the guide only for whatever the prompt leaves unspecified. When the prompt says nothing about colour, DO use the guide's palette (do not substitute a generic default).${focusText}
+⚠️ This image is a VISUAL reference ONLY. NEVER copy any text visible in it — no headlines, taglines, claims, time estimates ("takes N minutes"), button labels, product names, or any other words or numbers shown in the image — into the generated form. All form text comes exclusively from the structure JSON below; the style guide contributes appearance, never content. Never embed this image itself in the form.`,
     });
     log("[GEMINI] Part: style guide image (inlineData) + text");
   }

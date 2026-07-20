@@ -48,6 +48,25 @@ b9a02ea. Everything above is what static checking cannot reach.
 | 4 | Widget UX + image-fit SI rules | T6, T8 | Minor-severity polish; cheap to bundle with any SI change | Small |
 | 5 | LLM judge (FI-3), then fold runtime checking into post-generation per the item-2 decision rule (async repair and/or jsdom logic-gate — NOT a blocking Chromium gate) | T3, T7 at scale; T1, T2 at generation time | Judge is the scaling path for what static checks can't see; serving integration only after Phase 1 measures the real failure rate — see item-2 details for options and tradeoffs | Large |
 
+## SI-only implementation status (2026-07-20)
+
+The prompt-only subset of the fixes landed on branch `post-eval-quality-improvements`
+(SI text in `app/lib/gemini.ts`; no pipeline/harness/judge code yet). Mapping to
+themes and QI registry:
+
+| Theme | SI change | QI | Verified |
+|---|---|---|---|
+| T3 style-guide text leak | Style-guide block: "VISUAL reference ONLY, never copy text" | QI-8b | ✅ 0/4 crossfit regens leak "Takes N min" (was in all 4 before) |
+| T4 invented validation | Rule 19 (ban non-original validation) | QI-12 | Rule in place; founders won't regenerate (transient Gemini errors, 4 attempts) — prior campaign regen already showed no `type=url`/`pattern=`, so no regression signal |
+| T5 chrome inconsistency | Rule 20 (persistent chrome every step) + removed rule 18's "first/last only" clause | QI-13 | Structural cause (the contradicting clause) removed; per-step placement needs a visual pass in the next full eval run |
+| T6 widget UX | Rule 21 (date picker, autocomplete, confirmation view) + rule 5 alignment | QI-14 | ✅ dainty regen emits `showPicker` + `autocomplete` |
+| T7 layout adherence (prompt half only) | Style-guide block: form guide → match layout; brand image → layout from prompt | QI-8b | Prompt-level; measured by the next eval run / judge. Structured `announce_plan` extraction (item 3) still deferred (code change) |
+| T8 image fit | Image guidelines: name brand hex, cap hero ~40vh, skip image if no signal | QI-8b | Prompt-level; measured by the next eval run |
+
+Deferred (NOT SI-addressable, still open): T1 + T2 (runtime interactivity / submission
+— need the item-2 interaction harness), the structured style-facts module (FI-8), and
+the LLM judge (item 5). These are the larger levers and the severest rated failures.
+
 ## Details for priority items 1–5
 
 The system instruction lives in `app/lib/gemini.ts` (RULES block, currently

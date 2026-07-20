@@ -36,9 +36,16 @@ how to address it. Requirements are grouped by rubric dimension and tagged:
 | QI-9 Contrast | ✅ Implemented | SI rule 16 |
 | QI-10 Overflow | ✅ Implemented | SI rule 17 |
 | QI-11 Linear scale / responsive | ✅ Implemented | Amended SI rules 6 & 9; rule 6 also gained mobile spacing compression + content-sized containers after live testing on narrow screens |
+| QI-12 No invented validation | ✅ Implemented (2026-07-20) | SI rule 19. From human-rating theme T4 (`post_eval_quality_improvements.md`) — bans URL/email/phone/length validation the original form lacks |
+| QI-13 Persistent brand chrome across steps | ✅ Implemented (2026-07-20) | SI rule 20 + removed the contradicting "footer on first/last step only" clause from rule 18. From theme T5 |
+| QI-14 Widget conventions | ✅ Implemented (2026-07-20) | SI rule 21: date field opens picker on full-field click (`showPicker()`), `autocomplete` on personal fields, dedicated post-submit confirmation view. From theme T6. Rule 5 aligned to route success → rule 21 |
+| QI-8b Style-guide form-vs-image + colour override | ✅ Implemented (2026-07-20) | Rewrote the style-guide message block: form guide → match layout **and** palette; brand/non-form image → palette+mood only, layout from prompt; prompt overrides the guide, silence keeps the guide's palette; no text transcription from the image (theme T3). Also adds hex-precision + hero-height cap + skip-image-if-no-signal to the image guidelines (theme T8) |
 
-Verified via live generation on the dev server (cupcake-workshop test form): footer,
-wordmark, and mobile rendering iterated against real screenshots. Full eval-set run
+Rules 1–18 verified via live generation on the dev server (cupcake-workshop test form):
+footer, wordmark, and mobile rendering iterated against real screenshots. QI-12..QI-14 +
+QI-8b verified 2026-07-20 by regenerating affected eval items on the working-tree SI:
+T3 text-leak gone (0/4 crossfit regens vs present before), T6 `showPicker`+`autocomplete`
+emitted (dainty), style-guide/no-drift clean via the QI-4 validator. Full eval-set run
 against the rubric still pending.
 
 ---
