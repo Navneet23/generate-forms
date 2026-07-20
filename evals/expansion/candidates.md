@@ -83,3 +83,52 @@ Chrome/Option A path or owner manual capture to get past bot walls / cookie over
 previews (purpose-built to view, no bot protection), smaller indie Shopify quiz/waitlist
 brands, more Luma events for palette variety. Tier 1 + brand-guideline scans → defer to
 Option A / owner.
+
+## Capture log — run 2 (2026-07-20, template previews)
+
+**KEPT (verified):**
+
+| File | Source URL | Why kept |
+|---|---|---|
+| `t1-framer-wait-waitlist.png` | https://wait.framer.media/ | Light theme, lime/chartreuse accent, clean centered email-capture, avatar social proof, video card. Distinctive palette; small unobtrusive "Made in Framer" badge. |
+| `t1-framer-waitliz.png` | https://wprotemplate.framer.website/ | Dark glassmorphism card, blue accent, cosmic nebula background, countdown blocks. Very distinctive; layout-diverse from the light one. |
+
+**REJECTED:**
+
+- `https://waitup.framer.website/` — dead ("Site Not Found").
+- `https://framerforms.com/templates/3d-survey-form-template` and `/multi-step-forms`
+  — these are FramerForms **product marketing pages** (own nav/CTA chrome), not raw
+  form previews. The `framerforms.com/templates/...` URLs are not the live form; the
+  actual form demo is behind a "Use template" action.
+- `https://www.drinktrade.com/pages/find-my-match` (Trade Coffee quiz) — puppeteer
+  crashed twice on it (hard redirect/JS). → owner/Option A.
+
+**Two published Framer templates (`*.framer.website` / `*.framer.media`) captured
+cleanly** — this is the reliable headless vein for polished, layout-diverse form/landing
+style guides. Note both are waitlist templates (email-capture heroes); for form-layout
+variety, the deferred list needs true multi-step/application form references.
+
+## Headless pass summary + handoff to Option A / owner
+
+**Collected this session: 5 verified keeps** — 2 Tier-1 (Framer templates), 3 Tier-2
+(Chantecaille quiz + 2 Luma events). Tooling is proven; the headless-friendly veins are
+mapped (template previews, Luma, indie luxury Shopify).
+
+**Deferred to the Chrome/Option A or owner-manual pass** (gallery-image or bot-walled —
+not headless-capturable):
+
+- **Tier 1 designer galleries** (image assets inside galleries, need discovery + asset
+  download): Muzli `https://muz.li/inspiration/forms/`, Eleken 42-examples, Dribbble
+  "form design" — save 2-3 high-polish shots directly.
+- **Tier 3 competitor customer showcases** (find the live branded customer forms):
+  Typeform "of the month" community thread + `typeform.com/blog-tag/customer-story`;
+  equivalent "made with Tally/Fillout" — 2 forms.
+- **Tier 2 bot-walled brand quizzes** worth grabbing via a real browser (decline
+  cookies, dismiss overlays): SkinCeuticals/Origins/Good Molecules routine finders,
+  Medik8 skincare quiz, Trade Coffee `drinktrade.com/pages/find-my-match`.
+- **Brand images (~4-6):** brand-guideline scans from `brandingstyleguides.com` +
+  Canva's "50 style guides"; 1 packaging shot (Dieline); 1 poster/menu. All gallery
+  images → save directly.
+
+Owner curation gate runs after this deferred pass fills the tiers to target
+(2/tier form-type + ~4 brand).
