@@ -225,6 +225,15 @@ arguments. Browser automation or owner help is only needed for **discovery**
 (browsing galleries to find the URLs) and for **image-shaped candidates**
 (Dribbble shots, brand-guideline scans) that live inside galleries.
 
+**Target-selection lesson (run 1, 2026-07-20 — see `candidates.md` capture log):**
+headless capture of major **D2C brand** sites is low-yield — most serve a
+Cloudflare/Akamai bot wall or an overlay-clogged hero to a headless browser.
+Prefer targets NOT built to block bots: **event pages** (Luma — but they share
+one layout, so cap at ~2 for palette not layout), **Framer/Webflow template live
+previews** (purpose-built to be viewed), and **smaller indie/Shopify** quiz/waitlist
+brands. Route bot-walled brand sites and Tier-1 image galleries to Option A / the
+owner instead of retrying headlessly.
+
 #### Option A — autonomous sourcing (Claude driving Chrome)
 
 Use when the owner has connected the Claude-in-Chrome extension and told the

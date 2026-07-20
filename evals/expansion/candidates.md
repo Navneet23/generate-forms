@@ -49,3 +49,37 @@ Starting points (verified live 2026-07-19 via search):
 - Gallery/Dribbble images: save the image directly as PNG. NEVER deliver images via
   Google Docs (Drive connector cannot extract them — Paperform lesson).
 - Name candidates `t<tier>-<slug>.png` / `brand-<slug>.png`; record source URL here.
+
+## Capture log — run 1 (2026-07-20, Option B headless half)
+
+Tooling worked perfectly (every capture came out 1440×900). The limiting factor is
+the TARGET, not the tool — see finding below.
+
+**KEPT (in `candidates/`, verified visually):**
+
+| File | Source URL | Why kept |
+|---|---|---|
+| `t2-chantecaille-routine-finder.png` | https://chantecaille.com/pages/skincare-routine-finder | Real live quiz; luxury-editorial brand — serif wordmark, blush/cream palette, icon-card options, product photography, progress bar. Custom (non-Luma, non-template) layout. Only a dismissable bottom cookie bar; form fully visible. |
+| `t2-luma-ddx-dubai.png` | https://lu.ma/ddxdubai | Design-conference event page; muted green/gold poster cover, clean two-column event layout. |
+| `t2-luma-shift-miami.png` | https://lu.ma/shiftmiami | Bold purple→pink→cyan gradient background, strong display type, Infobip Shift cover. Good palette reference. |
+
+**REJECTED this run:**
+
+- `skinceuticals.com/advanced-routine-finder.html` — Cloudflare "verify you are human" bot wall.
+- `origins.com/skincare-routine-finder` — Akamai "Access Denied".
+- `goodmolecules.com/skincare-quiz` — bot "confirm you are human" wall.
+- `us.medik8.com/pages/skincare-quiz` — page loaded but buried under cookie banner + rewards popup + accessibility widget; hero unusable without dismissing overlays (needs interaction → Option A/owner).
+- Extra Luma events (pitchxl, metacomference) captured but dropped: Luma pages all share ONE layout, so >2 over-indexes the set on the Luma template. Keep Luma as palette/brand references, not layout diversity.
+
+**Finding (important for planning):** headless capture of major **D2C brand** sites is
+low-yield — 3 of 4 were hard bot walls (Cloudflare/Akamai), the 4th overlay-clogged.
+The clean-yield veins for the headless path are (a) **event pages** (Luma — but
+layout-homogeneous) and (b) **Shopify-based indie/luxury brands** that don't gate bots
+(Chantecaille). The specific *branded forms* likely wanted (major-brand quizzes) and the
+**Tier-1 designer galleries** (Muzli/Dribbble — image assets, not live pages) need the
+Chrome/Option A path or owner manual capture to get past bot walls / cookie overlays.
+
+**Next captures to try headlessly (gentler targets):** Framer/Webflow template live
+previews (purpose-built to view, no bot protection), smaller indie Shopify quiz/waitlist
+brands, more Luma events for palette variety. Tier 1 + brand-guideline scans → defer to
+Option A / owner.
