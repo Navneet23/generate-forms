@@ -132,3 +132,37 @@ not headless-capturable):
 
 Owner curation gate runs after this deferred pass fills the tiers to target
 (2/tier form-type + ~4 brand).
+
+## Capture log — run 3 (2026-07-20, indie brands + Kind B)
+
+Pivoted to indie/Shopify brands (gentler than mega-DTC) and deliberately grabbed
+**Kind B brand images** (had zero before). D2C quiz subpages still mostly walled;
+brand homepages of indie Shopify brands render well and make strong Kind B references.
+
+**KEPT (verified):**
+
+| File | Kind | Source URL | Why kept |
+|---|---|---|---|
+| `t2-prose-consultation.png` | A form-type | https://prose.com/consultation | Real hair-consultation intro; editorial DTC — serif wordmark, custom product photography (orange/lavender labels), cream/dark-green palette, two-column. Adds layout diversity (consultation, not waitlist/event). |
+| `brand-liquid-death.png` | B brand | https://liquiddeath.com | Maximalist — hot magenta bg, gold/purple cans, gothic blackletter wordmark, bold condensed sans. Extreme, unmistakable palette. |
+| `brand-olipop.png` | B brand | https://drinkolipop.com | Retro-groovy — teal/cream/yellow, rounded serif, hand-drawn landscape illustration. Warm, distinctive. |
+| `brand-omsom.png` | B brand | https://omsom.com | Maximalist Asian-American food — warm red/orange/amber, bold yellow packaging, dramatic food photography, starburst callout. |
+| `brand-magic-spoon.png` | B brand | https://magicspoon.com/pages/build-a-box | Playful — yellow bg, purple logo, whimsical character illustration, pastel accents. NOTE: URL 404'd but the branded 404 fully shows the brand language; owner may swap for the homepage. |
+
+**REJECTED this run (walls/clutter/404 → see owner-capture-tasks.md):**
+Curology (Cloudflare block), Hims (Cloudflare wall), Ritual (redirected to shop + geo-modal),
+Nutrafol (404 — wrong quiz path, site renders), Warby Parker (scheduled maintenance),
+Topicals (spin-to-win modal covers page), Jones Road / Function of Beauty / Care-of / DedCool
+(puppeteer crash — likely wrong URL path).
+
+## FINAL TALLY — headless pass (2026-07-20): 10 verified keeps
+
+**Kind A form-type (6):** t1-framer-wait, t1-framer-waitliz (Tier-1 templates);
+t2-chantecaille, t2-prose (in-the-wild quizzes/consultations); t2-luma-ddx,
+t2-luma-shift (event pages). **Kind B brand images (4):** liquid-death, olipop,
+omsom, magic-spoon.
+
+Good spread across both kinds and a range of moods (luxury-editorial, retro,
+maximalist, playful, dark-glass, event). Still thin on **Tier-1 designer-gallery
+shots** and **Tier-3 competitor customer forms** — both deferred to
+`owner-capture-tasks.md` (gallery images / bot-walled, not headless-capturable).
