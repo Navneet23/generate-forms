@@ -1,9 +1,21 @@
 ---
 name: forms-restyler-research-frontier
-description: Load when planning what to work on next on Forms AI Restyler, evaluating whether an idea is novel or already considered, scoping a new quality/architecture bet, or asked to "advance the state of the art" / "what should we build next" / "has anyone thought about X" here. Maps every open problem where this project could push past its current quality ceiling — grounded in requirements/future_improvements.md (FI-1..FI-7), requirements/quality_improvements.md, V3/V4 roadmap docs, and the 37-item eval set. Not for executing the drift-elimination campaign (forms-restyler-drift-elimination-campaign), not for SI mechanics (forms-restyler-si-engineering), not for running the eval pipeline (forms-restyler-eval-pipeline), not for judging whether a change is already validated (forms-restyler-validation-and-qa).
+description: Load when planning what to work on next on Forms AI Restyler, evaluating whether an idea is novel or already considered, scoping a new quality/architecture bet, or asked to "advance the state of the art" / "what should we build next" / "has anyone thought about X" here. Maps every open problem where this project could push past its current quality ceiling — grounded in requirements/future_improvements.md (FI-1..FI-14), requirements/quality_improvements.md, requirements/post_eval_quality_improvements.md, V3/V4 roadmap docs, and the 37-item eval set. Not for executing the drift-elimination campaign (forms-restyler-drift-elimination-campaign), not for SI mechanics (forms-restyler-si-engineering), not for running the eval pipeline (forms-restyler-eval-pipeline), not for judging whether a change is already validated (forms-restyler-validation-and-qa).
 ---
 
 # Forms AI Restyler — Research Frontier
+
+**Update 2026-07-19 (post human-rating analysis):** two newer registries extend
+this map and take precedence where they overlap: (a)
+`requirements/post_eval_quality_improvements.md` — themes T1–T8 from the first
+human rating pass with detailed, prioritized fix specs (SI rule pack,
+interaction harness, layout extraction, widget/image rules, two-mode LLM
+judge); (b) `requirements/future_improvements.md` now runs FI-1..FI-14 — the
+seven added entries (FI-8 structured style facts, FI-9 surgical retries, FI-10
+branching forms, FI-11 variance measurement, FI-12 prod telemetry, FI-13
+injection hardening, FI-14 a11y/page-weight) each carry implementation-level
+detail. Check both before claiming an idea is new; the problem write-ups below
+predate them.
 
 This is the map of open problems, not a task list for any one of them. Each
 problem below has its own future — pick one, then hand off to the skill that
