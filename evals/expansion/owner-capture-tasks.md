@@ -20,6 +20,11 @@ owner (or a Claude-in-Chrome / Option A session).
 Target sizes: Kind A form-type = 8 kept (2 per tier T1–T4). Kind B brand images = ~4 kept.
 Collect with surplus so the curation gate has real choice.
 
+**⚠️ Kind-A standard (owner, 2026-07-22): REAL, multi-field, NON-QUIZ forms only** —
+contact, registration, application, order, intake, feedback, booking (like
+`t1-contact-information` / `t1-contact-us`). NOT waitlists (single email capture),
+NOT product quizzes/recommenders (one question at a time). Kind B brand images are done.
+
 ---
 
 ## Tier 1 — designer showcases (gallery images; save the image directly)
@@ -31,10 +36,12 @@ Collect with surplus so the curation gate has real choice.
 
 ## Tier 3 — competitor customer showcases (find the live branded form, screenshot hero)
 
-- [ ] `t3-<brand>.png` — Typeform "of the month" community thread
-      (https://community.typeform.com , customer-stories) + typeform.com/blog-tag/customer-story;
-      open the actual live customer form and screenshot it. Target 2 real branded forms
-      (NOT template-gallery defaults).
+**NOT Typeform** — the existing 37-item eval set already has plenty of Typeform (owner,
+2026-07-22). Source real branded forms built on OTHER products.
+
+- [ ] `t3-<brand>.png` — "made with Tally / Fillout / Jotform" customer showcases, or any
+      real branded multi-field form in the wild (registration, application, order, intake).
+      Target 2 real forms (NOT template-gallery defaults, NOT quizzes/waitlists).
 
 ## Tier 2 — bot-walled brand quizzes (real browser passes the wall; decline cookies)
 

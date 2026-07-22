@@ -155,25 +155,47 @@ Nutrafol (404 — wrong quiz path, site renders), Warby Parker (scheduled mainte
 Topicals (spin-to-win modal covers page), Jones Road / Function of Beauty / Care-of / DedCool
 (puppeteer crash — likely wrong URL path).
 
-## FINAL TALLY — headless pass (2026-07-20): 10 verified keeps
+## STATUS — owner review (2026-07-22): Kind A NOT complete
 
-### Kind A — form-type, labeled by tier (target: 2 per tier T1–T4 = 8)
+Owner reviewed the headless captures and **redefined the Kind-A bar**:
 
-| Tier | What the tier is | Files kept | vs target |
-|---|---|---|---|
-| **T1** — designer showcases / templates | UI-pattern libraries, Dribbble/Mobbin, polished template concepts | `t1-framer-wait-waitlist`, `t1-framer-waitliz` | 2 / 2 ✅ (but both waitlist templates — a gallery shot would add variety) |
-| **T2** — in-the-wild branded forms | Real forms creators ship: quizzes, consultations, event pages | `t2-chantecaille-routine-finder`, `t2-prose-consultation`, `t2-luma-ddx-dubai`, `t2-luma-shift-miami` | 4 / 2 ✅ (over — can drop 1–2 at curation) |
-| **T3** — competitor customer showcases | Real branded forms "made with Typeform/Tally" (not templates) | *(none)* | 0 / 2 ❌ **gap** |
-| **T4** — third-party roundups | Forms featured in "best form design" articles | *(none)* | 0 / 2 ❌ **gap** |
+- **Kind A must be REAL, multi-field, NON-QUIZ forms** — contact, registration,
+  application, order, intake, feedback, booking — like the two the owner added
+  (`t1-contact-information` = property/mortgage form; `t1-contact-us` = branded
+  inquiry form). These set the standard.
+- **Waitlists** (single email capture) and **product quizzes / recommenders**
+  (one-question-at-a-time) do **NOT** qualify.
+- **Tier 3: do NOT source more Typeform** — the existing 37-item eval set already
+  has plenty of Typeform. Seek non-Typeform real forms.
+- **Kind B brand images: approved as-is** (the 4 kept are good).
 
-### Kind B — brand images (target: ~4)
+### Kind A — form-type, by tier (target 2/tier; NON-QUIZ real forms only)
 
-| Files kept | vs target |
-|---|---|
-| `brand-liquid-death`, `brand-olipop`, `brand-omsom`, `brand-magic-spoon` | 4 / ~4 ✅ |
+| Tier | Files | Meets the bar? |
+|---|---|---|
+| **T1** | `t1-contact-information`, `t1-contact-us` (owner-added) | ✅ real multi-field forms — the standard |
+| **T1** | `t1-framer-wait-waitlist`, `t1-framer-waitliz` (mine) | ❌ waitlists (email capture) — do not qualify |
+| **T2** | `t2-chantecaille-routine-finder`, `t2-prose-consultation` (mine) | ❌ quiz / consultation recommenders — do not qualify |
+| **T2** | `t2-luma-ddx-dubai`, `t2-luma-shift-miami` (mine) | ⚠️ event/ticket pages — not quizzes, but not real multi-field forms either (owner to decide keep/drop) |
+| **T3** | *(none)* | ❌ gap — **non-Typeform** real forms |
+| **T4** | *(none)* | ❌ gap |
 
-**Coverage summary:** T1 ✅, T2 ✅ (over), Kind B ✅. **Gaps = T3 and T4** (competitor
-customer forms + roundup-featured forms) — both are bot-walled / gallery-image types,
-so they live in `owner-capture-tasks.md` for the owner or an Option-A Chrome pass. A
-couple of Tier-1 gallery shots (Muzli/Dribbble) would also add variety beyond the two
-waitlist templates.
+**Qualifying Kind A: 2** (both T1, owner-added). Kind A is **INCOMPLETE** — needs real
+non-quiz forms across T1 (more), T2, T3 (non-Typeform), T4. My 6 form-type captures
+(2 waitlists + 2 quizzes + 2 events) do not meet the bar and are pending an owner
+keep/drop call.
+
+### Kind B — brand images: COMPLETE ✅
+
+`brand-liquid-death`, `brand-olipop`, `brand-omsom`, `brand-magic-spoon` — 4/4, approved.
+
+### What is NOT complete (summary)
+
+1. **Kind A form-type** — only 2 qualifying (owner's contact forms). Need real,
+   multi-field, non-quiz forms: more T1, all of T2 (non-quiz), T3 (**non-Typeform**), T4.
+2. **T3 / T4** — empty. T3 must avoid Typeform.
+3. **Pending owner decision** — remove my 6 non-qualifying Kind-A captures? keep the
+   2 Luma event pages or not?
+
+(Sourcing for real forms is **paused** by owner — next work is authoring prompts for the
+no-style-guide and Kind-B tracks, which need no further sourcing.)

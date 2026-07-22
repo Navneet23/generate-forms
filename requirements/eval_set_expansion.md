@@ -25,6 +25,20 @@ what is checked automatically.
 | Target size | ~60 new items, **pilot first** to test quality |
 | Form-type style-guide sourcing pilot | 2 examples from each of the 4 sourcing tiers (8 total) |
 
+### Owner refinement (2026-07-22, after first sourcing pass)
+
+- **Kind A form-type = REAL, multi-field, NON-QUIZ forms only** (contact, registration,
+  application, order, intake, feedback, booking). Waitlists (single email capture) and
+  product quizzes / recommenders (one question at a time) do **not** qualify — they were
+  captured in the first pass and rejected. Reference standard: the owner-added
+  `t1-contact-information` and `t1-contact-us` in `evals/expansion/candidates/`.
+- **Tier 3: exclude Typeform** — the base 37-item eval set already covers Typeform well;
+  source real forms built on other products / in the wild.
+- **Kind B brand images: approved** after the first pass (Liquid Death, Olipop, Omsom,
+  Magic Spoon). Kind B is considered sufficient for the pilot.
+- **Sourcing paused**: before sourcing more form inspiration, author the prompt bank for
+  the two tracks that need no sourcing — no-style-guide and Kind-B brand-image use cases.
+
 ## What makes a good eval item
 
 An item is a triple **(base form, style guide, prompt)**.
