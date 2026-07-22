@@ -157,12 +157,23 @@ Topicals (spin-to-win modal covers page), Jones Road / Function of Beauty / Care
 
 ## FINAL TALLY — headless pass (2026-07-20): 10 verified keeps
 
-**Kind A form-type (6):** t1-framer-wait, t1-framer-waitliz (Tier-1 templates);
-t2-chantecaille, t2-prose (in-the-wild quizzes/consultations); t2-luma-ddx,
-t2-luma-shift (event pages). **Kind B brand images (4):** liquid-death, olipop,
-omsom, magic-spoon.
+### Kind A — form-type, labeled by tier (target: 2 per tier T1–T4 = 8)
 
-Good spread across both kinds and a range of moods (luxury-editorial, retro,
-maximalist, playful, dark-glass, event). Still thin on **Tier-1 designer-gallery
-shots** and **Tier-3 competitor customer forms** — both deferred to
-`owner-capture-tasks.md` (gallery images / bot-walled, not headless-capturable).
+| Tier | What the tier is | Files kept | vs target |
+|---|---|---|---|
+| **T1** — designer showcases / templates | UI-pattern libraries, Dribbble/Mobbin, polished template concepts | `t1-framer-wait-waitlist`, `t1-framer-waitliz` | 2 / 2 ✅ (but both waitlist templates — a gallery shot would add variety) |
+| **T2** — in-the-wild branded forms | Real forms creators ship: quizzes, consultations, event pages | `t2-chantecaille-routine-finder`, `t2-prose-consultation`, `t2-luma-ddx-dubai`, `t2-luma-shift-miami` | 4 / 2 ✅ (over — can drop 1–2 at curation) |
+| **T3** — competitor customer showcases | Real branded forms "made with Typeform/Tally" (not templates) | *(none)* | 0 / 2 ❌ **gap** |
+| **T4** — third-party roundups | Forms featured in "best form design" articles | *(none)* | 0 / 2 ❌ **gap** |
+
+### Kind B — brand images (target: ~4)
+
+| Files kept | vs target |
+|---|---|
+| `brand-liquid-death`, `brand-olipop`, `brand-omsom`, `brand-magic-spoon` | 4 / ~4 ✅ |
+
+**Coverage summary:** T1 ✅, T2 ✅ (over), Kind B ✅. **Gaps = T3 and T4** (competitor
+customer forms + roundup-featured forms) — both are bot-walled / gallery-image types,
+so they live in `owner-capture-tasks.md` for the owner or an Option-A Chrome pass. A
+couple of Tier-1 gallery shots (Muzli/Dribbble) would also add variety beyond the two
+waitlist templates.
