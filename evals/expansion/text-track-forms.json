@@ -1,0 +1,245 @@
+{
+  "description": "30 real, specific base forms for the text-only (no-style-guide) eval track (2026-07-22). One per prompt in text-track-items.json. Named brands/workshops/products, mixed question types (no grid — unsupported; deferred). Created as real Google Forms via create-forms.mjs --forms=text-track-forms.json --out=text-track-created.json.",
+  "forms": [
+    { "id": "ridgeline-pottery", "title": "Ridgeline Pottery Studio — Wheel-Throwing Workshop Registration", "description": "Reserve your spot in our beginner wheel-throwing workshop. Classes are small, so early signup is encouraged.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Phone number", "type": "short_answer", "required": false },
+      { "text": "Which session would you like?", "type": "dropdown", "required": true, "options": ["Sat Jun 7 · 10am", "Sat Jun 14 · 10am", "Sun Jun 22 · 2pm", "Wed Jun 25 · 6pm"] },
+      { "text": "How much pottery experience do you have?", "type": "multiple_choice", "required": true, "options": ["Total beginner", "Dabbled a little", "Fairly experienced"] },
+      { "text": "Anything you'd love to make or learn?", "type": "paragraph", "required": false }
+    ]},
+    { "id": "verdant-botanicals", "title": "Verdant Botanicals — Wholesale Stockist Application", "description": "Tell us about your shop and we'll follow up with wholesale pricing for our plant-care range.", "questions": [
+      { "text": "Business name", "type": "short_answer", "required": true },
+      { "text": "Contact name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Store type", "type": "dropdown", "required": true, "options": ["Garden center", "Florist", "Gift shop", "Online only", "Other"] },
+      { "text": "Which ranges are you interested in?", "type": "checkboxes", "required": true, "options": ["Potting mixes", "Organic fertilizers", "Ceramic planters", "Care tools", "Gift sets"] },
+      { "text": "Store address", "type": "paragraph", "required": true }
+    ]},
+    { "id": "northgate-festival", "title": "Northgate Music Festival — Food & Craft Vendor Application", "description": "Apply to vend at this year's Northgate Music Festival, Aug 15–17 at Riverside Park.", "questions": [
+      { "text": "Business / stall name", "type": "short_answer", "required": true },
+      { "text": "Contact email", "type": "short_answer", "required": true },
+      { "text": "Vendor category", "type": "multiple_choice", "required": true, "options": ["Food & drink", "Arts & crafts", "Apparel", "Nonprofit / community"] },
+      { "text": "Which days will you attend?", "type": "checkboxes", "required": true, "options": ["Friday", "Saturday", "Sunday"] },
+      { "text": "Do you require electrical hookup?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] },
+      { "text": "Describe what you'll be selling", "type": "paragraph", "required": true }
+    ]},
+    { "id": "pixel-pine", "title": "Pixel & Pine Co. — Custom Furniture Order", "description": "Commission a handmade piece from our workshop. Share the details and we'll send a quote.", "questions": [
+      { "text": "Your name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "What piece are you after?", "type": "dropdown", "required": true, "options": ["Dining table", "Desk", "Bookshelf", "Bed frame", "Other"] },
+      { "text": "Preferred wood", "type": "multiple_choice", "required": true, "options": ["White oak", "Walnut", "Maple", "Reclaimed pine"] },
+      { "text": "Ideal delivery date", "type": "date", "required": false },
+      { "text": "Dimensions and any special requests", "type": "paragraph", "required": true }
+    ]},
+    { "id": "summit-strength", "title": "Summit Strength Gym — New Member Intake", "description": "Welcome to Summit Strength. A few questions so we can set up your membership and program.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Phone number", "type": "short_answer", "required": true },
+      { "text": "Membership plan", "type": "dropdown", "required": true, "options": ["Monthly", "6-month", "Annual", "Class pack"] },
+      { "text": "Primary goals", "type": "checkboxes", "required": true, "options": ["Strength", "Weight loss", "Mobility", "Sport-specific", "General fitness"] },
+      { "text": "Any injuries or conditions we should know about?", "type": "paragraph", "required": false }
+    ]},
+    { "id": "brightleaf-coffee", "title": "Brightleaf Coffee Roasters — Subscription Signup", "description": "Fresh-roasted beans delivered on your schedule. Set your preferences below.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Roast preference", "type": "multiple_choice", "required": true, "options": ["Light", "Medium", "Dark", "Surprise me"] },
+      { "text": "Grind", "type": "dropdown", "required": true, "options": ["Whole bean", "Espresso", "Pour over", "French press"] },
+      { "text": "Delivery frequency", "type": "multiple_choice", "required": true, "options": ["Weekly", "Every 2 weeks", "Monthly"] },
+      { "text": "Shipping address", "type": "paragraph", "required": true }
+    ]},
+    { "id": "coastal-paws", "title": "Coastal Paws Veterinary — New Patient Registration", "description": "Register your pet as a new patient. We'll confirm your first visit by email.", "questions": [
+      { "text": "Owner name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Pet's name", "type": "short_answer", "required": true },
+      { "text": "Species", "type": "multiple_choice", "required": true, "options": ["Dog", "Cat", "Rabbit", "Bird", "Other"] },
+      { "text": "Preferred appointment date", "type": "date", "required": true },
+      { "text": "Reason for visit", "type": "paragraph", "required": false }
+    ]},
+    { "id": "lumen-analytics", "title": "Lumen Analytics — Smart Dashboards Beta Feedback", "description": "You're testing our new Smart Dashboards feature. Tell us how it's going.", "questions": [
+      { "text": "Work email", "type": "short_answer", "required": true },
+      { "text": "How satisfied are you with Smart Dashboards?", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Very dissatisfied", "highLabel": "Very satisfied" },
+      { "text": "Which parts have you used?", "type": "checkboxes", "required": true, "options": ["Auto-charts", "Custom widgets", "Sharing", "Alerts", "Exports"] },
+      { "text": "How easy was it to set up?", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Very hard", "highLabel": "Very easy" },
+      { "text": "What should we improve?", "type": "paragraph", "required": true },
+      { "text": "Can we contact you for a follow-up?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] }
+    ]},
+    { "id": "aurora-yoga", "title": "Aurora Yoga Collective — 200-Hr Teacher Training Application", "description": "Apply for our next teacher-training cohort. We review applications on a rolling basis.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Years of personal practice", "type": "multiple_choice", "required": true, "options": ["Under 1", "1–3", "3–5", "5+"] },
+      { "text": "Styles you practice", "type": "checkboxes", "required": false, "options": ["Vinyasa", "Hatha", "Yin", "Ashtanga", "Restorative"] },
+      { "text": "Why do you want to teach?", "type": "paragraph", "required": true },
+      { "text": "Preferred start", "type": "dropdown", "required": true, "options": ["Fall cohort", "Winter cohort", "Spring cohort"] }
+    ]},
+    { "id": "tandem-bikes", "title": "Tandem Bikes — Warranty Claim", "description": "Submit a warranty claim for your Tandem bike. Keep your order number handy.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Order number", "type": "short_answer", "required": true },
+      { "text": "Which model?", "type": "dropdown", "required": true, "options": ["Tandem City", "Tandem Trail", "Tandem Cargo", "Tandem Kids"] },
+      { "text": "What's the issue?", "type": "checkboxes", "required": true, "options": ["Frame", "Brakes", "Drivetrain", "Wheels", "Electrical", "Other"] },
+      { "text": "Describe the problem", "type": "paragraph", "required": true }
+    ]},
+    { "id": "fernwood-camp", "title": "Fernwood Summer Camp — Camper Registration", "description": "Sign your child up for a week of adventure at Fernwood. Spots fill quickly!", "questions": [
+      { "text": "Parent / guardian name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Camper's name", "type": "short_answer", "required": true },
+      { "text": "Camper's age", "type": "dropdown", "required": true, "options": ["6", "7", "8", "9", "10", "11", "12"] },
+      { "text": "Which week(s)?", "type": "checkboxes", "required": true, "options": ["Week 1 (Jul 7)", "Week 2 (Jul 14)", "Week 3 (Jul 21)", "Week 4 (Jul 28)"] },
+      { "text": "Allergies or medical notes", "type": "paragraph", "required": false }
+    ]},
+    { "id": "harborview-dental", "title": "Harborview Dental — Appointment Request", "description": "Request an appointment and our front desk will confirm your time.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Phone number", "type": "short_answer", "required": true },
+      { "text": "Appointment type", "type": "dropdown", "required": true, "options": ["Checkup & cleaning", "New patient", "Toothache", "Cosmetic consult"] },
+      { "text": "Preferred date", "type": "date", "required": true },
+      { "text": "Preferred time", "type": "time", "required": true }
+    ]},
+    { "id": "metro-cycling", "title": "Metro Cycling Club — Saturday Group Ride RSVP", "description": "Let us know you're coming to this weekend's group ride so we can plan the route.", "questions": [
+      { "text": "Name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Which pace group?", "type": "multiple_choice", "required": true, "options": ["Social (12–14 mph)", "Tempo (15–17 mph)", "Fast (18+ mph)"] },
+      { "text": "Start time you'll join", "type": "time", "required": true },
+      { "text": "Bringing a guest?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] },
+      { "text": "Anything the ride leader should know?", "type": "paragraph", "required": false }
+    ]},
+    { "id": "byte-academy", "title": "Byte Academy — Full-Stack Coding Bootcamp Application", "description": "Apply for our 12-week full-stack bootcamp. No prior experience required.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Current coding level", "type": "multiple_choice", "required": true, "options": ["None", "Beginner", "Intermediate"] },
+      { "text": "Which cohort?", "type": "dropdown", "required": true, "options": ["Sep (evenings)", "Oct (full-time)", "Jan (full-time)"] },
+      { "text": "Which tracks interest you?", "type": "checkboxes", "required": false, "options": ["Frontend", "Backend", "Data", "Mobile"] },
+      { "text": "Why do you want to join?", "type": "paragraph", "required": true }
+    ]},
+    { "id": "rusty-spoon", "title": "The Rusty Spoon Bistro — Private Event Reservation", "description": "Host your celebration in our private dining room. Tell us about your event.", "questions": [
+      { "text": "Your name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Event date", "type": "date", "required": true },
+      { "text": "Preferred start time", "type": "time", "required": true },
+      { "text": "Number of guests", "type": "dropdown", "required": true, "options": ["Up to 10", "10–20", "20–40", "40+"] },
+      { "text": "Occasion and any special requests", "type": "paragraph", "required": false }
+    ]},
+    { "id": "cedar-sage-spa", "title": "Cedar & Sage Spa — Wellness Consultation Intake", "description": "Before your first visit, help us tailor your treatments.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Which services interest you?", "type": "checkboxes", "required": true, "options": ["Massage", "Facial", "Body treatment", "Aromatherapy", "Sauna"] },
+      { "text": "Stress level lately", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Very calm", "highLabel": "Very stressed" },
+      { "text": "Preferred appointment date", "type": "date", "required": false },
+      { "text": "Anything we should be aware of?", "type": "paragraph", "required": false }
+    ]},
+    { "id": "willowbrook-venue", "title": "Willowbrook Wedding Venue — Booking Inquiry", "description": "Dreaming of a Willowbrook wedding? Share your plans and we'll check availability.", "questions": [
+      { "text": "Your name", "type": "short_answer", "required": true },
+      { "text": "Partner's name", "type": "short_answer", "required": false },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Preferred wedding date", "type": "date", "required": true },
+      { "text": "Estimated guest count", "type": "dropdown", "required": true, "options": ["Under 50", "50–100", "100–150", "150+"] },
+      { "text": "Tell us about your vision", "type": "paragraph", "required": false }
+    ]},
+    { "id": "nimbus-cloud", "title": "Nimbus Cloud — Enterprise Demo Request", "description": "See Nimbus Cloud in action. A solutions engineer will reach out to schedule.", "questions": [
+      { "text": "Work email", "type": "short_answer", "required": true },
+      { "text": "Company name", "type": "short_answer", "required": true },
+      { "text": "Company size", "type": "dropdown", "required": true, "options": ["1–50", "51–200", "201–1000", "1000+"] },
+      { "text": "Which products interest you?", "type": "checkboxes", "required": true, "options": ["Compute", "Storage", "Databases", "Networking", "Security"] },
+      { "text": "Timeline to evaluate", "type": "multiple_choice", "required": true, "options": ["This month", "This quarter", "Just exploring"] },
+      { "text": "What are you hoping to solve?", "type": "paragraph", "required": false }
+    ]},
+    { "id": "homestead-farms", "title": "Homestead Farms — CSA Box Preferences", "description": "Set your weekly CSA box preferences for the summer season.", "questions": [
+      { "text": "Member name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Box size", "type": "multiple_choice", "required": true, "options": ["Small (1–2 people)", "Medium (3–4)", "Large (5+)"] },
+      { "text": "Any items to swap out?", "type": "checkboxes", "required": false, "options": ["No beets", "No kale", "No spicy peppers", "No mushrooms"] },
+      { "text": "Pickup location", "type": "dropdown", "required": true, "options": ["Farm stand", "Downtown market", "Home delivery"] },
+      { "text": "Notes for our farmers", "type": "paragraph", "required": false }
+    ]},
+    { "id": "maker-guild", "title": "Maker's Guild — Annual Conference Registration", "description": "Join makers from across the country at this year's Maker's Guild conference.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Ticket type", "type": "dropdown", "required": true, "options": ["Full conference", "Single day", "Workshops only", "Student"] },
+      { "text": "Which tracks will you attend?", "type": "checkboxes", "required": false, "options": ["Woodworking", "Electronics", "Textiles", "3D printing", "Business"] },
+      { "text": "Dietary needs", "type": "paragraph", "required": false },
+      { "text": "How did you hear about us?", "type": "multiple_choice", "required": false, "options": ["Newsletter", "Social media", "A friend", "Last year's event"] }
+    ]},
+    { "id": "vantage-realty", "title": "Vantage Realty — Property Viewing Request", "description": "Request a private viewing for a listing and an agent will confirm.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Phone number", "type": "short_answer", "required": true },
+      { "text": "Listing address or ID", "type": "short_answer", "required": true },
+      { "text": "Preferred viewing date", "type": "date", "required": true },
+      { "text": "Are you working with an agent?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] }
+    ]},
+    { "id": "solstice-retreat", "title": "Solstice Retreat Center — Retreat Booking", "description": "Reserve your place at an upcoming Solstice retreat in the redwoods.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Which retreat?", "type": "dropdown", "required": true, "options": ["Silent meditation", "Yoga & hiking", "Creative writing", "Digital detox"] },
+      { "text": "Room preference", "type": "multiple_choice", "required": true, "options": ["Private cabin", "Shared cabin", "Camping"] },
+      { "text": "Arrival date", "type": "date", "required": true },
+      { "text": "Dietary preferences", "type": "checkboxes", "required": false, "options": ["Vegetarian", "Vegan", "Gluten-free", "No restrictions"] }
+    ]},
+    { "id": "quillbook-publishing", "title": "Quillbook Publishing — Manuscript Submission", "description": "Submit your manuscript for consideration. We accept fiction and narrative nonfiction.", "questions": [
+      { "text": "Author name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Working title", "type": "short_answer", "required": true },
+      { "text": "Genre", "type": "dropdown", "required": true, "options": ["Literary fiction", "Mystery/Thriller", "Fantasy/Sci-fi", "Romance", "Nonfiction"] },
+      { "text": "Approximate word count", "type": "multiple_choice", "required": true, "options": ["Under 40k", "40–70k", "70–100k", "100k+"] },
+      { "text": "Short synopsis", "type": "paragraph", "required": true }
+    ]},
+    { "id": "trailhead-outfitters", "title": "Trailhead Outfitters — Backcountry Gear Rental Reservation", "description": "Reserve your gear for an upcoming trip. Pick up in-store the day before you leave.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Which gear do you need?", "type": "checkboxes", "required": true, "options": ["Tent", "Sleeping bag", "Backpack", "Stove", "Trekking poles", "Bear canister"] },
+      { "text": "Pickup date", "type": "date", "required": true },
+      { "text": "Return date", "type": "date", "required": true },
+      { "text": "Trip notes", "type": "paragraph", "required": false }
+    ]},
+    { "id": "sparrow-finch", "title": "Sparrow & Finch Boutique — Personal Styling Booking", "description": "Book a one-on-one styling session with one of our stylists.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "What are you shopping for?", "type": "checkboxes", "required": true, "options": ["Everyday wear", "Work", "Special occasion", "Complete refresh"] },
+      { "text": "Preferred date", "type": "date", "required": true },
+      { "text": "Preferred time", "type": "time", "required": true },
+      { "text": "Tell us about your style", "type": "paragraph", "required": false }
+    ]},
+    { "id": "beacon-nonprofit", "title": "Beacon Community — Volunteer Application", "description": "Join our volunteer team. We'll match you with opportunities that fit.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Phone number", "type": "short_answer", "required": true },
+      { "text": "Areas you'd like to help with", "type": "checkboxes", "required": true, "options": ["Food pantry", "Tutoring", "Events", "Fundraising", "Admin"] },
+      { "text": "Availability", "type": "multiple_choice", "required": true, "options": ["Weekday mornings", "Weekday evenings", "Weekends", "Flexible"] },
+      { "text": "Why do you want to volunteer with us?", "type": "paragraph", "required": false }
+    ]},
+    { "id": "apex-esports", "title": "Apex Esports — Spring Showdown Tournament Registration", "description": "Register your team for the Apex Spring Showdown. Bracket is single-elimination.", "questions": [
+      { "text": "Team name", "type": "short_answer", "required": true },
+      { "text": "Captain's email", "type": "short_answer", "required": true },
+      { "text": "Which game?", "type": "dropdown", "required": true, "options": ["Valor Arena", "Rocket Rumble", "Strike Force", "Mind Games"] },
+      { "text": "Team size", "type": "multiple_choice", "required": true, "options": ["Solo", "Duo", "Squad (4)", "Full (5)"] },
+      { "text": "Region", "type": "dropdown", "required": true, "options": ["North America", "Europe", "Asia", "Other"] },
+      { "text": "Roster (gamertags)", "type": "paragraph", "required": true }
+    ]},
+    { "id": "kindred-childcare", "title": "Kindred Childcare — Enrollment Application", "description": "Apply to enroll your child at Kindred. We'll invite you for a tour after review.", "questions": [
+      { "text": "Parent / guardian name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Child's name", "type": "short_answer", "required": true },
+      { "text": "Child's date of birth", "type": "date", "required": true },
+      { "text": "Program", "type": "dropdown", "required": true, "options": ["Infant", "Toddler", "Preschool", "Pre-K"] },
+      { "text": "Days needed", "type": "checkboxes", "required": true, "options": ["Mon", "Tue", "Wed", "Thu", "Fri"] }
+    ]},
+    { "id": "flux-design", "title": "Flux Design Studio — Project Inquiry", "description": "Have a project in mind? Tell us about it and we'll set up a call.", "questions": [
+      { "text": "Your name", "type": "short_answer", "required": true },
+      { "text": "Work email", "type": "short_answer", "required": true },
+      { "text": "Company", "type": "short_answer", "required": false },
+      { "text": "What do you need?", "type": "checkboxes", "required": true, "options": ["Branding", "Website", "Product design", "Illustration", "Not sure yet"] },
+      { "text": "Budget range", "type": "dropdown", "required": true, "options": ["Under $10k", "$10–25k", "$25–50k", "$50k+"] },
+      { "text": "Tell us about the project", "type": "paragraph", "required": true }
+    ]},
+    { "id": "meadowlark-bnb", "title": "Meadowlark B&B — Reservation Request", "description": "Request a stay at our countryside bed & breakfast. We'll confirm availability by email.", "questions": [
+      { "text": "Full name", "type": "short_answer", "required": true },
+      { "text": "Email", "type": "short_answer", "required": true },
+      { "text": "Check-in date", "type": "date", "required": true },
+      { "text": "Check-out date", "type": "date", "required": true },
+      { "text": "Room", "type": "dropdown", "required": true, "options": ["The Willow (queen)", "The Robin (king)", "The Wren (twin)", "The Loft (suite)"] },
+      { "text": "Any special requests?", "type": "paragraph", "required": false }
+    ]}
+  ]
+}

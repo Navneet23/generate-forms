@@ -3,26 +3,30 @@
 // the original 37). Requires evals/tools/credentials/token.json (OAuth, forms.body).
 //
 // Usage (from evals/expansion/):
-//   node create-forms.mjs                 create every form not already created
-//   node create-forms.mjs --only=<id>     create just one form by its base-forms id
+//   node create-forms.mjs                                create from base-forms.json
+//   node create-forms.mjs --forms=<f> --out=<f>          use a different forms/output file
+//   node create-forms.mjs --only=<id>                    create just one form by its id
 //
-// Resumable: results are appended to created-forms.json; a form already listed there
+// Resumable: results are appended to the output file; a form already listed there
 // (with a formId) is skipped. Unknown args abort (fail-closed, DR-6).
 import fs from "fs";
 import { createGoogleForm } from "../tools/lib/gforms.mjs";
 
-const BASE = new URL("./base-forms.json", import.meta.url);
-const OUT = new URL("./created-forms.json", import.meta.url);
-
 const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith("--only="))?.slice(7);
-const unknown = args.filter((a) => !a.startsWith("--only="));
+const formsArg = args.find((a) => a.startsWith("--forms="))?.slice(8) ?? "base-forms.json";
+const outArg = args.find((a) => a.startsWith("--out="))?.slice(6) ?? "created-forms.json";
+const unknown = args.filter(
+  (a) => !a.startsWith("--only=") && !a.startsWith("--forms=") && !a.startsWith("--out=")
+);
 if (unknown.length) {
   console.error(`Unknown argument(s): ${unknown.join(", ")}`);
-  console.error("Usage: node create-forms.mjs [--only=<id>]");
+  console.error("Usage: node create-forms.mjs [--forms=<file>] [--out=<file>] [--only=<id>]");
   process.exit(1);
 }
 
+const BASE = new URL(`./${formsArg}`, import.meta.url);
+const OUT = new URL(`./${outArg}`, import.meta.url);
 const { forms } = JSON.parse(fs.readFileSync(BASE, "utf8"));
 const created = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { forms: [] };
 const doneIds = new Set(created.forms.filter((f) => f.formId).map((f) => f.id));

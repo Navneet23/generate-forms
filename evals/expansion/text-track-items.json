@@ -1,0 +1,41 @@
+{
+  "description": "30 text-only (no style guide) eval items (2026-07-22). Each = one real base form (text-track-created.json) + one styling prompt, classified on four axes: detail (simple|detailed), layoutTheme (none|layout-only|theme-only|both), formContext (agnostic|domain-aware), phrasing (polished|messy). Distribution: 20 simple / 10 detailed; 12 domain-aware (40%); 4 messy (20% of simple). Simple layout cells use basic layouts (question-by-question, single page); detailed use complex layouts. Vibe words count as theme (max 3).",
+  "items": [
+    { "formId": "ridgeline-pottery",    "prompt": "This is the signup for our beginner wheel-throwing workshop at Ridgeline Pottery — make it look clean and inviting.", "detail": "simple",   "layoutTheme": "none",        "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "verdant-botanicals",   "prompt": "Make this form look clean and professional.", "detail": "simple",   "layoutTheme": "none",        "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "northgate-festival",   "prompt": "This is a vendor application for the Northgate Music Festival — give it a polished, professional look.", "detail": "simple",   "layoutTheme": "none",        "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "pixel-pine",           "prompt": "just make this look nice and clean please, nothing too fancy", "detail": "simple",   "layoutTheme": "none",        "formContext": "agnostic",     "phrasing": "messy" },
+    { "formId": "summit-strength",      "prompt": "hey this is the intake form for summit strength gym, can you make it look good and kinda modern", "detail": "simple",   "layoutTheme": "none",        "formContext": "domain-aware", "phrasing": "messy" },
+
+    { "formId": "brightleaf-coffee",    "prompt": "Make it warm and cozy.", "detail": "simple",   "layoutTheme": "theme-only",  "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "coastal-paws",         "prompt": "This is for Coastal Paws Veterinary — make it feel friendly and reassuring.", "detail": "simple",   "layoutTheme": "theme-only",  "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "lumen-analytics",      "prompt": "Make it sleek and modern.", "detail": "simple",   "layoutTheme": "theme-only",  "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "aurora-yoga",          "prompt": "This is Aurora Yoga's teacher-training application — make it calm and serene.", "detail": "simple",   "layoutTheme": "theme-only",  "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "tandem-bikes",         "prompt": "can you make it feel clean and trustworthy and kind of friendly", "detail": "simple",   "layoutTheme": "theme-only",  "formContext": "agnostic",     "phrasing": "messy" },
+    { "formId": "fernwood-camp",        "prompt": "this is for fernwood summer camp so make it fun and bright and playful for parents signing up their kids", "detail": "simple",   "layoutTheme": "theme-only",  "formContext": "domain-aware", "phrasing": "messy" },
+
+    { "formId": "harborview-dental",    "prompt": "Show one question per screen.", "detail": "simple",   "layoutTheme": "layout-only", "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "metro-cycling",        "prompt": "Put everything on a single page.", "detail": "simple",   "layoutTheme": "layout-only", "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "byte-academy",         "prompt": "This is Byte Academy's coding bootcamp application — show one question at a time.", "detail": "simple",   "layoutTheme": "layout-only", "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "rusty-spoon",          "prompt": "One question per screen, please.", "detail": "simple",   "layoutTheme": "layout-only", "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "cedar-sage-spa",       "prompt": "Keep everything on a single page.", "detail": "simple",   "layoutTheme": "layout-only", "formContext": "agnostic",     "phrasing": "polished" },
+
+    { "formId": "willowbrook-venue",    "prompt": "Single page, elegant and romantic.", "detail": "simple",   "layoutTheme": "both",        "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "nimbus-cloud",         "prompt": "One question per screen, clean and professional.", "detail": "simple",   "layoutTheme": "both",        "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "homestead-farms",      "prompt": "Single page, warm and rustic.", "detail": "simple",   "layoutTheme": "both",        "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "maker-guild",          "prompt": "This is registration for the Maker's Guild annual conference — one question per screen, modern and energetic.", "detail": "simple",   "layoutTheme": "both",        "formContext": "domain-aware", "phrasing": "polished" },
+
+    { "formId": "vantage-realty",       "prompt": "Question by question, with a header image at the top of each step.", "detail": "detailed", "layoutTheme": "layout-only", "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "solstice-retreat",     "prompt": "This is the booking form for Solstice Retreat Center — question by question with a hero image on the left side of each question.", "detail": "detailed", "layoutTheme": "layout-only", "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "quillbook-publishing", "prompt": "Single page with a header image across the top.", "detail": "detailed", "layoutTheme": "layout-only", "formContext": "agnostic",     "phrasing": "polished" },
+
+    { "formId": "trailhead-outfitters", "prompt": "Charcoal background, orange accent buttons, bold sans-serif headings.", "detail": "detailed", "layoutTheme": "theme-only",  "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "sparrow-finch",        "prompt": "This is for Sparrow & Finch Boutique — cream background, dusty-rose accents, elegant serif headings.", "detail": "detailed", "layoutTheme": "theme-only",  "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "beacon-nonprofit",     "prompt": "Deep teal and warm white palette, rounded cards, friendly rounded sans-serif font.", "detail": "detailed", "layoutTheme": "theme-only",  "formContext": "agnostic",     "phrasing": "polished" },
+
+    { "formId": "apex-esports",         "prompt": "Question by question with a hero image on the left, dark background with neon-green accents and a bold condensed font.", "detail": "detailed", "layoutTheme": "both",        "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "kindred-childcare",    "prompt": "This is enrollment for Kindred Childcare — question by question with a cover page showing the title, description and a hero image on the right; soft pastel palette with a friendly rounded font.", "detail": "detailed", "layoutTheme": "both",        "formContext": "domain-aware", "phrasing": "polished" },
+    { "formId": "flux-design",          "prompt": "Single page with a header image, minimal black-and-white with a single electric-blue accent and a modern grotesk font.", "detail": "detailed", "layoutTheme": "both",        "formContext": "agnostic",     "phrasing": "polished" },
+    { "formId": "meadowlark-bnb",       "prompt": "This is the reservation form for Meadowlark B&B — question by question with a header image, warm cream and sage-green palette, classic serif headings.", "detail": "detailed", "layoutTheme": "both",        "formContext": "domain-aware", "phrasing": "polished" }
+  ]
+}
