@@ -1,0 +1,25 @@
+{
+  "description": "Pilot items for the eval-set expansion (2026-07-22). An item = (base form + optional Kind-B brand image + prompt). Base forms are the real Google Forms in created-forms.json (resolve baseFormId -> responderUrl); styleGuide is a filename in evals/expansion/candidates/ or null (no-guide track); promptId is from prompt-bank.json. Covers the two sourcing-free tracks the owner approved: no-style-guide and Kind-B brand-image. A generation driver resolves the form, attaches the style-guide image if present, and generates with the prompt text.",
+  "tracks": {
+    "no-guide": "base form + prompt, no style guide — tests text-to-design instruction following",
+    "kind-b": "base form + brand image + prompt — tests palette/mood extraction onto a coherent form"
+  },
+  "items": [
+    { "id": "x-liquiddeath-onbrand",   "track": "kind-b",   "baseFormId": "liquid-death-country-club",  "styleGuide": "brand-liquid-death.png", "promptId": "p1-4", "promptClass": "P1" },
+    { "id": "x-liquiddeath-palette",   "track": "kind-b",   "baseFormId": "liquid-death-country-club",  "styleGuide": "brand-liquid-death.png", "promptId": "p4-5", "promptClass": "P4" },
+    { "id": "x-olipop-card",           "track": "kind-b",   "baseFormId": "olipop-wholesale-application","styleGuide": "brand-olipop.png",       "promptId": "p4-1", "promptClass": "P4" },
+    { "id": "x-omsom-multistep",       "track": "kind-b",   "baseFormId": "omsom-catering-order",        "styleGuide": "brand-omsom.png",        "promptId": "p4-2", "promptClass": "P4" },
+    { "id": "x-omsom-compact",         "track": "kind-b",   "baseFormId": "omsom-catering-order",        "styleGuide": "brand-omsom.png",        "promptId": "p4-4", "promptClass": "P4" },
+    { "id": "x-magicspoon-onbrand",    "track": "kind-b",   "baseFormId": "magic-spoon-flavor-feedback", "styleGuide": "brand-magic-spoon.png",  "promptId": "p1-4", "promptClass": "P1" },
+    { "id": "x-magicspoon-mood",       "track": "kind-b",   "baseFormId": "magic-spoon-flavor-feedback", "styleGuide": "brand-magic-spoon.png",  "promptId": "p6-4", "promptClass": "P6" },
+
+    { "id": "x-5k-navygold",           "track": "no-guide", "baseFormId": "community-5k-registration",   "styleGuide": null, "promptId": "p5-1", "promptClass": "P5" },
+    { "id": "x-5k-vague",              "track": "no-guide", "baseFormId": "community-5k-registration",   "styleGuide": null, "promptId": "p1-1", "promptClass": "P1" },
+    { "id": "x-offsite-multistep",     "track": "no-guide", "baseFormId": "team-offsite-planning",       "styleGuide": null, "promptId": "p2-3", "promptClass": "P2" },
+    { "id": "x-offsite-botanical",     "track": "no-guide", "baseFormId": "team-offsite-planning",       "styleGuide": null, "promptId": "p6-1", "promptClass": "P6" },
+    { "id": "x-feedback-editorial",    "track": "no-guide", "baseFormId": "product-feedback-survey",     "styleGuide": null, "promptId": "p5-4", "promptClass": "P5" },
+    { "id": "x-feedback-scroll",       "track": "no-guide", "baseFormId": "product-feedback-survey",     "styleGuide": null, "promptId": "p2-5", "promptClass": "P2" },
+    { "id": "x-research-pastel",       "track": "no-guide", "baseFormId": "user-research-screener",      "styleGuide": null, "promptId": "p5-3", "promptClass": "P5" },
+    { "id": "x-research-fintech",      "track": "no-guide", "baseFormId": "user-research-screener",      "styleGuide": null, "promptId": "p6-3", "promptClass": "P6" }
+  ]
+}

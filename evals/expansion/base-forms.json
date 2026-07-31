@@ -1,0 +1,157 @@
+{
+  "description": "New base forms authored for the eval-set expansion (2026-07-22). Real, multi-field, NON-QUIZ forms. Brand-coherent forms pair with the matching Kind-B brand image; no-guide forms are generic use cases. Question format matches evals/tools/lib/gforms.mjs authoring shape (type, required, options; linear_scale uses low/high/lowLabel/highLabel). create-forms.mjs turns these into real published Google Forms.",
+  "forms": [
+    {
+      "id": "liquid-death-country-club",
+      "kind": "brand",
+      "styleGuide": "brand-liquid-death.png",
+      "useCase": "membership registration",
+      "title": "Liquid Death Country Club — Membership Registration",
+      "description": "Sell your soul to the Country Club. Fill this out to lock in your membership and get first dibs on every merch drop.",
+      "questions": [
+        { "text": "Full name", "type": "short_answer", "required": true },
+        { "text": "Email", "type": "short_answer", "required": true },
+        { "text": "Phone number", "type": "short_answer", "required": false },
+        { "text": "Shipping address", "type": "paragraph", "required": true },
+        { "text": "T-shirt size", "type": "dropdown", "required": true, "options": ["XS", "S", "M", "L", "XL", "XXL"] },
+        { "text": "Which drops are you here for?", "type": "checkboxes", "required": true, "options": ["Apparel", "Enamel mugs", "Skateboards", "Limited art", "All of it"] },
+        { "text": "How do you murder your thirst?", "type": "multiple_choice", "required": true, "options": ["Mountain Water", "Sparkling Water", "Iced Tea", "Flavored Sparkling"] },
+        { "text": "How did you hear about the Country Club?", "type": "multiple_choice", "required": false, "options": ["Instagram", "A friend", "Saw the cans in store", "Other"] },
+        { "text": "Anything else you want to scream at us?", "type": "paragraph", "required": false }
+      ]
+    },
+    {
+      "id": "olipop-wholesale-application",
+      "kind": "brand",
+      "styleGuide": "brand-olipop.png",
+      "useCase": "wholesale / stockist application",
+      "title": "OLIPOP Wholesale & Stockist Application",
+      "description": "Interested in carrying OLIPOP in your store? Tell us about your business and our team will be in touch.",
+      "questions": [
+        { "text": "Business name", "type": "short_answer", "required": true },
+        { "text": "Contact name", "type": "short_answer", "required": true },
+        { "text": "Email", "type": "short_answer", "required": true },
+        { "text": "Phone number", "type": "short_answer", "required": true },
+        { "text": "Business type", "type": "dropdown", "required": true, "options": ["Grocery", "Convenience", "Café / Restaurant", "Gym / Wellness", "Online only", "Other"] },
+        { "text": "Which flavors are you interested in carrying?", "type": "checkboxes", "required": true, "options": ["Vintage Cola", "Classic Root Beer", "Strawberry Vanilla", "Orange Squeeze", "Cream Soda", "Ginger Lemon"] },
+        { "text": "Estimated monthly volume (cases)", "type": "multiple_choice", "required": true, "options": ["Under 25", "25–100", "100–500", "500+"] },
+        { "text": "Store address", "type": "paragraph", "required": true },
+        { "text": "Do you have refrigeration available?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] },
+        { "text": "Additional notes", "type": "paragraph", "required": false }
+      ]
+    },
+    {
+      "id": "omsom-catering-order",
+      "kind": "brand",
+      "styleGuide": "brand-omsom.png",
+      "useCase": "catering / bulk order inquiry",
+      "title": "Omsom Catering & Bulk Order Inquiry",
+      "description": "Planning something delicious? Tell us about your event and we'll help you bring proud, loud Asian flavors to the table.",
+      "questions": [
+        { "text": "Your name", "type": "short_answer", "required": true },
+        { "text": "Email", "type": "short_answer", "required": true },
+        { "text": "Phone number", "type": "short_answer", "required": true },
+        { "text": "Event date", "type": "date", "required": true },
+        { "text": "Number of guests", "type": "multiple_choice", "required": true, "options": ["Under 25", "25–50", "50–100", "100+"] },
+        { "text": "Which flavors are you interested in?", "type": "checkboxes", "required": true, "options": ["Sichuan", "Vietnamese", "Thai", "Filipino", "Korean", "Japanese"] },
+        { "text": "Dietary restrictions to note", "type": "checkboxes", "required": false, "options": ["Vegetarian", "Vegan", "Gluten-free", "Nut allergy", "None"] },
+        { "text": "Spice level preference", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Mild", "highLabel": "Proud & Loud" },
+        { "text": "Delivery address", "type": "paragraph", "required": true },
+        { "text": "Anything else we should know?", "type": "paragraph", "required": false }
+      ]
+    },
+    {
+      "id": "magic-spoon-flavor-feedback",
+      "kind": "brand",
+      "styleGuide": "brand-magic-spoon.png",
+      "useCase": "product feedback / flavor research",
+      "title": "Magic Spoon — Flavor Feedback & Research",
+      "description": "Help us dream up your next favorite bowl. Tell us what you love and what you'd want to see next.",
+      "questions": [
+        { "text": "Name", "type": "short_answer", "required": false },
+        { "text": "Email", "type": "short_answer", "required": true },
+        { "text": "Which flavors have you tried?", "type": "checkboxes", "required": true, "options": ["Cocoa", "Fruity", "Frosted", "Peanut Butter", "Blueberry Muffin", "Maple Waffle"] },
+        { "text": "Your favorite so far", "type": "dropdown", "required": true, "options": ["Cocoa", "Fruity", "Frosted", "Peanut Butter", "Blueberry Muffin", "Maple Waffle"] },
+        { "text": "How would you rate the taste?", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Meh", "highLabel": "Magical" },
+        { "text": "How would you rate the crunch and texture?", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Meh", "highLabel": "Perfect" },
+        { "text": "What new flavor would you want to see?", "type": "paragraph", "required": true },
+        { "text": "How often do you eat Magic Spoon?", "type": "multiple_choice", "required": true, "options": ["Daily", "A few times a week", "Occasionally", "This is my first box"] },
+        { "text": "Would you recommend Magic Spoon to a friend?", "type": "multiple_choice", "required": true, "options": ["Definitely", "Maybe", "No"] }
+      ]
+    },
+    {
+      "id": "community-5k-registration",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "event registration",
+      "title": "Riverside Community 5K — Runner Registration",
+      "description": "Join us for the annual Riverside Community 5K Fun Run. Register below to reserve your spot and your race packet.",
+      "questions": [
+        { "text": "Full name", "type": "short_answer", "required": true },
+        { "text": "Email", "type": "short_answer", "required": true },
+        { "text": "Phone number", "type": "short_answer", "required": true },
+        { "text": "Date of birth", "type": "date", "required": true },
+        { "text": "T-shirt size", "type": "dropdown", "required": true, "options": ["XS", "S", "M", "L", "XL", "XXL"] },
+        { "text": "Race category", "type": "multiple_choice", "required": true, "options": ["Competitive run", "Casual jog", "Walk"] },
+        { "text": "Emergency contact name and phone", "type": "short_answer", "required": true },
+        { "text": "Any medical conditions we should know about?", "type": "paragraph", "required": false },
+        { "text": "I agree to the event waiver and liability terms", "type": "checkboxes", "required": true, "options": ["I agree"] }
+      ]
+    },
+    {
+      "id": "team-offsite-planning",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "event planning",
+      "title": "Annual Team Offsite — Planning Survey",
+      "description": "Help us plan this year's offsite. Your input shapes the dates, the location, and the activities.",
+      "questions": [
+        { "text": "Name", "type": "short_answer", "required": true },
+        { "text": "Department", "type": "dropdown", "required": true, "options": ["Engineering", "Design", "Sales", "Marketing", "Operations", "Other"] },
+        { "text": "Which date ranges work best for you?", "type": "checkboxes", "required": true, "options": ["Early September", "Late September", "Early October", "Late October"] },
+        { "text": "Preferred location type", "type": "multiple_choice", "required": true, "options": ["Beach", "Mountains", "City", "Countryside"] },
+        { "text": "Which activities interest you?", "type": "checkboxes", "required": true, "options": ["Hiking", "Team games", "Workshops", "Spa / relaxation", "Nightlife", "Volunteering"] },
+        { "text": "Dietary restrictions or allergies", "type": "paragraph", "required": false },
+        { "text": "Do you need travel assistance?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] },
+        { "text": "Any suggestions for the offsite?", "type": "paragraph", "required": false }
+      ]
+    },
+    {
+      "id": "product-feedback-survey",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "feedback",
+      "title": "Product Feedback Survey",
+      "description": "We'd love your honest feedback to help us improve. Your responses are confidential.",
+      "questions": [
+        { "text": "Overall, how satisfied are you with the product?", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Very dissatisfied", "highLabel": "Very satisfied" },
+        { "text": "How easy is the product to use?", "type": "linear_scale", "required": true, "low": 1, "high": 5, "lowLabel": "Very difficult", "highLabel": "Very easy" },
+        { "text": "Which features do you use most?", "type": "checkboxes", "required": true, "options": ["Dashboard", "Reports", "Integrations", "Notifications", "Mobile app", "Team sharing"] },
+        { "text": "What do you like most about the product?", "type": "paragraph", "required": true },
+        { "text": "What would you improve?", "type": "paragraph", "required": true },
+        { "text": "How likely are you to recommend us to a colleague?", "type": "linear_scale", "required": true, "low": 0, "high": 10, "lowLabel": "Not likely", "highLabel": "Extremely likely" },
+        { "text": "May we contact you about your feedback?", "type": "multiple_choice", "required": true, "options": ["Yes", "No"] },
+        { "text": "Email (optional)", "type": "short_answer", "required": false }
+      ]
+    },
+    {
+      "id": "user-research-screener",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "research",
+      "title": "User Research Participant Screener",
+      "description": "We're inviting people to a short paid research study. Answer a few questions to see if you're a fit.",
+      "questions": [
+        { "text": "Full name", "type": "short_answer", "required": true },
+        { "text": "Email", "type": "short_answer", "required": true },
+        { "text": "Age range", "type": "dropdown", "required": true, "options": ["18–24", "25–34", "35–44", "45–54", "55+"] },
+        { "text": "Occupation", "type": "short_answer", "required": true },
+        { "text": "How often do you fill out online forms?", "type": "multiple_choice", "required": true, "options": ["Daily", "Weekly", "Monthly", "Rarely"] },
+        { "text": "Which devices do you use most?", "type": "checkboxes", "required": true, "options": ["Phone", "Laptop", "Tablet", "Desktop"] },
+        { "text": "Would you be willing to join a 30-minute interview?", "type": "multiple_choice", "required": true, "options": ["Yes", "No", "Maybe"] },
+        { "text": "Which time slots work for you?", "type": "checkboxes", "required": false, "options": ["Mon AM", "Mon PM", "Wed AM", "Wed PM", "Fri AM", "Fri PM"] },
+        { "text": "Anything else you'd like to share?", "type": "paragraph", "required": false }
+      ]
+    }
+  ]
+}

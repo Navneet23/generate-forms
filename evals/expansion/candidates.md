@@ -194,8 +194,25 @@ keep/drop call.
 1. **Kind A form-type** — only 2 qualifying (owner's contact forms). Need real,
    multi-field, non-quiz forms: more T1, all of T2 (non-quiz), T3 (**non-Typeform**), T4.
 2. **T3 / T4** — empty. T3 must avoid Typeform.
-3. **Pending owner decision** — remove my 6 non-qualifying Kind-A captures? keep the
-   2 Luma event pages or not?
+3. ~~Pending owner decision on the 6 non-qualifying captures~~ — **resolved: deleted**
+   (2026-07-22). `candidates/` now holds only the 4 Kind-B brand images + the 2
+   owner-added real contact forms.
 
-(Sourcing for real forms is **paused** by owner — next work is authoring prompts for the
-no-style-guide and Kind-B tracks, which need no further sourcing.)
+### Progress 2026-07-22 — base forms + prompts + items (sourcing-free tracks)
+
+Sourcing for more Kind-A form-type is paused. Instead, built the two tracks that need
+no sourcing:
+
+- **8 new real Google Forms** authored in `base-forms.json` and created + published via
+  the Forms API (`create-forms.mjs` → `created-forms.json`): 4 brand-coherent
+  (Liquid Death membership, OLIPOP wholesale, Omsom catering, Magic Spoon feedback) +
+  4 no-guide (5K registration, team offsite planning, product feedback, research
+  screener). All real multi-field NON-quiz forms.
+- **Prompt bank** (`prompt-bank.json`) extended with no-guide (p2-5, p5-4, p6-3) and
+  Kind-B (p4-5, p6-4) prompts.
+- **15 ready-to-generate pilot items** (`pilot-items.json`): 7 Kind-B (base form + its
+  brand image + prompt) + 8 no-guide (base form + prompt). Resolve `baseFormId` →
+  `created-forms.json` for the responder URL.
+
+Still open (needs owner/Chrome pass): real Kind-A **form-type style guides** for T1
+(more), T2 (non-quiz), T3 (**non-Typeform**), T4 — see `owner-capture-tasks.md`.

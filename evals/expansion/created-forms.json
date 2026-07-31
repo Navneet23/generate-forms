@@ -1,0 +1,92 @@
+{
+  "forms": [
+    {
+      "id": "liquid-death-country-club",
+      "kind": "brand",
+      "styleGuide": "brand-liquid-death.png",
+      "useCase": "membership registration",
+      "title": "Liquid Death Country Club — Membership Registration",
+      "formId": "1AOYPGgqKy4mvVRRFqyhz8b40lwi-mjSZj6uuVqsO8fM",
+      "editUrl": "https://docs.google.com/forms/d/1AOYPGgqKy4mvVRRFqyhz8b40lwi-mjSZj6uuVqsO8fM/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSe4Xvsw6M9hqJmzbmbgMOPqLWZaS31FZ6BAL2yB4sFFQovKIg/viewform",
+      "questionCount": 9
+    },
+    {
+      "id": "olipop-wholesale-application",
+      "kind": "brand",
+      "styleGuide": "brand-olipop.png",
+      "useCase": "wholesale / stockist application",
+      "title": "OLIPOP Wholesale & Stockist Application",
+      "formId": "1aj9zoc_G_P5nXtUd-efRgWdr4SGFYJk4dW-vVzKnNu4",
+      "editUrl": "https://docs.google.com/forms/d/1aj9zoc_G_P5nXtUd-efRgWdr4SGFYJk4dW-vVzKnNu4/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdFkPGIAoqFYvXn5qImSs194cxhN1H_b9ulaOvLkpaTmxcBQQ/viewform",
+      "questionCount": 10
+    },
+    {
+      "id": "omsom-catering-order",
+      "kind": "brand",
+      "styleGuide": "brand-omsom.png",
+      "useCase": "catering / bulk order inquiry",
+      "title": "Omsom Catering & Bulk Order Inquiry",
+      "formId": "1udSzq4pQhoycDTIZmUTDhwsIbb5UZ2j4N9Z8XmIW3AM",
+      "editUrl": "https://docs.google.com/forms/d/1udSzq4pQhoycDTIZmUTDhwsIbb5UZ2j4N9Z8XmIW3AM/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSesTHohs8g1j68i0ORcOrzxH6-4K675Tvn9KSFdJy-nBSXh1A/viewform",
+      "questionCount": 10
+    },
+    {
+      "id": "magic-spoon-flavor-feedback",
+      "kind": "brand",
+      "styleGuide": "brand-magic-spoon.png",
+      "useCase": "product feedback / flavor research",
+      "title": "Magic Spoon — Flavor Feedback & Research",
+      "formId": "1oT9f6lnf1jfGznZRmda7tu_2wjs2X3Pc_armbCwu_Eg",
+      "editUrl": "https://docs.google.com/forms/d/1oT9f6lnf1jfGznZRmda7tu_2wjs2X3Pc_armbCwu_Eg/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfc5lB2hB22I7UQkhvKNN30zHNPbVqQexUEjshW-vwcWTi4PA/viewform",
+      "questionCount": 9
+    },
+    {
+      "id": "community-5k-registration",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "event registration",
+      "title": "Riverside Community 5K — Runner Registration",
+      "formId": "1CsI6UwlcbbABKNDimdfz19tzeLzMVqUuhAs_ikyU7WY",
+      "editUrl": "https://docs.google.com/forms/d/1CsI6UwlcbbABKNDimdfz19tzeLzMVqUuhAs_ikyU7WY/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeUi0RHPuVdM_Nom7dNnGIouGvRnkpua6KZ6NfT9qRQ27c3IA/viewform",
+      "questionCount": 9
+    },
+    {
+      "id": "team-offsite-planning",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "event planning",
+      "title": "Annual Team Offsite — Planning Survey",
+      "formId": "1U0p7sMduGZFHHIqXeinxBxGjzTDSntF_H5TIPOR1ThU",
+      "editUrl": "https://docs.google.com/forms/d/1U0p7sMduGZFHHIqXeinxBxGjzTDSntF_H5TIPOR1ThU/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSd44Z1hgAvdgXuQl2FJ96t0nxBeXn9E6Irmv6gtRIN2y7GQsQ/viewform",
+      "questionCount": 8
+    },
+    {
+      "id": "product-feedback-survey",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "feedback",
+      "title": "Product Feedback Survey",
+      "formId": "15s2oyPcVhqI2WExCrpMOje0vsUnXb98yyXgP6XlS9qk",
+      "editUrl": "https://docs.google.com/forms/d/15s2oyPcVhqI2WExCrpMOje0vsUnXb98yyXgP6XlS9qk/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeQMkpAyUBCXlGQjX0lr7m_YpayE0jcULlEPd_T9-KdHGtdbg/viewform",
+      "questionCount": 8
+    },
+    {
+      "id": "user-research-screener",
+      "kind": "no-guide",
+      "styleGuide": null,
+      "useCase": "research",
+      "title": "User Research Participant Screener",
+      "formId": "1b3wbFpNqp3LxDR5SPhmr12-APdj2PkzPsZIyXU5fzxg",
+      "editUrl": "https://docs.google.com/forms/d/1b3wbFpNqp3LxDR5SPhmr12-APdj2PkzPsZIyXU5fzxg/edit",
+      "responderUrl": "https://docs.google.com/forms/d/e/1FAIpQLScIknjOERx6ItYehNOYLJ4xDt41b0sZFSzOwjHn31sqfZKo6g/viewform",
+      "questionCount": 9
+    }
+  ]
+}

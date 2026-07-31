@@ -1,5 +1,5 @@
 {
-  "description": "Prompt bank for the eval-set expansion (requirements/eval_set_expansion.md). Classes P1-P6. styleGuide: 'form' = form-type screenshot, 'brand' = brand image, 'none' = no style guide, 'any' = works with either kind, 'optional' = with or without.",
+  "description": "Prompt bank for the eval-set expansion (requirements/eval_set_expansion.md). Classes P1-P6. styleGuide: 'form' = form-type screenshot, 'brand' = brand image, 'none' = no style guide, 'any' = works with either kind, 'optional' = with or without. 2026-07-22: added no-guide (p2-5, p5-4, p6-3) and Kind-B brand-image (p4-5, p6-4) prompts to cover the two sourcing-free pilot tracks.",
   "authoredAt": "2026-07-19",
   "prompts": [
     { "id": "p1-1", "class": "P1", "styleGuide": "optional", "text": "Make this form beautiful." },
@@ -11,6 +11,7 @@
     { "id": "p2-2", "class": "P2", "styleGuide": "any", "text": "Redesign this form as a single-page form with all questions visible in one scrollable column. Match the attached style guide." },
     { "id": "p2-3", "class": "P2", "styleGuide": "none", "text": "Redesign this form as a multi-step flow with one question per screen and a progress bar at the top." },
     { "id": "p2-4", "class": "P2", "styleGuide": "form", "text": "Make this a conversational form where questions appear one at a time with a typing-style transition. Follow the attached style guide's visual style." },
+    { "id": "p2-5", "class": "P2", "styleGuide": "none", "text": "Redesign this as a single-page form with all questions in one clean scrollable column, clearly grouped into labelled sections." },
 
     { "id": "p3-1", "class": "P3", "styleGuide": "form", "text": "Follow the attached reference's layout and structure closely, but change the theme to a dark palette with emerald green accents." },
     { "id": "p3-2", "class": "P3", "styleGuide": "form", "text": "Use the same layout as the attached form, but restyle it in a warm cream and terracotta theme." },
@@ -20,12 +21,16 @@
     { "id": "p4-2", "class": "P4", "styleGuide": "brand", "text": "Extract the color palette from the attached image and build a multi-step form, one question per screen." },
     { "id": "p4-3", "class": "P4", "styleGuide": "form", "text": "Use the attached reference's color palette only — do NOT copy its layout. Design a completely different layout of your choice." },
     { "id": "p4-4", "class": "P4", "styleGuide": "brand", "text": "Use this image's palette and typography feel for a compact single-screen form." },
+    { "id": "p4-5", "class": "P4", "styleGuide": "brand", "text": "Use the color palette from the attached image; choose whatever layout best fits this form." },
 
     { "id": "p5-1", "class": "P5", "styleGuide": "none", "text": "Design this as a single-column form on a deep navy background with white sans-serif text, gold accent buttons, and rounded cards." },
     { "id": "p5-2", "class": "P5", "styleGuide": "none", "text": "Multi-step form, one question per screen, light warm-gray background, large serif headings in dark green, and a thin progress bar." },
     { "id": "p5-3", "class": "P5", "styleGuide": "none", "text": "Single page, soft pastel pink and lavender gradient background, playful rounded style, big friendly buttons." },
+    { "id": "p5-4", "class": "P5", "styleGuide": "none", "text": "Minimal editorial black-and-white: white background, black serif headings, thin rules between sections, and a single bold red accent." },
 
     { "id": "p6-1", "class": "P6", "styleGuide": "none", "text": "Style this form with a warm, botanical, editorial feel." },
-    { "id": "p6-2", "class": "P6", "styleGuide": "optional", "text": "Make this feel like a luxury fashion brand." }
+    { "id": "p6-2", "class": "P6", "styleGuide": "optional", "text": "Make this feel like a luxury fashion brand." },
+    { "id": "p6-3", "class": "P6", "styleGuide": "none", "text": "Make this feel like a trustworthy, modern fintech brand — clean, confident, and professional." },
+    { "id": "p6-4", "class": "P6", "styleGuide": "brand", "text": "Capture the mood and personality of the attached image; the layout is your choice." }
   ]
 }
