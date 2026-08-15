@@ -187,7 +187,7 @@ npm install
 
 `evals/tools/package.json` key facts (verified 2026-07-19): `type: module`,
 scripts `auth` → `node auth.mjs`, `run` → `node run.mjs`. Dependencies:
-`@google/generative-ai@^0.24.1`, `@vercel/blob@^2.6.1`,
+`@google/genai@^2.17.1`, `@vercel/blob@^2.6.1`,
 `googleapis@^173.0.0`, `puppeteer@^24.37.5`.
 
 ### Puppeteer version must match the app's

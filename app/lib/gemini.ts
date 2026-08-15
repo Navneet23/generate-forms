@@ -1,10 +1,10 @@
 import {
-  GoogleGenerativeAI,
+  GoogleGenAI,
   Part,
-  SchemaType,
+  Type,
   FunctionDeclaration,
   Tool,
-} from "@google/generative-ai";
+} from "@google/genai";
 import { FormStructure } from "./scraper";
 import {
   validateGeneratedForm,
@@ -15,7 +15,32 @@ import {
 import fs from "fs";
 import path from "path";
 
-const MODEL_ID = "gemini-3-flash-preview";
+/**
+ * Text models offered by the model picker. Note the 3.6/3.7 Flash models are
+ * GA — there is no "-preview" suffix on them.
+ *
+ * 3.6 and 3.7 require the @google/genai SDK: the legacy @google/generative-ai
+ * package sent functionResponse parts with role "function" (removed in that
+ * model generation) and dropped the thought_signature those models require on
+ * functionCall parts, so every function-calling round-trip 400'd.
+ */
+export type TextModelId =
+  | "gemini-3-flash-preview"
+  | "gemini-3.6-flash"
+  | "gemini-3.7-flash";
+
+/**
+ * The system instruction is tuned against this model; it stays the default so
+ * generation behaviour does not shift unless a caller opts in.
+ */
+export const DEFAULT_TEXT_MODEL: TextModelId = "gemini-3-flash-preview";
+
+/** Allowlist for validating the client-supplied model id before it reaches Gemini. */
+export const TEXT_MODEL_IDS: readonly TextModelId[] = [
+  "gemini-3-flash-preview",
+  "gemini-3.6-flash",
+  "gemini-3.7-flash",
+];
 
 const IS_LOCAL = !process.env.VERCEL;
 const LOG_FILE = IS_LOCAL ? path.join(process.cwd(), "debug.log") : null;
@@ -61,27 +86,27 @@ const generateImageFunctionDecl: FunctionDeclaration = {
   description:
     "Generate an AI image to use in the form design. Call this when an image would enhance the form — for example, a header banner, background image, or accent image. Do not call this for simple surveys or internal forms that don't benefit from images.",
   parameters: {
-    type: SchemaType.OBJECT,
+    type: Type.OBJECT,
     properties: {
       prompt: {
-        type: SchemaType.STRING,
+        type: Type.STRING,
         description:
           "Detailed image generation prompt. Be specific about style, mood, composition, and subject. Never request text/words/letters in the image.",
       },
       imageType: {
-        type: SchemaType.STRING,
+        type: Type.STRING,
         format: "enum",
         description:
           "How this image will be used: 'background' for full-page/section backgrounds (subtle, low-contrast), 'header' for top banner images (visually striking), 'accent' for decorative/content images.",
         enum: ["background", "header", "accent"],
       },
       colorPalette: {
-        type: SchemaType.STRING,
+        type: Type.STRING,
         description:
           "Dominant colors the image should use, so you can match form colors to complement it. E.g. 'warm oranges, soft yellows, cream'.",
       },
       aspectRatio: {
-        type: SchemaType.STRING,
+        type: Type.STRING,
         description:
           "Desired aspect ratio. Use '16:9' for headers, '1:1' for accent images, or 'flexible' for backgrounds.",
       },
@@ -96,10 +121,10 @@ const announcePlanFunctionDecl: FunctionDeclaration = {
   description:
     "Announce your visual design plan before generating the form. You MUST call this function first, before generating any HTML or calling generate_image. Describe only visual/layout decisions (colors, fonts, layout style, images). Your plan must NEVER include changing question text, option labels, or form title — those are immutable.",
   parameters: {
-    type: SchemaType.OBJECT,
+    type: Type.OBJECT,
     properties: {
       summary: {
-        type: SchemaType.STRING,
+        type: Type.STRING,
         description:
           "A brief 1-2 sentence summary of your visual design plan: what style/theme, colors, and layout you will use, and whether images will be included. Do NOT mention changing any form text content — only describe visual changes.",
       },
@@ -229,7 +254,8 @@ export async function generateForm(
   includeImages?: boolean,
   imageGenerator?: ImageGenerator,
   activeImages?: GeneratedImage[],
-  onProgress?: (event: ProgressEvent) => void
+  onProgress?: (event: ProgressEvent) => void,
+  textModel?: TextModelId
 ): Promise<{
   html: string;
   images: GeneratedImage[];
@@ -239,7 +265,7 @@ export async function generateForm(
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
 
-  const genAI = new GoogleGenerativeAI(apiKey);
+  const ai = new GoogleGenAI({ apiKey });
 
   // Build tools array — always include announce_plan, conditionally include generate_image
   const functionDeclarations: FunctionDeclaration[] = [announcePlanFunctionDecl];
@@ -256,21 +282,25 @@ export async function generateForm(
   log(systemPrompt);
   log("=== [GEMINI] END SYSTEM PROMPT ===\n");
 
-  log("[GEMINI] Model:", MODEL_ID);
+  const modelId = textModel ?? DEFAULT_TEXT_MODEL;
+
+  log("[GEMINI] Model:", modelId);
   log("[GEMINI] Include images:", includeImages);
   log("[GEMINI] Tools provided:", functionDeclarations.map(f => f.name).join(", "));
   log("[GEMINI] Active images from previous turns:", activeImages?.length ?? 0);
   log("[GEMINI] History turns:", history.length, "(using last", Math.min(history.length, 10), ")");
 
-  const model = genAI.getGenerativeModel({
-    model: MODEL_ID,
-    systemInstruction: systemPrompt,
-    ...(tools.length > 0 ? { tools } : {}),
-  });
-
   const recentHistory = history.slice(-10);
 
-  const chat = model.startChat({
+  // The Chat object owns the conversation history, including the model's own
+  // functionCall parts and their thought_signature — which 3.6/3.7 require to
+  // be echoed back on the next turn.
+  const chat = ai.chats.create({
+    model: modelId,
+    config: {
+      systemInstruction: systemPrompt,
+      ...(tools.length > 0 ? { tools } : {}),
+    },
     history: recentHistory.map((turn) => ({
       role: turn.role,
       parts: [{ text: turn.text }],
@@ -338,7 +368,7 @@ In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for 
   // Send message and handle function calling loop
   log("[GEMINI] >>> Sending initial message to Gemini...");
   onProgress?.({ type: "step", step: "analyze", status: "started" });
-  let response = await chat.sendMessage(parts);
+  let response = await chat.sendMessage({ message: parts });
   // Auto-complete analyze when first response arrives
   onProgress?.({ type: "step", step: "analyze", status: "completed" });
   const generatedImages: GeneratedImage[] = [];
@@ -351,7 +381,7 @@ In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for 
   let loopIteration = 0;
   while (true) {
     loopIteration++;
-    const candidate = response.response.candidates?.[0];
+    const candidate = response.candidates?.[0];
     if (!candidate) {
       log("[GEMINI] No candidate in response — exiting loop");
       break;
@@ -363,7 +393,7 @@ In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for 
 
     if (!functionCalls || functionCalls.length === 0) {
       log(`[GEMINI] Loop iteration ${loopIteration}: No function calls — Gemini returned final text response`);
-      const textPreview = response.response.text();
+      const textPreview = response.text ?? "";
       log(`[GEMINI] Response text preview: ${textPreview.slice(0, 200)}...`);
       break;
     }
@@ -510,13 +540,13 @@ In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for 
     // Send function responses first (functionResponse-only message)
     log(`[GEMINI] >>> Sending ${functionResponses.length} function response(s) back to Gemini...`);
     log(`=== [GEMINI] END FUNCTION CALLING — Loop iteration ${loopIteration} ===\n`);
-    response = await chat.sendMessage(functionResponses);
+    response = await chat.sendMessage({ message: functionResponses });
 
     // Then send vision follow-up so Gemini can see the actual images for color picking
     if (visionFollowUp.length > 0) {
       log(`[GEMINI] >>> Sending ${visionFollowUp.length} vision follow-up part(s) (images + instructions)...`);
       onProgress?.({ type: "step", step: "color_match", status: "started" });
-      response = await chat.sendMessage(visionFollowUp);
+      response = await chat.sendMessage({ message: visionFollowUp });
       onProgress?.({ type: "step", step: "color_match", status: "completed" });
     }
   }
@@ -536,7 +566,7 @@ In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for 
       .replace(/\s*```$/i, "")
       .trim();
 
-  let html = stripFences(response.response.text());
+  let html = stripFences(response.text ?? "");
 
   log("\n=== [GEMINI] FINAL RESULT ===");
   log(`[GEMINI] Generated HTML length: ${html.length} chars`);
@@ -570,8 +600,8 @@ In BOTH cases the creator's request OVERRIDES the image: if the prompt asks for 
       status: "started",
       detail: `Fixing ${errs.length} issue${errs.length === 1 ? "" : "s"} (attempt ${retries})`,
     });
-    const corrected = await chat.sendMessage(buildCorrectionPrompt(violations));
-    html = stripFences(corrected.response.text());
+    const corrected = await chat.sendMessage({ message: buildCorrectionPrompt(violations) });
+    html = stripFences(corrected.text ?? "");
     violations = validateGeneratedForm(html, structure, submitUrl);
   }
   const finalErrors = validationErrors(violations);

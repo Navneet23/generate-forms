@@ -7,7 +7,7 @@
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling (tool UI) | Tailwind CSS |
-| AI Model | Gemini 3 Flash Preview (`@google/generative-ai`) |
+| AI Model | User-selectable: Gemini 3 Flash Preview (`gemini-3-flash-preview`, default), Gemini 3.6 Flash (`gemini-3.6-flash`) or Gemini 3.7 Flash (`gemini-3.7-flash`) — via `@google/genai` |
 | Image Generation | User-selectable: Gemini 2.5 Flash Image (`gemini-2.5-flash-image`) or Gemini 3.1 Flash Image (`gemini-3.1-flash-image-preview`) |
 | Image Storage | Vercel Blob (CDN-backed permanent URLs) |
 | Storage | Upstash Redis (published forms, 30-day default TTL, extendable to 1 year) |
@@ -66,6 +66,7 @@ Creator types prompt → POST /api/generate
               + optional screenshot base64 (selected region)
               + optional style guide (image base64 or website screenshot)
               + imageModel selection (none / gemini-2.5 / gemini-3.1)
+              + textModel selection (gemini-3-flash-preview / 3.6-flash / 3.7-flash)
               + activeImages from previous turns
     → Returns: Server-Sent Events (SSE) stream
     → Event flow:
@@ -173,7 +174,9 @@ Unsupported types (grids, file upload) are silently skipped.
 
 Wraps the Gemini API. Builds a system prompt with the form structure and rules, then starts a chat session with conversation history for iterative refinement. Supports function calling for AI image generation.
 
-**Model:** `gemini-3-flash-preview`
+**Model:** selectable per request — `gemini-3-flash-preview` (default), `gemini-3.6-flash`, or `gemini-3.7-flash`. The default is what the system prompt is tuned against; the picker sends `textModel` in the `/api/generate` body and the route validates it against `TEXT_MODEL_IDS` before use.
+
+**SDK:** `@google/genai`. The previous `@google/generative-ai` package cannot drive 3.6/3.7 — it sends `functionResponse` parts with role `"function"` (removed in that model generation) and drops the `thought_signature` those models require on `functionCall` parts, so every function-calling round-trip returns 400.
 
 **System prompt rules enforced** (revised per `requirements/quality_improvements.md`):
 1. Output raw HTML only — no markdown, no code fences
@@ -241,6 +244,8 @@ Shared image generation logic used by both the generate route (via direct functi
 
 **Error handling:** Exports `ImageGenError` class that parses Gemini SDK errors to extract HTTP status codes (e.g. 429 Too Many Requests, 503 Service Unavailable). Error codes and messages are surfaced to the user in the chat UI.
 
+**SDK note:** uses `ai.models.generateContent` from `@google/genai`, which types `inlineData.mimeType`/`.data` as optional — both are narrowed before use rather than asserted.
+
 **Processing:**
 1. Enhances the prompt with type-specific instructions (e.g. "keep subtle" for backgrounds)
 2. Calls the user-selected image model with `responseModalities: ["TEXT", "IMAGE"]`
@@ -297,6 +302,7 @@ Chat interface with toolbar buttons:
 - **Screenshot button** — select a region of the preview to attach to message (only shown when AI form exists)
 - **Style guide button** — open style reference dialog
 - **Image model dropdown** — select image generation model: "No images", "Gemini 2.5 Flash image" (default), or "Gemini 3.1 Flash image". Purple when a model is selected.
+- **Text model dropdown** — select the model that generates the form HTML: "Gemini 3 Flash" (default), "Gemini 3.6 Flash", or "Gemini 3.7 Flash".
 
 Tracks `activeImages` (generated images from previous turns) and sends them with each generation request for color coherence.
 

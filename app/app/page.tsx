@@ -25,6 +25,7 @@ export default function Home() {
   const [pendingScreenshot, setPendingScreenshot] = useState<string | null>(null);
   const [screenshotMode, setScreenshotMode] = useState(false);
   const [imageModel, setImageModel] = useState<"none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview">("gemini-2.5-flash-image");
+  const [textModel, setTextModel] = useState<"gemini-3-flash-preview" | "gemini-3.6-flash" | "gemini-3.7-flash">("gemini-3-flash-preview");
   const [activeImages, setActiveImages] = useState<GeneratedImage[]>([]);
 
   function handleFormLoad(url: string, s: FormStructure) {
@@ -136,6 +137,8 @@ export default function Home() {
             onToggleScreenshotMode={() => setScreenshotMode((v) => !v)}
             imageModel={imageModel}
             onImageModelChange={setImageModel}
+            textModel={textModel}
+            onTextModelChange={setTextModel}
             activeImages={activeImages}
             onActiveImagesUpdate={setActiveImages}
           />

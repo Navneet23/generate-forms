@@ -93,7 +93,7 @@ labeled a stopgap in its requirement doc, not treated as *the* fix.
   `f5599da`); reduced but did not eliminate. Treat as done, not as an open
   option. (`forms-restyler-change-control` DR-4 step 5.)
 - **Lowering temperature without measurement.** Checked in this repo,
-  2026-07-19: `app/lib/gemini.ts`'s `genAI.getGenerativeModel({...})` call
+  2026-07-19: `app/lib/gemini.ts`'s `ai.chats.create({...})` call
   (line ~248) passes only `model`, `systemInstruction`, and `tools` — there
   is **no `generationConfig` block anywhere in the file or in
   `app/app/api/generate/route.ts`**, confirmed by `grep -rn "temperature"
@@ -356,7 +356,7 @@ needed there.
 1. Run `validateGeneratedForm(html, structure, submitUrl)`. Clean → done.
 2. On violations: send a corrective follow-up message in the **same** chat
    session (`chat.sendMessage([...])` — the `chat` object from
-   `model.startChat()` is already in scope in `generateForm()`) listing each
+   `ai.chats.create()` is already in scope in `generateForm()`) listing each
    violation precisely — spec's example phrasing: `"Question 3 text must be
    exactly: '…' but you rendered: '…'"` — and ask for the complete corrected
    HTML. Re-validate the new response.

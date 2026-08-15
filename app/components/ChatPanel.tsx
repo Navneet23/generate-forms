@@ -35,6 +35,9 @@ interface Props {
   // Image generation
   imageModel: "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview";
   onImageModelChange: (model: "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview") => void;
+  // Text generation model
+  textModel: "gemini-3-flash-preview" | "gemini-3.6-flash" | "gemini-3.7-flash";
+  onTextModelChange: (model: "gemini-3-flash-preview" | "gemini-3.6-flash" | "gemini-3.7-flash") => void;
   activeImages: GeneratedImage[];
   onActiveImagesUpdate: (images: GeneratedImage[]) => void;
 }
@@ -185,6 +188,8 @@ export default function ChatPanel({
   onToggleScreenshotMode,
   imageModel,
   onImageModelChange,
+  textModel,
+  onTextModelChange,
   activeImages,
   onActiveImagesUpdate,
 }: Props) {
@@ -282,6 +287,7 @@ export default function ChatPanel({
           screenshotBase64: currentAttachment?.source === "screenshot" ? currentAttachment.base64 : undefined,
           styleGuide: styleGuide ?? undefined,
           imageModel,
+          textModel,
           activeImages: imageModel !== "none" ? activeImages : undefined,
         }),
         signal: abortControllerRef.current!.signal,
@@ -650,6 +656,19 @@ export default function ChatPanel({
             <option value="none">No images</option>
             <option value="gemini-2.5-flash-image">Gemini 2.5 Flash image</option>
             <option value="gemini-3.1-flash-image-preview">Gemini 3.1 Flash image</option>
+          </select>
+
+          {/* Text model selector */}
+          <select
+            value={textModel}
+            onChange={(e) => onTextModelChange(e.target.value as "gemini-3-flash-preview" | "gemini-3.6-flash" | "gemini-3.7-flash")}
+            disabled={!structure}
+            title="Model used to generate the form HTML"
+            className="px-2 py-1.5 rounded-lg text-xs font-medium border transition-colors disabled:opacity-40 border-gray-300 text-gray-600"
+          >
+            <option value="gemini-3-flash-preview">Gemini 3 Flash</option>
+            <option value="gemini-3.6-flash">Gemini 3.6 Flash</option>
+            <option value="gemini-3.7-flash">Gemini 3.7 Flash</option>
           </select>
         </div>
 
