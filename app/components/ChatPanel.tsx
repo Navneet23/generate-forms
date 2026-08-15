@@ -587,7 +587,7 @@ export default function ChatPanel({
 
       {/* Input area */}
       <div className="px-4 py-3 border-t border-gray-200 space-y-2">
-        {/* Toolbar row */}
+        {/* Toolbar row 1 — icon actions */}
         <div className="flex items-center gap-2">
           {/* + button */}
           <div className="relative">
@@ -628,8 +628,10 @@ export default function ChatPanel({
               </svg>
             </button>
           )}
+        </div>
 
-          {/* Style guide button */}
+        {/* Toolbar row 2 — style guide */}
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setShowStyleGuide(true)}
             disabled={!structure}
@@ -641,8 +643,10 @@ export default function ChatPanel({
           >
             {styleGuide ? "Style guide ✓" : "Style guide"}
           </button>
+        </div>
 
-          {/* Image model selector */}
+        {/* Toolbar row 3 — image model */}
+        <div className="flex items-center gap-2">
           <select
             value={imageModel}
             onChange={(e) => onImageModelChange(e.target.value as "none" | "gemini-2.5-flash-image" | "gemini-3.1-flash-image-preview")}
@@ -657,8 +661,10 @@ export default function ChatPanel({
             <option value="gemini-2.5-flash-image">Gemini 2.5 Flash image</option>
             <option value="gemini-3.1-flash-image-preview">Gemini 3.1 Flash image</option>
           </select>
+        </div>
 
-          {/* Text model selector */}
+        {/* Toolbar row 4 — text model */}
+        <div className="flex items-center gap-2">
           <select
             value={textModel}
             onChange={(e) => onTextModelChange(e.target.value as "gemini-3-flash-preview" | "gemini-3.6-flash" | "gemini-3.7-flash")}
