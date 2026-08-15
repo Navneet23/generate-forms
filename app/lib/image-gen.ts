@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { put } from "@vercel/blob";
 import { nanoid } from "nanoid";
 import { GeneratedImage } from "./gemini";
@@ -56,38 +56,36 @@ export async function generateImage(params: {
   console.log(`[IMAGE-GEN] Model: ${modelId}, type: ${imageType}`);
   console.log(`[IMAGE-GEN] Prompt: ${prompt}`);
 
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({
-    model: modelId,
-    generationConfig: {
-      // @ts-expect-error - responseModalities is supported but not typed yet
-      responseModalities: ["TEXT", "IMAGE"],
-    },
-  });
+  const ai = new GoogleGenAI({ apiKey });
 
-  let result;
+  let response;
   try {
-    result = await model.generateContent(fullPrompt);
+    response = await ai.models.generateContent({
+      model: modelId,
+      contents: fullPrompt,
+      config: {
+        responseModalities: ["TEXT", "IMAGE"],
+      },
+    });
   } catch (err) {
     throw ImageGenError.fromError(err);
   }
-  const response = result.response;
   const parts = response.candidates?.[0]?.content?.parts;
 
   if (!parts) {
     throw new ImageGenError("No response from image generation model");
   }
 
-  const imagePart = parts.find(
-    (p: { inlineData?: { mimeType: string; data: string } }) =>
-      p.inlineData?.mimeType?.startsWith("image/")
-  );
+  const imagePart = parts.find((p) => p.inlineData?.mimeType?.startsWith("image/"));
 
-  if (!imagePart?.inlineData) {
+  // @google/genai types both fields as optional, so narrow them rather than
+  // assert — a part with a mimeType but no data would otherwise blow up below.
+  const mimeType = imagePart?.inlineData?.mimeType;
+  const base64Data = imagePart?.inlineData?.data;
+  if (!mimeType || !base64Data) {
     throw new ImageGenError("No image generated — model returned text only");
   }
 
-  const { mimeType, data: base64Data } = imagePart.inlineData;
   const extension = mimeType === "image/png" ? "png" : "jpeg";
 
   const buffer = Buffer.from(base64Data, "base64");
