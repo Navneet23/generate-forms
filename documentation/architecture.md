@@ -66,6 +66,7 @@ Creator types prompt → POST /api/generate
               + optional screenshot base64 (selected region)
               + optional style guide (image base64 or website screenshot)
               + imageModel selection (none / gemini-2.5 / gemini-3.1)
+              + textModel selection (gemini-3-flash-preview / 3.6-flash / 3.7-flash)
               + activeImages from previous turns
     → Returns: Server-Sent Events (SSE) stream
     → Event flow:
@@ -243,6 +244,8 @@ Shared image generation logic used by both the generate route (via direct functi
 
 **Error handling:** Exports `ImageGenError` class that parses Gemini SDK errors to extract HTTP status codes (e.g. 429 Too Many Requests, 503 Service Unavailable). Error codes and messages are surfaced to the user in the chat UI.
 
+**SDK note:** uses `ai.models.generateContent` from `@google/genai`, which types `inlineData.mimeType`/`.data` as optional — both are narrowed before use rather than asserted.
+
 **Processing:**
 1. Enhances the prompt with type-specific instructions (e.g. "keep subtle" for backgrounds)
 2. Calls the user-selected image model with `responseModalities: ["TEXT", "IMAGE"]`
@@ -299,6 +302,7 @@ Chat interface with toolbar buttons:
 - **Screenshot button** — select a region of the preview to attach to message (only shown when AI form exists)
 - **Style guide button** — open style reference dialog
 - **Image model dropdown** — select image generation model: "No images", "Gemini 2.5 Flash image" (default), or "Gemini 3.1 Flash image". Purple when a model is selected.
+- **Text model dropdown** — select the model that generates the form HTML: "Gemini 3 Flash" (default), "Gemini 3.6 Flash", or "Gemini 3.7 Flash".
 
 Tracks `activeImages` (generated images from previous turns) and sends them with each generation request for color coherence.
 
