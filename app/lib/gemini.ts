@@ -15,7 +15,34 @@ import {
 import fs from "fs";
 import path from "path";
 
-const MODEL_ID = "gemini-3-flash-preview";
+/**
+ * Text models offered by the model picker. Note the 3.6/3.7 Flash models are
+ * GA — there is no "-preview" suffix on them.
+ *
+ * KNOWN LIMITATION: only the default completes a generation today. 3.6 and 3.7
+ * reject this app's function-calling round-trip when driven by the legacy
+ * @google/generative-ai SDK, which (a) sends functionResponse parts with
+ * role "function" (removed in that model generation) and (b) does not carry the
+ * thought_signature those models now require on functionCall parts. Fixing this
+ * means migrating to the current @google/genai SDK.
+ */
+export type TextModelId =
+  | "gemini-3-flash-preview"
+  | "gemini-3.6-flash"
+  | "gemini-3.7-flash";
+
+/**
+ * The system instruction is tuned against this model; it stays the default so
+ * generation behaviour does not shift unless a caller opts in.
+ */
+export const DEFAULT_TEXT_MODEL: TextModelId = "gemini-3-flash-preview";
+
+/** Allowlist for validating the client-supplied model id before it reaches Gemini. */
+export const TEXT_MODEL_IDS: readonly TextModelId[] = [
+  "gemini-3-flash-preview",
+  "gemini-3.6-flash",
+  "gemini-3.7-flash",
+];
 
 const IS_LOCAL = !process.env.VERCEL;
 const LOG_FILE = IS_LOCAL ? path.join(process.cwd(), "debug.log") : null;
@@ -229,7 +256,8 @@ export async function generateForm(
   includeImages?: boolean,
   imageGenerator?: ImageGenerator,
   activeImages?: GeneratedImage[],
-  onProgress?: (event: ProgressEvent) => void
+  onProgress?: (event: ProgressEvent) => void,
+  textModel?: TextModelId
 ): Promise<{
   html: string;
   images: GeneratedImage[];
@@ -256,14 +284,16 @@ export async function generateForm(
   log(systemPrompt);
   log("=== [GEMINI] END SYSTEM PROMPT ===\n");
 
-  log("[GEMINI] Model:", MODEL_ID);
+  const modelId = textModel ?? DEFAULT_TEXT_MODEL;
+
+  log("[GEMINI] Model:", modelId);
   log("[GEMINI] Include images:", includeImages);
   log("[GEMINI] Tools provided:", functionDeclarations.map(f => f.name).join(", "));
   log("[GEMINI] Active images from previous turns:", activeImages?.length ?? 0);
   log("[GEMINI] History turns:", history.length, "(using last", Math.min(history.length, 10), ")");
 
   const model = genAI.getGenerativeModel({
-    model: MODEL_ID,
+    model: modelId,
     systemInstruction: systemPrompt,
     ...(tools.length > 0 ? { tools } : {}),
   });

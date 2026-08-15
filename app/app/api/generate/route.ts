@@ -5,6 +5,9 @@ import {
   StyleGuide,
   GeneratedImage,
   ProgressEvent,
+  TextModelId,
+  DEFAULT_TEXT_MODEL,
+  TEXT_MODEL_IDS,
 } from "@/lib/gemini";
 import { FormStructure } from "@/lib/scraper";
 import { generateImage, ImageModelId } from "@/lib/image-gen";
@@ -39,6 +42,7 @@ export async function POST(req: NextRequest) {
     screenshotBase64,
     styleGuide,
     imageModel,
+    textModel,
     activeImages,
   }: {
     structure: FormStructure;
@@ -48,6 +52,7 @@ export async function POST(req: NextRequest) {
     screenshotBase64?: string;
     styleGuide?: StyleGuide;
     imageModel?: ImageModelId | "none";
+    textModel?: TextModelId;
     activeImages?: GeneratedImage[];
   } = await req.json();
 
@@ -57,6 +62,11 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
+
+  // The body is client-supplied, so never forward an unrecognised id to Gemini.
+  const selectedTextModel = TEXT_MODEL_IDS.includes(textModel as TextModelId)
+    ? (textModel as TextModelId)
+    : DEFAULT_TEXT_MODEL;
 
   const submitUrl = `${req.nextUrl.origin}/api/submit/${structure.formId}`;
   const includeImages = imageModel != null && imageModel !== "none";
@@ -88,7 +98,8 @@ export async function POST(req: NextRequest) {
           includeImages,
           boundImageGenerator,
           activeImages,
-          send
+          send,
+          selectedTextModel
         );
 
         send({
