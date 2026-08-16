@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T18:20:32.188Z",
+  "generatedAt": "2026-08-16T10:56:11.766Z",
   "items": {
     "atelier-eva-tattoo": {
       "id": "atelier-eva-tattoo",
@@ -413,6 +413,35 @@
           "htmlLength": 30047,
           "durationMs": 93890,
           "at": "2026-07-18T18:07:20.199Z"
+        },
+        "gemini-3-flash-preview|gemini-2.5-flash-image": {
+          "status": "done",
+          "textModel": "gemini-3-flash-preview",
+          "imageModel": "gemini-2.5-flash-image",
+          "url": "https://app-red-phi-88.vercel.app/f/-ULdo0XxXh",
+          "publishId": "-ULdo0XxXh",
+          "expiresAt": "2027-08-15T10:48:17.360Z",
+          "imageCount": 1,
+          "htmlLength": 30844,
+          "durationMs": 148649,
+          "at": "2026-08-15T10:48:17.467Z"
+        },
+        "gemini-3.6-flash|gemini-2.5-flash-image": {
+          "status": "done",
+          "textModel": "gemini-3.6-flash",
+          "imageModel": "gemini-2.5-flash-image",
+          "url": "https://app-red-phi-88.vercel.app/f/x2ATZWpTtW",
+          "publishId": "x2ATZWpTtW",
+          "expiresAt": "2027-08-15T10:50:25.565Z",
+          "imageCount": 1,
+          "htmlLength": 32293,
+          "durationMs": 128201,
+          "at": "2026-08-15T10:50:25.670Z"
+        },
+        "gemini-3.7-flash|gemini-2.5-flash-image": {
+          "status": "failed",
+          "error": "generation error: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+          "at": "2026-08-15T10:50:31.858Z"
         }
       }
     },
@@ -1158,6 +1187,35 @@
           "htmlLength": 14708,
           "durationMs": 79101,
           "at": "2026-07-18T18:14:34.940Z"
+        },
+        "gemini-3-flash-preview|gemini-2.5-flash-image": {
+          "status": "done",
+          "textModel": "gemini-3-flash-preview",
+          "imageModel": "gemini-2.5-flash-image",
+          "url": "https://app-red-phi-88.vercel.app/f/mHkAxzrIyn",
+          "publishId": "mHkAxzrIyn",
+          "expiresAt": "2027-08-15T10:35:45.669Z",
+          "imageCount": 1,
+          "htmlLength": 16048,
+          "durationMs": 83578,
+          "at": "2026-08-15T10:35:45.774Z"
+        },
+        "gemini-3.6-flash|gemini-2.5-flash-image": {
+          "status": "done",
+          "textModel": "gemini-3.6-flash",
+          "imageModel": "gemini-2.5-flash-image",
+          "url": "https://app-red-phi-88.vercel.app/f/xhiplzRoYe",
+          "publishId": "xhiplzRoYe",
+          "expiresAt": "2027-08-15T10:37:38.937Z",
+          "imageCount": 1,
+          "htmlLength": 14930,
+          "durationMs": 113264,
+          "at": "2026-08-15T10:37:39.043Z"
+        },
+        "gemini-3.7-flash|gemini-2.5-flash-image": {
+          "status": "failed",
+          "error": "generation error: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+          "at": "2026-08-15T10:38:28.742Z"
         }
       }
     },
@@ -1846,6 +1904,35 @@
           "htmlLength": 32648,
           "durationMs": 40238,
           "at": "2026-07-18T17:40:43.484Z"
+        },
+        "gemini-3-flash-preview|gemini-2.5-flash-image": {
+          "status": "done",
+          "textModel": "gemini-3-flash-preview",
+          "imageModel": "gemini-2.5-flash-image",
+          "url": "https://app-red-phi-88.vercel.app/f/q2LRXcqNUB",
+          "publishId": "q2LRXcqNUB",
+          "expiresAt": "2027-08-15T10:41:35.052Z",
+          "imageCount": 1,
+          "htmlLength": 31408,
+          "durationMs": 157721,
+          "at": "2026-08-15T10:41:35.158Z"
+        },
+        "gemini-3.6-flash|gemini-2.5-flash-image": {
+          "status": "done",
+          "textModel": "gemini-3.6-flash",
+          "imageModel": "gemini-2.5-flash-image",
+          "url": "https://app-red-phi-88.vercel.app/f/626ba9nNqd",
+          "publishId": "626ba9nNqd",
+          "expiresAt": "2027-08-15T10:45:19.528Z",
+          "imageCount": 0,
+          "htmlLength": 37438,
+          "durationMs": 224478,
+          "at": "2026-08-15T10:45:19.638Z"
+        },
+        "gemini-3.7-flash|gemini-2.5-flash-image": {
+          "status": "failed",
+          "error": "generation error: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+          "at": "2026-08-15T10:45:48.095Z"
         }
       }
     },

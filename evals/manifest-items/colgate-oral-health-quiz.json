@@ -158,6 +158,35 @@
       "htmlLength": 30047,
       "durationMs": 93890,
       "at": "2026-07-18T18:07:20.199Z"
+    },
+    "gemini-3-flash-preview|gemini-2.5-flash-image": {
+      "status": "done",
+      "textModel": "gemini-3-flash-preview",
+      "imageModel": "gemini-2.5-flash-image",
+      "url": "https://app-red-phi-88.vercel.app/f/-ULdo0XxXh",
+      "publishId": "-ULdo0XxXh",
+      "expiresAt": "2027-08-15T10:48:17.360Z",
+      "imageCount": 1,
+      "htmlLength": 30844,
+      "durationMs": 148649,
+      "at": "2026-08-15T10:48:17.467Z"
+    },
+    "gemini-3.6-flash|gemini-2.5-flash-image": {
+      "status": "done",
+      "textModel": "gemini-3.6-flash",
+      "imageModel": "gemini-2.5-flash-image",
+      "url": "https://app-red-phi-88.vercel.app/f/x2ATZWpTtW",
+      "publishId": "x2ATZWpTtW",
+      "expiresAt": "2027-08-15T10:50:25.565Z",
+      "imageCount": 1,
+      "htmlLength": 32293,
+      "durationMs": 128201,
+      "at": "2026-08-15T10:50:25.670Z"
+    },
+    "gemini-3.7-flash|gemini-2.5-flash-image": {
+      "status": "failed",
+      "error": "generation error: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+      "at": "2026-08-15T10:50:31.858Z"
     }
   }
 }

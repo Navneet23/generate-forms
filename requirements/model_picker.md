@@ -1,7 +1,9 @@
 # Text Model Picker — Requirements
 
-Status: **Implemented 2026-08-15.** Functionally verified; NOT quality-validated
-(no eval A/B has been run across the three models — see "Open work" below).
+Status: **Implemented 2026-08-15.** Functionally verified; NOT quality-validated.
+An eval pilot across the three models was started 2026-08-15 and stopped early at
+9 of 24 generations — see "Eval pilot" below. `gemini-3.7-flash` has an open
+availability problem (5/5 attempts returned 503).
 
 ## Goal
 
@@ -80,12 +82,48 @@ follow-up (`color_match`) → CDN URL embedded in the HTML, zero image errors.
 Gates: `npx tsc --noEmit` clean, `npm run build` clean, `npm run lint` unchanged at
 8 pre-existing issues with none added.
 
+## Eval pilot — partial run, stopped early (2026-08-15/16)
+
+A pilot was scoped at 8 non-thin eval items × 3 text models × 1 image config
+(`gemini-2.5-flash-image` held fixed so the text model is the only variable).
+It was **stopped by the owner after 9 of 24 generations**; 5 items never ran.
+
+| Item | `gemini-3-flash-preview` | `gemini-3.6-flash` | `gemini-3.7-flash` |
+|---|---|---|---|
+| `fillout-checkout` | done | done | **503** |
+| `founders-factory-application` | done | done | **503** |
+| `colgate-oral-health-quiz` | done | done | **503** |
+
+**Finding — `gemini-3.7-flash` availability.** 3.7 failed every attempt made
+against it: 3/3 in this run plus 2/2 in earlier production smoke tests, five for
+five, all the identical `503 UNAVAILABLE — "This model is currently experiencing
+high demand"`. Over the same period `gemini-3-flash-preview` and `gemini-3.6-flash`
+recorded zero failures. The requests are well-formed and the same code path
+succeeds on the other two models, so this is Google-side capacity, not a defect
+here — but at 5/5 it should not be characterised as transient. A user selecting
+3.7 today will frequently hit a generation error, and neither the route nor the
+UI retries on 503.
+
+Options if this persists (none actioned — needs an owner decision):
+1. Retry-on-503 with backoff in `/api/generate`.
+2. Drop 3.7 from the picker until capacity improves.
+3. Leave as-is and accept the failure rate, since 3.7 is opt-in.
+
+**No quality conclusion is available.** 6 successful generations across 3 items
+is far too little to compare output quality, and no rating pass has been run
+against them — `evals/rater_instructions.md` still has never been executed by
+anyone. The completed generations are published under composite config keys in
+their shards and can be rated later or resumed with `--retry-failed`.
+
 ## Open work
 
 - **No eval A/B across models.** The SI is tuned against `gemini-3-flash-preview`,
-  and question-text drift (DR-3) is the standing weak point. One generation per
-  model proves the plumbing, not output quality. Before recommending 3.6 or 3.7 as
-  a new default, run the eval set per `forms-restyler-validation-and-qa`.
+  and question-text drift (DR-3) is the standing weak point. The pilot above was
+  stopped before it could produce a comparable sample. Before recommending 3.6 or
+  3.7 as a new default, complete the run and rate it per
+  `forms-restyler-validation-and-qa`.
+- **`gemini-3.7-flash` reliability** — see the pilot finding above; decide between
+  retry-on-503, removing it from the picker, or accepting the failure rate.
 - **Model choice is not recorded on published forms** (owner decision above), so a
   published form cannot be attributed to the model that produced it. Worth
   revisiting if model comparison becomes an eval workflow.

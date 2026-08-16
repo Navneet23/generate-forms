@@ -15,7 +15,7 @@ scraper can read it.
 | `upload-style-guides.mjs` | Uploads screenshots to Vercel Blob (linkable URLs for the doc) |
 | `generate-doc.mjs` | Builds `evals/eval-set-doc.html` — the table uploaded to Drive as a Google Doc |
 | `auth.mjs` | One-time OAuth loopback flow for the Forms API |
-| `generate-restyled.mjs` | Generates restyled forms per item (2 image-model configs) by driving the app: local `/api/generate` (working-tree SI) → submit-URL rewrite → prod `/api/publish` + 1-year extend |
+| `generate-restyled.mjs` | Generates restyled forms per item (one config per model combination) by driving the app: local `/api/generate` (working-tree SI) → submit-URL rewrite → prod `/api/publish` + 1-year extend |
 | `lib/` | extract / recreate / gforms / verify / manifest / env modules |
 
 ## State model
@@ -64,6 +64,10 @@ a native table).
 node generate-restyled.mjs --only=<id>[,<id>...]   # specific items
 node generate-restyled.mjs --all                   # every ready item
 node generate-restyled.mjs --retry-failed          # failed configs only
+
+# Optional model selection (combine with any of the above):
+--image-models=<id>[,<id>]   # restrict image configs (default: both)
+--text-models=<id>[,<id>]    # also vary the text model (default: the app's own default)
 ```
 
 Requirements & behaviour:
@@ -77,9 +81,21 @@ Requirements & behaviour:
 - The generated HTML bakes the submit proxy URL from the generating origin;
   the script rewrites `localhost:3000/api/submit/...` → prod before publishing
   and refuses to publish if the rewrite finds nothing.
-- Results are stored per item under `generated[<image-model-id>]` in the shard
+- Results are stored per item under `generated[<config-key>]` in the shard
   (URL, publish id, expiry, image count, duration). Resumable per config;
   parallel-safe across DIFFERENT ids (subagent batches).
+- **Two config-key schemes coexist, by design.** Without `--text-models` a config
+  is one image model and the key is the bare image-model id — the original scheme,
+  which is what the 68 pre-existing records use and still resume under. With
+  `--text-models`, configs are the cross product of text × image models and the key
+  is `"<textModel>|<imageModel>"`. The two never collide, so adding text-model runs
+  neither overwrites nor invalidates earlier results. Records written under either
+  scheme now also carry explicit `textModel`/`imageModel` fields; older records
+  predate those fields and have neither.
+- Unknown model ids abort the run rather than falling back to a default. This is
+  deliberate: `/api/generate` validates `textModel` against an allowlist and
+  silently substitutes the default for anything unrecognised, so a typo'd id would
+  otherwise produce eval data labelled with a model that did not generate it.
 - Transient Gemini 503s happen; a single rerun of the same command resumes and
   usually recovers.
 

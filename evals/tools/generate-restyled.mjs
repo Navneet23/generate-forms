@@ -4,7 +4,16 @@
 //   node generate-restyled.mjs --all                   every completed non-skipped item
 //   node generate-restyled.mjs --retry-failed          only configs that previously failed
 //
-// Per item, per config (A: gemini-2.5-flash-image, B: gemini-3.1-flash-image-preview):
+// Optional model selection:
+//   --image-models=<id>[,<id>]   restrict image configs (default: both)
+//   --text-models=<id>[,<id>]    vary the text model too (default: the app's own default)
+//
+// Without --text-models a config is one image model, keyed by the image-model id
+// (the original scheme — the pre-existing records resume under it). With
+// --text-models, configs are the cross product and are keyed "<text>|<image>",
+// so the two schemes never collide.
+//
+// Per item, per config:
 //   1. scrape the recreated Google Form via the LOCAL dev server (working-tree SI)
 //   2. generate via LOCAL /api/generate (SSE) with the style-guide screenshot
 //   3. rewrite the baked localhost submit URL to the prod origin
@@ -23,20 +32,68 @@ const LOCAL_BASE = process.env.EVAL_LOCAL_BASE ?? "http://localhost:3000";
 const PROD_BASE = process.env.EVAL_PROD_BASE ?? "https://app-red-phi-88.vercel.app";
 const GENERATE_TIMEOUT_MS = 300_000;
 
-const CONFIGS = [
+const IMAGE_MODELS = [
   { key: "gemini-2.5-flash-image", label: "A (Gemini 2.5 image)" },
   { key: "gemini-3.1-flash-image-preview", label: "B (Gemini 3.1 image)" },
 ];
+
+// Must match TEXT_MODEL_IDS in app/lib/gemini.ts. Kept as a literal list so an
+// unknown id aborts here rather than being silently coerced to the default by
+// the route's allowlist — a run against a different model than requested would
+// produce plausible-looking but mislabelled eval data.
+const TEXT_MODELS = ["gemini-3-flash-preview", "gemini-3.6-flash", "gemini-3.7-flash"];
 
 const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith("--only="))?.slice(7).split(",");
 const all = args.includes("--all");
 const retryFailed = args.includes("--retry-failed");
-const unknown = args.filter((a) => !a.startsWith("--only=") && a !== "--all" && a !== "--retry-failed");
+const textModels = args.find((a) => a.startsWith("--text-models="))?.slice(14).split(",");
+const imageModelsArg = args.find((a) => a.startsWith("--image-models="))?.slice(15).split(",");
+const unknown = args.filter(
+  (a) =>
+    !a.startsWith("--only=") &&
+    !a.startsWith("--text-models=") &&
+    !a.startsWith("--image-models=") &&
+    a !== "--all" &&
+    a !== "--retry-failed"
+);
 if (unknown.length || (!only && !all && !retryFailed)) {
-  console.error("Usage: node generate-restyled.mjs (--only=<id>[,<id>...] | --all | --retry-failed)");
+  console.error(
+    "Usage: node generate-restyled.mjs (--only=<id>[,<id>...] | --all | --retry-failed)\n" +
+      "                                 [--text-models=<id>[,<id>...]] [--image-models=<id>[,<id>...]]"
+  );
   process.exit(1);
 }
+
+const badText = (textModels ?? []).filter((m) => !TEXT_MODELS.includes(m));
+if (badText.length) {
+  console.error(`Unknown text model(s): ${badText.join(", ")}\nValid: ${TEXT_MODELS.join(", ")}`);
+  process.exit(1);
+}
+const badImage = (imageModelsArg ?? []).filter((m) => !IMAGE_MODELS.some((c) => c.key === m));
+if (badImage.length) {
+  console.error(`Unknown image model(s): ${badImage.join(", ")}\nValid: ${IMAGE_MODELS.map((c) => c.key).join(", ")}`);
+  process.exit(1);
+}
+
+const activeImageModels = imageModelsArg
+  ? IMAGE_MODELS.filter((c) => imageModelsArg.includes(c.key))
+  : IMAGE_MODELS;
+
+// Without --text-models the tool behaves exactly as before: one config per image
+// model, keyed by the image-model id, so the 68 pre-existing records still
+// resume correctly. With --text-models, configs become the cross product and are
+// keyed "<textModel>|<imageModel>" so the two schemes never collide.
+const CONFIGS = textModels
+  ? textModels.flatMap((tm) =>
+      activeImageModels.map((im) => ({
+        key: `${tm}|${im.key}`,
+        label: `${tm} + ${im.label}`,
+        textModel: tm,
+        imageModel: im.key,
+      }))
+    )
+  : activeImageModels.map((im) => ({ key: im.key, label: im.label, textModel: undefined, imageModel: im.key }));
 
 const { sources, standardPrompt } = JSON.parse(fs.readFileSync(SOURCES_PATH, "utf8"));
 
@@ -51,7 +108,7 @@ async function scrapeStructure(responderUrl) {
   return j.structure ?? j;
 }
 
-async function generate(structure, styleGuideBase64, imageModel) {
+async function generate(structure, styleGuideBase64, imageModel, textModel) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), GENERATE_TIMEOUT_MS);
   try {
@@ -66,6 +123,7 @@ async function generate(structure, styleGuideBase64, imageModel) {
         previousHtml: "",
         styleGuide: { imageBase64: styleGuideBase64, focusNote: "" },
         imageModel,
+        ...(textModel ? { textModel } : {}),
       }),
     });
     if (!res.ok) throw new Error(`generate HTTP ${res.status}`);
@@ -155,7 +213,7 @@ for (const source of sources) {
     return g?.status !== "done";
   });
   if (pending.length === 0) {
-    console.log(`✓ ${source.id} — both configs already generated`);
+    console.log(`✓ ${source.id} — all ${CONFIGS.length} config(s) already generated`);
     ok++;
     continue;
   }
@@ -181,10 +239,12 @@ for (const source of sources) {
     console.log(`  config ${config.label}:`);
     try {
       const t0 = Date.now();
-      const result = await generate(structure, styleGuideBase64, config.key);
+      const result = await generate(structure, styleGuideBase64, config.imageModel, config.textModel);
       const published = await publishAndExtend(result.html, structure, result.generatedImages);
       item.generated[config.key] = {
         status: "done",
+        textModel: config.textModel,
+        imageModel: config.imageModel,
         url: published.url,
         publishId: published.id,
         expiresAt: published.expiresAt,
