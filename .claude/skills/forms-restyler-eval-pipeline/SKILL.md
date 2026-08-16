@@ -65,7 +65,7 @@ State as of 2026-07-19 (verify before trusting — see §9):
 | `form` | `{ formId, editUrl, responderUrl, questionCount }` of the CURRENT (non-orphaned) Google Form. |
 | `orphanedForm` | Present only if a previous form for this item was superseded (see INC-4 in §4). Same shape as `form`. Orphans are harmless clutter in Drive, not bugs — never auto-delete them. |
 | `styleGuideUrl` | Public Vercel Blob URL for the screenshot, set by `upload-style-guides.mjs`. |
-| `generated["<image-model-id>"]` | Per-config restyle result: `{ status, url, publishId, expiresAt, imageCount, imageErrors?, htmlLength, durationMs, at }` on success, `{ status: "failed", error, at }` on failure. Keys are the literal image-model ids (`gemini-2.5-flash-image`, `gemini-3.1-flash-image-preview`). |
+| `generated["<config-key>"]` | Per-config restyle result: `{ status, url, publishId, expiresAt, imageCount, imageErrors?, htmlLength, durationMs, at }` on success, `{ status: "failed", error, at }` on failure. TWO key schemes coexist: bare image-model ids (`gemini-2.5-flash-image`, `gemini-3.1-flash-image-preview`) for runs without `--text-models`, and `"<textModel>\|<imageModel>"` composites for runs with it. They never collide; the 68 original records keep the bare-id form. Newer records also carry explicit `textModel`/`imageModel` fields. |
 
 ## 3. Pipeline stages (`node run.mjs`, orchestrated in `evals/tools/run.mjs`)
 
@@ -140,13 +140,21 @@ cd evals/tools
 node generate-restyled.mjs --only=<id>[,<id>...]   # specific items
 node generate-restyled.mjs --all                   # every item with verify done + a style-guide file
 node generate-restyled.mjs --retry-failed          # only configs previously marked failed
+
+# Optional model selection, combinable with any of the above:
+--image-models=<id>[,<id>]   # restrict image configs (default: both)
+--text-models=<id>[,<id>]    # also vary the text model (default: the app's own default)
 ```
+
+Unknown model ids abort rather than falling back — `/api/generate` silently
+substitutes its default for an unrecognised `textModel`, so a typo would
+otherwise yield eval data labelled with a model that did not generate it.
 
 Same unknown-flag abort as `run.mjs`; also aborts if none of
 `--only`/`--all`/`--retry-failed` is given.
 
-Per item, per config (`gemini-2.5-flash-image` = "A", `gemini-3.1-flash-image-preview`
-= "B"):
+Per item, per config (without `--text-models`: `gemini-2.5-flash-image` = "A",
+`gemini-3.1-flash-image-preview` = "B"; with it, the text × image cross product):
 1. Scrape the recreated Google Form via **`EVAL_LOCAL_BASE`** (default
    `http://localhost:3000`) `/api/scrape`.
 2. Generate via **local** `/api/generate` (SSE), reading `evt.type ===
